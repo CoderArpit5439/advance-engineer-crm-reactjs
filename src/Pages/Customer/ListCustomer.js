@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../Layout/Header'
 import Sidebar from '../../Layout/Sidebar'
 import Footer from '../../Layout/Footer'
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetCustomerList } from '../../Redux/crmSlices/customerSlice/CustomerSlice'
+import { GetCustomerList, updateCustomer } from '../../Redux/crmSlices/customerSlice/CustomerSlice'
 import Pagination from '../../Components/Pagination'
 
 const ListCustomer = () => {
+    const { register, handleSubmit, formState: { errors }, setValue, control, watch } = useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [fetchCustomerList, setFetchCustomerList] = useState([]);
     const [showItems, setShowItems] = useState([])      //pagination and search for map function
     const [currentPageNo, setCurrentPageNo] = useState();
     const [totalRow, setTotalRow] = useState();
+    const [cId, setCId] = useState();
 
     const { data, count, loading, response } = useSelector((state) => {
         return {
@@ -61,6 +63,30 @@ const ListCustomer = () => {
         dispatch(GetCustomerList(body));
     }, [])
 
+    const onClickEditBtn = (customer) => {
+        setCId(customer.c_id)
+        setValue("c_fullname", customer.c_fullname)
+        setValue("c_company_name", customer.c_company_name)
+        setValue("c_email", customer.c_email)
+        setValue("c_mobile", customer.c_mobile)
+        setValue("c_post", customer.c_post)
+        setValue("c_department", customer.c_department)
+        // setValue("c_password", customer.c_password)
+        setValue("c_status", customer.c_status)
+        setValue("c_description", customer.c_description)
+        setValue("c_dob", customer.c_dob)
+        setValue("c_rank", customer.c_rank)
+        setValue("c_address", customer.c_address)
+    };
+
+    const onSubmit = (data) => {
+        const body = {
+            cId,
+            data
+        }
+        dispatch(updateCustomer(body));
+    }
+
     return (
         <>
             <Header />
@@ -93,7 +119,7 @@ const ListCustomer = () => {
                                             <a class="btn btn-add" onClick={() => navigate('/add-customer')}> <i class="fa fa-plus"></i> Add Customer
                                             </a>
                                         </div>
-                                        <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
+                                        {/* <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
                                         <ul class="dropdown-menu exp-drop" role="menu">
                                             <li>
                                                 <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false'});">
@@ -144,7 +170,7 @@ const ListCustomer = () => {
                                                 <a href="#" onclick="$('#dataTableExample1').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
                                                     <img src="assets/dist/img/pdf.png" width="24" alt="logo" /> PDF</a>
                                             </li>
-                                        </ul>
+                                        </ul> */}
                                     </div>
                                     <div class="table-responsive">
                                         <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
@@ -192,7 +218,7 @@ const ListCustomer = () => {
                                                             <td>{customer.c_no_of_quotation}</td>
                                                             <td>{customer.c_status}</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1" onClick={() => onClickEditBtn(customer)}><i class="fa fa-pencil"></i></button>
                                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                             </td>
                                                         </tr>
@@ -217,52 +243,94 @@ const ListCustomer = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div class="modal fade" id="customer1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade" id="customer1" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header modal-header-primary">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h3><i class="fa fa-user m-r-5"></i> Update Customer</h3>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <form class="form-horizontal">
-                                                <fieldset>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Customer Name:</label>
-                                                        <input type="text" placeholder="Customer Name" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Email:</label>
-                                                        <input type="email" placeholder="Email" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Mobile</label>
-                                                        <input type="number" placeholder="Mobile" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-6 form-group">
-                                                        <label class="control-label">Address</label><br></br>
-                                                        <textarea name="address" rows="3"></textarea>
-                                                    </div>
-                                                    <div class="col-md-6 form-group">
-                                                        <label class="control-label">type</label>
-                                                        <input type="text" placeholder="type" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-12 form-group user-form-group">
-                                                        <div class="pull-right">
-                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
+                                <form onSubmit={handleSubmit(onSubmit)} >
+                                    <>
+                                    
+                                    <div class="modal-body">
+                                        <div className='row'>
+                                            <div class="form-group col-sm-6">
+                                                <label>Company Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    placeholder="Enter Company Name"
+                                                    {...register('c_company_name')} />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Full Name"  {...register('c_fullname')} />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" placeholder="Enter Email"  {...register('c_email')} />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Mobile</label>
+                                                <input type="number" class="form-control" placeholder="Enter Mobile"  {...register('c_mobile')} />
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+                                                <label>Post</label>
+                                                <input type="text" class="form-control" placeholder="Enter Post"  {...register('c_post')} />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Department</label>
+                                                <input type="text" class="form-control" placeholder="Enter Department"  {...register('c_department')} />
+                                            </div>
+                                            {/* <div class="form-group col-sm-6">
+                                                <label>Password</label>
+                                                <input type="text" class="form-control" placeholder="Enter Password"  {...register('c_password')} />
+                                            </div> */}
+                                            <div class="form-group col-sm-6">
+                                                <label>Date of Birth</label>
+                                                <input id="minMaxExample" type="date" class="form-control hasDatepicker" placeholder="Enter Date..." {...register('c_dob')} />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Address</label>
+                                                <textarea class="form-control" rows="4"  {...register('c_address')}></textarea>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Customer Ranking</label>
+                                                <select class="form-control" {...register('c_rank')}>
+                                                    <option value="Excellent">Excellent</option>
+                                                    <option value="Good">Good</option>
+                                                    <option value="Average">Average</option>
+                                                    <option value="Average">Average</option>
+                                                    <option value="Poor">Poor</option>
+                                                    <option value="Very Poor">Very Poor</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label>Gender</label><br></br>
+                                                <select class="form-control" {...register('c_gender')}>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-check col-sm-3">
+                                                <label>Status</label><br></br>
+                                                <select class="form-control" {...register('c_status')}>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Not Active">Not Active</option>
+                                                </select>
+                                            </div>
+                                           
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type='submit' class="btn btn-success pull-left" >Update</button>
+                                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -295,7 +363,7 @@ const ListCustomer = () => {
                                 </div>
                             </div>
                         </div>
-                    </div> */}
+                    </div>
                 </section>
             </div>
             <Footer />

@@ -25,8 +25,8 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) => 
         {
-            if(response.data.status === 'error'){
-                toast.error(response.data.message)
+            if(response.data?.status === 'error' || response.data?.status === false ){
+                toast.error(response.data?.message)
             }
             else {
                return response

@@ -8,7 +8,7 @@ const Sidebar = () => {
          <div class="sidebar">
             <ul class="sidebar-menu">
                <li class="active">
-                  <a ><i class="fa fa-tachometer"></i><span>Dashboard</span>
+                  <a onClick={() => navigate("/dashboard")} style={{cursor:"pointer"}}><i class="fa fa-tachometer"></i><span>Dashboard</span>
                      <span class="pull-right-container">
                      </span>
                   </a>
@@ -24,6 +24,31 @@ const Sidebar = () => {
                      <li><a onClick={() => navigate("/add-customer")} style={{cursor:"pointer"}}>Add Customer</a></li>
                      <li><a onClick={() => navigate("/list-customer")} style={{cursor:"pointer"}}>List</a></li>
                      <li><a >Groups</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-users"></i><span>Products</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/add-product")} style={{cursor:"pointer"}}>Add Product</a></li>
+                     <li><a onClick={() => navigate("/list-product")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-users"></i><span>Quotation</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-quotation")} style={{cursor:"pointer"}}>List</a></li>
+                     <li><a onClick={() => navigate("/create-quotation")} style={{cursor:"pointer"}}>Create Quotation</a></li>
+                     <li><a onClick={() => navigate("/add-customer")} style={{cursor:"pointer"}}>Quotation</a></li>
                   </ul>
                </li>
                {/* <li class="treeview">
