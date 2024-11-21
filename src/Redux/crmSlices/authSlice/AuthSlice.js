@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
 import instance from "../../../Config/Config";
+import axios from "axios";
 
 const initialState = {
     loading: false,
@@ -16,12 +17,12 @@ export const loginAuth = createAsyncThunk(
         formData.append("username", data.username);
         formData.append("password", data.password);
         try {
-            const response = await instance.post("/auth/login", formData);
+            const response = await axios.post("https://api.advanceengineerings.com/crm/auth/login", formData);
+          
             if (response?.data?.token) {
                 const now = new Date();
                 const midnight = new Date(now.getFullYear(), now.getMonth(), (now.getDate() + 1)); // Midnight of the next day
                 Cookies.set('authToken', response.data.token, { expires: midnight }); // Expires in 1 days
-
             }
             return response?.data;
 

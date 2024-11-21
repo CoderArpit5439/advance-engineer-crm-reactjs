@@ -112,7 +112,7 @@ const DragAndDrop = ({ onFilesChange, fileType = 'image/*', uploadType = 'multip
                                         </td>
                                         <td>{file.name}</td>
                                         <td>
-                                            <button className="btn btn-sm btn-danger" onClick={() => removeFile(i)}>Delete</button>
+                                            <button className="btn btn-sm btn-danger" type='button' onClick={() => removeFile(i)}>Delete</button>
                                         </td>
                                     </tr>
                                 );

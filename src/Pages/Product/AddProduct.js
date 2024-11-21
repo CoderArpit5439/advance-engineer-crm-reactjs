@@ -1,33 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import Sidebar from '../../Layout/Sidebar';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateProduct } from '../../Redux/crmSlices/productSlice/ProductSlice';
+import { CreateProduct, GetCategoryNameList } from '../../Redux/crmSlices/productSlice/ProductSlice';
 import DragAndDrop from '../../Components/DragNDrop';
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors }, setValue, control, watch } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [productMedia,setProductMedia] = useState([]);
+    const [productMedia, setProductMedia] = useState([]);
 
 
-    const { loading, response } = useSelector((state) => {
+    const { loading, response, catList } = useSelector((state) => {
         return {
             loading: state.rootReducer.ProductSlice?.loading,
             response: state.rootReducer.ProductSlice?.response,
+            catList: state.rootReducer.ProductSlice?.categoryList?.data,
         }
     })
+
+    useEffect(() => {
+        dispatch(GetCategoryNameList());
+    }, []);
 
     const handleProductFile = (files) => {
         setProductMedia(files);
     }
 
+    useEffect(() => {
+        if(response){
+            if(response.status){
+                navigate('/list-product')
+            }
+        }
+    },[])
+
+
+
     const onSubmit = (data) => {
-        if(productMedia?.length){
+        if (productMedia?.length) {
             data.p_media = productMedia
             dispatch(CreateProduct(data))
         }
@@ -63,11 +78,15 @@ const AddProduct = () => {
                                         <div className='row'>
                                             <div className="form-group col-sm-4">
                                                 <label>Category</label>
-                                                <input
-                                                    type="text"
+                                                <select
                                                     className="form-control"
-                                                    placeholder="Enter Category"
-                                                    {...register('p_category')} />
+                                                    {...register('p_category')} >
+                                                        <option className=''> -- Select Any Category -- </option>
+                                                        {console.log(741,catList)}
+                                                    {
+                                                        catList?.length > 0 && catList?.map((cat) => <option value={cat.cat_id}>{cat.cat_name}</option>)
+                                                    }
+                                                </select>
                                             </div>
                                             <div className="form-group col-sm-4">
                                                 <label>Unique ID</label>
@@ -187,11 +206,11 @@ const AddProduct = () => {
                                                     className="form-control"
                                                     placeholder="Enter Status Type"
                                                     {...register('p_status')}
-                                                    >
-                                                        <option value=""> -- Select Status --</option>
-                                                        <option value="active">Active</option>
-                                                        <option value="unactive">Unactive</option>
-                                                    </select>
+                                                >
+                                                    <option value=""> -- Select Status --</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="unactive">Unactive</option>
+                                                </select>
                                             </div>
                                             <div className="form-group col-sm-12">
                                                 <label>Description</label>
@@ -200,11 +219,11 @@ const AddProduct = () => {
                                                     rows="3"
                                                     {...register('p_description')}></textarea>
                                             </div>
-                                            <DragAndDrop onFilesChange={handleProductFile}/>
+                                            <DragAndDrop onFilesChange={handleProductFile} />
                                         </div>
                                         <div className="reset-button text-center">
-                                            <a className="btn btn-warning">Reset</a>
                                             <button className="btn btn-success" type='submit'>Save</button>
+                                            <button className="btn btn-danger" type='button' onClick={() => navigate(-1)}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>

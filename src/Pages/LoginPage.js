@@ -18,16 +18,17 @@ const LoginPage = () => {
         }
     })
 
+
+    
     useEffect(() => {
-        console.log(111, data)
-        if (data?.status) {
+        if (data?.status === true) {
+            console.log(741)
             navigate('/dashboard')
             setIsErrorVisible(false)
         }
         else {
             setIsErrorVisible(data?.message)
             console.log(641,data)
-            // toast.error(data?.message)
         }
     }, [data])
 
@@ -35,7 +36,6 @@ const LoginPage = () => {
         dispatch(loginAuth(data))
     }
 
-    console.log(741,isErrorVisible)
     return (
         <div class="login-wrapper">
             {/* <div class="back-link">
@@ -77,8 +77,8 @@ const LoginPage = () => {
                                         }
                                     </div>
                                 </div>
-                                <div>
-                                    {isErrorVisible && <span className="text-danger">{isErrorVisible}</span>}
+                                <div style={{ display:"grid"}} >
+                                    {isErrorVisible && <span className="text-danger text-center" >{isErrorVisible}</span>}
                                     <button class="btn btn-add" type='submit' >Login</button>
                                 </div>
                             </form>

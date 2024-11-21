@@ -28,6 +28,18 @@ const Sidebar = () => {
                </li>
                <li class="treeview">
                   <a >
+                     <i class="fa fa-users"></i><span>Category</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/add-category")} style={{cursor:"pointer"}}>Add Category</a></li>
+                     <li><a onClick={() => navigate("/list-category")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
                      <i class="fa fa-users"></i><span>Products</span>
                      <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>

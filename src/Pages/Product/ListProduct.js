@@ -14,6 +14,7 @@ const ListProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [fetchProductList, setFetchProductList] = useState([]);
+    const [productDetail, setProductDetail] = useState();
     const [showItems, setShowItems] = useState([])      //pagination and search for map function
     const [currentPageNo, setCurrentPageNo] = useState();
     const [totalRow, setTotalRow] = useState();
@@ -62,7 +63,7 @@ const ListProduct = () => {
             "page": currentPageNo,
         }
         dispatch(GetProductList(body));
-    }, [])
+    }, [response,currentPageNo])
 
     const onClickEditBtn = (product) => {
         setCId(product.p_id)
@@ -88,10 +89,14 @@ const ListProduct = () => {
 
     const onSubmit = (data) => {
         const body = {
-            pId,
+            id : pId,
             data
         }
         dispatch(updateProduct(body));
+    }
+
+    const onClickViewProduct = (data) => {
+        setProductDetail(data);
     }
 
     return (
@@ -130,7 +135,7 @@ const ListProduct = () => {
                                     <div className="table-responsive">
                                         <table id="dataTableExample1" className="table table-bordered table-striped table-hover">
                                             <thead>
-                                                <tr className="info">
+                                                <tr className="info" style={{ textAlign: "center" }}>
                                                     <th>Photo</th>
                                                     <th>Name</th>
                                                     <th>Price</th>
@@ -142,12 +147,11 @@ const ListProduct = () => {
                                             </thead>
                                             <tbody>
                                                 {showItems?.length > 0 ? showItems?.map((product, i) => {
-                                                    console.log(741, JSON.parse(product.p_media)[0])
                                                     return (
-                                                        <tr key={i}>
+                                                        <tr key={i} style={{ textAlign: "center" }}>
                                                             <td>
-                                                                {product.p_media !== null ?
-                                                                    <img src={`http://localhost:8080/${JSON.parse(product.p_media)[0]}`} className="img-square" alt="Product Image" width="50" height="50" />
+                                                                {product.p_image !== null ?
+                                                                    <img src={product.p_image} className="img-square" alt="Product Image" width="80" height="80" />
                                                                     :
                                                                     <img src="assets/dist/img/default-product.png" className="img-circle" alt="Default Image" width="50" height="50" />
                                                                 }
@@ -164,6 +168,7 @@ const ListProduct = () => {
                                                                 }
                                                             </td>
                                                             <td>
+                                                                <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target="#productViewModal" onClick={() => onClickViewProduct(product)}><i className="fa fa-eye"></i></button>
                                                                 <button type="button" className="btn btn-add btn-sm" data-toggle="modal" data-target="#productEditModal" onClick={() => onClickEditBtn(product)}><i className="fa fa-pencil"></i></button>
                                                                 <button type="button" className="btn btn-danger btn-sm" data-toggle="modal" data-target="#productDeleteModal"><i className="fa fa-trash-o"></i></button>
                                                             </td>
@@ -184,7 +189,6 @@ const ListProduct = () => {
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -197,155 +201,241 @@ const ListProduct = () => {
                                     <h3><i class="fa fa-user m-r-5"></i> Update Product</h3>
                                 </div>
                                 <form onSubmit={handleSubmit(onSubmit)} >
-                                  <>
+                                    <>
+                                        <div class="modal-body">
+                                            <div className='row'>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Category</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Category"
+                                                        {...register('p_category')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Unique ID</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="1001"
+                                                        {...register('p_unique_id')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Name</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Product Name"
+                                                        {...register('p_name')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Price</label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="Enter Price"
+                                                        {...register('p_price')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Material</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Material"
+                                                        {...register('p_material')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>MOC</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter MOC"
+                                                        {...register('p_moc')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Dimension</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Dimension"
+                                                        {...register('p_dimension')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Brand</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Brand"
+                                                        {...register('p_brand')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Colour</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Colour"
+                                                        {...register('p_color')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Weight</label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="Enter Weight"
+                                                        {...register('p_weight')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Description</label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        rows="3"
+                                                        {...register('p_description')}></textarea>
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Manufacturer</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Manufacturer"
+                                                        {...register('p_manufacturer')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Country</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Country"
+                                                        {...register('p_country')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Code</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Code"
+                                                        {...register('p_code')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Drawing No</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Drawing No"
+                                                        {...register('p_drawing_no')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Finish Type</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Finish Type"
+                                                        {...register('p_finish_type')} />
+                                                </div>
+                                                <div className="form-group col-sm-6">
+                                                    <label>Status</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Enter Status Type"
+                                                        {...register('p_status')} />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div className="reset-button text-center">
+
+                                                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                                                <button className="btn btn-success pull-right" type='submit' >Update</button>
+                                            </div>
+                                        </div>
+                                    </>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="productViewModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" style={{ width: "900px" }}>
+                            <div class="modal-content">
+                                <div class="modal-header modal-header-primary">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3><i class="fa fa-user m-r-5"></i>Product</h3>
+                                </div>
+                                <>
                                     <div class="modal-body">
                                         <div className='row'>
-                                            <div className="form-group col-sm-6">
-                                                <label>Category</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Category"
-                                                    {...register('p_category')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Name</h6>
+                                                <p>{productDetail?.p_name}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Unique ID</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="1001"
-                                                    {...register('p_unique_id')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Price</h6>
+                                                <p>{productDetail?.p_price}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Product Name"
-                                                    {...register('p_name')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Status</h6>
+                                                <p className='text-info'>{productDetail?.p_status}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Price</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    placeholder="Enter Price"
-                                                    {...register('p_price')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Weight</h6>
+                                                <p className='text-info'>{productDetail?.p_weight}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Material</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Material"
-                                                    {...register('p_material')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Unique Id</h6>
+                                                <p >{productDetail?.p_unique_id}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>MOC</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter MOC"
-                                                    {...register('p_moc')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>MOC</h6>
+                                                <p >{productDetail?.p_moc}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Dimension</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Dimension"
-                                                    {...register('p_dimension')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Material</h6>
+                                                <p >{productDetail?.p_material}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Brand</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Brand"
-                                                    {...register('p_brand')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Manufacturer</h6>
+                                                <p >{productDetail?.p_manufacturer}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Colour</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Colour"
-                                                    {...register('p_color')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Finish Type</h6>
+                                                <p >{productDetail?.p_finish_type}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Weight</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    placeholder="Enter Weight"
-                                                    {...register('p_weight')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Drawing No</h6>
+                                                <p >{productDetail?.p_drawing_no}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Description</label>
-                                                <textarea
-                                                    className="form-control"
-                                                    rows="3"
-                                                    {...register('p_description')}></textarea>
+                                            <div className="form-group col-sm-4">
+                                                <h6>Dimension</h6>
+                                                <p >{productDetail?.p_dimension}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Manufacturer</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Manufacturer"
-                                                    {...register('p_manufacturer')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Country</h6>
+                                                <p >{productDetail?.p_country}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Country</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Country"
-                                                    {...register('p_country')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Colour</h6>
+                                                <p >{productDetail?.p_color}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Code</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Code"
-                                                    {...register('p_code')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Code</h6>
+                                                <p >{productDetail?.p_code}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Drawing No</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Drawing No"
-                                                    {...register('p_drawing_no')} />
+                                            <div className="form-group col-sm-4">
+                                                <h6>Brand</h6>
+                                                <p >{productDetail?.p_brand}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Finish Type</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Finish Type"
-                                                    {...register('p_finish_type')} />
+                                            <div className="form-group col-sm-12">
+                                                <h6>Description</h6>
+                                                <p >{productDetail?.p_description}</p>
                                             </div>
-                                            <div className="form-group col-sm-6">
-                                                <label>Status</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Status Type"
-                                                    {...register('p_status')} />
-                                            </div>
-
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <div className="reset-button text-center">
-                                            <a className="btn btn-warning">Reset</a>
-                                            <button className="btn btn-success" type='submit'>Save</button>
-                                        </div>
+                                        {/* <div className="reset-button text-center"> */}
+                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                                        {/* </div> */}
                                     </div>
-                                    </>
-                                </form>
+                                </>
                             </div>
                         </div>
                     </div>
