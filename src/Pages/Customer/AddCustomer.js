@@ -4,14 +4,20 @@ import Header from '../../Layout/Header';
 import Footer from '../../Layout/Footer';
 import Sidebar from '../../Layout/Sidebar';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CreateCustomer } from '../../Redux/crmSlices/customerSlice/CustomerSlice';
 
 const AddCustomer = () => {
     const { register, handleSubmit, formState: { errors }, setValue, control, watch } = useForm();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { loading, response } = useSelector((state) => {
+        return {
+            loading: state.rootReducer.CustomerSlice?.loading,
+            response: state.rootReducer.CustomerSlice?.response,
+        }
+    })
 
     const onSubmit = (data) => {
         dispatch(CreateCustomer(data))
@@ -28,7 +34,7 @@ const AddCustomer = () => {
                     </div>
                     <div class="header-title">
                         <h1>Add Customer</h1>
-                        <small>Customer list</small>
+                        <small>Customer</small>
                     </div>
                 </section>
                 <section class="content">

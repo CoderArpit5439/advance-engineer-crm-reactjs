@@ -1,6 +1,13 @@
 import React from 'react'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+        Cookies.remove('authToken');
+        navigate('/')
+    };
     return (
         <header class="main-header">
             <a class="logo">
@@ -12,7 +19,7 @@ const Header = () => {
                 </span>
             </a>
             <nav class="navbar navbar-static-top">
-                <a  class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="pe-7s-angle-left-circle"></span>
                 </a>
@@ -27,7 +34,7 @@ const Header = () => {
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown messages-menu">
-                            <a  class="dropdown-toggle admin-notification" data-toggle="dropdown">
+                            <a class="dropdown-toggle admin-notification" data-toggle="dropdown">
                                 <i class="pe-7s-cart"></i>
                                 <span class="label label-primary">5</span>
                             </a>
@@ -35,7 +42,7 @@ const Header = () => {
                                 <li>
                                     <ul class="menu">
                                         <li >
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/basketball-jersey.png" class="img-thumbnail" alt="User Image" />
                                                 </div>
@@ -45,7 +52,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/shirt.png" class="img-thumbnail" alt="User Image" />
                                                 </div>
@@ -55,7 +62,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/football.png" class="img-thumbnail" alt="User Image" />
                                                 </div>
@@ -65,7 +72,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li class="nav-list">
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/shoe.png" class="img-thumbnail" alt="User Image" />
                                                 </div>
@@ -79,7 +86,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li class="dropdown messages-menu">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-mail"></i>
                                 <span class="label label-success">4</span>
                             </a>
@@ -87,7 +94,7 @@ const Header = () => {
                                 <li>
                                     <ul class="menu">
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/avatar.png" class="img-circle" alt="User Image" />
                                                 </div>
@@ -98,7 +105,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/avatar2.png" class="img-circle" alt="User Image" />
                                                 </div>
@@ -109,7 +116,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left" >
                                                     <img src="assets/dist/img/avatar3.png" class="img-circle" alt="User Image" />
                                                 </div>
@@ -120,7 +127,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/avatar4.png" class="img-circle" alt="User Image" />
                                                 </div>
@@ -132,7 +139,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="assets/dist/img/avatar5.png" class="img-circle" alt="User Image" />
                                                 </div>
@@ -147,7 +154,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li class="dropdown notifications-menu">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-bell"></i>
                                 <span class="label label-warning">7</span>
                             </a>
@@ -155,25 +162,25 @@ const Header = () => {
                                 <li>
                                     <ul class="menu">
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <i class="fa fa-dot-circle-o color-green"></i>Change Your font style</a>
                                         </li>
-                                        <li><a  class="border-gray">
+                                        <li><a class="border-gray">
                                             <i class="fa fa-dot-circle-o color-red"></i>
                                             check the system ststus..</a>
                                         </li>
-                                        <li><a  class="border-gray">
+                                        <li><a class="border-gray">
                                             <i class="fa fa-dot-circle-o color-yellow"></i>
                                             Add more admin...</a>
                                         </li>
-                                        <li><a  class="border-gray">
+                                        <li><a class="border-gray">
                                             <i class="fa fa-dot-circle-o color-violet"></i> Add more clients and order</a>
                                         </li>
-                                        <li><a  class="border-gray">
+                                        <li><a class="border-gray">
                                             <i class="fa fa-dot-circle-o color-yellow"></i>
                                             Add more admin...</a>
                                         </li>
-                                        <li><a  class="border-gray">
+                                        <li><a class="border-gray">
                                             <i class="fa fa-dot-circle-o color-violet"></i> Add more clients and order</a>
                                         </li>
                                     </ul>
@@ -181,7 +188,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li class="dropdown tasks-menu">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-note2"></i>
                                 <span class="label label-danger">6</span>
                             </a>
@@ -195,31 +202,31 @@ const Header = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <span class="label label-warning pull-right">90%</span>
                                                 <h3><i class="fa fa-check-circle"></i> Fix Error and bugs</h3>
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <span class="label label-danger pull-right">80%</span>
                                                 <h3><i class="fa fa-check-circle"></i> Sidebar color change</h3>
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <span class="label label-info pull-right">30%</span>
                                                 <h3><i class="fa fa-check-circle"></i> font-family should be change</h3>
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <span class="label label-success pull-right">60%</span>
                                                 <h3><i class="fa fa-check-circle"></i> Fix the database Error</h3>
                                             </a>
                                         </li>
                                         <li>
-                                            <a  class="border-gray">
+                                            <a class="border-gray">
                                                 <span class="label label-info pull-right">20%</span>
                                                 <h3><i class="fa fa-check-circle"></i> data table data missing</h3>
                                             </a>
@@ -244,7 +251,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="assets/dist/img/avatar5.png" class="img-circle" width="45" height="45" alt="user" /></a>
                             <ul class="dropdown-menu" >
                                 <li>
@@ -252,8 +259,8 @@ const Header = () => {
                                         <i class="fa fa-user"></i> User Profile</a>
                                 </li>
                                 <li><a><i class="fa fa-inbox"></i> Inbox</a></li>
-                                <li><a href="/">
-                                    <i class="fa fa-sign-out"></i> Signout</a>
+                                <li><a onClick={() => handleLogOut()}>
+                                    <i class="fa fa-sign-out" ></i> Signout</a>
                                 </li>
                             </ul>
                         </li>

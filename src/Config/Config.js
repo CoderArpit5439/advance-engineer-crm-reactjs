@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 const instance = axios.create({
     // baseURL: process.env.REACT_APP_API_KEY,
-    baseURL: "http://localhost:8080/crm",
+    baseURL: "https://api.advanceengineerings.com/crm",
 })
 // instance.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("authToken")}` 
 instance.interceptors.request.use(
@@ -25,8 +25,8 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) => 
         {
-            if(response.data.status === 'error'){
-                toast.error(response.data.message)
+            if(response.data?.status === 'error' || response.data?.status === false ){
+                toast.error(response.data?.message)
             }
             else {
                return response

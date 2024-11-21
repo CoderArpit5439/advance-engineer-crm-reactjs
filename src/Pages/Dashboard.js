@@ -20,7 +20,7 @@ const Dashboard = () => {
         </section>
         <section class="content">
           <div class="row">
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-user-plus fa-3x"></i> */}
@@ -33,7 +33,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-user-secret fa-3x"></i> */}
@@ -46,7 +46,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-money fa-3x"></i> */}
@@ -59,7 +59,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -72,7 +72,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -85,7 +85,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -98,7 +98,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -111,7 +111,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -124,7 +124,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -137,7 +137,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -150,7 +150,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -163,7 +163,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -176,7 +176,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -189,7 +189,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -202,7 +202,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -215,7 +215,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -228,7 +228,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}
@@ -241,85 +241,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-1">
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
               <div id="cardbox4">
                 <div class="statistic-box">
                   {/* <i class="fa fa-files-o fa-3x"></i> */}

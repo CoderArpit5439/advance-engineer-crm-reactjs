@@ -1899,6 +1899,8 @@ i.fa-dot-circle-o {
 
 .btn {
     border-radius: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .btn-rounded {
     border-radius: 2em;

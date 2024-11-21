@@ -1,19 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginPage from '../Pages/LoginPage'
 import { Route, Routes } from 'react-router-dom'
-import Dashboard from '../Pages/Dashboard'
-import AddCustomer from '../Pages/Customer.js/AddCustomer'
-import ListCustomer from '../Pages/Customer.js/ListCustomer'
+import Cookies from 'js-cookie';
 
 const PublicRoute = () => {
+
+ 
   return (
     <div>
       <Routes>
-        <Route path='/' element={<LoginPage  />} />
-        <Route path='/dashboard' element={<Dashboard  />} />
-        <Route path='/add-customer' element={<AddCustomer  />} />
-        <Route path='/list-customer' element={<ListCustomer  />} />
-        
+        <Route path='/' element={<LoginPage />} />
       </Routes>
     </div>
   )
