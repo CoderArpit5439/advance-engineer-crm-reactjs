@@ -33,65 +33,14 @@ const Header = () => {
                 </div>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown messages-menu">
-                            <a class="dropdown-toggle admin-notification" data-toggle="dropdown">
-                                <i class="pe-7s-cart"></i>
-                                <span class="label label-primary">5</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <ul class="menu">
-                                        <li >
-                                            <a class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="assets/dist/img/basketball-jersey.png" class="img-thumbnail" alt="User Image" />
-                                                </div>
-                                                <h4>polo shirt</h4>
-                                                <p><strong>total item:</strong> 21
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="assets/dist/img/shirt.png" class="img-thumbnail" alt="User Image" />
-                                                </div>
-                                                <h4>Kits</h4>
-                                                <p><strong>total item:</strong> 11
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="assets/dist/img/football.png" class="img-thumbnail" alt="User Image" />
-                                                </div>
-                                                <h4>Football</h4>
-                                                <p><strong>total item:</strong> 16
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-list">
-                                            <a class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="assets/dist/img/shoe.png" class="img-thumbnail" alt="User Image" />
-                                                </div>
-                                                <h4>Sports sheos</h4>
-                                                <p><strong>total item:</strong> 10
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                       
                         <li class="dropdown messages-menu">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-mail"></i>
-                                <span class="label label-success">4</span>
+                                <span class="label label-success">0</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
+                                {/* <li>
                                     <ul class="menu">
                                         <li>
                                             <a class="border-gray">
@@ -150,16 +99,16 @@ const Header = () => {
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> */}
                             </ul>
                         </li>
                         <li class="dropdown notifications-menu">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-bell"></i>
-                                <span class="label label-warning">7</span>
+                                <span class="label label-warning">0</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
+                                {/* <li>
                                     <ul class="menu">
                                         <li>
                                             <a class="border-gray">
@@ -184,16 +133,16 @@ const Header = () => {
                                             <i class="fa fa-dot-circle-o color-violet"></i> Add more clients and order</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> */}
                             </ul>
                         </li>
                         <li class="dropdown tasks-menu">
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-note2"></i>
-                                <span class="label label-danger">6</span>
+                                <span class="label label-danger">0</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
+                                {/* <li>
                                     <ul class="menu">
                                         <li>
                                             <a class="border-gray">
@@ -232,7 +181,7 @@ const Header = () => {
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> */}
                             </ul>
                         </li>
                         <li class="dropdown dropdown-help hidden-xs">
@@ -240,14 +189,10 @@ const Header = () => {
                                 <i class="pe-7s-settings"></i></a>
                             <ul class="dropdown-menu" >
                                 <li>
-                                    <a >
-                                        <i class="fa fa-line-chart"></i> Networking</a>
+                                    <a onClick={() => navigate('/create-quotation')}>
+                                        <i class="fa fa-line-chart"></i> Create Quotation</a>
                                 </li>
-                                <li><a ><i class="fa fa fa-bullhorn"></i> Lan settings</a></li>
-                                <li><a ><i class="fa fa-bar-chart"></i> Settings</a></li>
-                                <li><a >
-                                    <i class="fa fa-wifi"></i> wifi</a>
-                                </li>
+                                <li><a onClick={() => navigate('/create-invoice')}><i class="fa fa fa-bullhorn"></i> Create Invoice</a></li>
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user">

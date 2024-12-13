@@ -443,7 +443,7 @@ const CreateInvoice = () => {
             Print Invoice
           </button>
           <button onClick={handleSave} style={styles.printButton}>
-            Save Quotation
+            Save Invoice
           </button>
         </div>
       </div>
