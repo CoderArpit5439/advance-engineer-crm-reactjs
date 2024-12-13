@@ -21,236 +21,51 @@ const Dashboard = () => {
         <section class="content">
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-user-plus fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }} >11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Client</h5>
+              <div id="cardbox4" style={{backgroundColor:"#bd4141"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+              
+                  <h3>Customer</h3>
                 </div>
               </div>
             </div>
             <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
+              <div id="cardbox4" style={{backgroundColor:"#88855f"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <h3>Category</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+              <div id="cardbox4" style={{backgroundColor:"#658d38"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <h3>Products</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+              <div id="cardbox4" style={{backgroundColor:"#49388d"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <h3>Quotation</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+              <div id="cardbox4" style={{backgroundColor:"#8d386e"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  <h3>Invoice</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+              <div id="cardbox4" style={{backgroundColor:"#4e766b"}}>
+                <div class="statistic-box" style={{display:"flex",justifyContent:"center",alignItems:"center"}} >
                   {/* <i class="fa fa-user-secret fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }} >4</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Admin</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-money fa-3x"></i> */}
-                  <i class="ti ti-money"></i><span style={{ fontWeight: 700 }}>965</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Expenses</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
-              <div id="cardbox4">
-                <div class="statistic-box">
-                  {/* <i class="fa fa-files-o fa-3x"></i> */}
-                  <span style={{ fontWeight: 700 }}>11</span>
-                  <div class="counter-number pull-right">
-                    <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
-                    </span>
-                  </div>
-                  <h5>Example</h5>
+                  {/* <span style={{ fontWeight: 700 }} >4</span> */}
+                  {/* <div class="counter-number pull-right"> */}
+                    {/* <span class="slight"><i class="fa fa-play fa-rotate-270"> </i> */}
+                    {/* </span> */}
+                  {/* </div> */}
+                  <h3>User</h3>
                 </div>
               </div>
             </div>
@@ -460,294 +275,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="gMdHD3Wjnp">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="gMdHD3Wjnp" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Works Announcements</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Workslist">
-                  <div class="worklistdate">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Works Type</th>
-                          <th>Name Of Worker</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="info">
-                          <td>Web Design</td>
-                          <td>Jr. Developer Alrazy</td>
-                        </tr>
-                        <tr>
-                          <td>Networking</td>
-                          <td>Jr. Developer Jahir</td>
-                        </tr>
-                        <tr>
-                          <td>Megento</td>
-                          <td>Jr. Developer Sayeed</td>
-                        </tr>
-                        <tr>
-                          <td>Php,Laravel</td>
-                          <td>Jr. Developer Muhim</td>
-                        </tr>
-                        <tr>
-                          <td>Html,css</td>
-                          <td>Frontend Developer Rafi</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="isNZuFD5E1">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="isNZuFD5E1" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Notice Board</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Workslist">
-                  <div class="worklistdate">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Notice</th>
-                          <th>Published By</th>
-                          <th>Date Added</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="info">
-                          <td>new notice</td>
-                          <td>Mr. Alrazy</td>
-                          <td>20th April 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. Alrazy</td>
-                          <td>20th june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. Jahir</td>
-                          <td>26th june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. leo</td>
-                          <td>3rd june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Notice</td>
-                          <td>Mr. Karim</td>
-                          <td>3rd July 2017</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="sJ0S0qyqhl">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="sJ0S0qyqhl" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Pending Works</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Pendingwork">
-                  <span class="label-warning label label-default pull-right">progressing</span>
-                  <i class="fa fa-ban"></i>
-                  <a href="#">Database tools</a>
-                  <div class="upworkdate">
-                    <p>Jul 25, 2017 for Alimul Alrazy</p>
-                  </div>
-                </div>
-                <div class="Pendingwork">
-                  <span class="label-success label label-default pull-right">success</span>
-                  <i class="fa fa-ban"></i>
-                  <a href="#">Cabels</a>
-                  <div class="upworkdate">
-                    <p>Jul 25, 2017 for Alimul</p>
-                  </div>
-                </div>
-                <div class="Pendingwork">
-                  <span class="label-danger label label-default pull-right">Failed</span>
-                  <i class="fa fa-ban"></i>
-                  <a href="#">Technologycal tools</a>
-                  <div class="upworkdate">
-                    <p>Feb 25, 2017 for Alrazy</p>
-                  </div>
-                </div>
-                <div class="Pendingwork">
-                  <span class="label-warning label label-default pull-right">progressing</span>
-                  <i class="fa fa-ban"></i>
-                  <a href="#">Transaction</a>
-                  <div class="upworkdate">
-                    <p>apr 25, 2017 for Mahfuz</p>
-                  </div>
-                </div>
-                <div class="Pendingwork">
-                  <span class="label-success label label-default pull-right">success</span>
-                  <i class="fa fa-ban"></i>
-                  <a href="#">Training tools</a>
-                  <div class="upworkdate">
-                    <p>jun 25, 2017 for Alrazy</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="uRgamf6RD1">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="uRgamf6RD1" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Works Deadlines</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Workslist">
-                  <div class="worklistdate">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Task Name</th>
-                          <th>End Deadlines</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="info">
-                          <th scope="row">Alrazy</th>
-                          <td>Feb 25,2017</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Jahir</th>
-                          <td>jun 05,2017</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Sayeed</th>
-                          <td>Feb 05,2017</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Shipon</th>
-                          <td>jun 25,2017</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Rafi</th>
-                          <td>Jul 15,2017</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="gMdHD3Wjnp">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="gMdHD3Wjnp" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Works Announcements</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Workslist">
-                  <div class="worklistdate">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Works Type</th>
-                          <th>Name Of Worker</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="info">
-                          <td>Web Design</td>
-                          <td>Jr. Developer Alrazy</td>
-                        </tr>
-                        <tr>
-                          <td>Networking</td>
-                          <td>Jr. Developer Jahir</td>
-                        </tr>
-                        <tr>
-                          <td>Megento</td>
-                          <td>Jr. Developer Sayeed</td>
-                        </tr>
-                        <tr>
-                          <td>Php,Laravel</td>
-                          <td>Jr. Developer Muhim</td>
-                        </tr>
-                        <tr>
-                          <td>Html,css</td>
-                          <td>Frontend Developer Rafi</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="isNZuFD5E1">
-            <div class="panel panel-bd lobidisable lobipanel lobipanel-sortable" data-inner-id="isNZuFD5E1" data-index="0">
-              <div class="panel-heading ui-sortable-handle">
-                <div class="panel-title" style={{maxWidth: "calc(100% - 90px)"}}>
-                  <h4>Notice Board</h4>
-                </div>
-                <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
-              <div class="panel-body">
-                <div class="Workslist">
-                  <div class="worklistdate">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>Notice</th>
-                          <th>Published By</th>
-                          <th>Date Added</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="info">
-                          <td>new notice</td>
-                          <td>Mr. Alrazy</td>
-                          <td>20th April 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. Alrazy</td>
-                          <td>20th june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. Jahir</td>
-                          <td>26th june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Urgent notice</td>
-                          <td>Mr. leo</td>
-                          <td>3rd june 2017</td>
-                        </tr>
-                        <tr>
-                          <td>Notice</td>
-                          <td>Mr. Karim</td>
-                          <td>3rd July 2017</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
         {/* </div> */}
       </div>
       <Footer />

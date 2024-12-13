@@ -8,7 +8,7 @@ const initialState = {
     error:null,
     response:null,
     nameList:null,
-
+    quotation:null
 }
 
 export const GetCustomerList = createAsyncThunk(
@@ -21,6 +21,18 @@ export const GetCustomerList = createAsyncThunk(
         }
     }
 )
+
+export const GetQuotationList = createAsyncThunk(
+    "GetQuotationList",async (body) => {
+        try {
+            const response = await instance.get("quotation/fetch-quotation")
+            return response.data
+        } catch (error) {
+            return error
+        }
+    }
+)
+
 export const GetCustomerNameList = createAsyncThunk(
     "GetCustomerNameList",async (body) => {
         try {
@@ -104,6 +116,18 @@ export const CustomerSlice = createSlice({
             state.data = action.payload;
         });
         builder.addCase(GetCustomerList.rejected,(state,action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        builder.addCase(GetQuotationList.pending,(state,action) => {
+            state.loading = true;
+        });
+        builder.addCase(GetQuotationList.fulfilled,(state,action) => {
+            state.loading = false;
+            state.quotation = action.payload;
+        });
+        builder.addCase(GetQuotationList.rejected,(state,action) => {
             state.loading = false;
             state.error = action.payload;
         })

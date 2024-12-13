@@ -10,6 +10,8 @@ import ListProduct from '../Pages/Product/ListProduct'
 import AddCategory from '../Pages/Category/AddCategory'
 import ListCategory from '../Pages/Category/ListCategory'
 import TestingQuotation from '../Pages/Quotation/TestingQuotation'
+import ListInvoice from '../Pages/Invoice/ListInvoice'
+import CreateInvoice from '../Pages/Invoice/CreateInvoice'
 
 const PrivateRoute = () => {
     return (
@@ -23,6 +25,9 @@ const PrivateRoute = () => {
                 <Route path='/list-quotation' element={<ListQuotation />} />
                 <Route path='/create-quotation' element={<CreateQuotation />} />
                 <Route path='/testing-quotation' element={<TestingQuotation />} />
+
+                <Route path='/list-invoice' element={<ListInvoice />} />
+                <Route path='/create-invoice' element={<CreateInvoice />} />
 
                 <Route path='/add-product' element={<AddProduct />} />
                 <Route path='/list-product' element={<ListProduct />} />

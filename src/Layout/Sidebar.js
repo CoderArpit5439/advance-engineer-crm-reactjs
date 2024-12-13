@@ -60,7 +60,18 @@ const Sidebar = () => {
                   <ul class="treeview-menu">
                      <li><a onClick={() => navigate("/list-quotation")} style={{cursor:"pointer"}}>List</a></li>
                      <li><a onClick={() => navigate("/create-quotation")} style={{cursor:"pointer"}}>Create Quotation</a></li>
-                     <li><a onClick={() => navigate("/add-customer")} style={{cursor:"pointer"}}>Quotation</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-users"></i><span>Invoice</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-invoice")} style={{cursor:"pointer"}}>List</a></li>
+                     <li><a onClick={() => navigate("/create-invoice")} style={{cursor:"pointer"}}>Create Invoice</a></li>
                   </ul>
                </li>
                {/* <li class="treeview">

@@ -1,236 +1,142 @@
-import React, { useState, useRef } from 'react';
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
-import Header from '../../Layout/Header';
-import Sidebar from '../../Layout/Sidebar';
-import Footer from '../../Layout/Footer';
+import React, { useState } from "react";
+import { PDFViewer, Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
+import Header from "../../Layout/Header";
+import Sidebar from "../../Layout/Sidebar";
+import Footer from "../../Layout/Footer";
 
 const TestingQuotation = () => {
-    const [customer, setCustomer] = useState('');
-    const [hsncode, setHsncode] = useState('');
-    const [description, setDescription] = useState('');
-    const [quantity, setQuantity] = useState(0);
-    const [unit, setUnit] = useState('');
-    const [kgpc, setKgpc] = useState(0);
-    const [discount, setDiscount] = useState(0);
-    const [itemArr, setItemArr] = useState([]);
-    const [totalAmount, setTotalAmount] = useState(0);
-    const quotationRef = useRef();
+  const [items, setItems] = useState([]);
+  const [branding, setBranding] = useState({
+    companyName: "Advance engineering",
+    subLine: "Our work is a new identity of engineering and technology",
+    logo: "https://via.placeholder.com/150",
+    address: "Head office : N. H. -47 Choudhary Market Tejaji Nagar Khandwa Road Indore 452001 (MP)",
+    subAddress: "sales@advanceengineerings.com | support@advanceengineerings.com",
+    phone: "+91 94253 11684 | +91 94253 11328",
+    website: "www.advanceengineerings.com",
+    products: ["All types of conveyors", "Bottle line machine change parts & blister packing machine change parts", "Mixer granulator", "Pharmaceutical instruments", "Machine spare parts & new research and development."],
+  });
+  const [details, setDetails] = useState({
+    name: "",
+    subject: "",
+    date: "",
+    quotationNumber: "",
+  });
+  const [discount, setDiscount] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [totalKG, setTotalKG] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name === 'customer') setCustomer(value);
-        if (name === 'hsncode') setHsncode(value);
-        if (name === 'description') setDescription(value);
-        if (name === 'quantity') setQuantity(value);
-        if (name === 'unit') setUnit(value);
-        if (name === 'kgpc') setKgpc(value);
-        if (name === 'discount') setDiscount(value);
-    };
+  const addItem = () => {
+    setItems([...items, { name: "", hsn: "", quantity: 0, unit: "", kg: 0, price: 0, total: 0 }]);
+  };
 
-    const addItem = () => {
-        const newItem = {
-            customer,
-            hsncode,
-            description,
-            quantity,
-            unit,
-            kgpc,
-            discount,
-        };
+  const updateTotals = (updatedItems) => {
+    const newSubtotal = updatedItems.reduce((acc, item) => acc + item.total, 0);
+    const newTotalQuantity = updatedItems.reduce((acc, item) => acc + item.quantity, 0);
+    const newTotalKG = updatedItems.reduce((acc, item) => acc + item.kg, 0);
+    setSubtotal(newSubtotal);
+    setTotalQuantity(newTotalQuantity);
+    setTotalKG(newTotalKG);
+    const discountedSubtotal = newSubtotal - discount;
+    setTotal(discountedSubtotal);
+  };
 
-        if (newItem.customer && newItem.hsncode && newItem.description && newItem.quantity && newItem.unit && newItem.kgpc && newItem.discount) {
-            const newArr = [...itemArr, newItem];
-            setItemArr(newArr);
-            calculateTotal(newArr);
-        }
-    };
+  const removeItem = (index) => {
+    const updatedItems = items.filter((_, i) => i !== index);
+    updateTotals(updatedItems);
+    setItems(updatedItems);
+  };
 
-    const removeItem = (index) => {
-        const newArr = [...itemArr];
-        newArr.splice(index, 1);
-        setItemArr(newArr);
-        calculateTotal(newArr);
-    };
+  const handleChange = (index, field, value) => {
+    const updatedItems = [...items];
+    if (["quantity", "price", "kg"].includes(field)) {
+      updatedItems[index][field] = parseFloat(value) || 0;
+    } else {
+      updatedItems[index][field] = value;
+    }
+    updatedItems[index].total = updatedItems[index].quantity * updatedItems[index].price;
+    updateTotals(updatedItems);
+    setItems(updatedItems);
+  };
 
-    const calculateTotal = (items) => {
-        const total = items.reduce((sum, item) => sum + (item.quantity * item.kgpc * item.discount), 0);
-        setTotalAmount(total);
-    };
+  // PDF Styles
+  const styles = StyleSheet.create({
+    page: { padding: 30, fontSize: 12 },
+    header: { textAlign: "center", marginBottom: 10 },
+    section: { marginBottom: 10 },
+    table: { display: "table", width: "100%", borderStyle: "solid", borderWidth: 1, marginBottom: 10 },
+    row: { display: "flex", flexDirection: "row", padding: 5, borderBottom: "1px solid #000" },
+    cell: { flex: 1, textAlign: "center" },
+    footer: { textAlign: "center", marginTop: 10 },
+  });
 
-    const generatePDF = async () => {
-        const quotation = quotationRef.current;
-        const canvas = await html2canvas(quotation);
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4',
-        });
+  const PDFContent = () => (
+    <Document>
+      <Page style={styles.page}>
+        <View style={styles.header}>
+          <Image src={branding.logo} style={{ width: 50, height: 50 }} />
+          <Text>{branding.companyName}</Text>
+          <Text>{branding.subLine}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text>Quotation for: {details.name}</Text>
+          <Text>Date: {details.date}</Text>
+          <Text>Quotation Number: {details.quotationNumber}</Text>
+        </View>
+        <View style={styles.table}>
+          <View style={styles.row}>
+            <Text style={styles.cell}>S.NO</Text>
+            <Text style={styles.cell}>Item Name</Text>
+            <Text style={styles.cell}>HSN Code</Text>
+            <Text style={styles.cell}>Quantity</Text>
+            <Text style={styles.cell}>Unit</Text>
+            <Text style={styles.cell}>KG</Text>
+            <Text style={styles.cell}>Price</Text>
+            <Text style={styles.cell}>Total</Text>
+          </View>
+          {items.map((item, index) => (
+            <View style={styles.row} key={index}>
+              <Text style={styles.cell}>{index + 1}</Text>
+              <Text style={styles.cell}>{item.name}</Text>
+              <Text style={styles.cell}>{item.hsn}</Text>
+              <Text style={styles.cell}>{item.quantity}</Text>
+              <Text style={styles.cell}>{item.unit}</Text>
+              <Text style={styles.cell}>{item.kg}</Text>
+              <Text style={styles.cell}>{item.price}</Text>
+              <Text style={styles.cell}>{item.total}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.section}>
+          <Text>Total Quantity: {totalQuantity}</Text>
+          <Text>Total KG: {totalKG}</Text>
+          <Text>Subtotal: {subtotal.toFixed(2)}</Text>
+          <Text>Discount: {discount.toFixed(2)}</Text>
+          <Text>Total: {total.toFixed(2)}</Text>
+        </View>
+        <View style={styles.footer}>
+          <Text>Address: {branding.address}</Text>
+          <Text>Contact: {branding.phone}</Text>
+        </View>
+      </Page>
+    </Document>
+  );
 
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
-        const blobPDF = pdf.output('blob');
-        const blobUrl = URL.createObjectURL(blobPDF);
-        console.log('Blob URL:', blobUrl);
-        window.open(blobUrl);
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form submitted!");
-        generatePDF();
-    };
-
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div class="content-wrapper" style={{ minHeight: "799px" }}>
-                <div ref={quotationRef} style={{ width: '210mm', height: '297mm', boxSizing: 'border-box' }}>
-                    <div style={{ width: '100%', height: '100%', padding: '10mm' }}>
-                        <form onSubmit={onSubmit} style={{ width: '100%' }} noValidate id="invoice_form">
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <div style={{ width: '100%' }}>
-                                    <div style={{ border: '1px solid #ccc', borderRadius: '5px' }}>
-                                        <div style={{ padding: '16px', borderBottom: '1px solid #ddd' }}>
-                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                                <div style={{ width: '33%', padding: '8px' }}>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="text"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="Legal Registration No"
-                                                            value={customer}
-                                                            onChange={handleInputChange}
-                                                            name="customer"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="text"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="HSN Code"
-                                                            value={hsncode}
-                                                            onChange={handleInputChange}
-                                                            name="hsncode"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <textarea
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="Product Description"
-                                                            value={description}
-                                                            onChange={handleInputChange}
-                                                            name="description"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="number"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="Quantity"
-                                                            value={quantity}
-                                                            onChange={handleInputChange}
-                                                            name="quantity"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="text"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="Unit"
-                                                            value={unit}
-                                                            onChange={handleInputChange}
-                                                            name="unit"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="number"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="KG per Item"
-                                                            value={kgpc}
-                                                            onChange={handleInputChange}
-                                                            name="kgpc"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div style={{ marginBottom: '10px' }}>
-                                                        <input
-                                                            type="number"
-                                                            style={{ width: '100%', padding: '8px', backgroundColor: '#f9f9f9', border: '1px solid #ccc', borderRadius: '5px' }}
-                                                            placeholder="Discount"
-                                                            value={discount}
-                                                            onChange={handleInputChange}
-                                                            name="discount"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <button type="button" onClick={addItem} style={{ padding: '10px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px' }}>
-                                                        Add Item
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div style={{ padding: '16px', borderTop: '1px solid #ddd' }}>
-                                            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                                                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                                                    <thead>
-                                                        <tr style={{ backgroundColor: '#f7f7f7' }}>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>#</th>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Product Details</th>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Rate</th>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Quantity</th>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Amount</th>
-                                                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {itemArr.map((item, index) => (
-                                                            <tr key={index}>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{index + 1}</td>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{item.description}</td>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{item.discount}</td>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{item.quantity}</td>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{(item.quantity * item.kgpc * item.discount).toFixed(2)}</td>
-                                                                <td style={{ padding: '10px', border: '1px solid #ddd' }}>
-                                                                    <button type="button" onClick={() => removeItem(index)} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px' }}>
-                                                                        Remove
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div style={{ padding: '16px' }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>Total Amount: ${totalAmount.toFixed(2)}</div>
-                                                <div>
-                                                    <button type="submit" style={{ padding: '10px 15px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px' }}>Generate PDF</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Sidebar />
+      <div>
+        <button onClick={addItem}>Add Item</button>
+        <PDFViewer style={{ width: "800px", height: "500px" }}>
+          <PDFContent />
+        </PDFViewer>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default TestingQuotation;

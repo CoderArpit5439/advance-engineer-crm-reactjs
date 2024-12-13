@@ -6,7 +6,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 
-const Quotation = () => {
+const CreateInvoice = () => {
   const [items, setItems] = useState([]);
   const [branding, setBranding] = useState({
     companyName: "Advance engineering",
@@ -22,15 +22,24 @@ const Quotation = () => {
     name: "",
     subject: "",
     date: "",
-    quotationNumber: "",
+    poNo: "",
+    invoiceNumber: "",
+    challanNo: "",
   });
-  // const [taxRate, setTaxRate] = useState(0);
+
+  const [bankDetail, setBankDetail] = useState({
+    bankName: "",
+    accName: "",
+    accNo: "",
+    ifsc: "",
+  });
+  const [transCharge, setTransCharge] = useState(0);
   const [discount, setDiscount] = useState(0);
+  const [gstNo, setGstNo] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
-  const [totalKG, setTotalKG] = useState(0);
+  const [totalPackage, setTotalPackage] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [pdfBlobState, setPdfBlobState] = useState("");
 
   const printRef = useRef(null);
 
@@ -59,10 +68,8 @@ const Quotation = () => {
   const updateTotals = (updatedItems) => {
     const newSubtotal = updatedItems.reduce((acc, item) => acc + item.total, 0);
     const newTotalQuantity = updatedItems.reduce((acc, item) => acc + item.quantity, 0);
-    const newTotalKG = updatedItems.reduce((acc, item) => acc + item.kg, 0);
     setSubtotal(newSubtotal);
     setTotalQuantity(newTotalQuantity);
-    setTotalKG(newTotalKG);
     const discountedSubtotal = newSubtotal - discount;
     setTotal(discountedSubtotal);
   };
@@ -84,58 +91,12 @@ const Quotation = () => {
 
       // Convert the PDF to a Blob
       const pdfBlob = pdf.output("blob");
-      
-      // Optional: Convert the Blob to a downloadable URL for testing
-      const blobURL = URL.createObjectURL(pdfBlob);
-      console.log("Blob URL: ", pdfBlob);
-      // setPdfBlobState(pdfBlob);
 
-      const formData = new FormData();
-      formData.append("quo_name", details.name);
-      formData.append("quo_date", details.date);
-      formData.append("quo_subject", details.subject);
-      formData.append("quo_number", details.quotationNumber);
-      formData.append("quo_description", JSON.stringify(items));
-      formData.append("quo_quantity", totalQuantity);
-      formData.append("quo_kg", totalKG);
-      formData.append("quo_subtotal", subtotal);
-      formData.append("quo_discount", discount);
-      formData.append("quo_total", total);
-      formData.append("quo_pdf",pdfBlob);
-  
-      // Send to API
-      fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("PDF uploaded successfully:", data);
-          // alert("Quotation data uploaded successfully!");
-        })
-        .catch((error) => {
-          console.error("Error uploading PDF:", error);
-          alert("Failed to upload the quotation PDF.");
-        });
+      console.log(741, pdfBlob)
       // Step 2: Upload the PDF
-      // const formData = new FormData();
-      // formData.append("quo_pdf", pdfBlob, "quotation.pdf");
-      // formData.append("quo_name", "testing");
-
-      // Send to API
-      // fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-      //   method: "POST",
-      //   body: formData,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log("PDF uploaded successfully:", data);
-      //     alert("Quotation PDF uploaded successfully!");
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error uploading PDF:", error);
-      //     alert("Failed to upload the quotation PDF.");
-      //   });
+      const formData = new FormData();
+      formData.append("quo_pdf", pdfBlob, "quotation.pdf");
+      formData.append("quo_name", "testing");
     });
 
     printWindow.document.write(`
@@ -190,33 +151,53 @@ const Quotation = () => {
   };
 
   const handleSave = () => {
+    // const obj = {
+    //   "inv_name": details.name,
+    //   "inv_date": details.date,
+    //   "inv_po_no": details.poNo,
+    //   "inv_number": details.invoiceNumber,
+    //   "inv_challan": challanNo,
+    //   "inv_description": items,
+    //   "inv_package": totalPackage,
+    //   "inv_quantity": totalQuantity,
+    //   "inv_kg": totalKG,
+    //   "inv_subtotal": subtotal,
+    //   "inv_transport": transCharge,
+    //   "inv_gst": gstNo,
+    //   "inv_bank": bankDetail,
+    //   "inv_discount": discount,
+    //   "inv_total": total,
+    // };
 
     const formData = new FormData();
-    formData.append("quo_name", details.name);
-    formData.append("quo_date", details.date);
-    formData.append("quo_subject", details.subject);
-    formData.append("quo_number", details.quotationNumber);
-    formData.append("quo_description", JSON.stringify(items));
-    formData.append("quo_quantity", totalQuantity);
-    formData.append("quo_kg", totalKG);
-    formData.append("quo_subtotal", subtotal);
-    formData.append("quo_discount", discount);
-    formData.append("quo_total", total);
-    formData.append("quo_pdf",pdfBlobState[0], "quotation.pdf");
+    formData.append("inv_name", details.name);
+    formData.append("inv_date", details.date);
+    formData.append("inv_po_no", details.poNo);
+    formData.append("inv_number", details.invoiceNumber);
+    formData.append("inv_challan", details.challanNo);
+    formData.append("inv_description", JSON.stringify(items));
+    formData.append("inv_package", totalPackage);
+    formData.append("inv_quantity", totalQuantity);
+    formData.append("inv_subtotal", subtotal);
+    formData.append("inv_transport", transCharge);
+    formData.append("inv_gst", gstNo);
+    formData.append("inv_bank", JSON.stringify(bankDetail));
+    formData.append("inv_discount", discount);
+    formData.append("inv_total", total);
 
     // Send to API
-    fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
+    fetch("https://api.advanceengineerings.com/crm/invoice/add-invoice", {
       method: "POST",
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("PDF uploaded successfully:", data);
-        // alert("Quotation data uploaded successfully!");
+        // console.log("PDF uploaded successfully:", data);
+        alert("Invoice data uploaded successfully!");
       })
       .catch((error) => {
         console.error("Error uploading PDF:", error);
-        alert("Failed to upload the quotation PDF.");
+        alert("Failed to upload the Invoice PDF.");
       });
   }
 
@@ -258,11 +239,20 @@ const Quotation = () => {
                 />
               </label>
               <label>
-                Subject:
+                Invoice Number:
                 <input
                   type="text"
-                  value={details.subject}
-                  onChange={(e) => setDetails({ ...details, subject: e.target.value })}
+                  value={details.invoiceNumber}
+                  onChange={(e) => setDetails({ ...details, invoiceNumber: e.target.value })}
+                  style={styles.input}
+                />
+              </label>
+              <label>
+                P.O. No.:
+                <input
+                  type="text"
+                  value={details.poNo}
+                  onChange={(e) => setDetails({ ...details, poNo: e.target.value })}
                   style={styles.input}
                 />
               </label>
@@ -278,18 +268,18 @@ const Quotation = () => {
                 />
               </label>
               <label>
-                Quotation Number:
+                Challan Number:
                 <input
                   type="text"
-                  value={details.quotationNumber}
-                  onChange={(e) => setDetails({ ...details, quotationNumber: e.target.value })}
+                  value={details.challanNo}
+                  onChange={(e) => setDetails({ ...details, challanNo: e.target.value })}
                   style={styles.input}
                 />
               </label>
             </div>
           </div>
 
-          {/* Quotation Table */}
+          {/* INVOICE DESCRIPTION Table */}
           <div style={styles.table}>
             <div style={styles.tableHeader}>
               <span>S.NO</span>
@@ -297,7 +287,6 @@ const Quotation = () => {
               <span>HSN Code</span>
               <span>Quantity</span>
               <span>Unit</span>
-              <span>KG/PC</span>
               <span>Price per Unit</span>
               <span>Total</span>
               <span>Actions</span>
@@ -330,12 +319,6 @@ const Quotation = () => {
                   onChange={(e) => handleChange(index, "unit", e.target.value)}
                 />
                 <input
-                  style={{ width: "50px", marginRight: "5px" }}
-                  type="number"
-                  value={item.kg}
-                  onChange={(e) => handleChange(index, "kg", e.target.value)}
-                />
-                <input
                   style={{ width: "100px", marginRight: "5px" }}
                   type="number"
                   value={item.price}
@@ -349,26 +332,87 @@ const Quotation = () => {
             ))}
           </div>
 
-          {/* Summary Section */}
+          {/* TOTAL Section */}
           <div style={styles.table}>
             <div style={styles.tableHeader}>
-              <span>Total Quantity</span>
-              <span>Total KG</span>
+              <span>Total QTY</span>
+              <span>Total Pkg</span>
               <span>Subtotal</span>
-              <span>Discount</span>
+              <span>Transportation</span>
+              <span>GST % </span>
+              <span>Discount price</span>
               <span>Total</span>
             </div>
             <div style={styles.tableRow}>
-              <span style={{ marginRight: "50px" }}>{totalQuantity}</span>
-              <span style={{ marginRight: "50px" }}>{totalKG}</span>
-              <span style={{ marginRight: "50px" }}>{subtotal.toFixed(2)}</span>
+              <span style={{ width: "48px" }}>{totalQuantity}</span>
+              <input
+                type="number"
+                value={totalPackage}
+                onChange={(e) => setTotalPackage(parseFloat(e.target.value) || 0)}
+                style={{ width: "66px" }}
+              />
+              <span >{subtotal.toFixed(2)}</span>
+              <input
+                type="number"
+                value={transCharge}
+                onChange={(e) => setTransCharge(parseFloat(e.target.value) || 0)}
+                style={{ width: "94px", marginRight: "-43px" }}
+              />
+              <input
+                type="number"
+                value={gstNo}
+                onChange={(e) => setGstNo(parseFloat(e.target.value) || 0)}
+                style={{ width: "85px", marginRight: "-46px" }}
+              />
               <input
                 type="number"
                 value={discount}
                 onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)}
-                style={{ width: "50px", marginRight: "5px" }}
+                style={{ width: "100px", marginRight: "-22px" }}
               />
               {total.toFixed(2)}
+            </div>
+          </div>
+
+          {/* Bank Detail */}
+          <div style={styles.table}>
+            <div style={styles.tableHeader}>
+              <span>Bank Details</span>
+              <span>Account holder</span>
+              <span>Account Number</span>
+              <span>IFSC code</span>
+            </div>
+            <div style={styles.tableRow}>
+              <input
+                type="text"
+                placeholder="Enter Bank Name..."
+                value={bankDetail.bankName}
+                onChange={(e) => setBankDetail({ ...bankDetail, bankName: e.target.value })}
+                style={{ marginRight: "5px" }}
+              />
+              <input
+                type="text"
+
+                placeholder="Enter Account holder Name..."
+                value={bankDetail.accName}
+                onChange={(e) => setBankDetail({ ...bankDetail, accName: e.target.value })}
+                style={{ marginRight: "5px" }}
+              />
+              <input
+                type="text"
+                value={bankDetail.accNo}
+
+                placeholder="Enter Account number..."
+                onChange={(e) => setBankDetail({ ...bankDetail, accNo: e.target.value })}
+                style={{ marginRight: "5px" }}
+              />
+              <input
+                type="text"
+                value={bankDetail.ifsc}
+                placeholder="Enter IFSC code..."
+                onChange={(e) => setBankDetail({ ...bankDetail, ifsc: e.target.value })}
+                style={{ marginRight: "5px" }}
+              />
             </div>
           </div>
 
@@ -391,15 +435,17 @@ const Quotation = () => {
         </div>
 
         {/* Buttons */}
-        <button onClick={addItem} style={styles.addButton}>
-          Add Item
-        </button>
-        <button onClick={handlePrint} style={styles.printButton}>
-          Print Quotation
-        </button>
-        <button onClick={handleSave} style={styles.printButton}>
-          Save Quotation
-        </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button onClick={addItem} style={styles.addButton}>
+            Add Item
+          </button>
+          <button onClick={handlePrint} style={styles.printButton}>
+            Print Invoice
+          </button>
+          <button onClick={handleSave} style={styles.printButton}>
+            Save Quotation
+          </button>
+        </div>
       </div>
       <Footer />
     </>
@@ -458,8 +504,8 @@ const styles = {
     borderRadius: "3px",
     cursor: "pointer",
     marginTop: "20px",
-    float: "right",
+    // float: "right",
   },
 };
 
-export default Quotation;
+export default CreateInvoice;
