@@ -85,6 +85,55 @@ return (
               </div>
             </div>
           </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#ff3399" }} onClick={() => navigate('/list-lead')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Lead</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#ff6699" }} onClick={() => navigate('/list-order')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Order Track</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#00cc99" }} onClick={() => navigate('/list-support')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Support</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#009900" }} onClick={() => navigate('/list-inventory')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Inventory</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#0099ff" }} onClick={() => navigate('/list-task')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Task</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#9933ff" }} onClick={() => navigate('/list-inquiry')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Inquiry</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div id="cardbox4" style={{ backgroundColor: "#0099ff" }} onClick={() => navigate('/list-account')} >
+              <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Account</h3>
+              </div>
+            </div>
+          </div>
           {/* <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
             <div id="cardbox4" style={{ backgroundColor: "#4e766b" }}>
               <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
@@ -107,7 +156,7 @@ return (
             <div class="panel-title" style={{ maxWidth: "calc(100% - 90px)" }}>
               <h4>Recent Customer (24 hours)</h4>
             </div>
-            <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            </div>
           <div class="panel-body">
             <div class="table-responsive">
               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
@@ -137,7 +186,7 @@ return (
             <div class="panel-title" style={{ maxWidth: "calc(100% - 90px)" }}>
               <h4>Recent Product (24 hours)</h4>
             </div>
-            <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            </div>
           <div class="panel-body">
             <div className="table-responsive">
               <table id="dataTableExample1" className="table table-bordered table-striped table-hover">
@@ -167,7 +216,7 @@ return (
             <div class="panel-title" style={{ maxWidth: "calc(100% - 90px)" }}>
               <h4>Customer Status</h4>
             </div>
-            <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            </div>
           <div class="panel-body">
           <Chart
               options={customerSales.options}
@@ -184,7 +233,7 @@ return (
             <div class="panel-title" style={{ maxWidth: "calc(100% - 90px)" }}>
               <h4>Product Status</h4>
             </div>
-            <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            </div>
           <div class="panel-body">
           <Chart
               options={productSales.options}
@@ -201,7 +250,7 @@ return (
             <div class="panel-title" style={{ maxWidth: "calc(100% - 90px)" }}>
               <h4>Invoice Status</h4>
             </div>
-            <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            </div>
           <div class="panel-body">
           <Chart
               options={invoiceSales.options}

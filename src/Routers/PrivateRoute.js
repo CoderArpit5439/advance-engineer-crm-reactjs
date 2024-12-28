@@ -12,6 +12,14 @@ import ListCategory from '../Pages/Category/ListCategory'
 import TestingQuotation from '../Pages/Quotation/TestingQuotation'
 import ListInvoice from '../Pages/Invoice/ListInvoice'
 import CreateInvoice from '../Pages/Invoice/CreateInvoice'
+import Lead from '../Pages/Lead'
+import Inquiry from '../Pages/Inquiry'
+import Order from '../Pages/Order'
+import Support from '../Pages/Support'
+import Inventory from '../Pages/Inventory'
+import Account from '../Pages/Account'
+import Manufacturing from '../Pages/Manufacturing'
+import Task from '../Pages/Task'
 
 const PrivateRoute = () => {
     return (
@@ -34,6 +42,17 @@ const PrivateRoute = () => {
 
                 <Route path='/add-category' element={<AddCategory />} />
                 <Route path='/list-category' element={<ListCategory />} />
+           
+                <Route path='/list-lead' element={<Lead />} />
+                <Route path='/list-inquiry' element={<Inquiry />} />
+                <Route path='/list-order' element={<Order />} />
+                <Route path='/list-support' element={<Support />} />
+                <Route path='/list-inventory' element={<Inventory />} />
+                <Route path='/list-account' element={<Account />} />
+                <Route path='/list-manufacturing' element={<Manufacturing />} />
+                <Route path='/list-task' element={<Task />} />
+             
+
             </Routes>
         </>
     )

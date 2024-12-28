@@ -8,7 +8,9 @@ const Sidebar = () => {
          <div class="sidebar">
             <ul class="sidebar-menu">
                <li class="active">
-                  <a onClick={() => navigate("/dashboard")} style={{cursor:"pointer"}}><i class="fa fa-tachometer"></i><span>Dashboard</span>
+                  <a onClick={() => navigate("/dashboard")} style={{cursor:"pointer"}}>
+                     <i class="fa fa-tachometer"></i>
+                     <span>Dashboard</span>
                      <span class="pull-right-container">
                      </span>
                   </a>
@@ -28,7 +30,7 @@ const Sidebar = () => {
                </li>
                <li class="treeview">
                   <a >
-                     <i class="fa fa-users"></i><span>Category</span>
+                     <i class="fa fa-list"></i><span>Category</span>
                      <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                      </span>
@@ -40,7 +42,7 @@ const Sidebar = () => {
                </li>
                <li class="treeview">
                   <a >
-                     <i class="fa fa-users"></i><span>Products</span>
+                     <i class="fa fa-shopping-basket"></i><span>Products</span>
                      <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                      </span>
@@ -52,7 +54,7 @@ const Sidebar = () => {
                </li>
                <li class="treeview">
                   <a >
-                     <i class="fa fa-users"></i><span>Quotation</span>
+                     <i class="fa fa-file-text"></i><span>Quotation</span>
                      <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                      </span>
@@ -64,7 +66,7 @@ const Sidebar = () => {
                </li>
                <li class="treeview">
                   <a >
-                     <i class="fa fa-users"></i><span>Invoice</span>
+                     <i class="fa fa-book"></i><span>Invoice</span>
                      <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                      </span>
@@ -72,6 +74,94 @@ const Sidebar = () => {
                   <ul class="treeview-menu">
                      <li><a onClick={() => navigate("/list-invoice")} style={{cursor:"pointer"}}>List</a></li>
                      <li><a onClick={() => navigate("/create-invoice")} style={{cursor:"pointer"}}>Create Invoice</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-user-circle"></i><span>Lead</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-lead")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-shopping-cart"></i><span>Order</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-order")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-handshake-o"></i><span>Support</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-support")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-cubes"></i><span>Inventory</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-inventory")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-edit"></i><span>Task</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-task")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-commenting-o"></i><span>Inquiry</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-inquiry")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-user-circle-o"></i><span>Account</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-account")} style={{cursor:"pointer"}}>List</a></li>
+                  </ul>
+               </li>
+               <li class="treeview">
+                  <a >
+                     <i class="fa fa-building-o"></i><span>Manufacturing</span>
+                     <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                  </a>
+                  <ul class="treeview-menu">
+                     <li><a onClick={() => navigate("/list-manufacturing")} style={{cursor:"pointer"}}>List</a></li>
                   </ul>
                </li>
                {/* <li class="treeview">
