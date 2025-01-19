@@ -48,6 +48,23 @@ export const fetchGraphicsImage = createAsyncThunk(
   }
 );
 
+export const imageApproved = createAsyncThunk("imageApproved",async(body,{rejectWithValue})=>{
+  try {
+    console.log(body)
+    const formData = new FormData();
+    formData.append("graphic_id",body.graphic_id);
+    formData.append("graphic_approved",body.graphic_approved);
+   const res = await instance.post("graphic/approve-graphic",formData);
+   return res.data
+  } catch (error) {
+    return rejectWithValue(
+      error.response?.data || "An error occurred while update graphics image status"
+    );
+  }
+} 
+
+)
+
 const GraphicsSlice = createSlice({
   name: "GraphicsSlice",
   initialState,
@@ -88,6 +105,23 @@ const GraphicsSlice = createSlice({
       .addCase(fetchGraphicsImage.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to fetch graphics images";
+      });
+
+      // Image aprroved 
+   builder
+      .addCase(imageApproved.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.response = null;
+      })
+      .addCase(imageApproved.fulfilled, (state, action) => {
+        state.loading = false;
+        state.response = action.payload;
+        state.error = null;
+      })
+      .addCase(imageApproved.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to Upadte status graphics image";
       });
   },
 });

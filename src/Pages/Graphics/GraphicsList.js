@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGraphicsImage } from "../../Redux/crmSlices/graphicsSlice/GraphicsSlice";
+import {
+  fetchGraphicsImage,
+  imageApproved,
+} from "../../Redux/crmSlices/graphicsSlice/GraphicsSlice";
 import AddGraphics from "./AddGraphics";
 import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
@@ -9,13 +12,11 @@ import Footer from "../../Layout/Footer";
 const GraphicsList = () => {
   const dispatch = useDispatch();
 
-  // Redux state
   const { data, loading } = useSelector((state) => ({
     data: state.rootReducer.GraphicsSlice?.data?.data,
     loading: state.rootReducer.GraphicsSlice?.loading,
   }));
 
-  // Fetch graphics on mount
   useEffect(() => {
     dispatch(fetchGraphicsImage({ page: 1 }));
   }, [dispatch]);
@@ -25,21 +26,28 @@ const GraphicsList = () => {
     dispatch(fetchGraphicsImage({ page: 1 }));
   };
 
+  const imageApproval = async (data) => {
+    await dispatch(imageApproved(data));
+   dispatch(fetchGraphicsImage({ page: 1 }));
+  };
+
   return (
     <>
       <Header />
       <Sidebar />
       <div className="content-wrapper" style={{ minHeight: "1276px" }}>
-      
         <section class="content-header">
-                    <div class="header-icon">
-                        <img className="w-20 h-20" src="https://cdn-icons-png.flaticon.com/128/3940/3940056.png"/>
-                    </div>
-                    <div class="header-title">
-                        <h1>Graphics</h1>
-                        <small>Graphics List</small>
-                    </div>
-                </section>
+          <div class="header-icon">
+            <img
+              className="w-20 h-20"
+              src="https://cdn-icons-png.flaticon.com/128/3940/3940056.png"
+            />
+          </div>
+          <div class="header-title">
+            <h1>Graphics</h1>
+            <small>Graphics List</small>
+          </div>
+        </section>
         {/* Add Graphics Section */}
         <section className="h-32 p-5">
           <AddGraphics onGraphicAdded={handleGraphicAdded} />
@@ -77,7 +85,9 @@ const GraphicsList = () => {
                     {/* Image Section */}
                     <div className="relative group">
                       <img
-                        src={graphic.g_image || "https://via.placeholder.com/300"}
+                        src={
+                          graphic.g_image || "https://via.placeholder.com/300"
+                        }
                         alt={graphic.title}
                         className="w-full h-56 object-cover rounded-t-xl"
                       />
@@ -88,26 +98,51 @@ const GraphicsList = () => {
 
                     {/* Title & Uploaded By */}
                     <div className="p-5">
-                      <h3 className="text-2xl font-lg text-gray-800">{graphic.g_title}</h3>
+                      <h3 className="text-2xl font-lg text-gray-800">
+                        {graphic.g_title}
+                      </h3>
                       <p className="mt-2 text-gray-600">
                         Uploaded by:{" "}
-                        <span className="font-medium text-indigo-600">{graphic.g_name}</span>
+                        <span className="font-medium text-indigo-600">
+                          {graphic.g_name}
+                        </span>
                       </p>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex justify-between items-center px-5 pb-5 mt-4">
-                      <button
-                        className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-green-400"
-                      >
-                        <i className="fa fa-check-circle mr-2"></i> Approve
-                      </button>
-                      <button
-                        className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-red-400"
-                      >
-                        <i className="fa fa-times-circle mr-2"></i> Reject
-                      </button>
-                    </div>
+                    {graphic.g_approved === "no" ? (
+                      <div className="flex justify-between items-center px-5 pb-5 mt-4">
+                        <button
+                          className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+                          onClick={() =>
+                            imageApproval({
+                              graphic_id: graphic.g_id,
+                              graphic_approved: "yes",
+                            })
+                          }
+                        >
+                          <i className="fa fa-check-circle mr-2"></i> Approve
+                        </button>
+
+                        <button
+                          className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-red-400"
+                          onClick={() =>
+                            imageApproval({
+                              graphic_id: graphic.g_id,
+                              graphic_approved: "no",
+                            })
+                          }
+                        >
+                          <i className="fa fa-times-circle mr-2"></i> Reject
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex justify-between items-center px-5 pb-5 mt-4">
+                        <button className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+                          <i className="fa fa-check-circle mr-2"></i> Approved
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

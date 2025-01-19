@@ -28,13 +28,21 @@ export const AddUser = createAsyncThunk("AddUser", async (body) => {
 // Fetch all employees
 export const fetchUser = createAsyncThunk("fetchUser", async () => {
   try {
-    const res = await instance.get("employee/get-employees");
+    const res = await instance.get("employee/get-employe");
     return res.data;
   } catch (error) {
     throw error;
   }
 });
 
+export const deleteUser = createAsyncThunk("deleteUser", async (userId, { rejectWithValue }) => {
+  try {
+   const res =  await instance.get(`/employee/remove-employe?emp_id=${userId}`);
+    return res; // Return the deleted user ID
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
 
 export const EmployeeSlice = createSlice({
   name: "EmployeeSlice",
@@ -53,5 +61,34 @@ export const EmployeeSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+
+    builder.addCase(fetchUser.pending, (state, action) => {
+      state.loading = true;
+      state.response = null;
+    });
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(fetchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder
+    .addCase(deleteUser.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(deleteUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    })
+    .addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
+
+
+export default EmployeeSlice.reducer

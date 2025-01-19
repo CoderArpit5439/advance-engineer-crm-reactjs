@@ -27,6 +27,7 @@
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "redux-toolkit": "^1.1.2",
+    "sweetalert2": "^11.15.10",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
