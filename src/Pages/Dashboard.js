@@ -134,6 +134,14 @@ return (
               </div>
             </div>
           </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
+            <div className='bg-teal-800' id="cardbox4"  onClick={() => navigate('/graphics-list')} >
+              <div class="statistic-box " style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Graphics</h3>
+              </div>
+            </div>
+          </div>
           {/* <div class="col-xs-12 col-sm-3 col-md-4 col-lg-2">
             <div id="cardbox4" style={{ backgroundColor: "#4e766b" }}>
               <div class="statistic-box" style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >

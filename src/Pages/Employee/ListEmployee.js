@@ -23,6 +23,8 @@ const EmployeeList = () => {
     };
   });
 
+  
+
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
@@ -47,6 +49,7 @@ const EmployeeList = () => {
         dispatch(deleteUser(user.emp_id))
         dispatch(fetchUser())
         Swal.fire("Deleted!", `${user.emp_name} has been deleted.`, "success");
+        dispatch(fetchUser())
       }
     });
   };
