@@ -13,6 +13,9 @@ import {
 const Inquiry = () => {
   const dispatch = useDispatch();
   const [inquiry, setInquiry] = useState([]);
+  useEffect(() => {
+    dispatch(fetchInquiry());
+  }, [dispatch]);
   const {
     register,
     handleSubmit,
@@ -29,41 +32,52 @@ const Inquiry = () => {
       response: state.rootReducer.InquirySlice?.response,
     };
   });
- 
-  const handleDelete = (inq)=>{
-     Swal.fire({
-         title: "Are you sure?",
-         text: `You won't be able to revert this!`,
-         icon: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#d33",
-         cancelButtonColor: "#3085d6",
-         confirmButtonText: "Yes, delete it!",
-       }).then((result) => {
-         if (result.isConfirmed) {
-           dispatch(deleteInquiry(inq.inq_id));
-           Swal.fire("Deleted!", `${inq.inq_name} has been deleted.`, "success");
-           dispatch(fetchInquiry());
-         }
-       });
-  }
 
-  useEffect(() => {
-    setInquiry(data);
-  }, [data]);
+  const handleDelete = (inq) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert this!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Dispatch the delete inquiry action
+        dispatch(deleteInquiry(inq.inq_id))
+          .then(() => {
+            // If deletion is successful, fetch the updated inquiry list
+            dispatch(fetchInquiry());
+
+            // Show success message after successful deletion
+            Swal.fire(
+              "Deleted!",
+              `${inq.inq_name} has been deleted.`,
+              "success"
+            );
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the deletion
+            Swal.fire(
+              "Error!",
+              "There was an issue deleting the inquiry.",
+              "error"
+            );
+          });
+      }
+    });
+  };
 
   useEffect(() => {
     if (response && response.data) {
       setInquiry(response.data);
     }
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchInquiry());
-  }, [dispatch]);
+  }, [response]);
 
   const onSubmit = (inquiry) => {
     dispatch(addInquiry(inquiry));
+    dispatch(fetchInquiry());
     reset();
   };
   return (
@@ -387,52 +401,51 @@ const Inquiry = () => {
                           </tr>
                         </thead>
                         <tbody>
-  {loading ? (
-    <tr>
-      <td colSpan="6" className="text-center">
-        <span>Loading...</span> 
-      </td>
-    </tr>
-  ) : inquiry?.length > 0 ? (
-    inquiry.map((inq, key) => {
-      return (
-        <tr key={key}>
-          <td>{inq.inq_name}</td>
-          <td>{inq.inq_contact}</td>
-          <td>{inq.inq_email}</td>
-          <td>{inq.inq_message}</td>
-          <td>
-            <span className="label-custom label label-default">
-              {inq.inq_status}
-            </span>
-          </td>
-          <td>
-            <button
-              type="button"
-              className="btn btn-add btn-sm"
-              data-toggle="modal"
-              data-target="#Inquiry1"
-            >
-              <i className="fa fa-pencil"></i>
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger btn-sm"
-              onClick={() => handleDelete(inq)}
-            >
-              <i className="fa fa-trash-o"></i>
-            </button>
-          </td>
-        </tr>
-      );
-    })
-  ) : (
-    <tr>
-      <td colSpan="6">No data found</td>
-    </tr>
-  )}
-</tbody>
-
+                          {loading ? (
+                            <tr>
+                              <td colSpan="6" className="text-center">
+                                <span>Loading...</span>
+                              </td>
+                            </tr>
+                          ) : inquiry?.length > 0 ? (
+                            inquiry.map((inq, key) => {
+                              return (
+                                <tr key={key}>
+                                  <td>{inq.inq_name}</td>
+                                  <td>{inq.inq_contact}</td>
+                                  <td>{inq.inq_email}</td>
+                                  <td>{inq.inq_message}</td>
+                                  <td>
+                                    <span className="label-custom label label-default">
+                                      {inq.inq_status}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <button
+                                      type="button"
+                                      className="btn btn-add btn-sm"
+                                      data-toggle="modal"
+                                      data-target="#Inquiry1"
+                                    >
+                                      <i className="fa fa-pencil"></i>
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger btn-sm"
+                                      onClick={() => handleDelete(inq)}
+                                    >
+                                      <i className="fa fa-trash-o"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          ) : (
+                            <tr>
+                              <td colSpan="6">No data found</td>
+                            </tr>
+                          )}
+                        </tbody>
                       </table>
                     </div>
                   </div>

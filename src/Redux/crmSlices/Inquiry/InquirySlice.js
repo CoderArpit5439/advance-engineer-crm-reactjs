@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../../Config/Config";
 
 const initialState = {
-  data: null,
+  data: [],
   loading: false,
   error: null,
-  response: null,
+  response: [],
 };
 
 
@@ -85,7 +85,7 @@ export const InquirySlice = createSlice({
     });
     builder.addCase(addInquiry.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload;
+      state.response = action.payload;
     });
     builder.addCase(addInquiry.rejected, (state, action) => {
       state.loading = false;

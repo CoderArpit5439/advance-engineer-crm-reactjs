@@ -17,6 +17,10 @@ const Lead = () => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [leads, setLeads] = useState([]);
 
+  useEffect(() => {
+    dispatch(fetchLead());
+  }, [dispatch]);
+
   const handleEdit = (data) => {
     if (selectedLead) {
       dispatch(updateLead(selectedLead));
@@ -51,8 +55,27 @@ const Lead = () => {
 
   const onSubmit = (lead) => {
     dispatch(AddLead(lead));
+    dispatch(fetchLead());
     reset();
   };
+
+  // const handleDelete = (lead) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: `You won't be able to revert this!`,
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#3085d6",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       dispatch(deleteLead(lead.l_id));
+  //       Swal.fire("Deleted!", `${lead.l_name} has been deleted.`, "success");
+  //       dispatch(fetchLead());
+  //     }
+  //   });
+  // };
 
   const handleDelete = (lead) => {
     Swal.fire({
@@ -65,16 +88,30 @@ const Lead = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteLead(lead.l_id));
-        Swal.fire("Deleted!", `${lead.l_name} has been deleted.`, "success");
-        dispatch(fetchLead());
+        // Dispatch the delete action and handle async response
+        dispatch(deleteLead(lead.l_id))
+          .then(() => {
+            // If deletion is successful, fetch the updated leads list
+            dispatch(fetchLead());
+
+            // Show success message after successful deletion
+            Swal.fire(
+              "Deleted!",
+              `${lead.l_name} has been deleted.`,
+              "success"
+            );
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the deletion
+            Swal.fire(
+              "Error!",
+              "There was an issue deleting the lead.",
+              "error"
+            );
+          });
       }
     });
   };
-
-  useEffect(() => {
-    dispatch(fetchLead());
-  }, [dispatch]);
 
   return (
     <>
@@ -447,36 +484,50 @@ const Lead = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {leads?.map((lead, index) => (
-                            <tr key={index}>
-                              <td>{lead.l_name}</td>
-                              <td>{lead.l_source}</td>
-                              <td>{lead.l_mobile}</td>
-                              <td>{lead.l_email}</td>
-                              <td>{lead.l_address}</td>
-                              <td>{lead.l_type}</td>
-                              <td>{lead.l_join}</td>
-
-                              <td className="grid grid-cols-2">
-                                <button
-                                  type="button"
-                                  className="btn btn-add btn-sm"
-                                  data-toggle="modal"
-                                  data-target="#lead1"
-                                  onClick={() => setSelectedLead(lead)}
-                                >
-                                  <i className="fa fa-pencil"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  className="btn btn-danger btn-sm"
-                                  onClick={() => handleDelete(lead)}
-                                >
-                                  <i className="fa fa-trash-o"></i>
-                                </button>
+                          {loading ? (
+                            <tr>
+                              <td colSpan="8" className="text-center">
+                                <span>Loading...</span>
                               </td>
                             </tr>
-                          ))}
+                          ) : leads?.length > 0 ? (
+                            leads.map((lead, index) => (
+                              <tr key={index}>
+                                <td>{lead.l_name}</td>
+                                <td>{lead.l_source}</td>
+                                <td>{lead.l_mobile}</td>
+                                <td>{lead.l_email}</td>
+                                <td>{lead.l_address}</td>
+                                <td>{lead.l_type}</td>
+                                <td>{lead.l_join}</td>
+
+                                <td className="grid grid-cols-2">
+                                  <button
+                                    type="button"
+                                    className="btn btn-add btn-sm"
+                                    data-toggle="modal"
+                                    data-target="#lead1"
+                                    onClick={() => setSelectedLead(lead)}
+                                  >
+                                    <i className="fa fa-pencil"></i>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => handleDelete(lead)}
+                                  >
+                                    <i className="fa fa-trash-o"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="8" className="text-center">
+                                No leads available
+                              </td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
                     </div>
