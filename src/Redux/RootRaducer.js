@@ -6,6 +6,8 @@ import CategorySlice from "./crmSlices/categorySlice/CategorySlice";
 import GraphicsSlice from "./crmSlices/graphicsSlice/GraphicsSlice"
 import  EmployeeSlice  from "./crmSlices/employeeSlice/EmployeeSlice";
 import  LeadSlice  from "./crmSlices/Lead/LeadSlice";
+import  ManufacturingSlice  from "./crmSlices/Manufacturing/ManufacturingSlice";
+import  InquirySlice  from "./crmSlices/Inquiry/InquirySlice";
 
 const rootReducer = combineReducers({
     ProductSlice,
@@ -14,8 +16,9 @@ const rootReducer = combineReducers({
     CategorySlice,
     GraphicsSlice,
     EmployeeSlice,
-    LeadSlice
-    
+    LeadSlice,
+    ManufacturingSlice,
+    InquirySlice
 })
 
 export default rootReducer; 

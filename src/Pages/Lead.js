@@ -19,7 +19,6 @@ const Lead = () => {
 
   const handleEdit = (data) => {
     if (selectedLead) {
-      console.log(selectedLead)
       dispatch(updateLead(selectedLead));
     } else {
       onSubmit(data);
