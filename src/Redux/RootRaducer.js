@@ -9,6 +9,8 @@ import  LeadSlice  from "./crmSlices/Lead/LeadSlice";
 import  ManufacturingSlice  from "./crmSlices/Manufacturing/ManufacturingSlice";
 import  InquirySlice  from "./crmSlices/Inquiry/InquirySlice";
 import InventorySlice from "./crmSlices/Inventory/InventorySlice";
+import SupportSlice from "./crmSlices/support/SupportSlice";
+import TaskSlice from "./crmSlices/task/TaskSlice";
 
 const rootReducer = combineReducers({
     ProductSlice,
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
     LeadSlice,
     ManufacturingSlice,
     InquirySlice,
-    InventorySlice
+    InventorySlice,
+    SupportSlice,
+    TaskSlice
 })
 
 export default rootReducer; 

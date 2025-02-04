@@ -13,7 +13,7 @@ import {
 } from "../Redux/crmSlices/Manufacturing/ManufacturingSlice";
 const Manufacturing = () => {
   const [allData, setAllData] = useState([]);
-  const [selectedManufacturing, setSelectedManufacturing] = useState([]);
+  const [selectedManufacturing, setSelectedManufacturing] = useState(null);
   const {
     register,
     handleSubmit,
@@ -33,6 +33,7 @@ const Manufacturing = () => {
 
   const onSubmit = (data) => {
     dispatch(addManufacturing(data));
+    dispatch(fetchManufacturing())
     reset();
   };
 
@@ -50,16 +51,10 @@ useEffect(() => {
   }
 }, [data]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  
 
   const handleEdit = (data) => {
-    console.log(data);
+
     if (setSelectedManufacturing) {
       dispatch(updateManufacturing(data));
     }
