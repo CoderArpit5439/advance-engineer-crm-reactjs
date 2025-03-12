@@ -22,18 +22,18 @@ const Manufacturing = () => {
   } = useForm();
   const dispatch = useDispatch();
 
-  const {data, count, loading, response, error } = useSelector((state) => {
+  const { data, count, loading, response, error } = useSelector((state) => {
     return {
       loading: state.rootReducer.ManufacturingSlice?.loading,
       response: state.rootReducer.ManufacturingSlice?.response,
       error: state.rootReducer.ManufacturingSlice?.error,
-      data:state.rootReducer.ManufacturingSlice?.data
+      data: state.rootReducer.ManufacturingSlice?.data,
     };
   });
 
   const onSubmit = (data) => {
     dispatch(addManufacturing(data));
-    dispatch(fetchManufacturing())
+    dispatch(fetchManufacturing());
     reset();
   };
 
@@ -45,16 +45,13 @@ const Manufacturing = () => {
     setAllData(response?.data);
   }, [response]);
 
-useEffect(() => {
-  if (data && Array.isArray(data)) {
-    setAllData((prevData) => [...prevData, ...data]);
-  }
-}, [data]);
-
-  
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      setAllData((prevData) => [...prevData, ...data]);
+    }
+  }, [data]);
 
   const handleEdit = (data) => {
-
     if (setSelectedManufacturing) {
       dispatch(updateManufacturing(data));
     }
@@ -72,31 +69,33 @@ useEffect(() => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Optimistically update the UI by removing the item
-        const updatedData = allData.filter(item => item.m_id !== data.m_id);
+        const updatedData = allData.filter((item) => item.m_id !== data.m_id);
         setAllData(updatedData); // assuming setAllData updates your state or local data
-        
+
         // Dispatch the delete action and re-fetch manufacturing data
         dispatch(removeManufacturing(data.m_id));
-        dispatch(fetchManufacturing()).then(() => {
-          // Once fetching is complete, show success
-          Swal.fire(
-            "Deleted!",
-            `${data.m_category} has been deleted.`,
-            "success"
-          );
-        }).catch(() => {
-          // If fetching fails, you might want to roll back the optimistic UI update
-          setAllData(allData); // revert back to original data in case of error
-          Swal.fire(
-            "Error!",
-            "Something went wrong, please try again.",
-            "error"
-          );
-        });
+        dispatch(fetchManufacturing())
+          .then(() => {
+            // Once fetching is complete, show success
+            Swal.fire(
+              "Deleted!",
+              `${data.m_category} has been deleted.`,
+              "success"
+            );
+          })
+          .catch(() => {
+            // If fetching fails, you might want to roll back the optimistic UI update
+            setAllData(allData); // revert back to original data in case of error
+            Swal.fire(
+              "Error!",
+              "Something went wrong, please try again.",
+              "error"
+            );
+          });
       }
     });
   };
-  
+
   return (
     <>
       <>
@@ -331,49 +330,52 @@ useEffect(() => {
                           </tr>
                         </thead>
                         <tbody>
-  {loading ? (
-    <>
-      <tr>
-        <td>Loading...</td>
-      </tr>
-    </>
-  ) : (
-    <>
-      {(Array.isArray(allData) ? allData : []).map((item, index) => (
-        <tr key={index}>
-          <td>{item.m_category}</td>
-          <td>{item.m_product}</td>
-          <td>{item.m_code}</td>
-          <td>{item.m_customer}</td>
-          <td>{item.m_launch}</td>
-          <td>{item.m_target}</td>
-          <td>{item.m_stage}</td>
-          <td>{item.m_quantity}</td>
-          <td>{item.m_unit}</td>
-          <td>
-            <button
-              type="button"
-              className="btn btn-add btn-sm"
-              data-toggle="modal"
-              data-target="#Production1"
-              onClick={() => setSelectedManufacturing(item)}
-            >
-              <i className="fa fa-pencil"></i>
-            </button>
-            <button
-              type="button"
-              className="btn btn-danger btn-sm"
-              onClick={() => handleDelete(item)}
-            >
-              <i className="fa fa-trash-o"></i>{" "}
-            </button>
-          </td>
-        </tr>
-      ))}
-    </>
-  )}
-</tbody>
-
+                          {loading ? (
+                            <>
+                              <tr>
+                                <td>Loading...</td>
+                              </tr>
+                            </>
+                          ) : (
+                            <>
+                              {(Array.isArray(allData) ? allData : []).map(
+                                (item, index) => (
+                                  <tr key={index}>
+                                    <td>{item.m_category}</td>
+                                    <td>{item.m_product}</td>
+                                    <td>{item.m_code}</td>
+                                    <td>{item.m_customer}</td>
+                                    <td>{item.m_launch}</td>
+                                    <td>{item.m_target}</td>
+                                    <td>{item.m_stage}</td>
+                                    <td>{item.m_quantity}</td>
+                                    <td>{item.m_unit}</td>
+                                    <td>
+                                      <button
+                                        type="button"
+                                        className="btn btn-add btn-sm"
+                                        data-toggle="modal"
+                                        data-target="#Production1"
+                                        onClick={() =>
+                                          setSelectedManufacturing(item)
+                                        }
+                                      >
+                                        <i className="fa fa-pencil"></i>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() => handleDelete(item)}
+                                      >
+                                        <i className="fa fa-trash-o"></i>{" "}
+                                      </button>
+                                    </td>
+                                  </tr>
+                                )
+                              )}
+                            </>
+                          )}
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -694,7 +696,7 @@ useEffect(() => {
                                 <p className="text-danger">
                                   {errors.m_product.message}
                                 </p>
-                              )}{" "}
+                              )}
                               {/* Display error */}
                             </div>
                             <div className="col-md-4 form-group">
@@ -745,7 +747,7 @@ useEffect(() => {
                                 <p className="text-danger">
                                   {errors.m_launch.message}
                                 </p>
-                              )}{" "}
+                              )}
                               {/* Display error */}
                             </div>
                             <div className="col-md-4 form-group">

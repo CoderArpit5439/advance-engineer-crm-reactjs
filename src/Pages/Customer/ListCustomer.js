@@ -1,97 +1,103 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../../Layout/Header'
-import Sidebar from '../../Layout/Sidebar'
-import Footer from '../../Layout/Footer'
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { GetCustomerList, updateCustomer } from '../../Redux/crmSlices/customerSlice/CustomerSlice'
-import Pagination from '../../Components/Pagination'
+import React, { useEffect, useState } from "react";
+import Header from "../../Layout/Header";
+import Sidebar from "../../Layout/Sidebar";
+import Footer from "../../Layout/Footer";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetCustomerList,
+  updateCustomer,
+} from "../../Redux/crmSlices/customerSlice/CustomerSlice";
+import Pagination from "../../Components/Pagination";
 
 const ListCustomer = () => {
-    const { register, handleSubmit, formState: { errors }, setValue, control, watch } = useForm();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [fetchCustomerList, setFetchCustomerList] = useState([]);
-    const [showItems, setShowItems] = useState([])      //pagination and search for map function
-    const [currentPageNo, setCurrentPageNo] = useState();
-    const [totalRow, setTotalRow] = useState();
-    const [cId, setCId] = useState();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    control,
+    watch,
+  } = useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [fetchCustomerList, setFetchCustomerList] = useState([]);
+  const [showItems, setShowItems] = useState([]); //pagination and search for map function
+  const [currentPageNo, setCurrentPageNo] = useState();
+  const [totalRow, setTotalRow] = useState();
+  const [cId, setCId] = useState();
 
-    const { data, count, loading, response } = useSelector((state) => {
-        return {
-            data: state.rootReducer.CustomerSlice?.data?.data,
-            count: state.rootReducer.CustomerSlice?.data?.count,
-            loading: state.rootReducer.CustomerSlice?.loading,
-            response: state.rootReducer.CustomerSlice?.response,
-        }
-    })
-
-    // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- START ----> 
-    const pageNumber = localStorage.getItem("customer-list")  // Remark Employer Page Number
-
-    useEffect(() => {
-
-        if (!pageNumber) {
-            setCurrentPageNo(1)
-            localStorage.setItem("customer-list", 1)
-        }
-        else {
-            if (!currentPageNo) {
-                setCurrentPageNo(JSON.parse(pageNumber))
-            }
-            else {
-                localStorage.setItem("customer-list", currentPageNo)
-            }
-        }
-    }, [currentPageNo, pageNumber])
-
-    // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- END ----> 
-
-
-    useEffect(() => {
-        if (data) {
-            setFetchCustomerList(data)
-            setTotalRow(count)
-        }
-    }, [response, data])
-
-    useEffect(() => {
-        var body = {
-            "page": currentPageNo,
-        }
-        dispatch(GetCustomerList(body));
-    }, [])
-
-    const onClickEditBtn = (customer) => {
-        setCId(customer.c_id)
-        setValue("c_fullname", customer.c_fullname)
-        setValue("c_company_name", customer.c_company_name)
-        setValue("c_email", customer.c_email)
-        setValue("c_mobile", customer.c_mobile)
-        setValue("c_post", customer.c_post)
-        setValue("c_department", customer.c_department)
-        // setValue("c_password", customer.c_password)
-        setValue("c_status", customer.c_status)
-        setValue("c_description", customer.c_description)
-        setValue("c_dob", customer.c_dob)
-        setValue("c_rank", customer.c_rank)
-        setValue("c_address", customer.c_address)
+  const { data, count, loading, response } = useSelector((state) => {
+    return {
+      data: state.rootReducer.CustomerSlice?.data?.data,
+      count: state.rootReducer.CustomerSlice?.data?.count,
+      loading: state.rootReducer.CustomerSlice?.loading,
+      response: state.rootReducer.CustomerSlice?.response,
     };
+  });
 
-    const onSubmit = (data) => {
-        const body = {
-            cId,
-            data
-        }
-        dispatch(updateCustomer(body));
+  // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- START ---->
+  const pageNumber = localStorage.getItem("customer-list"); // Remark Employer Page Number
+
+  useEffect(() => {
+    if (!pageNumber) {
+      setCurrentPageNo(1);
+      localStorage.setItem("customer-list", 1);
+    } else {
+      if (!currentPageNo) {
+        setCurrentPageNo(JSON.parse(pageNumber));
+      } else {
+        localStorage.setItem("customer-list", currentPageNo);
+      }
     }
+  }, [currentPageNo, pageNumber]);
 
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div class="content-wrapper" style={{ minHeight: "799px" }}>
+  // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- END ---->
+
+  useEffect(() => {
+    if (data) {
+      setFetchCustomerList(data);
+      setTotalRow(count);
+    }
+  }, [response, data]);
+
+  useEffect(() => {
+    var body = {
+      page: currentPageNo,
+    };
+    dispatch(GetCustomerList(body));
+  }, []);
+
+  const onClickEditBtn = (customer) => {
+    setCId(customer.c_id);
+    setValue("c_fullname", customer.c_fullname);
+    setValue("c_company_name", customer.c_company_name);
+    setValue("c_email", customer.c_email);
+    setValue("c_mobile", customer.c_mobile);
+    setValue("c_post", customer.c_post);
+    setValue("c_department", customer.c_department);
+    // setValue("c_password", customer.c_password)
+    setValue("c_status", customer.c_status);
+    setValue("c_description", customer.c_description);
+    setValue("c_dob", customer.c_dob);
+    setValue("c_rank", customer.c_rank);
+    setValue("c_address", customer.c_address);
+  };
+
+  const onSubmit = (data) => {
+    const body = {
+      cId,
+      data,
+    };
+    dispatch(updateCustomer(body));
+  };
+
+  return (
+    <>
+      <Header />
+      <Sidebar />
+      {/* <div class="content-wrapper" style={{ minHeight: "799px" }}>
                 <section class="content-header">
                     <div class="header-icon">
                         <i class="fa fa-users"></i>
@@ -111,7 +117,6 @@ const ListCustomer = () => {
                                             <h4>Customer List</h4>
                                         </a>
                                     </div>
-                                    {/* <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="editTitle" data-tooltip="Edit title" data-toggle="tooltip" data-title="Edit title" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-pencil"></i><span class="control-title">Edit title</span></a></li><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="reload" data-tooltip="Reload" data-toggle="tooltip" data-title="Reload" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-reload"></i><span class="control-title">Reload</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li><li><a data-func="close" data-tooltip="Close" data-toggle="tooltip" data-title="Close" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-close"></i><span class="control-title">Close</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div> */}
                                 </div>
                                 <div class="panel-body">
                                     <div class="btn-group">
@@ -119,58 +124,7 @@ const ListCustomer = () => {
                                             <a class="btn btn-add" onClick={() => navigate('/add-customer')}> <i class="fa fa-plus"></i> Add Customer
                                             </a>
                                         </div>
-                                        {/* <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
-                                        <ul class="dropdown-menu exp-drop" role="menu">
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false'});">
-                                                    <img src="assets/dist/img/json.png" width="24" alt="logo" /> JSON</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});">
-                                                    <img src="assets/dist/img/json.png" width="24" alt="logo" /> JSON (ignoreColumn)</a>
-                                            </li>
-                                            <li><a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'true'});">
-                                                <img src="assets/dist/img/json.png" width="24" alt="logo" /> JSON (with Escape)</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li><a href="#" onclick="$('#dataTableExample1').tableExport({type:'xml',escape:'false'});">
-                                                <img src="assets/dist/img/xml.png" width="24" alt="logo" /> XML</a>
-                                            </li>
-                                            <li><a href="#" onclick="$('#dataTableExample1').tableExport({type:'sql'});">
-                                                <img src="assets/dist/img/sql.png" width="24" alt="logo" /> SQL</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'csv',escape:'false'});">
-                                                    <img src="assets/dist/img/csv.png" width="24" alt="logo" /> CSV</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'txt',escape:'false'});">
-                                                    <img src="assets/dist/img/txt.png" width="24" alt="logo" /> TXT</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'excel',escape:'false'});">
-                                                    <img src="assets/dist/img/xls.png" width="24" alt="logo" /> XLS</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'doc',escape:'false'});">
-                                                    <img src="assets/dist/img/word.png" width="24" alt="logo" /> Word</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'powerpoint',escape:'false'});">
-                                                    <img src="assets/dist/img/ppt.png" width="24" alt="logo" /> PowerPoint</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'png',escape:'false'});">
-                                                    <img src="assets/dist/img/png.png" width="24" alt="logo" /> PNG</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onclick="$('#dataTableExample1').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
-                                                    <img src="assets/dist/img/pdf.png" width="24" alt="logo" /> PDF</a>
-                                            </li>
-                                        </ul> */}
+                                       
                                     </div>
                                     <div class="table-responsive">
                                         <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
@@ -287,7 +241,7 @@ const ListCustomer = () => {
                                             {/* <div class="form-group col-sm-6">
                                                 <label>Password</label>
                                                 <input type="text" class="form-control" placeholder="Enter Password"  {...register('c_password')} />
-                                            </div> */}
+                                            </div> *
                                             <div class="form-group col-sm-6">
                                                 <label>Date of Birth</label>
                                                 <input id="minMaxExample" type="date" class="form-control hasDatepicker" placeholder="Enter Date..." {...register('c_dob')} />
@@ -365,10 +319,293 @@ const ListCustomer = () => {
                         </div>
                     </div>
                 </section>
+            </div> */}
+      <div className="main-content">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="row" style={{ fontFamily: "poppins" }}>
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-header">
+                    <h4 className="card-title mb-0">Add, Edit &amp; Remove</h4>
+                  </div>
+                  {/* end card header */}
+                  <div className="card-body">
+                    <div className="listjs-table" id="customerList">
+                      <div className="row g-4 mb-3">
+                        <div className="col-sm-auto">
+                          <div>
+                            <button
+                              type="button"
+                              className="btn btn-success add-btn"
+                              data-bs-toggle="modal"
+                              id="create-btn"
+                              data-bs-target="#showModal"
+                            >
+                              <i className="ri-add-line align-bottom me-1" />{" "}
+                              Add
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="table-responsive table-card mt-3 mb-1">
+                        <table
+                          className="table align-middle table-nowrap"
+                          id="customerTable"
+                        >
+                          <thead className="table-light">
+                            <tr>
+                              <th className="sort" data-sort="customer_name">
+                                Photo
+                              </th>
+                              <th className="sort" data-sort="email">
+                                Company
+                              </th>
+                              <th className="sort" data-sort="phone">
+                                Customer
+                              </th>
+                              <th className="sort" data-sort="date">
+                                Mobile
+                              </th>
+                              <th className="sort" data-sort="status">
+                                Email
+                              </th>
+                              <th className="sort" data-sort="action">
+                                City
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Ranking
+                              </th>
+                              <th className="sort" data-sort="action">
+                                No. Of Quotation
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Status
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Action
+                              </th>
+                            </tr>
+                          </thead>
+                          {/* <tbody className="list form-check-all">
+                           
+                            {showItems?.length > 0 ? (
+                              showItems?.map((customer, i) => {
+                                return (
+                                  <tr>
+                                    <td>
+                                      {customer.c_image !== null ? (
+                                        <img
+                                          src={`http://localhost:8080/public/assets/img/uploads/customerImage/${customer.c_image}`}
+                                          class="img-circle"
+                                          alt="User Image"
+                                          width="50"
+                                          height="50"
+                                        />
+                                      ) : (
+                                        <img
+                                          src="assets/dist/img/w1.png"
+                                          class="img-circle"
+                                          alt="User Image"
+                                          width="50"
+                                          height="50"
+                                        />
+                                      )}
+                                    </td>
+                                    <td>{customer.c_fullname}</td>
+                                    <td>{customer.c_company_name}</td>
+                                    <td>{customer.c_mobile}</td>
+                                    <td>{customer.c_email}</td>
+                                    <td>{customer.c_address}</td>
+                                    <td>
+                                      {customer.c_rank == "Excellent" ? (
+                                        <span class="label-custom label label-default">
+                                          {customer.c_rank}
+                                        </span>
+                                      ) : customer.c_rank == "Good" ? (
+                                        <span class="label-success label label-default ">
+                                          {customer.c_rank}
+                                        </span>
+                                      ) : (
+                                        <span class="label-danger label label-default">
+                                          {customer.c_rank}
+                                        </span>
+                                      )}
+                                    </td>
+                                    <td>{customer.c_no_of_quotation}</td>
+                                    <td>{customer.c_status}</td>
+                                    <td>
+                                      <div className="d-flex gap-2">
+                                        <div className="edit">
+                                          <button
+                                            className="btn btn-sm btn-success edit-item-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#showModal"
+                                          >
+                                            Edit
+                                          </button>
+                                        </div>
+                                        <div className="remove">
+                                          <button
+                                            className="btn btn-sm btn-danger remove-item-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteRecordModal"
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <tr>
+                                                    <td colSpan={10}>
+                                                        <Pagination data={fetchCustomerList} setShowItems={setShowItems} itemPerPage={20} showItems={showItems} setCurrentPage={setCurrentPageNo} currentPage={currentPageNo} totalRow={totalRow} />
+                                                    </td>
+                                                </tr>
+                                  </tr>
+                                );
+                              })
+                            ) : (
+                              <tr>
+                                <td colSpan={10} className="text-center">
+                                  No records found
+                                </td>
+                              </tr>
+                            )}
+                          </tbody> */}
+                          <tbody className="list form-check-all">
+                                                {showItems?.length > 0 ? showItems?.map((customer, i) => {
+                                                    return (
+                                                        <tr>
+                                                            <td>
+                                                                {customer.c_image !== null ?
+                                                                    <img src={`http://localhost:8080/public/assets/img/uploads/customerImage/${customer.c_image}`} class="img-circle" alt="User Image" width="50" height="50" />
+                                                                    :
+                                                                    <img src="assets/dist/img/w1.png" class="img-circle" alt="User Image" width="50" height="50" />
+                                                                }
+                                                            </td>
+                                                            <td>{customer.c_fullname}</td>
+                                                            <td>{customer.c_company_name}</td>
+                                                            <td>{customer.c_mobile}</td>
+                                                            <td>{customer.c_email}</td>
+                                                            <td>{customer.c_address}</td>
+                                                            <td>{
+                                                                customer.c_rank == "Excellent"
+                                                                    ?
+                                                                    <span class="label-custom label label-default">{customer.c_rank}</span>
+                                                                    :
+                                                                    customer.c_rank == "Good"
+                                                                        ?
+                                                                        <span class="label-success label label-default ">{customer.c_rank}</span>
+                                                                        :
+                                                                        <span class="label-danger label label-default">{customer.c_rank}</span>
+                                                            }</td>
+                                                            <td>{customer.c_no_of_quotation}</td>
+                                                            <td>{customer.c_status}</td>
+                                                            <td>
+                                                            <div className="d-flex gap-2">
+                                        <div className="edit">
+                                          <button
+                                            className="btn btn-sm btn-success edit-item-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#showModal"
+                                          >
+                                            Edit
+                                          </button>
+                                        </div>
+                                        <div className="remove">
+                                          <button
+                                            className="btn btn-sm btn-danger remove-item-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteRecordModal"
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      </div>
+                                      </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                                    :
+                                                    <tr>
+                                                        <td colSpan={10} className='text-center'>
+                                                            No records found
+                                                        </td>
+                                                    </tr>
+                                                }
+                                           
+                                            </tbody>
+                        </table>
+                        <div className="noresult" style={{ display: "none" }}>
+                          <div className="text-center">
+                            <lord-icon
+                              src="https://cdn.lordicon.com/msoeawqm.json"
+                              trigger="loop"
+                              colors="primary:#121331,secondary:#08a88a"
+                              style={{ width: 75, height: 75 }}
+                            />
+                            <h5 className="mt-2">Sorry! No Result Found</h5>
+                            <p className="text-muted mb-0">
+                              We've searched more than 150+ Orders We did not
+                              find any orders for you search.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="d-flex justify-content-end">
+                        <div
+                          className="pagination-wrap hstack gap-2"
+                          style={{ display: "flex" }}
+                        >
+                          <a
+                            className="page-item pagination-prev disabled"
+                            href="javascript:void(0);"
+                          >
+                            Previous
+                          </a>
+                          <ul className="pagination listjs-pagination mb-0">
+                            <li className="active">
+                              <a
+                                className="page"
+                                href="#"
+                                data-i={1}
+                                data-page={8}
+                              >
+                                1
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className="page"
+                                href="#"
+                                data-i={2}
+                                data-page={8}
+                              >
+                                2
+                              </a>
+                            </li>
+                          </ul>
+                          <a
+                            className="page-item pagination-next"
+                            href="javascript:void(0);"
+                          >
+                            Next
+                          </a>
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                  {/* end card */}
+                </div>
+                {/* end col */}
+              </div>
             </div>
-            <Footer />
-        </>
-    )
-}
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+};
 
-export default ListCustomer
+export default ListCustomer;

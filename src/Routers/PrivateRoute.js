@@ -18,12 +18,18 @@ import Order from '../Pages/Order'
 import Support from '../Pages/Support'
 import Inventory from '../Pages/Inventory'
 import Account from '../Pages/Account'
-import Manufacturing from '../Pages/Manufacturing'
+import AddManufacturing from '../Pages/Manufacturing/AddManufacturing'
 import Task from '../Pages/Task'
 import GraphicsList from '../Pages/Graphics/GraphicsList'
 import AddEmployee from '../Pages/Employee/AddEmployee'
 import ListEmployee from '../Pages/Employee/ListEmployee'
-
+import Manufacturinglist from '../Pages/Manufacturing/Manufacturinglist'
+import Addaccount from '../Pages/Account/Addaccount'
+import AccountList from '../Pages/Account/AccountList'
+import AddInquiry from '../Pages/Inquiry/AddInquiry'
+import Inquirylist from '../Pages/Inquiry/Inquirylist'
+import AddTask from '../Pages/Task/AddTask'
+import TaskList from '../Pages/Task/TaskList'
 const PrivateRoute = () => {
     return (
         <>
@@ -47,13 +53,18 @@ const PrivateRoute = () => {
                 <Route path='/list-category' element={<ListCategory />} />
            
                 <Route path='/list-lead' element={<Lead />} />
-                <Route path='/list-inquiry' element={<Inquiry />} />
+                <Route path='/add-inquiry' element={<AddInquiry />} />
+                <Route path='/inquiry-list' element={<Inquirylist />} />
                 <Route path='/list-order' element={<Order />} />
                 <Route path='/list-support' element={<Support />} />
                 <Route path='/list-inventory' element={<Inventory />} />
-                <Route path='/list-account' element={<Account />} />
-                <Route path='/list-manufacturing' element={<Manufacturing />} />
-                <Route path='/list-task' element={<Task />} />
+                <Route path='/add-account' element={<Addaccount />} />
+                <Route path='/account-list' element={<AccountList />} />
+                <Route path='/add-manufacturing' element={<AddManufacturing />} />
+                <Route path='/manufacturing-list' element={<Manufacturinglist />} />
+                <Route path='/add-task' element={<AddTask />} />
+                <Route path='/task-list' element={<TaskList />} />
+
                 <Route path='/graphics-list' element={<GraphicsList/>}/>
                 <Route path='/add-employee' element={<AddEmployee/>}/>
                 <Route path='/employe-list' element={<ListEmployee/>}/> 

@@ -27,7 +27,7 @@ const AddCustomer = () => {
         <>
             <Header />
             <Sidebar />
-            <div class="content-wrapper" style={{ minHeight: "799px" }}>
+            {/* <div class="content-wrapper" style={{ minHeight: "799px" }}>
                 <section class="content-header">
                     <div class="header-icon">
                         <i class="fa fa-users"></i>
@@ -46,7 +46,7 @@ const AddCustomer = () => {
                                         <a class="btn btn-add" onClick={() => navigate('/list-customer')}>
                                             <i class="fa fa-list"></i>  Customer List </a>
                                     </div>
-                                    {/* <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="editTitle" data-tooltip="Edit title" data-toggle="tooltip" data-title="Edit title" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-pencil"></i><span class="control-title">Edit title</span></a></li><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="reload" data-tooltip="Reload" data-toggle="tooltip" data-title="Reload" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-reload"></i><span class="control-title">Reload</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li><li><a data-func="close" data-tooltip="Close" data-toggle="tooltip" data-title="Close" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-close"></i><span class="control-title">Close</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div> */}
+                                 
                                 </div>
                                 <div class="panel-body">
                                     <form onSubmit={handleSubmit(onSubmit)} class="col-sm-12">
@@ -91,7 +91,7 @@ const AddCustomer = () => {
                                             <div class="form-group col-sm-6">
                                                 <label>Picture upload</label>
                                                 <input type="file" name="picture" {...register('c_image')} />
-                                                {/* <input type="hidden" name="old_picture" /> */}
+                                              
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Address</label>
@@ -138,7 +138,380 @@ const AddCustomer = () => {
                         </div>
                     </div>
                 </section>
+            </div> */}
+               <div className="main-content">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="position-relative mx-n4 mt-n4">
+              <div className="">
+                <img src="" className="profile-wid-img" alt="" />
+                <div className="overlay-content">
+                  <div className="text-end p-3">
+                    <div className="p-0 ms-auto rounded-circle profile-photo-edit">
+                      {/* <input
+                        id="profile-foreground-img-file-input"
+                        type="file"
+                        className="profile-foreground-img-file-input"
+                      /> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div className="row">
+              {/*end col*/}
+              <div className="col-xxl-12 mb-10">
+                <div className="card mt-xxl-n5">
+                  <div className="card-header">
+                    <ul
+                      className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                      role="tablist"
+                    >
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link active"
+                          data-bs-toggle="tab"
+                          href="#personalDetails"
+                          role="tab"
+                          aria-selected="true"
+                        >
+                          <i className="fas fa-home" /> Add Customer
+                        </a>
+                      </li>
+                      {/* <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link"
+                          data-bs-toggle="tab"
+                          href="#changePassword"
+                          role="tab"
+                          aria-selected="false"
+                          tabIndex={-1}
+                        >
+                          <i className="far fa-user" /> Change Password
+                        </a>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link"
+                          data-bs-toggle="tab"
+                          href="#experience"
+                          role="tab"
+                          aria-selected="false"
+                          tabIndex={-1}
+                        >
+                          <i className="far fa-envelope" /> Experience
+                        </a>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link"
+                          data-bs-toggle="tab"
+                          href="#privacy"
+                          role="tab"
+                          aria-selected="false"
+                          tabIndex={-1}
+                        >
+                          <i className="far fa-envelope" /> Privacy Policy
+                        </a>
+                      </li> */}
+                    </ul>
+                  </div>
+                  <div className="card-body p-4">
+                    <div className="tab-content">
+                      <div
+                        className="tab-pane active"
+                        id="personalDetails"
+                        role="tabpanel"
+                      >
+                        <form onSubmit={handleSubmit(onSubmit)} >
+                          <div className="row">
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="firstnameInput"
+                                  className="form-label"
+                                >
+                                  Company Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="firstnameInput"
+                                  placeholder="Enter your firstname"
+                                  {...register('c_company_name')} 
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="lastnameInput"
+                                  className="form-label"
+                                  {...register('c_fullname')}
+                                >
+                                  Full Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="lastnameInput"
+                                  placeholder="Enter your lastname"
+                                  
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="phonenumberInput"
+                                  className="form-label"
+                                >
+                                  Phone Number
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="phonenumberInput"
+                                  placeholder="Enter your phone number"
+                                  {...register('c_mobile')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="emailInput"
+                                  className="form-label"
+                                >
+                                  Email Address
+                                </label>
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  id="emailInput"
+                                  placeholder="Enter your email"
+                                  {...register('c_email')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="JoiningdatInput"
+                                  className="form-label"
+                                >
+                                  Post
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control flatpickr-input"
+                                  data-provider="flatpickr"
+                                  id="JoiningdatInput"
+                                  {...register('c_post')} 
+                                  placeholder=" Post"
+                                 
+                                />
+                              </div>
+                            </div>
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="JoiningdatInput"
+                                  className="form-label"
+                                >
+                                No. of quotation
+                                </label>
+                                <input
+                                  type="Number"
+                                  className="form-control flatpickr-input"
+                                  data-provider="flatpickr"
+                                  id="JoiningdatInput"
+                                  {...register('c_no_of_quotation')}  
+                                  placeholder="quotation"
+                                 
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="designationInput"
+                                  className="form-label"
+                                >
+                                  Department
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="designationInput"
+                                  placeholder="Designation"
+                                  {...register('c_department')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="websiteInput1"
+                                  className="form-label"
+                                >
+                                  Password
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="websiteInput1"
+                                  placeholder="www.example.com"
+                                  {...register('c_password')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-4">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="cityInput"
+                                  className="form-label"
+                                >
+                                  Date of Birth
+                                </label>
+                                <input
+                                  type="date"
+                                  className="form-control"
+                                  id="cityInput"
+                                  placeholder="City"
+                                  {...register('c_dob')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-4">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="countryInput"
+                                  className="form-label"
+                                >
+                                  Picture upload
+                                </label>
+                                <input
+                                  type="file"
+                                  className="form-control"
+                                  id="countryInput"
+                                  placeholder="picture"
+                                  {...register('c_image')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-4">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="zipcodeInput"
+                                  className="form-label"
+                                >
+                                  Address
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  minLength={5}
+                                  maxLength={6}
+                                  id="zipcodeInput"
+                                  placeholder="Enter zipcode"
+                                  {...register('c_address')}
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-4">
+                              <div className="mb-3 pb-2">
+                                <label
+                                  htmlFor="exampleFormControlTextarea"
+                                  className="form-label"
+                                >
+                                  Customer Ranking
+                                </label>
+                                <select class="form-control" {...register('c_rank')}>
+                                  <option value="Excellent">Excellent</option>
+                                  <option value="Good">Good</option>
+                                  <option value="Average">Average</option>
+                                  <option value="Average">Average</option>
+                                  <option value="Poor">Poor</option>
+                                  <option value="Very Poor">Very Poor</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-lg-4">
+                              <div className="mb-3 pb-2">
+                                <label
+                                  htmlFor="exampleFormControlTextarea"
+                                  className="form-label"
+                                >
+                                  Gender
+                                </label>
+                                <select class="form-control" {...register('c_gender')}>
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                  <option value="Other">Other</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-lg-4">
+                              <div className="mb-3 pb-2">
+                                <label
+                                  htmlFor="exampleFormControlTextarea"
+                                  className="form-label"
+                                >
+                                  Status
+                                </label>
+                                <select class="form-control" {...register('c_status')}>
+                                  <option value="Active">Active</option>
+                                  <option value="Not Active">Not Active</option>
+                                </select>
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-lg-12">
+                              <div className="hstack gap-2 justify-content-end">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary"
+                                >
+                                 Add Customer
+                                </button>
+                                <button
+                                  type="button"
+                                  className="btn btn-soft-success"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                            {/*end col*/}
+                          </div>
+                          {/*end row*/}
+                        </form>
+                      </div>
+                      {/*end tab-pane*/}
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/*end col*/}
+            </div>
+            {/*end row*/}
+          </div>
+        </div>
+      </div>
             <Footer />
         </>
     )

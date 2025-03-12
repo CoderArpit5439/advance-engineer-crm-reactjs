@@ -4,15 +4,19 @@ import Sidebar from "../Layout/Sidebar";
 import Footer from "../Layout/Footer";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+
 import Swal from "sweetalert2";
 import {
   addTask,
   deleteTask,
   fetchTask,
+  // UpdateTask,
 } from "../Redux/crmSlices/task/TaskSlice";
+
 const Task = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState([]);
+  const [editTask, setEditTask] = useState(null);
 
   const {
     register,
@@ -79,11 +83,39 @@ const Task = () => {
       }
     });
   };
+  const handleEdit = async (e) => {
+    e.preventDefault();
+
+    if (!editTask || !editTask.t_id) {
+      console.error("No task data available to update.");
+      return;
+    }
+
+    const updatedTask = {
+      t_id: editTask.t_id,
+      t_name: editTask.t_name,
+      t_due_date: editTask.t_due_date,
+      t_description: editTask.t_description,
+      t_assign_to: editTask.t_assign_to,
+      t_status: editTask.t_status,
+    };
+ 
+    try {
+      // await dispatch(UpdateTask(updatedTask));
+
+      await dispatch(fetchTask());
+
+      setEditTask(null);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
 
   return (
     <>
       <Header />
       <Sidebar />
+
       <div class="content-wrapper" style={{ minHeight: "1348px" }}>
         <section class="content-header">
           <div class="header-icon">
@@ -403,11 +435,12 @@ const Task = () => {
                               <td>
                                 <button
                                   type="button"
-                                  className="btn btn-add btn-sm"
+                                  class="btn btn-add btn-xs"
                                   data-toggle="modal"
-                                  data-target="#Inquiry1"
+                                  data-target="#update"
+                                  onClick={() => setEditTask(data)}
                                 >
-                                  <i className="fa fa-pencil"></i>
+                                  <i class="fa fa-pencil"></i>
                                 </button>
                                 <button
                                   type="button"
@@ -545,16 +578,10 @@ const Task = () => {
                           <div className="col-md-12 form-group user-form-group">
                             <div className="pull-right">
                               <button
-                                type="button"
-                                className="btn btn-danger btn-sm"
-                              >
-                                Cancel
-                              </button>
-                              <button
                                 type="submit"
-                                className="btn btn-add btn-sm"
+                                className="btn btn-add btn-md"
                               >
-                                Update
+                                Save
                               </button>
                             </div>
                           </div>
@@ -575,132 +602,117 @@ const Task = () => {
               </div>
             </div>
           </div>
-          <div class="modal fade" id="update" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header modal-header-primary">
+          {/* Modal for editing */}
+          <div className="modal fade" id="update" tabIndex="-1" role="dialog">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header modal-header-primary">
                   <button
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     ×
                   </button>
                   <h3>
-                    <i class="fa fa-plus m-r-5"></i> Update Info
+                    <i className="fa fa-plus m-r-5"></i> Update Info
                   </h3>
                 </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <form class="form-horizontal">
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <form className="form-horizontal" onSubmit={handleEdit}>
                         <fieldset>
-                          <div class="col-md-6 form-group">
-                            <label class="control-label">Task Name</label>
+                          <div className="col-md-6 form-group">
+                            <label className="control-label">Task Name</label>
                             <input
                               type="text"
                               placeholder="Task Name"
-                              class="form-control"
+                              className="form-control"
+                              value={editTask?.t_name || ""}
+                              onChange={(e) =>
+                                setEditTask({
+                                  ...editTask,
+                                  t_name: e.target.value,
+                                })
+                              }
                             />
                           </div>
-                          <div class="col-md-6 form-group">
-                            <label class="control-label">Due date</label>
+                          <div className="col-md-6 form-group">
+                            <label className="control-label">Due date</label>
                             <input
-                              type="number"
+                              type="text"
                               placeholder="Due title"
-                              class="form-control"
+                              className="form-control"
+                              value={editTask?.t_due_date || ""}
+                              onChange={(e) =>
+                                setEditTask({
+                                  ...editTask,
+                                  t_due_date: e.target.value,
+                                })
+                              }
                             />
                           </div>
-                          <div class="col-md-6 form-group">
-                            <label class="control-label">Description</label>
+                          <div className="col-md-6 form-group">
+                            <label className="control-label">Description</label>
                             <input
                               type="text"
                               placeholder="Description"
-                              class="form-control"
+                              className="form-control"
+                              value={editTask?.t_description || ""}
+                              onChange={(e) =>
+                                setEditTask({
+                                  ...editTask,
+                                  t_description: e.target.value,
+                                })
+                              }
                             />
                           </div>
-                          <div class="col-md-6 form-group">
-                            <label class="control-label">Assign to</label>
+                          <div className="col-md-6 form-group">
+                            <label className="control-label">Assign to</label>
                             <input
                               type="text"
                               placeholder="Assign to"
-                              class="form-control"
+                              className="form-control"
+                              value={editTask?.t_assign_to || ""}
+                              onChange={(e) =>
+                                setEditTask({
+                                  ...editTask,
+                                  t_assign_to: e.target.value,
+                                })
+                              }
                             />
                           </div>
-                          <div class="col-md-6 form-group">
-                            <label class="control-label">status</label>
+                          <div className="col-md-6 form-group">
+                            <label className="control-label">Status</label>
                             <input
                               type="text"
-                              placeholder="status"
-                              class="form-control"
+                              placeholder="Status"
+                              className="form-control"
+                              value={editTask?.t_status || ""}
+                              onChange={(e) =>
+                                setEditTask({
+                                  ...editTask,
+                                  t_status: e.target.value,
+                                })
+                              }
                             />
                           </div>
-                          <div class="col-md-12 form-group user-form-group">
-                            <div class="pull-right">
+                          <div className="col-md-12 form-group user-form-group">
+                            <div className="pull-right">
                               <button
                                 type="button"
-                                class="btn btn-danger btn-sm"
+                                className="btn btn-danger btn-sm"
+                                data-dismiss="modal"
                               >
                                 Cancel
                               </button>
-                              <button type="submit" class="btn btn-add btn-sm">
-                                Update
-                              </button>
-                            </div>
-                          </div>
-                        </fieldset>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-danger pull-left"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal fade" id="delt" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    ×
-                  </button>
-                  <h3>
-                    <i class="fa fa-user m-r-5"></i> Delete task
-                  </h3>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <form class="form-horizontal">
-                        <fieldset>
-                          <div class="col-md-12 form-group user-form-group">
-                            <label class="control-label">Delete task</label>
-                            <div class="pull-right">
-                              <button
-                                type="button"
-                                class="btn btn-danger btn-sm"
-                              >
-                                NO
-                              </button>
                               <button
                                 type="submit"
-                                class="btn btn-success btn-sm"
+                                className="btn btn-add btn-md"
                               >
-                                YES
+                                Save
                               </button>
                             </div>
                           </div>
@@ -709,10 +721,10 @@ const Task = () => {
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-danger pull-left"
+                    className="btn btn-danger pull-left"
                     data-dismiss="modal"
                   >
                     Close
