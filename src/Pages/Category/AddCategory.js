@@ -32,66 +32,112 @@ const AddCategory = () => {
         <>
             <Header />
             <Sidebar />
-            <div class="content-wrapper" style={{ minHeight: "799px" }}>
-                <section class="content-header">
-                    <div class="header-icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <div class="header-title">
-                        <h1>Add Category</h1>
-                        <small>Category</small>
-                    </div>
-                </section>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-sm-12 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="3N11jRpUy7">
-                            <div class="panel panel-bd lobidrag lobipanel lobipanel-sortable" data-inner-id="3N11jRpUy7" data-index="0">
-                                <div class="panel-heading ui-sortable-handle">
-                                    <div class="btn-group" id="buttonlist">
-                                        <a class="btn btn-add" onClick={() => navigate('/list-category')}>
-                                            <i class="fa fa-list"></i>  Category List </a>
-                                    </div>
-                                    {/* <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="editTitle" data-tooltip="Edit title" data-toggle="tooltip" data-title="Edit title" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-pencil"></i><span class="control-title">Edit title</span></a></li><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="reload" data-tooltip="Reload" data-toggle="tooltip" data-title="Reload" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-reload"></i><span class="control-title">Reload</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li><li><a data-func="close" data-tooltip="Close" data-toggle="tooltip" data-title="Close" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-close"></i><span class="control-title">Close</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div> */}
-                                </div>
-                                <div class="panel-body">
-                                    <form onSubmit={handleSubmit(onSubmit)} className="col-sm-12">
-                                        <div className='row'>
-                                            <div className="form-group col-sm-4">
-                                                <label>Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="1001"
-                                                    {...register('cat_name')} />
-                                            </div>
-                                            <div className="form-group col-sm-4">
-                                                <label>Code</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Category Name"
-                                                    {...register('cat_code')} />
-                                            </div>
-                                            <div className="form-group col-sm-4">
-                                                <label>Image</label>
-                                                <input
-                                                    type="file"
-                                                    className="form-control"
-                                                    placeholder="Enter Price"
-                                                    {...register('cat_image')} />
-                                            </div>
-                                        </div>
-                                        <div className="reset-button text-center">
-                                            <button className="btn btn-warning" type='button' >Reset</button>
-                                            <button className="btn btn-success" type='submit'>Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <div className="main-content mt-10">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="position-relative mx-n4 mt-n4">
+              <div className="">
+                <img src="" className="profile-wid-img" alt="" />
+                <div className="overlay-content">
+                  <div className="text-end p-3">
+                    <div className="p-0 ms-auto rounded-circle profile-photo-edit"></div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div className="row">
+              {/*end col*/}
+              <div className="col-xxl-12 mb-10">
+                <div className="card mt-xxl-n5">
+                  <div className="card-header">
+                    <ul
+                      className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                      role="tablist"
+                    >
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link active"
+                          data-bs-toggle="tab"
+                          href="#personalDetails"
+                          role="tab"
+                          aria-selected="true"
+                        >
+                          <i className="fas fa-home" /> Add Category
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="card-body p-4">
+                    <div className="tab-content">
+                      <div
+                        className="tab-pane active"
+                        id="personalDetails"
+                        role="tabpanel"
+                      >
+                      <form onSubmit={handleSubmit(onSubmit)}>
+  <div className="row">
+    {/* Category Name */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Name:</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Name"
+          {...register('cat_name')}
+        />
+      </div>
+    </div>
+
+    {/* Category Code */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Code:</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="code "
+          {...register('cat_code')}
+        />
+      </div>
+    </div>
+
+    {/* Category Image */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Image:</label>
+        <input
+          type="file"
+          className="form-control"
+          {...register('cat_image')}
+        />
+      </div>
+    </div>
+
+    {/* Submit & Reset Buttons */}
+    <div className="col-lg-12">
+      <div className="hstack gap-2 justify-content-end">
+   
+        <button type="submit" className="btn btn-success">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+                      </div>
+                      {/*end tab-pane*/}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/*end col*/}
+            </div>
+            {/*end row*/}
+          </div>
+        </div>
+      </div>
             <Footer />
         </>
     )

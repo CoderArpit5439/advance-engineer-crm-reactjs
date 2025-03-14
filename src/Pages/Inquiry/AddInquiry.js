@@ -30,7 +30,7 @@ const AddInquiry = () => {
     <div>
       <Header />
       <Sidebar />
-      <div className="main-content">
+      <div className="main-content mt-10">
         <div className="page-content">
           <div className="container-fluid">
             <div className="position-relative mx-n4 mt-n4">

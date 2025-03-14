@@ -10,7 +10,7 @@ import {
   deleteInquiry,
   fetchInquiry,
 } from "../../Redux/crmSlices/Inquiry/InquirySlice";
-import { Navigate } from "react-router-dom";
+
 
 const Inquirylist = () => {
   const dispatch = useDispatch();

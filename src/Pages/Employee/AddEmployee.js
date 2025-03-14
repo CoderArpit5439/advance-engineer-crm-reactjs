@@ -44,139 +44,154 @@ const AddEmployee = () => {
     <div>
       <Header />
       <Sidebar />
-      <div class="content-wrapper" style={{ minHeight: "799px" }}>
-        <section class="content-header">
-          <div class="header-icon">
-            <i class="fa fa-users"></i>
-          </div>
-          <div class="header-title">
-            <h1>Add Employee</h1>
-            <small>Employee</small>
-          </div>
-        </section>
-        <section class="content">
-          <div class="row">
-            <div
-              class="col-sm-12 lobipanel-parent-sortable ui-sortable"
-              data-lobipanel-child-inner-id="3N11jRpUy7"
-            >
-              <div
-                class="panel panel-bd lobidrag lobipanel lobipanel-sortable"
-                data-inner-id="3N11jRpUy7"
-                data-index="0"
-              >
-                <div class="panel-heading ui-sortable-handle">
-                  <div class="btn-group" id="buttonlist">
-                    <a
-                      class="btn btn-add"
-                      onClick={() => navigate("/employe-list")}
-                    >
-                      <i class="fa fa-list"></i> Employee List{" "}
-                    </a>
+      <div className="main-content mt-10">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="position-relative mx-n4 mt-n4">
+              <div className="">
+                <img src="" className="profile-wid-img" alt="" />
+                <div className="overlay-content">
+                  <div className="text-end p-3">
+                    <div className="p-0 ms-auto rounded-circle profile-photo-edit"></div>
                   </div>
-                 
-                </div>
-                <div class="panel-body p-6 bg-white rounded-lg shadow-lg">
-                  <form onSubmit={handleSubmit(onSubmit)} class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div class="form-group">
-                        <label
-                          for="user_name"
-                          class="block text-xl font-bold font-medium text-gray-700"
-                        >
-                          User Name
-                        </label>
-                        <input
-                          type="text"
-                          id="user_name"
-                          class="mt-2 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                          placeholder="User Name"
-                          {...register("user_name")}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label
-                          htmlFor="user_pass"
-                          className="block text-xl font-bold font-medium text-gray-700"
-                        >
-                          Password
-                        </label>
-                        <div className="relative mt-2">
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            id="emp_pass"
-                            className="p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Password"
-                            {...register("user_pass")}
-                          />
-                          <button
-                            type="button"
-                            onClick={togglePasswordVisibility}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                          >
-                            {showPassword ? (
-                              <EyeOffIcon className="w-5 h-5" />
-                            ) : (
-                              <EyeIcon className="w-5 h-5" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label
-                          for="user_image"
-                          class="block text-xl font-bold font-medium text-gray-700"
-                        >
-                          Image
-                        </label>
-                        <input
-                          type="file"
-                          id="user_image"
-                          class="mt-2 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                          {...register("user_image")}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label
-                          htmlFor="user_role"
-                          className="block text-xl font-bold font-medium text-gray-700"
-                        >
-                          Role
-                        </label>
-                        <select
-                          id="user_role"
-                          className="mt-2 p-3 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                          {...register("user_role")}
-                        >
-                          <option value="" disabled>
-                            Select Role
-                          </option>
-                          <option value="ADMIN">ADMIN</option>
-                          <option value="DESIGNER">DESIGNER</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="flex justify-between mt-6">
-                      <button
-                        type="button"
-                        class="w-32 py-3 px-6 bg-yellow-400 text-white font-medium rounded-md shadow-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                      >
-                        Reset
-                      </button>
-                      <button
-                        type="submit"
-                        class="w-32 py-3 px-6 bg-green-500 text-white font-medium rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-                      >
-                        <i className="fa fa-user-plus"></i> Add
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
+            <div className="row">
+              {/*end col*/}
+              <div className="col-xxl-12 mb-10">
+                <div className="card mt-xxl-n5">
+                  <div className="card-header">
+                    <ul
+                      className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                      role="tablist"
+                    >
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link active"
+                          data-bs-toggle="tab"
+                          href="#personalDetails"
+                          role="tab"
+                          aria-selected="true"
+                        >
+                          <i className="fas fa-home" /> Add Employe
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="card-body p-4">
+                    <div className="tab-content">
+                      <div
+                        className="tab-pane active"
+                        id="personalDetails"
+                        role="tabpanel"
+                      >
+                       <form onSubmit={handleSubmit(onSubmit)}>
+  <div className="row">
+    {/* User Name */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">User Name:</label>
+        <input
+          type="text"
+          placeholder="User Name"
+          className="form-control"
+          {...register("user_name")}
+        />
+        {errors.user_name && (
+          <p className="text-danger">{errors.user_name.message}</p>
+        )}
+      </div>
+    </div>
+
+    {/* Password */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Password:</label>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="form-control"
+            {...register("user_pass")}
+          />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          >
+            {showPassword ? (
+              <EyeOffIcon className="w-5 h-5" />
+            ) : (
+              <EyeIcon className="w-5 h-5" />
+            )}
+          </button>
+        </div>
+        {errors.user_pass && (
+          <p className="text-danger">{errors.user_pass.message}</p>
+        )}
+      </div>
+    </div>
+
+    {/* User Image */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Image:</label>
+        <input
+          type="file"
+          className="form-control"
+          {...register("user_image")}
+        />
+        {errors.user_image && (
+          <p className="text-danger">{errors.user_image.message}</p>
+        )}
+      </div>
+    </div>
+
+    {/* Role */}
+    <div className="col-lg-6">
+      <div className="mb-3">
+        <label className="form-label">Role:</label>
+        <select
+          className="form-control"
+          {...register("user_role")}
+        >
+          <option value="" disabled>Select Role</option>
+          <option value="ADMIN">ADMIN</option>
+          <option value="DESIGNER">DESIGNER</option>
+        </select>
+        {errors.user_role && (
+          <p className="text-danger">{errors.user_role.message}</p>
+        )}
+      </div>
+    </div>
+
+    {/* Submit & Reset Buttons */}
+    <div className="col-lg-12">
+      <div className="hstack gap-2 justify-content-end">
+       
+        <button
+          type="submit"
+          className="btn btn-success"
+        >
+          <i className="fa fa-user-plus text-lg "></i> Add User
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+                      </div>
+                      {/*end tab-pane*/}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/*end col*/}
+            </div>
+            {/*end row*/}
           </div>
-        </section>
+        </div>
       </div>
       <Footer />
     </div>

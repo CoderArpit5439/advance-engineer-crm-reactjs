@@ -30,6 +30,8 @@ import AddInquiry from '../Pages/Inquiry/AddInquiry'
 import Inquirylist from '../Pages/Inquiry/Inquirylist'
 import AddTask from '../Pages/Task/AddTask'
 import TaskList from '../Pages/Task/TaskList'
+import AddNewLead from '../Pages/Lead/AddNewLead'
+import LeadList from '../Pages/Lead/LeadList'
 const PrivateRoute = () => {
     return (
         <>
@@ -52,7 +54,8 @@ const PrivateRoute = () => {
                 <Route path='/add-category' element={<AddCategory />} />
                 <Route path='/list-category' element={<ListCategory />} />
            
-                <Route path='/list-lead' element={<Lead />} />
+                <Route path='/add-lead' element={<AddNewLead />} />
+                <Route path='/lead-list' element={<LeadList />} />
                 <Route path='/add-inquiry' element={<AddInquiry />} />
                 <Route path='/inquiry-list' element={<Inquirylist />} />
                 <Route path='/list-order' element={<Order />} />

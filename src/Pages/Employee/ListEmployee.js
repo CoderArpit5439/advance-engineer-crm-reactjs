@@ -5,8 +5,10 @@ import Swal from "sweetalert2";
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
 import Sidebar from "../../Layout/Sidebar";
-import { fetchUser, deleteUser } from "../../Redux/crmSlices/employeeSlice/EmployeeSlice";
-
+import {
+  fetchUser,
+  deleteUser,
+} from "../../Redux/crmSlices/employeeSlice/EmployeeSlice";
 
 const EmployeeList = () => {
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const EmployeeList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedData, setEditedData] = useState({ emp_name: "", emp_role: "" });
-  
+
   const { userList, loading } = useSelector((state) => {
     const response = state.rootReducer?.EmployeeSlice?.response;
     return {
@@ -22,8 +24,6 @@ const EmployeeList = () => {
       loading: state.rootReducer?.EmployeeSlice?.loading || false,
     };
   });
-
-  
 
   useEffect(() => {
     dispatch(fetchUser());
@@ -46,10 +46,10 @@ const EmployeeList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteUser(user.emp_id))
-        dispatch(fetchUser())
+        dispatch(deleteUser(user.emp_id));
+        dispatch(fetchUser());
         Swal.fire("Deleted!", `${user.emp_name} has been deleted.`, "success");
-        dispatch(fetchUser())
+        dispatch(fetchUser());
       }
     });
   };
@@ -68,90 +68,114 @@ const EmployeeList = () => {
     <div>
       <Header />
       <Sidebar />
-      <div className="content-wrapper" style={{ minHeight: "799px" }}>
-        <section className="content-header">
-          <div className="header-icon">
-            <i className="fa fa-users"></i>
-          </div>
-          <div className="header-title">
-            <h1>Employee List</h1>
-            <small>Manage your employees</small>
-          </div>
-        </section>
-        <section className="content">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="panel panel-bd">
-                <div className="panel-heading">
-                  <h4>Employee List</h4>
-                </div>
-                <div className="panel-body ">
-                  <div className="btn-group mb-4 ">
-                    <button
-                      className="btn btn-add"
-                      onClick={() => navigate("/add-employee")}
-                    >
-                      <i className="fa fa-plus"></i> Add Employee
-                    </button>
-                  </div>
-                  <div className="table-responsive">
-                    <table className="table table-bordered table-striped">
-                      <thead>
-                        <tr className="info">
-                          <th>Photo</th>
-                          <th>Name</th>
-                          <th>Role</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {userList && userList.length > 0 ? (
-                          userList.map((user) => (
-                            <tr key={user.id}>
-                              <td>
-                                <img
-                                  src={
-                                    user.emp_image ||
-                                    "assets/dist/img/default-cat.png"
-                                  }
-                                  alt="User"
-                                  width="50"
-                                  height="50"
-                                />
-                              </td>
-                              <td>{user.emp_name}</td>
-                              <td>{user.emp_role}</td>
-                              <td>
-                                <button
-                                  className="btn btn-info btn-sm"
-                                  onClick={() => handleEdit(user)}
-                                >
-                                  <i className="fa fa-pencil"></i> Edit
-                                </button>
-                                <button
-                                  className="btn btn-danger btn-sm ml-2"
-                                  onClick={() => handleDelete(user)}
-                                >
-                                  <i className="fa fa-trash"></i> Delete
-                                </button>
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="4" className="text-center">
-                              No employees found
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
+      <div className="main-content">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="row" style={{ fontFamily: "poppins" }}>
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-header"></div>
+                  <div className="card-body">
+                    <div className="listjs-table" id="customerList">
+                      {/* Add Lead Button */}
+                      <div className="row g-4 mb-3">
+                        <div className="col-sm-auto">
+                          <button
+                            type="submit"
+                            className="btn btn-success add-btn"
+                            id="create-btn"
+                            onClick={() => navigate("/add-employee")} // Redirect to "Add Lead" page
+                          >
+                            <i className="ri-add-line align-bottom me-1" /> Add
+                          </button>
+                        </div>
+                      </div>
+                      <div className="table-responsive table-card mt-3 mb-1">
+  <table className="table align-middle table-nowrap" id="dataTableExample1">
+    <thead className="table-light">
+      <tr>
+        <th className="sort" data-sort="emp_name">
+          Name
+        </th>
+        <th className="sort" data-sort="emp_role">
+          Role
+        </th>
+        <th className="sort" data-sort="emp_image">
+          Photo
+        </th>
+        <th className="sort" data-sort="action">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody className="list form-check-all">
+      {userList && userList.length > 0 ? (
+        userList.map((user) => (
+          <tr key={user.id}>
+            <td>{user.emp_name}</td>
+            <td>{user.emp_role}</td>
+            <td>
+              <img
+                src={user.emp_image || "assets/dist/img/default-cat.png"}
+                alt="User"
+                width="50"
+                height="50"
+              />
+            </td>
+            <td>
+              <div className="d-flex gap-2">
+                {/* <button
+                  className="btn btn-info btn-sm"
+                  onClick={() => handleEdit(user)}
+                >
+                  <i className="fa fa-pencil"></i> Edit
+                </button> */}
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => handleDelete(user)}
+                >
+                  <i className="fa fa-trash"></i> Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={4} className="text-center">
+            No employees found
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+
+  {/* No Result Found Section */}
+  {userList?.length === 0 && !loading && (
+    <div className="noresult" style={{ display: "block" }}>
+      <div className="text-center">
+        <lord-icon
+          src="https://cdn.lordicon.com/msoeawqm.json"
+          trigger="loop"
+          colors="primary:#121331,secondary:#08a88a"
+          style={{ width: 75, height: 75 }}
+        />
+        <h5 className="mt-2">Sorry! No Employees Found</h5>
+        <p className="text-muted mb-0">
+          We searched for employees but didn't find any.
+        </p>
+      </div>
+    </div>
+  )}
+</div>
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
       <Footer />
 

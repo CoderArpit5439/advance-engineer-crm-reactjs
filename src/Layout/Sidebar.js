@@ -618,18 +618,18 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                              href="#x`"
-                                              className="nav-link"
-                                              data-key="t-analytics"
+                                            onClick={()=>navigate("/add-employee")}
+                                              className="nav-link cursor-pointer"
+                                              
                                             >
                                               Add Employe
                                             </a>
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              href="dashboard-crm.html"
-                                              className="nav-link"
-                                              data-key="t-crm"
+                                              onClick={()=>navigate("/employe-list")}
+                                              className="nav-link cursor-pointer"
+                                          
                                             >
                                               List Employe
                                             </a>
@@ -723,20 +723,18 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                              href="layouts-horizontal.html"
-                                              target="_blank"
+                                             onClick={()=>navigate("/add-category")}
                                               className="nav-link"
-                                              data-key="t-horizontal"
+                                          
                                             >
                                               Add Category
                                             </a>
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              href="layouts-detached.html"
-                                              target="_blank"
+                                             onClick={()=>navigate("/list-category")}
                                               className="nav-link"
-                                              data-key="t-detached"
+                                              
                                             >
                                               Category List
                                             </a>
@@ -764,13 +762,10 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                              href="#sidebarCalendar"
+                                             
                                               className="nav-link collapsed"
-                                              data-bs-toggle="collapse"
-                                              role="button"
-                                              aria-expanded="false"
-                                              aria-controls="sidebarCalendar"
-                                              data-key="t-calender"
+                                              onClick={()=>navigate("/add-product")}
+                                              
                                             >
                                               Add Product
                                             </a>
@@ -781,9 +776,9 @@ const Sidebar = () => {
                                               <ul className="nav nav-sm flex-column">
                                                 <li className="nav-item">
                                                   <a
-                                                    href="apps-calendar.html"
+                                                    onClick={()=>navigate("/list-product")}
                                                     className="nav-link"
-                                                    data-key="t-main-calender"
+                                                    
                                                   >
                                                     List Products
                                                   </a>
@@ -793,11 +788,11 @@ const Sidebar = () => {
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              href="apps-chat.html"
+                                              onClick={()=>navigate("/list-product")}
                                               className="nav-link"
-                                              data-key="t-chat"
+                                              
                                             >
-                                              Customer List
+                                              Product List
                                             </a>
                                           </li>
                                         </ul>
@@ -923,9 +918,9 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                              href="layouts-horizontal.html"
-                                              target="_blank"
-                                              className="nav-link"
+                                             onClick={()=>navigate("/add-lead")}
+                                              
+                                              className="nav-link cursor-pointer"
                                               data-key="t-horizontal"
                                             >
                                               Add Lead
@@ -933,9 +928,9 @@ const Sidebar = () => {
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              href="layouts-detached.html"
-                                              target="_blank"
-                                              className="nav-link"
+                                               onClick={()=>navigate("/lead-list")}
+                                             
+                                              className="nav-link cursor-pointer"
                                               data-key="t-detached"
                                             >
                                               Leads List
@@ -948,7 +943,7 @@ const Sidebar = () => {
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
-                                        href="#Order"
+                                      
                                         data-bs-toggle="collapse"
                                         role="button"
                                         aria-expanded="false"
@@ -981,7 +976,7 @@ const Sidebar = () => {
                                               <ul className="nav nav-sm flex-column">
                                                 <li className="nav-item">
                                                   <a
-                                                    href="apps-calendar.html"
+                                                    
                                                     className="nav-link"
                                                     data-key="t-main-calender"
                                                   >
@@ -1025,7 +1020,7 @@ const Sidebar = () => {
                                           <li className="nav-item">
                                             <a
                                               href="layouts-horizontal.html"
-                                              target="_blank"
+                                            
                                               className="nav-link"
                                               data-key="t-horizontal"
                                             >
