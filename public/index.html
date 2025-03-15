@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+  data-sidebar-image="none" data-preloader="disable">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="./favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="./favicon.png" />
+
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!-- App favicon -->
+  <link rel="shortcut icon" href='./favicon.png'>
+
+  <!-- plugin css -->
+  <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Layout config Js -->
+  <script src="assets/js/layout.js"></script>
+  <!-- Bootstrap Css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- Icons Css -->
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <!-- App Css-->
+  <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+  <!-- custom Css-->
+  <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+  <link type="text/css" rel="stylesheet" href="css/lightgallery.css" />
+
+  <!-- lightgallery plugins -->
+  <link type="text/css" rel="stylesheet" href="css/lg-zoom.css" />
+  <link type="text/css" rel="stylesheet" href="css/lg-thumbnail.css" />
+
+
+  <!-- OR -->
+
+  <link type="text/css" rel="stylesheet" href="css/lightgallery-bundle.css" />
+<!-- leaf-map -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="extensions/filter-control/bootstrap-table-filter-control.css"/>
+  <script src="extensions/filter-control/bootstrap-table-filter-control.js"></script>
+  <title>Advance Engineerings</title>
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <!-- JAVASCRIPT -->
+  <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/libs/simplebar/simplebar.min.js"></script>
+  <script src="assets/libs/node-waves/waves.min.js"></script>
+  <script src="assets/libs/feather-icons/feather.min.js"></script>
+  <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+  <script src="assets/js/plugins.js"></script>
+
+  <!-- apexcharts -->
+  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+  <!-- Vector map-->
+  <script src="assets/libs/jsvectormap/js/jsvectormap.min.js" defer></script>
+  <script src="assets/libs/jsvectormap/maps/world-merc.js" defer></script>
+
+  <!-- Dashboard init -->
+  <script src="assets/js/pages/dashboard-analytics.init.js" defer></script>
+
+  <!-- App js -->
+  <script src="assets/js/app.js"></script>
+
+  <script src="js/lightgallery/lightgallery.js"></script>
+  <script src="js/lightgallery/lg-fullscreen.js"></script>
+  <script src="js/lightgallery/lg-thumbnail.js"></script>
+
+  <script src="js/lightgallery/lg-video.js"></script>
+  <script src="js/lightgallery/lg-autoplay.js"></script>
+  <script src="js/lightgallery/lg-zoom.js"></script>
+  <script src="js/lightgallery/lg-hash.js"></script>
+  <script src="js/lightgallery/lg-pager.js"></script>
+
+  <script src="https://browser.sentry-cdn.com/7.64.0/bundle.tracing.min.js"
+    integrity="sha384-sXRXtf4iGK2XdQEaG7eOlZtJaVq+DKmnpe2Du8Bl4Di2LacdP7aR+VuLqk5ip9az"
+    crossorigin="anonymous"></script>
+  <script src="https://browser.sentry-cdn.com/7.64.0/dedupe.min.js"
+    integrity="sha384-rg7CACyZhgrcw+SXEDhrIqiPBuuvvTftZhbitgK3q0fJQY4QIWUxuLZhYwzAhYed"
+    crossorigin="anonymous"></script>
+
+  <script>
+    Sentry.init({
+      dsn: "https://7ff3ebe6416a03a1d1655c9ae1b462b3@o4505741494452224.ingest.sentry.io/4505759717851136",
+      integrations: [new Sentry.Integrations.Dedupe()],
+    }); 
+  </script>
+
+</body>
+
+</html>
