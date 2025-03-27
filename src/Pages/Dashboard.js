@@ -37,19 +37,24 @@ const Dashboard = () => {
 
   const cardList = [
     {
+      name: "Employe  ",
+      icon: "card",
+      url: "/add-employee"
+    },
+    {
       name: "Customer",
       icon: "card",
-      url: "/"
+      url: "/add-customer"
     },
     {
       name: "Category",
       icon: "card",
-      url: "/"
+      url: "/add-category"
     },
     {
       name: "Products",
       icon: "card",
-      url: "/"
+      url: "/add-product"
     },
     {
       name: "Quotation",
@@ -57,44 +62,44 @@ const Dashboard = () => {
       url: "/"
     },
     {
-      name: "Invoice",
+      name: "Inventory",
       icon: "card",
-      url: "/"
+      url: "/add-inventory"
     },
     {
       name: "Lead",
       icon: "card",
-      url: "/"
+      url: "/add-lead"
     },
-    {
-      name: "Order",
-      icon: "card",
-      url: "/"
-    },
+    // {
+    //   name: "Order",
+    //   icon: "card",
+    //   url: "/"
+    // },
     {
       name: "Support",
       icon: "card",
-      url: "/"
+      url: "/add-support"
     },
     {
-      name: "Inventory",
+      name: "Graphics",
       icon: "card",
-      url: "/"
+      url: "/add-graphics"
     },
     {
       name: "Task",
       icon: "card",
-      url: "/"
+      url: "/add-task"
     },
     {
       name: "Inquiry",
       icon: "card",
-      url: "/"
+      url: "/add-inquiry"
     },
     {
-      name: "Account",
+      name: "Manufacturing",
       icon: "card",
-      url: "/"
+      url: "/add-manufacturing"
     },
   ]
   return (
@@ -117,7 +122,7 @@ const Dashboard = () => {
                     return (
                       <div class="col-xl-2">
                         <div class="card card-animate" style={{ cursor: "pointer" }} >
-                        {/* <div class="card card-animate" style={{ cursor: "pointer" }} onClick={() => navigate(card.url)}> */}
+                        <div style={{ cursor: "pointer" }} onClick={() => navigate(card.url)}>
                           <div class="card-body">
                             <div class="d-flex align-items-center">
                               <div class="avatar-sm flex-shrink-0">
@@ -136,6 +141,7 @@ const Dashboard = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
                       </div>
                     )
                   })

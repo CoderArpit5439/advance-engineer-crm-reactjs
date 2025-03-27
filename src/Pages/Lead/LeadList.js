@@ -82,21 +82,26 @@ const LeadList = () => {
                   <div className="card-header"></div>
                   <div className="card-body">
                     <div className="listjs-table" id="customerList">
-                      {/* Add Lead Button */}
+                      
                       <div className="row g-4 mb-3">
                         <div className="col-sm-auto">
-                          <button
+                          <button 
                             type="submit"
                             className="btn btn-success add-btn"
                             id="create-btn"
-                            onClick={() => navigate("/add-lead")} // Redirect to "Add Lead" page
+                            onClick={() => navigate("/add-lead")} 
                           >
                             <i className="ri-add-line align-bottom me-1" /> Add
                           </button>
+                          {/* Search  */}
+                          <div className="col-10 d-flex " style={{marginTop:"20px"}}><div class="search-box mx-2">
+                            <input type="text" class="form-control w-auto" id="searchMemberList" placeholder="Mobile, Name"/><i class="ri-search-line search-icon"></i></div><div class="search-box mx-2">
+                           </div></div>
+                          {/* Search  */}
                         </div>
                       </div>
 
-                      {/* Table Section */}
+                   
                       <div className="table-responsive table-card mt-3 mb-1">
                         <table
                           className="table align-middle table-nowrap"

@@ -37,6 +37,7 @@ import InventoryList from '../Pages/Inventory/InventoryList'
 import AddNewLead from '../Pages/Lead/AddNewLead'
 import LeadList from '../Pages/Lead/LeadList'
 import AddGraphics from '../Pages/Graphics/AddGraphics'
+import TestingInvoice from '../Pages/Invoice/TestingInvoice'
 const PrivateRoute = () => {
     return (
         <>
@@ -52,7 +53,7 @@ const PrivateRoute = () => {
 
                 <Route path='/list-invoice' element={<ListInvoice />} />
                 <Route path='/create-invoice' element={<CreateInvoice />} />
-
+                <Route path='/testing-invoice' element={<TestingInvoice />} />
                 <Route path='/add-product' element={<AddProduct />} />
                 <Route path='/list-product' element={<ListProduct />} />
 

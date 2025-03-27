@@ -36,9 +36,9 @@ const ListCustomer = () => {
       response: state.rootReducer.CustomerSlice?.response,
     };
   });
-
+console.log(data) 
   // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- START ---->
-  const pageNumber = localStorage.getItem("customer-list"); // Remark Employer Page Number
+  const pageNumber = localStorage.getItem("customer-list"); 
 
   useEffect(() => {
     if (!pageNumber) {
@@ -327,7 +327,7 @@ const ListCustomer = () => {
               <div className="col-lg-12">
                 <div className="card">
                   <div className="card-header">
-                    <h4 className="card-title mb-0">Add, Edit &amp; Remove</h4>
+                    {/* <h4 className="card-title mb-0">Add, Edit &amp; Remove</h4> */}
                   </div>
                   {/* end card header */}
                   <div className="card-body">
@@ -472,6 +472,7 @@ const ListCustomer = () => {
                               </tr>
                             )}
                           </tbody> */}
+                          {showItems}
                           <tbody className="list form-check-all">
                                                 {showItems?.length > 0 ? showItems?.map((customer, i) => {
                                                     return (

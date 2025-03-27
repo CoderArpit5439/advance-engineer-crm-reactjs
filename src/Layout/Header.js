@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { logoutAuth } from '../redux/crmSlices/authSlice/AuthSlice';
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 // import { lunchStartNow } from '../redux/crmSlices/attendanceSlice/AttendanceSlice';
 // import CountdownTimer from '../common/CountdownTimer';
 // import fractionlogo from '../image/Asset 3.png'
@@ -55,8 +56,8 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    // dispatch(logoutAuth())
-    navigate("/");
+    Cookies.remove('authToken')
+  
   };
 
   const changeTheme = () => {

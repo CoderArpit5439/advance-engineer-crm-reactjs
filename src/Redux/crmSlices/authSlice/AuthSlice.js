@@ -21,8 +21,8 @@ export const loginAuth = createAsyncThunk(
           
             if (response?.data?.token) {
                 const now = new Date();
-                const midnight = new Date(now.getFullYear(), now.getMonth(), (now.getDate() + 1)); // Midnight of the next day
-                Cookies.set('authToken', response.data.token, { expires: midnight }); // Expires in 1 days
+                const midnight = new Date(now.getFullYear(), now.getMonth(), (now.getDate() + 1));
+                Cookies.set('authToken', response.data.token, { expires: midnight }); 
             }
             return response?.data;
 

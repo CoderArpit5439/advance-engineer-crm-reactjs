@@ -7,281 +7,44 @@ import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCustomerList } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import { useForm } from 'react-hook-form';
-const TestingQuotation = () => {
-  const [items, setItems] = useState([]);
-  const [shippingAddress, setShippingAddress] = useState("");
-  const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const { dta, count, loading, response } = useSelector((state) => {
-    return {
-      response: state.rootReducer.CustomerSlice?.data?.data,
-      count: state.rootReducer.CustomerSlice?.data?.count,
-      loading: state.rootReducer.CustomerSlice?.loading,
-    };
-  });
 
-  useEffect(() => {
-    dispatch(GetCustomerList()); // Fetch customer data when component mounts
-  }, [dispatch]);
-
-  const handleSelectChange = (event) => {
-    const selectedCustomer = response.find(
-      (customer) => customer.c_fullname === event.target.value
-    );
-    if (selectedCustomer) {
-      setShippingAddress(selectedCustomer.c_address);
-    }
-  };
-
-  const [branding, setBranding] = useState({
-    companyName: "Advance engineering",
-    subLine: "Our work is a new identity of engineering and technology",
-    logo: "https://via.placeholder.com/150", // Replace with your logo URL
-    address:
-      "Head office : N. H. -47 Choudhary Market Tejaji Nagar Khandwa Road Indore 452001 (MP)",
-    subAddress:
-      "sales@advanceengineerings.com | support@advanceengineerings.com",
-    phone: "+91 94253 11684 | +91 94253 11328",
-    website: "www.advanceengineerings.com",
-    products: [
-      "All types of conveyors",
-      "Bottle line machine change parts & blister packing machine change parts",
-      "Mixer granulator",
-      "pharmaceutical instruments",
-      "Machine spare parts & new research and development.",
-    ],
-  });
-  const [details, setDetails] = useState({
-    name: "",
-    subject: "",
-    date: "",
-    quotationNumber: "",
-  });
-  // const [taxRate, setTaxRate] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const [subtotal, setSubtotal] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [totalKG, setTotalKG] = useState(0);
-  const [totalQuantity, setTotalQuantity] = useState(0);
-  const [pdfBlobState, setPdfBlobState] = useState("");
-
-  const printRef = useRef(null);
-
-  const addItem = () => {
-    setItems([
-      ...items,
-      { name: "", hsn: "", quantity: 0, unit: "", kg: 0, price: 0, total: 0 },
-    ]);
-  };
-
-  const removeItem = (index) => {
-    const updatedItems = items.filter((_, i) => i !== index);
-    updateTotals(updatedItems);
-    setItems(updatedItems);
-  };
-
-  const handleChange = (index, field, value) => {
-    const updatedItems = [...items];
-    if (["quantity", "price", "kg"].includes(field)) {
-      updatedItems[index][field] = parseFloat(value) || 0;
-    } else {
-      updatedItems[index][field] = value;
-    }
-    updatedItems[index].total =
-      updatedItems[index].quantity * updatedItems[index].price;
-    updateTotals(updatedItems);
-    setItems(updatedItems);
-  };
-
-  const updateTotals = (updatedItems) => {
-    const newSubtotal = updatedItems.reduce((acc, item) => acc + item.total, 0);
-    const newTotalQuantity = updatedItems.reduce(
-      (acc, item) => acc + item.quantity,
-      0
-    );
-    const newTotalKG = updatedItems.reduce((acc, item) => acc + item.kg, 0);
-    setSubtotal(newSubtotal);
-    setTotalQuantity(newTotalQuantity);
-    setTotalKG(newTotalKG);
-    const discountedSubtotal = newSubtotal - discount;
-    setTotal(discountedSubtotal);
-  };
-
-  const handlePrint = () => {
-    const printContent = printRef.current;
-    const printWindow = window.open("", "_blank");
-
-    // Step 1: Generate the PDF
-    html2canvas(printContent).then((canvas) => {
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgData = canvas.toDataURL("image/png");
-
-      // Adjust width and height for A4 page
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-      // Convert the PDF to a Blob
-      const pdfBlob = pdf.output("blob");
-
-      // Optional: Convert the Blob to a downloadable URL for testing
-      const blobURL = URL.createObjectURL(pdfBlob);
-      console.log("Blob URL: ", pdfBlob);
-      // setPdfBlobState(pdfBlob);
-
-      const formData = new FormData();
-      formData.append("quo_name", details.name);
-      formData.append("quo_date", details.date);
-      formData.append("quo_subject", details.subject);
-      formData.append("quo_number", details.quotationNumber);
-      formData.append("quo_description", JSON.stringify(items));
-      formData.append("quo_quantity", totalQuantity);
-      formData.append("quo_kg", totalKG);
-      formData.append("quo_subtotal", subtotal);
-      formData.append("quo_discount", discount);
-      formData.append("quo_total", total);
-      formData.append("quo_pdf", pdfBlob);
-
-      // Send to API
-      fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("PDF uploaded successfully:", data);
-          // alert("Quotation data uploaded successfully!");
-        })
-        .catch((error) => {
-          console.error("Error uploading PDF:", error);
-          alert("Failed to upload the quotation PDF.");
-        });
-      // Step 2: Upload the PDF
-      // const formData = new FormData();
-      // formData.append("quo_pdf", pdfBlob, "quotation.pdf");
-      // formData.append("quo_name", "testing");
-
-      // Send to API
-      // fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-      //   method: "POST",
-      //   body: formData,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log("PDF uploaded successfully:", data);
-      //     alert("Quotation PDF uploaded successfully!");
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error uploading PDF:", error);
-      //     alert("Failed to upload the quotation PDF.");
-      //   });
-    });
-
-    printWindow.document.write(`
-      <html>
-        <head>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              margin: 20px;
-              padding: 0;
-            }
-            .branding, .tableHeader, .tableRow, .summaryRow, .terms {
-              margin-bottom: 15px;
-            }
-            .details {
-             display: "flex", justifyContent: "space-between",margin-bottom: 15px;
-            }
-            .tableHeader, .tableRow {
-              display: flex;
-              justify-content: space-between;
-            }
-            .tableHeader {
-              font-weight: bold;
-              background-color: #f0f0f0;
-              padding: 10px;
-            }
-            .summaryRow, .terms p {
-              margin: 5px 0;
-            }
-            .branding img {
-              height: 100px;
-              width: auto;
-            }
-                input {
-              border: none;
-              background: none;
-              pointer-events: none;
-              width: 150px;
-              text-align: left;
-            }
-          </style>
-        </head>
-        <body>
-          ${printContent.outerHTML}
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.focus();
-    printWindow.print();
-    printWindow.close();
-  };
-
-  const handleSave = () => {
-    const formData = new FormData();
-    formData.append("quo_name", details.name);
-    formData.append("quo_date", details.date);
-    formData.append("quo_subject", details.subject);
-    formData.append("quo_number", details.quotationNumber);
-    formData.append("quo_description", JSON.stringify(items));
-    formData.append("quo_quantity", totalQuantity);
-    formData.append("quo_kg", totalKG);
-    formData.append("quo_subtotal", subtotal);
-    formData.append("quo_discount", discount);
-    formData.append("quo_total", total);
-    formData.append("quo_pdf", pdfBlobState[0], "quotation.pdf");
-
-    // Send to API
-    fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("PDF uploaded successfully:", data);
-        // alert("Quotation data uploaded successfully!");
-      })
-      .catch((error) => {
-        console.error("Error uploading PDF:", error);
-        alert("Failed to upload the quotation PDF.");
+const TestingInvoice = () => {
+     const [list, setList] = useState([]);
+    
+    const [shippingAddress, setShippingAddress] = useState("");
+      const dispatch = useDispatch();
+      const { register, handleSubmit, formState: { errors }, reset } = useForm();
+      const { dta, count, loading, response } = useSelector((state) => {
+        return {
+          response: state.rootReducer.CustomerSlice?.data?.data,
+          count: state.rootReducer.CustomerSlice?.data?.count,
+          loading: state.rootReducer.CustomerSlice?.loading,
+        };
       });
-  };
-  const [productData, setProductData] = useState({
-    itemName: "",
-    hsnCode: "",
-    quantity: "",
-    pricePerUnit: "",
-    kgPerUnit: "",
-    unitType: "",
-  });
-
-  const [list, setList] = useState([]);
-
-
-  
-  const addDetail = (data) => {
-    setList((prevList) => [...prevList, data]);
-    reset();
-  };
-
-  const removeProduct = (index) => {
-    setList(list.filter((_, i) => i !== index));
-  };
+    
+      useEffect(() => {
+        dispatch(GetCustomerList()); // Fetch customer data when component mounts
+      }, [dispatch]);
+      
+      const addDetail = (data) => {
+        setList((prevList) => [...prevList, data]);
+        reset();
+      };
+    
+      const removeProduct = (index) => {
+        setList(list.filter((_, i) => i !== index));
+      };
+      const handleSelectChange = (event) => {
+        const selectedCustomer = response.find(
+          (customer) => customer.c_fullname === event.target.value
+        );
+        if (selectedCustomer) {
+          setShippingAddress(selectedCustomer.c_address);
+        }
+      };
   return (
-    <>
-      <Header />
+    <div>
+       <Header />
       <Sidebar />
       <div>
         <div class="main-content">
@@ -770,11 +533,8 @@ const TestingQuotation = () => {
           <PDFContent />
         </PDFViewer> */}
       </div>
-      {/* New Page  */}
+    </div>
+  )
+}
 
-      <Footer />
-    </>
-  );
-};
-
-export default TestingQuotation;
+export default TestingInvoice
