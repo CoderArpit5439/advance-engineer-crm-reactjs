@@ -30,8 +30,17 @@ export const GetQuotationList = createAsyncThunk(
         } catch (error) {
             return error
         }
-    }
+    } 
 )
+
+export const deleteQuotation= createAsyncThunk("deleteQuotation", async (Id, { rejectWithValue }) => {
+    try {
+     const res =  await instance.get(`/quotation/delete-quotation?quo_id=${Id}`);
+      return res; 
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  });
 
 export const GetCustomerNameList = createAsyncThunk(
     "GetCustomerNameList",async (body) => {
@@ -128,6 +137,18 @@ export const CustomerSlice = createSlice({
             state.quotation = action.payload;
         });
         builder.addCase(GetQuotationList.rejected,(state,action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        builder.addCase(deleteQuotation.pending,(state,action) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteQuotation.fulfilled,(state,action) => {
+            state.loading = false;
+            state.quotation = action.payload;
+        });
+        builder.addCase(deleteQuotation.rejected,(state,action) => {
             state.loading = false;
             state.error = action.payload;
         })

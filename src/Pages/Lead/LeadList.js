@@ -34,6 +34,7 @@ const LeadList = () => {
       setLeads(response.data);
     }
   }, [response]);
+
   const handleDelete = (lead) => {
     Swal.fire({
       title: "Are you sure?",
@@ -69,6 +70,14 @@ const LeadList = () => {
       }
     });
   };
+
+  const handleEdit = (data) => {
+    if (data) {
+      localStorage.setItem("editData", JSON.stringify(data));
+      navigate("/update-lead");
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -82,26 +91,36 @@ const LeadList = () => {
                   <div className="card-header"></div>
                   <div className="card-body">
                     <div className="listjs-table" id="customerList">
-                      
                       <div className="row g-4 mb-3">
                         <div className="col-sm-auto">
-                          <button 
+                          <button
                             type="submit"
                             className="btn btn-success add-btn"
                             id="create-btn"
-                            onClick={() => navigate("/add-lead")} 
+                            onClick={() => navigate("/add-lead")}
                           >
                             <i className="ri-add-line align-bottom me-1" /> Add
                           </button>
                           {/* Search  */}
-                          <div className="col-10 d-flex " style={{marginTop:"20px"}}><div class="search-box mx-2">
-                            <input type="text" class="form-control w-auto" id="searchMemberList" placeholder="Mobile, Name"/><i class="ri-search-line search-icon"></i></div><div class="search-box mx-2">
-                           </div></div>
+                          <div
+                            className="col-10 d-flex "
+                            style={{ marginTop: "20px" }}
+                          >
+                            <div class="search-box mx-2">
+                              <input
+                                type="text"
+                                class="form-control w-auto"
+                                id="searchMemberList"
+                                placeholder="Mobile, Name"
+                              />
+                              <i class="ri-search-line search-icon"></i>
+                            </div>
+                            <div class="search-box mx-2"></div>
+                          </div>
                           {/* Search  */}
                         </div>
                       </div>
 
-                   
                       <div className="table-responsive table-card mt-3 mb-1">
                         <table
                           className="table align-middle table-nowrap"
@@ -154,6 +173,14 @@ const LeadList = () => {
                                   <td>{lead.l_join}</td>
                                   <td>
                                     <div className="d-flex gap-2">
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-info"
+                                        onClick={() => handleEdit(lead)}
+                                      >
+                                        <i className="fa fa-pencil-o"></i>{" "}
+                                        Update
+                                      </button>
                                       <button
                                         type="button"
                                         className="btn btn-sm btn-danger"

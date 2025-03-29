@@ -6,12 +6,19 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCustomerList } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 const TestingQuotation = () => {
   const [items, setItems] = useState([]);
   const [shippingAddress, setShippingAddress] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const { dta, count, loading, response } = useSelector((state) => {
     return {
       response: state.rootReducer.CustomerSlice?.data?.data,
@@ -58,11 +65,11 @@ const TestingQuotation = () => {
     quotationNumber: "",
   });
   // const [taxRate, setTaxRate] = useState(0);
-  const [discount, setDiscount] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalKG, setTotalKG] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [pricePerUnit, setpricePerUnit] = useState(0);
   const [pdfBlobState, setPdfBlobState] = useState("");
 
   const printRef = useRef(null);
@@ -103,7 +110,7 @@ const TestingQuotation = () => {
     setSubtotal(newSubtotal);
     setTotalQuantity(newTotalQuantity);
     setTotalKG(newTotalKG);
-    const discountedSubtotal = newSubtotal - discount;
+    const discountedSubtotal = newSubtotal - 50;
     setTotal(discountedSubtotal);
   };
 
@@ -139,7 +146,7 @@ const TestingQuotation = () => {
       formData.append("quo_quantity", totalQuantity);
       formData.append("quo_kg", totalKG);
       formData.append("quo_subtotal", subtotal);
-      formData.append("quo_discount", discount);
+      // formData.append("quo_discount", discount);
       formData.append("quo_total", total);
       formData.append("quo_pdf", pdfBlob);
 
@@ -235,15 +242,11 @@ const TestingQuotation = () => {
     formData.append("quo_date", details.date);
     formData.append("quo_subject", details.subject);
     formData.append("quo_number", details.quotationNumber);
-    formData.append("quo_description", JSON.stringify(items));
+    formData.append("quo_description", JSON.stringify(list));
     formData.append("quo_quantity", totalQuantity);
     formData.append("quo_kg", totalKG);
-    formData.append("quo_subtotal", subtotal);
-    formData.append("quo_discount", discount);
+    formData.append("quo_discount", discountPercentage);
     formData.append("quo_total", total);
-    formData.append("quo_pdf", pdfBlobState[0], "quotation.pdf");
-
-    // Send to API
     fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
       method: "POST",
       body: formData,
@@ -251,7 +254,7 @@ const TestingQuotation = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("PDF uploaded successfully:", data);
-        // alert("Quotation data uploaded successfully!");
+        navigate("/list-quotation");
       })
       .catch((error) => {
         console.error("Error uploading PDF:", error);
@@ -268,11 +271,22 @@ const TestingQuotation = () => {
   });
 
   const [list, setList] = useState([]);
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const addDiscount = (discount) => {
+    const discountAmount = (discount / 100) * total;
+    const finalTotal = total - discountAmount;
+    setTotal(finalTotal);
+    setDiscountPercentage(0);
+  };
 
-
-  
   const addDetail = (data) => {
+    console.log(data);
+    setTotalQuantity(data.quantity);
+    setTotalKG(data.kgPerUnit);
+    setpricePerUnit(data.pricePerUnit);
     setList((prevList) => [...prevList, data]);
+    const totalWithoutDiscount = data.pricePerUnit * data.quantity;
+    setTotal(totalWithoutDiscount);
     reset();
   };
 
@@ -295,144 +309,113 @@ const TestingQuotation = () => {
               >
                 <div class="row">
                   <div class="col-lg-8">
-                    {/* <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label" for="product-title-input">Product Title</label>
-                                <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"/>
-                                <input type="text" class="form-control d-none" id="product-id-input"/>
-                                <input type="text" class="form-control" id="product-title-input" value="" 
-                                placeholder="Enter product title" required=""/>
-                                <div class="invalid-feedback">Please Enter a product title.</div>
-                            </div>
-                            <div>
-                                <label>Product Description</label>
-
-                                <div id="ckeditor-classic"style={{display:"none"}}>
-                                    <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                                    <ul>
-                                        <li>Full Sleeve</li>
-                                        <li>Cotton</li>
-                                        <li>All Sizes available</li>
-                                        <li>4 Different Color</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-  // */}
-                    {/*  */}
-                    <div class="card">
-                      <div class="card-header">
-                        {/* <h5 class="card-title mb-0">Publish</h5> */}
-                      </div>
+                    {/* New Form   */}
+                    <div className="card">
+                      <div class="card-header">Add</div>
                       <div class="card-body ">
-                        <div class="mb-3">
-                          <label
-                            for="choices-publish-status-input"
-                            class="form-label"
-                          >
-                            Billing Address
-                          </label>
-
-                          <div
-                            class="choices"
-                            data-type="select-one"
-                            tabindex="0"
-                            role="listbox"
-                            aria-label="Status"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <div className="choices__inner">
-                              {loading ? (
-                                // Show a loading spinner or any indicator while data is loading
-                                <div>Loading...</div>
-                              ) : (
-                                <select
-                                  className="form-select choices__input"
-                                  id="choices-publish-status-input"
-                                  data-choices=""
-                                  data-choices-search-false=""
-                                  tabIndex="-1"
-                                  data-choice="active"
-                                  onChange={handleSelectChange}
+                        <form>
+                          <div className="row">
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="firstNameinput"
+                                  className="form-label"
                                 >
-                                  {response && response.length > 0 ? (
-                                    response.map((customer, key) => (
-                                      <option
-                                        key={key}
-                                        value={customer.c_fullname}
-                                      >
-                                        {customer.c_fullname}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option disabled>No Data Found</option>
-                                  )}
-                                </select>
-                              )}
-                            </div>
-
-                            <div
-                              class="choices__list choices__list--dropdown"
-                              aria-expanded="false"
-                            >
-                              <div class="choices__list" role="listbox">
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-3"
-                                  class="choices__item choices__item--choice choices__item--selectable is-highlighted"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="3"
-                                  data-value="Draft"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
-                                  aria-selected="true"
-                                >
-                                  Draft
-                                </div>
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-1"
-                                  class="choices__item choices__item--choice is-selected choices__item--selectable"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="1"
-                                  data-value="Published"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
-                                >
-                                  Published
-                                </div>
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-2"
-                                  class="choices__item choices__item--choice choices__item--selectable"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="2"
-                                  data-value="Scheduled"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
-                                >
-                                  Scheduled
-                                </div>
+                                  Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Enter your name"
+                                  id="firstNameinput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      name: e.target.value,
+                                    })
+                                  }
+                                />
                               </div>
                             </div>
-                          </div>
-                        </div>
-
-                        <div class="card-body">
-                          <h5 class="card-title mb-4">Shipping Address</h5>
-                          <div class="d-flex flex-wrap gap-2 fs-16 display-5">
-                            <div class="badge fw-medium bg-secondary-subtle text-secondary display-1">
-                              <i class="ri-map-pin-user-line me-1 text-dark text-opacity-75 fs-16 align-middle"></i>
-                              {shippingAddress ||
-                                "Select a customer to view address"}
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="lastNameinput"
+                                  className="form-label"
+                                >
+                                  Subject
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Enter your subject"
+                                  id="lastNameinput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      subject: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
                             </div>
+
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="phonenumberInput"
+                                  className="form-label"
+                                >
+                                  Date
+                                </label>
+                                <input
+                                  type="date"
+                                  className="form-control"
+                                  placeholder="+(245) 451 45123"
+                                  id="phonenumberInput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      date: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="emailidInput"
+                                  className="form-label"
+                                >
+                                  Quotation Number
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  placeholder="Quotation Number"
+                                  id="emailidInput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      quotationNumber: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </div>
+
+                            {/*end col*/}
                           </div>
-                        </div>
+                          {/*end row*/}
+                        </form>
                       </div>
                     </div>
+
+                    {/* New form  */}
 
                     <div class="card">
                       <div class="card-header">
@@ -444,7 +427,6 @@ const TestingQuotation = () => {
                             <a
                               class="nav-link active"
                               data-bs-toggle="tab"
-                            
                               role="tab"
                               aria-selected="true"
                             >
@@ -456,133 +438,185 @@ const TestingQuotation = () => {
 
                       <div class="card-body">
                         <div class="tab-content">
-                        <form onSubmit={handleSubmit(addDetail)}>
-        <div className="tab-pane active" >
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="mb-3">
-                <label className="form-label" >
-                  Item Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                 
-                  placeholder="Enter item"
-                  {...register('itemName', { required: 'Item Name is required' })}
-                />
-                {errors.itemName && <p className="text-danger">{errors.itemName.message}</p>}
-              </div>
-            </div>
+                          <form onSubmit={handleSubmit(addDetail)}>
+                            <div className="tab-pane active">
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label className="form-label">
+                                      Item Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Enter item"
+                                      {...register("itemName", {
+                                        required: "Item Name is required",
+                                      })}
+                                    />
+                                    {errors.itemName && (
+                                      <p className="text-danger">
+                                        {errors.itemName.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
 
-            <div className="col-lg-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="manufacturer-brand-input">
-                  HSN Code
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="manufacturer-brand-input"
-                  placeholder="Enter HSN Code"
-                  {...register('hsnCode', { required: 'HSN Code is required' })}
-                />
-                {errors.hsnCode && <p className="text-danger">{errors.hsnCode.message}</p>}
-              </div>
-            </div>
-          </div>
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="manufacturer-brand-input"
+                                    >
+                                      HSN Code
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      id="manufacturer-brand-input"
+                                      placeholder="Enter HSN Code"
+                                      {...register("hsnCode", {
+                                        required: "HSN Code is required",
+                                      })}
+                                    />
+                                    {errors.hsnCode && (
+                                      <p className="text-danger">
+                                        {errors.hsnCode.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
 
-          <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="stocks-input">
-                  Quantity
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="stocks-input"
-                  placeholder="Quantity"
-                  required
-                  {...register('quantity', { required: 'Quantity is required' })}
-                />
-                {errors.quantity && <p className="text-danger">{errors.quantity.message}</p>}
-              </div>
-            </div>
+                              <div className="row">
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="stocks-input"
+                                    >
+                                      Quantity
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      id="stocks-input"
+                                      placeholder="Quantity"
+                                      required
+                                      {...register("quantity", {
+                                        required: "Quantity is required",
+                                      })}
+                                    />
+                                    {errors.quantity && (
+                                      <p className="text-danger">
+                                        {errors.quantity.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="product-price-input">
-                  Price Per Unit
-                </label>
-                <div className="input-group has-validation mb-3">
-                  <span className="input-group-text" id="product-price-addon">
-                    Rs
-                  </span>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="product-price-input"
-                    placeholder="Enter Price Per Unit"
-                    aria-label="Price"
-                    aria-describedby="product-price-addon"
-                    required
-                    {...register('pricePerUnit', { required: 'Price Per Unit is required' })}
-                  />
-                  {errors.pricePerUnit && <p className="text-danger">{errors.pricePerUnit.message}</p>}
-                </div>
-              </div>
-            </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="product-price-input"
+                                    >
+                                      Price Per Unit
+                                    </label>
+                                    <div className="input-group has-validation mb-3">
+                                      <span
+                                        className="input-group-text"
+                                        id="product-price-addon"
+                                      >
+                                        Rs
+                                      </span>
+                                      <input
+                                        type="number"
+                                        className="form-control"
+                                        id="product-price-input"
+                                        placeholder="Enter Price Per Unit"
+                                        aria-label="Price"
+                                        aria-describedby="product-price-addon"
+                                        required
+                                        {...register("pricePerUnit", {
+                                          required:
+                                            "Price Per Unit is required",
+                                        })}
+                                      />
+                                      {errors.pricePerUnit && (
+                                        <p className="text-danger">
+                                          {errors.pricePerUnit.message}
+                                        </p>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="product-discount-input">
-                  KG/PC
-                </label>
-                <div className="input-group mb-3">
-                  <span className="input-group-text" id="product-discount-addon">
-                    %
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="product-discount-input"
-                    placeholder="Enter KG/PC"
-                    aria-label="discount"
-                    aria-describedby="product-discount-addon"
-                    {...register('kgPerUnit')}
-                  />
-                </div>
-              </div>
-            </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="product-discount-input"
+                                    >
+                                      KG/PC
+                                    </label>
+                                    <div className="input-group mb-3">
+                                      <span
+                                        className="input-group-text"
+                                        id="product-discount-addon"
+                                      >
+                                        %
+                                      </span>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-discount-input"
+                                        placeholder="Enter KG/PC"
+                                        aria-label="discount"
+                                        aria-describedby="product-discount-addon"
+                                        {...register("kgPerUnit")}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="orders-input">
-                  Unit
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="orders-input"
-                  placeholder="Unit"
-                  required
-                  {...register('unitType', { required: 'Unit is required' })}
-                />
-                {errors.unitType && <p className="text-danger">{errors.unitType.message}</p>}
-              </div>
-            </div>
-          </div>
-        </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="orders-input"
+                                    >
+                                      Unit
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="orders-input"
+                                      placeholder="Unit"
+                                      required
+                                      {...register("unitType", {
+                                        required: "Unit is required",
+                                      })}
+                                    />
+                                    {errors.unitType && (
+                                      <p className="text-danger">
+                                        {errors.unitType.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
 
-        <div className="text-end mb-3">
-          <button type="submit" className="btn btn-success w-sm">
-            Submit
-          </button>
-        </div>
-      </form>
-
-
+                            <div className="text-end mb-3">
+                              <button
+                                type="submit"
+                                className="btn btn-success w-sm"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -622,13 +656,12 @@ const TestingQuotation = () => {
                                   <td>{product.kgPerUnit}</td>
                                   <td>{product.unitType}</td>
                                   <td>
-                                    <a
-                                      href="#"
-                                      className="link-danger fw-bold"
+                                    <p
+                                      className="link-danger fw-bold cursor-pointer"
                                       onClick={() => removeProduct(index)}
                                     >
                                       Remove
-                                    </a>
+                                    </p>
                                   </td>
                                 </tr>
                               ))
@@ -677,6 +710,121 @@ const TestingQuotation = () => {
                   </div>
 
                   <div class="col-lg-4">
+                    <div class="card">
+                      <div class="card-header">
+                        {/* <h5 class="card-title mb-0">Publish</h5> */}
+                      </div>
+                      <div class="card-body ">
+                        <div class="mb-3">
+                          <label
+                            for="choices-publish-status-input"
+                            class="form-label"
+                          >
+                            Billing Address
+                          </label>
+
+                          {loading ? (
+                            <div>Loading...</div>
+                          ) : (
+                            <select
+                              className="form-select rounded-pill mb-3 "
+                              style={{ marginTop: "10px" }}
+                              id="choices-publish-status-input"
+                              data-choices=""
+                              data-choices-search-false=""
+                              tabIndex="-1"
+                              data-choice="active"
+                              onChange={handleSelectChange}
+                            >
+                              <option selected="">Search for customers</option>
+                              {response && response.length > 0 ? (
+                                response.map((customer, key) => (
+                                  <option key={key} value={customer.c_fullname}>
+                                    {customer.c_fullname}
+                                  </option>
+                                ))
+                              ) : (
+                                <option disabled>No Data Found</option>
+                              )}
+                            </select>
+                          )}
+                        </div>
+
+                        <div class="card-body">
+                          <h5 class="card-title mb-4">Shipping Address</h5>
+                          <div class="d-flex flex-wrap gap-2 fs-16 display-5">
+                            <div class="badge fw-medium bg-secondary-subtle text-secondary display-1">
+                              <i class="ri-map-pin-user-line me-1 text-dark text-opacity-75 fs-16 align-middle"></i>
+                              {shippingAddress ||
+                                "Select a customer to view address"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Total Amount  */}
+                    <div className="card">
+                      <div className="card-header">
+                        <h5 className="card-title mb-0">Total</h5>
+                      </div>
+                      <table className="table table-borderless mb-0">
+                        <tbody>
+                          {/* Total Quantity Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Total Quantity :</td>
+                            <td className="text-end">{totalQuantity} </td>
+                          </tr>
+                          {/* Total KG Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Total KG:</td>
+                            <td className="text-end"> {totalKG} </td>
+                          </tr>
+                          {/* Subtotal Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Price :</td>
+                            <td className="text-end">{pricePerUnit}</td>
+                          </tr>
+                          {/* Discount Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Discount :</td>
+                            <td className="text-end">
+                              <div className="input-group">
+                                {/* Discount input */}
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm"
+                                  style={{ width: "80px" }}
+                                  value={discountPercentage}
+                                  onChange={(e) =>
+                                    setDiscountPercentage(e.target.value)
+                                  }
+                                />
+                                {/* Button inside the input group */}
+                                <button
+                                  onClick={() =>
+                                    addDiscount(discountPercentage)
+                                  }
+                                  className="input-group-text btn btn-outline-secondary" // Bootstrap styling for button
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="ri-add-fill"></i>{" "}
+                                  {/* You can keep the icon */}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr className="d-flex justify-content-between border-top border-top-dashed">
+                            <th scope="row">Total :</th>
+                            <th className="text-end">RS {total}</th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Total Amount  */}
+                    <div class="col-lg-12 " style={{ marginTop: "40px" }}></div>
+
                     {/* Bank Detail */}
                     <div class="col-lg-12  ">
                       <div class="form-check card-radio">
@@ -717,47 +865,17 @@ const TestingQuotation = () => {
                       </div>
                     </div>
 
-                    <div
-                      class="col-lg-12 col-sm-6 "
-                      style={{ marginTop: "40px" }}
-                    ></div>
                     {/* Bank detail */}
-                    {/* Total Amount  */}
-                    <div className="card">
-                      <div class="card-header">
-                        <h5 class="card-title mb-0">Total</h5>
-                      </div>
-                      <tr class="border-top border-top-dashed">
-                        <td colspan="3"></td>
-                        <td colspan="2" class="fw-medium p-0">
-                          <table class="table table-borderless mb-0">
-                            <tbody>
-                              <tr>
-                                <td>Total Quantity :</td>
-                                <td class="text-end">5</td>
-                              </tr>
-                              <tr>
-                                <td>Total KG:</td>
-                                <td class="text-end">-5</td>
-                              </tr>
-                              <tr>
-                                <td>Subtotal :</td>
-                                <td class="text-end">55</td>
-                              </tr>
-                              <tr>
-                                <td>Discount :</td>
-                                <td class="text-end">10%</td>
-                              </tr>
-                              <tr class="border-top border-top-dashed">
-                                <th scope="row">Total :</th>
-                                <th class="text-end">RS 525512</th>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </div>
-                    {/* Total Amount  */}
+                  </div>
+
+                  <div className="col-lg-12 text-end">
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      onClick={handleSave}
+                    >
+                      Save Quotation
+                    </button>
                   </div>
                 </div>
               </div>

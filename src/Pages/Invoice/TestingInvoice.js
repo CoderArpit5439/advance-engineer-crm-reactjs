@@ -6,48 +6,335 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCustomerList } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const TestingInvoice = () => {
-     const [list, setList] = useState([]);
-    
-    const [shippingAddress, setShippingAddress] = useState("");
-      const dispatch = useDispatch();
-      const { register, handleSubmit, formState: { errors }, reset } = useForm();
-      const { dta, count, loading, response } = useSelector((state) => {
-        return {
-          response: state.rootReducer.CustomerSlice?.data?.data,
-          count: state.rootReducer.CustomerSlice?.data?.count,
-          loading: state.rootReducer.CustomerSlice?.loading,
-        };
+  const [items, setItems] = useState([]);
+  const [shippingAddress, setShippingAddress] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+    const [bankDetail, setBankDetail] = useState({
+      bankName: "",
+      accName: "",
+      accNo: "",
+      ifsc: "",
+    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const { dta, count, loading, response } = useSelector((state) => {
+    return {
+      response: state.rootReducer.CustomerSlice?.data?.data,
+      count: state.rootReducer.CustomerSlice?.data?.count,
+      loading: state.rootReducer.CustomerSlice?.loading,
+    };
+  });
+
+  useEffect(() => {
+    dispatch(GetCustomerList()); // Fetch customer data when component mounts
+  }, [dispatch]);
+
+  const handleSelectChange = (event) => {
+    const selectedCustomer = response.find(
+      (customer) => customer.c_fullname === event.target.value
+    );
+    if (selectedCustomer) {
+      setShippingAddress(selectedCustomer.c_address);
+    }
+  };
+
+  const [branding, setBranding] = useState({
+    companyName: "Advance engineering",
+    subLine: "Our work is a new identity of engineering and technology",
+    logo: "https://via.placeholder.com/150", // Replace with your logo URL
+    address:
+      "Head office : N. H. -47 Choudhary Market Tejaji Nagar Khandwa Road Indore 452001 (MP)",
+    subAddress:
+      "sales@advanceengineerings.com | support@advanceengineerings.com",
+    phone: "+91 94253 11684 | +91 94253 11328",
+    website: "www.advanceengineerings.com",
+    products: [
+      "All types of conveyors",
+      "Bottle line machine change parts & blister packing machine change parts",
+      "Mixer granulator",
+      "pharmaceutical instruments",
+      "Machine spare parts & new research and development.",
+    ],
+  });
+  const [details, setDetails] = useState({
+    name: "",
+    date: "",
+    poNo: "",
+    invoiceNumber: "",
+    challanNo: "",
+  });
+  // const [taxRate, setTaxRate] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [totalKG, setTotalKG] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [pricePerUnit, setpricePerUnit] = useState(0);
+  const [pdfBlobState, setPdfBlobState] = useState("");
+
+  const printRef = useRef(null);
+
+  const addItem = () => {
+    setItems([
+      ...items,
+      { name: "", hsn: "", quantity: 0, unit: "", kg: 0, price: 0, total: 0 },
+    ]);
+  };
+
+  const removeItem = (index) => {
+    const updatedItems = items.filter((_, i) => i !== index);
+    updateTotals(updatedItems);
+    setItems(updatedItems);
+  };
+
+  const handleChange = (index, field, value) => {
+    const updatedItems = [...items];
+    if (["quantity", "price", "kg"].includes(field)) {
+      updatedItems[index][field] = parseFloat(value) || 0;
+    } else {
+      updatedItems[index][field] = value;
+    }
+    updatedItems[index].total =
+      updatedItems[index].quantity * updatedItems[index].price;
+    updateTotals(updatedItems);
+    setItems(updatedItems);
+  };
+
+  const updateTotals = (updatedItems) => {
+    const newSubtotal = updatedItems.reduce((acc, item) => acc + item.total, 0);
+    const newTotalQuantity = updatedItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+    const newTotalKG = updatedItems.reduce((acc, item) => acc + item.kg, 0);
+    setSubtotal(newSubtotal);
+    setTotalQuantity(newTotalQuantity);
+    setTotalKG(newTotalKG);
+    const discountedSubtotal = newSubtotal - 50;
+    setTotal(discountedSubtotal);
+  };
+
+  const handlePrint = () => {
+    const printContent = printRef.current;
+    const printWindow = window.open("", "_blank");
+
+    // Step 1: Generate the PDF
+    html2canvas(printContent).then((canvas) => {
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+
+      // Adjust width and height for A4 page
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      // Convert the PDF to a Blob
+      const pdfBlob = pdf.output("blob");
+
+      // Optional: Convert the Blob to a downloadable URL for testing
+      const blobURL = URL.createObjectURL(pdfBlob);
+      console.log("Blob URL: ", pdfBlob);
+      // setPdfBlobState(pdfBlob);
+
+      const formData = new FormData();
+      formData.append("quo_name", details.name);
+      formData.append("quo_date", details.date);
+      formData.append("quo_subject", details.subject);
+      formData.append("quo_number", details.quotationNumber);
+      formData.append("quo_description", JSON.stringify(items));
+      formData.append("quo_quantity", totalQuantity);
+      formData.append("quo_kg", totalKG);
+      formData.append("quo_subtotal", subtotal);
+      // formData.append("quo_discount", discount);
+      formData.append("quo_total", total);
+      formData.append("quo_pdf", pdfBlob);
+
+      // Send to API
+      fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("PDF uploaded successfully:", data);
+          // alert("Quotation data uploaded successfully!");
+        })
+        .catch((error) => {
+          console.error("Error uploading PDF:", error);
+          alert("Failed to upload the quotation PDF.");
+        });
+      // Step 2: Upload the PDF
+      // const formData = new FormData();
+      // formData.append("quo_pdf", pdfBlob, "quotation.pdf");
+      // formData.append("quo_name", "testing");
+
+      // Send to API
+      // fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
+      //   method: "POST",
+      //   body: formData,
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log("PDF uploaded successfully:", data);
+      //     alert("Quotation PDF uploaded successfully!");
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error uploading PDF:", error);
+      //     alert("Failed to upload the quotation PDF.");
+      //   });
+    });
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 20px;
+              padding: 0;
+            }
+            .branding, .tableHeader, .tableRow, .summaryRow, .terms {
+              margin-bottom: 15px;
+            }
+            .details {
+             display: "flex", justifyContent: "space-between",margin-bottom: 15px;
+            }
+            .tableHeader, .tableRow {
+              display: flex;
+              justify-content: space-between;
+            }
+            .tableHeader {
+              font-weight: bold;
+              background-color: #f0f0f0;
+              padding: 10px;
+            }
+            .summaryRow, .terms p {
+              margin: 5px 0;
+            }
+            .branding img {
+              height: 100px;
+              width: auto;
+            }
+                input {
+              border: none;
+              background: none;
+              pointer-events: none;
+              width: 150px;
+              text-align: left;
+            }
+          </style>
+        </head>
+        <body>
+          ${printContent.outerHTML}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+  };
+
+  const handleSave = () => {
+
+
+    const formData = new FormData();
+    formData.append("inv_name", details.name);
+    formData.append("inv_date", details.date);
+    formData.append("inv_po_no", details.poNo);
+    formData.append("inv_number", details.invoiceNumber);
+    formData.append("inv_challan", details.challanNo);
+    formData.append("inv_description", JSON.stringify(items));
+    formData.append("inv_package", totalKG);
+    formData.append("inv_quantity", totalQuantity);
+    formData.append("inv_subtotal", subtotal);
+    formData.append("inv_transport",transportation );
+    formData.append("inv_gst", gst);
+    formData.append("inv_bank", JSON.stringify(bankDetail));
+    formData.append("inv_discount", discount);
+    formData.append("inv_total", total);
+
+    // Send to API
+    fetch("https://api.advanceengineerings.com/crm/invoice/add-invoice", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("PDF uploaded successfully:", data);
+        alert("Invoice data uploaded successfully!");
+      })
+      .catch((error) => {
+        console.error("Error uploading PDF:", error);
+        alert("Failed to upload the Invoice PDF.");
       });
-    
-      useEffect(() => {
-        dispatch(GetCustomerList()); // Fetch customer data when component mounts
-      }, [dispatch]);
-      
-      const addDetail = (data) => {
-        setList((prevList) => [...prevList, data]);
-        reset();
-      };
-    
-      const removeProduct = (index) => {
-        setList(list.filter((_, i) => i !== index));
-      };
-      const handleSelectChange = (event) => {
-        const selectedCustomer = response.find(
-          (customer) => customer.c_fullname === event.target.value
-        );
-        if (selectedCustomer) {
-          setShippingAddress(selectedCustomer.c_address);
-        }
-      };
+  }
+  const [productData, setProductData] = useState({
+    itemName: "",
+    hsnCode: "",
+    quantity: "",
+    pricePerUnit: "",
+    kgPerUnit: "",
+    unitType: "",
+  });
+
+  const [list, setList] = useState([]);
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const [transportation, setTransportation] = useState(0);
+  const [gst, setGst] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const addDetail = (data) => {
+    console.log(data);
+    setTotalQuantity(data.quantity);
+    setTotalKG(data.kgPerUnit);
+    setpricePerUnit(data.pricePerUnit);
+    setList((prevList) => [...prevList, data]);
+    const totalWithoutDiscount = data.pricePerUnit * data.quantity;
+    setTotal(totalWithoutDiscount);
+    reset();
+  };
+
+  const removeProduct = (index) => {
+    setList(list.filter((_, i) => i !== index));
+  };
+
+   // Function to apply Transportation cost to the total
+   const addTransportation = (transportation) => {
+    const newTotal = total + transportation;
+    setTotal(newTotal);
+    setTransportation(0); 
+  };
+
+  // Function to apply Discount Percentage
+  const addDiscount = (discount) => {
+    const discountAmount = (discount / 100) * total;
+    const finalTotal = total - discountAmount;
+    setTotal(finalTotal);
+    setDiscountPercentage(0); 
+  }
+  // Function to apply GST
+  const addGST = (gst) => {
+    const gstAmount = (gst / 100) * total;
+    const finalTotalWithGST = total + gstAmount;
+    setTotal(finalTotalWithGST);
+  };
+
+
   return (
     <div>
        <Header />
       <Sidebar />
       <div>
-        <div class="main-content">
+      <div class="main-content">
           <div class="page-content">
             <div class="container-fluid">
               <div
@@ -58,144 +345,135 @@ const TestingInvoice = () => {
               >
                 <div class="row">
                   <div class="col-lg-8">
-                    {/* <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label" for="product-title-input">Product Title</label>
-                                <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"/>
-                                <input type="text" class="form-control d-none" id="product-id-input"/>
-                                <input type="text" class="form-control" id="product-title-input" value="" 
-                                placeholder="Enter product title" required=""/>
-                                <div class="invalid-feedback">Please Enter a product title.</div>
-                            </div>
-                            <div>
-                                <label>Product Description</label>
-
-                                <div id="ckeditor-classic"style={{display:"none"}}>
-                                    <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                                    <ul>
-                                        <li>Full Sleeve</li>
-                                        <li>Cotton</li>
-                                        <li>All Sizes available</li>
-                                        <li>4 Different Color</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-  // */}
-                    {/*  */}
-                    <div class="card">
-                      <div class="card-header">
-                        {/* <h5 class="card-title mb-0">Publish</h5> */}
-                      </div>
+                    {/* New Form   */}
+                    <div className="card">
+                      <div class="card-header">Add</div>
                       <div class="card-body ">
-                        <div class="mb-3">
-                          <label
-                            for="choices-publish-status-input"
-                            class="form-label"
-                          >
-                            Billing Address
-                          </label>
-
-                          <div
-                            class="choices"
-                            data-type="select-one"
-                            tabindex="0"
-                            role="listbox"
-                            aria-label="Status"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <div className="choices__inner">
-                              {loading ? (
-                                // Show a loading spinner or any indicator while data is loading
-                                <div>Loading...</div>
-                              ) : (
-                                <select
-                                  className="form-select choices__input"
-                                  id="choices-publish-status-input"
-                                  data-choices=""
-                                  data-choices-search-false=""
-                                  tabIndex="-1"
-                                  data-choice="active"
-                                  onChange={handleSelectChange}
+                        <form>
+                          <div className="row">
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="firstNameinput"
+                                  className="form-label"
                                 >
-                                  {response && response.length > 0 ? (
-                                    response.map((customer, key) => (
-                                      <option
-                                        key={key}
-                                        value={customer.c_fullname}
-                                      >
-                                        {customer.c_fullname}
-                                      </option>
-                                    ))
-                                  ) : (
-                                    <option disabled>No Data Found</option>
-                                  )}
-                                </select>
-                              )}
+                                  Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Enter your name"
+                                  id="firstNameinput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      name: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="lastNameinput"
+                                  className="form-label"
+                                >
+                                  Invoice NO
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Invoice NO"
+                                  id="lastNameinput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      invoiceNumber: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
                             </div>
 
-                            <div
-                              class="choices__list choices__list--dropdown"
-                              aria-expanded="false"
-                            >
-                              <div class="choices__list" role="listbox">
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-3"
-                                  class="choices__item choices__item--choice choices__item--selectable is-highlighted"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="3"
-                                  data-value="Draft"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
-                                  aria-selected="true"
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="phonenumberInput"
+                                  className="form-label"
                                 >
-                                  Draft
-                                </div>
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-1"
-                                  class="choices__item choices__item--choice is-selected choices__item--selectable"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="1"
-                                  data-value="Published"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
+                                  Date
+                                </label>
+                                <input
+                                  type="date"
+                                  className="form-control"
+                                  placeholder="+(245) 451 45123"
+                                  id="phonenumberInput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      date: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </div>
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="emailidInput"
+                                  className="form-label"
                                 >
-                                  Published
-                                </div>
-                                <div
-                                  id="choices--choices-publish-status-input-item-choice-2"
-                                  class="choices__item choices__item--choice choices__item--selectable"
-                                  role="option"
-                                  data-choice=""
-                                  data-id="2"
-                                  data-value="Scheduled"
-                                  data-select-text="Press to select"
-                                  data-choice-selectable=""
+                                Challan No
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  placeholder="Challan No"
+                                  id="emailidInput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      challanNo: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </div>
+
+                            {/*end col*/}
+                            <div className="col-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="emailidInput"
+                                  className="form-label"
                                 >
-                                  Scheduled
-                                </div>
+                                PO No
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  placeholder="PO No"
+                                  id="emailidInput"
+                                  onChange={(e) =>
+                                    setDetails({
+                                      ...details,
+                                      poNo: e.target.value,
+                                    })
+                                  }
+                                />
                               </div>
                             </div>
                           </div>
-                        </div>
-
-                        <div class="card-body">
-                          <h5 class="card-title mb-4">Shipping Address</h5>
-                          <div class="d-flex flex-wrap gap-2 fs-16 display-5">
-                            <div class="badge fw-medium bg-secondary-subtle text-secondary display-1">
-                              <i class="ri-map-pin-user-line me-1 text-dark text-opacity-75 fs-16 align-middle"></i>
-                              {shippingAddress ||
-                                "Select a customer to view address"}
-                            </div>
-                          </div>
-                        </div>
+                          {/*end row*/}
+                        </form>
                       </div>
                     </div>
+
+                    {/* New form  */}
 
                     <div class="card">
                       <div class="card-header">
@@ -207,7 +485,6 @@ const TestingInvoice = () => {
                             <a
                               class="nav-link active"
                               data-bs-toggle="tab"
-                            
                               role="tab"
                               aria-selected="true"
                             >
@@ -219,133 +496,185 @@ const TestingInvoice = () => {
 
                       <div class="card-body">
                         <div class="tab-content">
-                        <form onSubmit={handleSubmit(addDetail)}>
-        <div className="tab-pane active" >
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="mb-3">
-                <label className="form-label" >
-                  Item Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                 
-                  placeholder="Enter item"
-                  {...register('itemName', { required: 'Item Name is required' })}
-                />
-                {errors.itemName && <p className="text-danger">{errors.itemName.message}</p>}
-              </div>
-            </div>
+                          <form onSubmit={handleSubmit(addDetail)}>
+                            <div className="tab-pane active">
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label className="form-label">
+                                      Item Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Enter item"
+                                      {...register("itemName", {
+                                        required: "Item Name is required",
+                                      })}
+                                    />
+                                    {errors.itemName && (
+                                      <p className="text-danger">
+                                        {errors.itemName.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
 
-            <div className="col-lg-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="manufacturer-brand-input">
-                  HSN Code
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="manufacturer-brand-input"
-                  placeholder="Enter HSN Code"
-                  {...register('hsnCode', { required: 'HSN Code is required' })}
-                />
-                {errors.hsnCode && <p className="text-danger">{errors.hsnCode.message}</p>}
-              </div>
-            </div>
-          </div>
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="manufacturer-brand-input"
+                                    >
+                                      HSN Code
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      id="manufacturer-brand-input"
+                                      placeholder="Enter HSN Code"
+                                      {...register("hsnCode", {
+                                        required: "HSN Code is required",
+                                      })}
+                                    />
+                                    {errors.hsnCode && (
+                                      <p className="text-danger">
+                                        {errors.hsnCode.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
 
-          <div className="row">
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="stocks-input">
-                  Quantity
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="stocks-input"
-                  placeholder="Quantity"
-                  required
-                  {...register('quantity', { required: 'Quantity is required' })}
-                />
-                {errors.quantity && <p className="text-danger">{errors.quantity.message}</p>}
-              </div>
-            </div>
+                              <div className="row">
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="stocks-input"
+                                    >
+                                      Quantity
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      id="stocks-input"
+                                      placeholder="Quantity"
+                                      required
+                                      {...register("quantity", {
+                                        required: "Quantity is required",
+                                      })}
+                                    />
+                                    {errors.quantity && (
+                                      <p className="text-danger">
+                                        {errors.quantity.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="product-price-input">
-                  Price Per Unit
-                </label>
-                <div className="input-group has-validation mb-3">
-                  <span className="input-group-text" id="product-price-addon">
-                    Rs
-                  </span>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="product-price-input"
-                    placeholder="Enter Price Per Unit"
-                    aria-label="Price"
-                    aria-describedby="product-price-addon"
-                    required
-                    {...register('pricePerUnit', { required: 'Price Per Unit is required' })}
-                  />
-                  {errors.pricePerUnit && <p className="text-danger">{errors.pricePerUnit.message}</p>}
-                </div>
-              </div>
-            </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="product-price-input"
+                                    >
+                                      Price Per Unit
+                                    </label>
+                                    <div className="input-group has-validation mb-3">
+                                      <span
+                                        className="input-group-text"
+                                        id="product-price-addon"
+                                      >
+                                        Rs
+                                      </span>
+                                      <input
+                                        type="number"
+                                        className="form-control"
+                                        id="product-price-input"
+                                        placeholder="Enter Price Per Unit"
+                                        aria-label="Price"
+                                        aria-describedby="product-price-addon"
+                                        required
+                                        {...register("pricePerUnit", {
+                                          required:
+                                            "Price Per Unit is required",
+                                        })}
+                                      />
+                                      {errors.pricePerUnit && (
+                                        <p className="text-danger">
+                                          {errors.pricePerUnit.message}
+                                        </p>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="product-discount-input">
-                  KG/PC
-                </label>
-                <div className="input-group mb-3">
-                  <span className="input-group-text" id="product-discount-addon">
-                    %
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="product-discount-input"
-                    placeholder="Enter KG/PC"
-                    aria-label="discount"
-                    aria-describedby="product-discount-addon"
-                    {...register('kgPerUnit')}
-                  />
-                </div>
-              </div>
-            </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="product-discount-input"
+                                    >
+                                      KG/PC
+                                    </label>
+                                    <div className="input-group mb-3">
+                                      <span
+                                        className="input-group-text"
+                                        id="product-discount-addon"
+                                      >
+                                        %
+                                      </span>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-discount-input"
+                                        placeholder="Enter KG/PC"
+                                        aria-label="discount"
+                                        aria-describedby="product-discount-addon"
+                                        {...register("kgPerUnit")}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
 
-            <div className="col-lg-3 col-sm-6">
-              <div className="mb-3">
-                <label className="form-label" htmlFor="orders-input">
-                  Unit
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="orders-input"
-                  placeholder="Unit"
-                  required
-                  {...register('unitType', { required: 'Unit is required' })}
-                />
-                {errors.unitType && <p className="text-danger">{errors.unitType.message}</p>}
-              </div>
-            </div>
-          </div>
-        </div>
+                                <div className="col-lg-3 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="orders-input"
+                                    >
+                                      Unit
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="orders-input"
+                                      placeholder="Unit"
+                                      required
+                                      {...register("unitType", {
+                                        required: "Unit is required",
+                                      })}
+                                    />
+                                    {errors.unitType && (
+                                      <p className="text-danger">
+                                        {errors.unitType.message}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
 
-        <div className="text-end mb-3">
-          <button type="submit" className="btn btn-success w-sm">
-            Submit
-          </button>
-        </div>
-      </form>
-
-
+                            <div className="text-end mb-3">
+                              <button
+                                type="submit"
+                                className="btn btn-success w-sm"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -385,13 +714,12 @@ const TestingInvoice = () => {
                                   <td>{product.kgPerUnit}</td>
                                   <td>{product.unitType}</td>
                                   <td>
-                                    <a
-                                      href="#"
-                                      className="link-danger fw-bold"
+                                    <p
+                                      className="link-danger fw-bold cursor-pointer"
                                       onClick={() => removeProduct(index)}
                                     >
                                       Remove
-                                    </a>
+                                    </p>
                                   </td>
                                 </tr>
                               ))
@@ -440,93 +768,306 @@ const TestingInvoice = () => {
                   </div>
 
                   <div class="col-lg-4">
-                    {/* Bank Detail */}
-                    <div class="col-lg-12  ">
-                      <div class="form-check card-radio">
-                        <input
-                          id="shippingAddress01"
-                          name="shippingAddress"
-                          type="radio"
-                          class="form-check-input"
-                          checked=""
-                        />
-                        <label class="form-check-label" for="shippingAddress01">
-                          <span class="mb-4 fs-2 fw-semibold d-block text-muted text-uppercase">
-                            Bank Details
-                          </span>
+                    <div class="card">
+                      <div class="card-header">
+                        {/* <h5 class="card-title mb-0">Publish</h5> */}
+                      </div>
+                      <div class="card-body ">
+                        <div class="mb-3">
+                          <label
+                            for="choices-publish-status-input"
+                            class="form-label"
+                          >
+                            Billing Address
+                          </label>
 
-                          <span class="fs-4 mb-2 d-block ">HDFC Bank </span>
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              {" "}
-                              <span class="text-muted fw-normal text-wrap mb-1 d-block fs-5 ">
-                                Account No - 854652587598
-                              </span>
-                              <span class="text-muted fw-normal d-block fs-5">
-                                IFC - 905098437098096
-                              </span>
-                            </div>
-                            <div>
-                              {" "}
-                              <span class="text-muted fw-normal text-wrap mb-1 d-block fs-5">
-                                Branch Name - xxxxxxx
-                              </span>
-                              <span class="text-muted fw-normal d-block fs-5">
-                                Mob No - 123456789
-                              </span>
+                          {loading ? (
+                            <div>Loading...</div>
+                          ) : (
+                            <select
+                              className="form-select rounded-pill mb-3 "
+                              style={{ marginTop: "10px" }}
+                              id="choices-publish-status-input"
+                              data-choices=""
+                              data-choices-search-false=""
+                              tabIndex="-1"
+                              data-choice="active"
+                              onChange={handleSelectChange}
+                            >
+                              <option selected="">Search for customers</option>
+                              {response && response.length > 0 ? (
+                                response.map((customer, key) => (
+                                  <option key={key} value={customer.c_fullname}>
+                                    {customer.c_fullname}
+                                  </option>
+                                ))
+                              ) : (
+                                <option disabled>No Data Found</option>
+                              )}
+                            </select>
+                          )}
+                        </div>
+
+                        <div class="card-body">
+                          <h5 class="card-title mb-4">Shipping Address</h5>
+                          <div class="d-flex flex-wrap gap-2 fs-16 display-5">
+                            <div class="badge fw-medium bg-secondary-subtle text-secondary display-1">
+                              <i class="ri-map-pin-user-line me-1 text-dark text-opacity-75 fs-16 align-middle"></i>
+                              {shippingAddress ||
+                                "Select a customer to view address"}
                             </div>
                           </div>
-                        </label>
+                        </div>
                       </div>
                     </div>
-
-                    <div
-                      class="col-lg-12 col-sm-6 "
-                      style={{ marginTop: "40px" }}
-                    ></div>
-                    {/* Bank detail */}
                     {/* Total Amount  */}
                     <div className="card">
-                      <div class="card-header">
-                        <h5 class="card-title mb-0">Total</h5>
+                      <div className="card-header">
+                        <h5 className="card-title mb-0">Total</h5>
                       </div>
-                      <tr class="border-top border-top-dashed">
-                        <td colspan="3"></td>
-                        <td colspan="2" class="fw-medium p-0">
-                          <table class="table table-borderless mb-0">
-                            <tbody>
-                              <tr>
-                                <td>Total Quantity :</td>
-                                <td class="text-end">5</td>
-                              </tr>
-                              <tr>
-                                <td>Total KG:</td>
-                                <td class="text-end">-5</td>
-                              </tr>
-                              <tr>
-                                <td>Subtotal :</td>
-                                <td class="text-end">55</td>
-                              </tr>
-                              <tr>
-                                <td>Discount :</td>
-                                <td class="text-end">10%</td>
-                              </tr>
-                              <tr class="border-top border-top-dashed">
-                                <th scope="row">Total :</th>
-                                <th class="text-end">RS 525512</th>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
+                      <table className="table table-borderless mb-0">
+                        <tbody>
+                          {/* Total Quantity Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Total Quantity :</td>
+                            <td className="text-end">{totalQuantity} </td>
+                          </tr>
+                          {/* Total KG Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Total PKG:</td>
+                            <td className="text-end"> {totalKG} </td>
+                          </tr>
+                          {/* Trasportation Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Transportation :</td>
+                            <td className="text-end">
+                              <div className="input-group">
+                                {/* Discount input */}
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm"
+                                  style={{ width: "80px" }}
+                                  value={transportation}
+                  onChange={(e) => setTransportation(parseFloat(e.target.value) || 0)}
+                                />
+                                {/* Button inside the input group */}
+                                <button
+                                    onClick={() => addTransportation(transportation)}
+                                  className="input-group-text btn btn-outline-secondary" // Bootstrap styling for button
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="ri-add-fill"></i>{" "}
+                                  {/* You can keep the icon */}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          {/* GST  */}
+                          <tr className="d-flex justify-content-between">
+                            <td>GST:</td>
+                            <td className="text-end">
+                              <div className="input-group">
+                                {/* Discount input */}
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm"
+                                  style={{ width: "80px" }}
+                                  value={gst}
+                  onChange={(e) => setGst(parseFloat(e.target.value) || 0)}
+                                />
+                                {/* Button inside the input group */}
+                                <button
+                                  onClick={() => addGST(gst)}
+                                  className="input-group-text btn btn-outline-secondary" // Bootstrap styling for button
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="ri-add-fill"></i>{" "}
+                                  {/* You can keep the icon */}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          {/* Discount Row */}
+                          <tr className="d-flex justify-content-between">
+                            <td>Discount :</td>
+                            <td className="text-end">
+                              <div className="input-group">
+                                {/* Discount input */}
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm"
+                                  style={{ width: "80px" }}
+                                  value={discount}
+                  onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)}
+                                />
+                                {/* Button inside the input group */}
+                                <button
+                                  onClick={() => addDiscount(discount)}
+                                  className="input-group-text btn btn-outline-secondary" // Bootstrap styling for button
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="ri-add-fill"></i>{" "}
+                                  {/* You can keep the icon */}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr className="d-flex justify-content-between border-top border-top-dashed">
+                            <th scope="row">Total :</th>
+                            <th className="text-end">₹ {total}</th>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+
                     {/* Total Amount  */}
+                    <div class="col-lg-12 " style={{ marginTop: "40px" }}></div>
+
+                    {/* Bank Detail */}
+                    <div class="col-lg-12  ">
+                    <div class="card">
+                      <div class="card-header">
+                        <ul
+                          class="nav nav-tabs-custom card-header-tabs border-bottom-0"
+                          role="tablist"
+                        >
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="tab"
+                              role="tab"
+                              aria-selected="true"
+                            >
+                              Add Bank Details
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="card-body">
+                        <div class="">
+                          <form >
+                            <div className="">
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label className="">
+                                      Bank Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Enter bank name  "
+                                      value={bankDetail.bankName}
+                onChange={(e) => setBankDetail({ ...bankDetail, bankName: e.target.value })}
+                                    
+                                    />
+                                    
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="manufacturer-brand-input"
+                                    >
+                                     Account holder name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    
+                                      placeholder="Enter Account Holder"
+                                      value={bankDetail.accName}
+                                      onChange={(e) => setBankDetail({ ...bankDetail, accName: e.target.value })}
+                                      
+                                    />
+                                    
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="col-lg-6 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="stocks-input"
+                                    >
+                                     Account Number
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                            
+                                      placeholder="Quantity"
+                                      onChange={(e) => setBankDetail({ ...bankDetail, accNo: e.target.value })}
+                                    
+                                    />
+                                    
+                                  </div>
+                                </div>
+
+                                <div className="col-lg-6 col-sm-6">
+                                  <div className="mb-3">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="product-price-input"
+                                    >
+                                      IFSC Code
+                                    </label>
+                                    <div className="input-group has-validation mb-3">
+                                      
+                                      <input
+                                        type="number"
+                                        className="form-control"
+                                      
+                                        placeholder="Enter Price Per Unit"
+                                        aria-label="Price"
+                                        aria-describedby="product-price-addon"
+                                        onChange={(e) => setBankDetail({ ...bankDetail, ifsc: e.target.value })}
+                                        required
+                                       
+                                      />
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+
+                              
+                              </div>
+                            </div>
+
+                            
+                          </form>
+                        </div>
+                      </div>
+
+  
+
+                    </div>
+                    </div>
+
+                    {/* Bank detail */}
+                  </div>
+
+                  <div className="col-lg-12 text-end">
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      onClick={handleSave}
+                    >
+                      Save Quotation
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
 
         {/* <button onClick={addItem}>Add Item</button>
         <PDFViewer style={{ width: "800px", height: "500px" }}>

@@ -38,6 +38,8 @@ import AddNewLead from '../Pages/Lead/AddNewLead'
 import LeadList from '../Pages/Lead/LeadList'
 import AddGraphics from '../Pages/Graphics/AddGraphics'
 import TestingInvoice from '../Pages/Invoice/TestingInvoice'
+import EditInvoice from '../Pages/Invoice/EditInvoice'
+import EditLead from '../Pages/Lead/EditLead'
 const PrivateRoute = () => {
     return (
         <>
@@ -54,6 +56,8 @@ const PrivateRoute = () => {
                 <Route path='/list-invoice' element={<ListInvoice />} />
                 <Route path='/create-invoice' element={<CreateInvoice />} />
                 <Route path='/testing-invoice' element={<TestingInvoice />} />
+                <Route path='/edit-invoice' element={<EditInvoice />} />
+
                 <Route path='/add-product' element={<AddProduct />} />
                 <Route path='/list-product' element={<ListProduct />} />
 
@@ -91,6 +95,7 @@ const PrivateRoute = () => {
 
                 <Route path='/add-lead' element={<AddNewLead />} />
                 <Route path='/lead-list' element={<LeadList />} />
+                <Route path='/update-lead' element={<EditLead />} />
 
                 <Route path='/add-graphics' element={<AddGraphics />} />
                 <Route path='/Graphic-list' element={<GraphicsList />} />

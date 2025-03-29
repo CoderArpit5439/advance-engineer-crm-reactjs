@@ -111,7 +111,7 @@ export const LeadSlice = createSlice({
       builder.addCase(deleteLead.pending, (state) => {
         state.loading = true;
         state.response = null;
-        state.error = null; // Reset the error when starting a new request
+        state.error = null; 
       });
       builder.addCase(deleteLead.fulfilled, (state, action) => {
         state.loading = false;

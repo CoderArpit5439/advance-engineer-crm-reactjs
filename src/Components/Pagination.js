@@ -107,9 +107,9 @@ const Pagination = ({ data, setShowItems, itemPerPage, showItems, currentPage, s
     <div>
       <div className='row g-0 text-center text-sm-start align-items-center mb-3'>
         <div className='col-sm-4'>
-          <p className='mb-sm-0' style={{color: "#222",fontWeight: "700"}}>
+          {/* <p className='mb-sm-0' style={{color: "#222",fontWeight: "700"}}>
             Showing {itemsFirstIndex + 1} - {itemsFirstIndex + showItems?.length} of {totalRow}
-          </p>
+          </p> */}
         </div>
         <div className='col-sm-8'>
           <ul className='pagination pagination-separated justify-content-center justify-content-sm-end mb-sm-0 ps-10' style={{display: "flex",float: "right",justifyContent: "center",margin:"0"}}>
@@ -135,7 +135,7 @@ const Pagination = ({ data, setShowItems, itemPerPage, showItems, currentPage, s
             </li>
             <li className='page-item'>
               <div className='input-group' style={{ flexWrap: "none" }}>
-                <input
+                {/* <input
                   type='number'
                   value={inputPage}
                   onChange={handleInputChange}
@@ -145,7 +145,7 @@ const Pagination = ({ data, setShowItems, itemPerPage, showItems, currentPage, s
                 />
                 <button className='btn btn-primary' style={{ padding: "5px 10px", height: "33px" }} type='button' onClick={handleGoToPage}>
                   Go
-                </button>
+                </button> */}
               </div>
             </li>
           </ul>

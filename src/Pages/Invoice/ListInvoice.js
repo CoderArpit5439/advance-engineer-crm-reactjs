@@ -1,200 +1,209 @@
-import React from 'react'
-import Header from '../../Layout/Header'
-import Sidebar from '../../Layout/Sidebar'
-import { useNavigate } from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import Header from "../../Layout/Header";
+import Sidebar from "../../Layout/Sidebar";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 const ListInvoice = () => {
-    const navigate = useNavigate();
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div class="content-wrapper" style={{ minHeight: "1276px" }}>
-                <section class="content-header">
-                    <div class="header-icon">
-                        <i class="fa fa-file-text-o"></i>
-                    </div>
-                    <div class="header-title">
-                        <h1>Invoice</h1>
-                        <small>Invoice List</small>
-                    </div>
-                </section>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-sm-12 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="e021iinrvG">
-                            <div class="panel panel-bd lobidrag lobipanel lobipanel-sortable" data-inner-id="e021iinrvG" data-index="0">
-                                <div class="panel-heading ui-sortable-handle">
-                                    <div class="btn-group" id="buttonexport">
-                                        <a href="#">
-                                            <h4>Invoice</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                               <div class="panel-body">
-                                    <div class="btn-group">
-                                        <div class="buttonexport" id="buttonlist">
-                                            <a class="btn btn-add" onClick={() => navigate('/create-invoice')}> <i class="fa fa-plus"></i> Add Invoice
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
-                                            <thead>
-                                                <tr class="info">
-                                                    <th>Serial No.</th>
-                                                    <th>Account</th>
-                                                    <th>Subject Name</th>
-                                                    <th>Amount</th>
-                                                    <th>Entry Date</th>
-                                                    <th>Expired Date</th>
-                                                    <th>Stage</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>01</td>
-                                                    <td>Eileen Gusikowski</td>
-                                                    <td>Networking</td>
-                                                    <td>$ 1,658.00</td>
-                                                    <td>05/02/2017</td>
-                                                    <td>15/06/2017</td>
-                                                    <td><span class="label label-custom">Draft</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>02</td>
-                                                    <td>Eileen Walker</td>
-                                                    <td>design</td>
-                                                    <td>$ 1,564.00</td>
-                                                    <td>05/03/2017</td>
-                                                    <td>15/09/2017</td>
-                                                    <td><span class="label label-info">transfer</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>03</td>
-                                                    <td>Maria gardoki</td>
-                                                    <td>Technology</td>
-                                                    <td>$ 1,564.00</td>
-                                                    <td>05/03/2017</td>
-                                                    <td>15/07/2017</td>
-                                                    <td><span class="label label-custom">Draft</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>04</td>
-                                                    <td>Stefen smith</td>
-                                                    <td>Lan Configuration</td>
-                                                    <td>$ 1,541.00</td>
-                                                    <td>05/06/2017</td>
-                                                    <td>15/09/2017</td>
-                                                    <td><span class="label label-warning">cheques</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+  const navigate = useNavigate();
+  const [invoices, setInvoices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const fetchInvoices = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.advanceengineerings.com/crm/invoice/fetch-invoice"
+      );
+      setInvoices(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      setError("Error fetching invoices");
+      setLoading(false);
+    }
+  };
 
-                            </div>
+  useEffect(() => {
+    fetchInvoices();
+  }, []);
+
+  const deleteInvoice = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        const response = await axios.get(
+          `https://api.advanceengineerings.com/crm/invoice/delete-invoice/?invoice_id=${id}`
+        );
+
+        if (response.data.status === "success") {
+          fetchInvoices();
+
+          Swal.fire("Deleted!", "Your invoice has been deleted.", "success");
+        } else {
+          Swal.fire(
+            "Error!",
+            "There was a problem deleting the invoice.",
+            "error"
+          );
+        }
+      }
+    } catch (error) {
+      Swal.fire(
+        "Error!",
+        "An error occurred while deleting the invoice.",
+        "error"
+      );
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <Sidebar />
+      <div className="main-content">
+        <div className="page-content">
+          <div className="container-fluid">
+            <div className="row" style={{ fontFamily: "poppins" }}>
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-header"></div>
+                  <div className="card-body">
+                    <div className="listjs-table" id="customerList">
+                      {/* Add Lead Button */}
+                      <div className="row g-4 mb-3">
+                        <div className="col-sm-auto">
+                          <button
+                            type="submit"
+                            className="btn btn-success add-btn"
+                            id="create-btn"
+                            onClick={() => navigate("/create-invoice")} // Redirect to "Add Lead" page
+                          >
+                            <i className="ri-add-line align-bottom me-1" /> Add
+                          </button>
                         </div>
-                    </div>
-                    <div class="modal fade" id="customer1" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header modal-header-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3><i class="fa fa-user m-r-5"></i> Update Quotes</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <form class="form-horizontal">
-                                                <fieldset>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Subject name</label>
-                                                        <input type="text" placeholder="Subject" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Account</label>
-                                                        <input type="text" placeholder="Account" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label class="control-label">Amount</label>
-                                                        <input type="number" placeholder="Amount" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-6 form-group">
-                                                        <label class="control-label">Entry Date</label>
-                                                        <input type="text" placeholder="Entry Date" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-6 form-group">
-                                                        <label class="control-label">Expire Date</label>
-                                                        <input type="text" placeholder="Expire Date" class="form-control" />
-                                                    </div>
-                                                    <div class="col-md-12 form-group user-form-group">
-                                                        <div class="pull-right">
-                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
+                      </div>
+                      <div className="table-responsive table-card mt-3 mb-1">
+                        <table
+                          className="table align-middle table-nowrap"
+                          id="dataTableExample1"
+                        >
+                          <thead className="table-light">
+                            <tr>
+                              <th className="sort" data-sort="emp_name">
+                                SNO
+                              </th>
+                              <th className="sort" data-sort="emp_name">
+                                Invoice Name
+                              </th>
+                              <th className="sort" data-sort="emp_role">
+                                Invoice Number
+                              </th>
+
+                              <th className="sort" data-sort="action">
+                                Transport
+                              </th>
+                              <th className="sort" data-sort="action">
+                                GST
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Discount
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Invoice Date
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Total
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Action
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="list form-check-all">
+                            {invoices && invoices.length > 0 ? (
+                              invoices.map((inv, i) => (
+                                <tr key={inv.inv_id}>
+                                  <td>{i + 1}</td>
+                                  <td>{inv.inv_name}</td>
+                                  <td>{inv.inv_number || "NA"}</td>
+                                  <td>{inv.inv_transport}</td>
+                                  <td>{inv.inv_gst} %</td>
+                                  <td>{inv.inv_discount} %</td>
+                                  <td>{inv.inv_date}</td>
+
+                                  <td>{inv.inv_total}</td>
+
+                                  <td>
+                                    <div className="d-flex gap-2">
+                                      {/* <button
+                  className="btn btn-info btn-sm"
+                  onClick={() => handleEdit(user)}
+                >
+                  <i className="fa fa-pencil"></i> Edit
+                </button> */}
+                                      <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() =>
+                                          deleteInvoice(inv.inv_id)
+                                        }
+                                      >
+                                        <i className="fa fa-trash"></i> Delete
+                                      </button>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                                </div>
+                                  </td>
+                                </tr>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan={4} className="text-center">
+                                  No employees found
+                                </td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+
+                        {/* No Result Found Section */}
+                        {invoices?.length === 0 && !loading && (
+                          <div
+                            className="noresult"
+                            style={{ display: "block" }}
+                          >
+                            <div className="text-center">
+                              <lord-icon
+                                src="https://cdn.lordicon.com/msoeawqm.json"
+                                trigger="loop"
+                                colors="primary:#121331,secondary:#08a88a"
+                                style={{ width: 75, height: 75 }}
+                              />
+                              <h5 className="mt-2">
+                                Sorry! No Employees Found
+                              </h5>
+                              <p className="text-muted mb-0">
+                                We searched for employees but didn't find any.
+                              </p>
                             </div>
-                        </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div class="modal fade" id="customer2" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header modal-header-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3><i class="fa fa-user m-r-5"></i> Delete Quotes</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <form class="form-horizontal">
-                                                <fieldset>
-                                                    <div class="col-md-12 form-group user-form-group">
-                                                        <label class="control-label">Delete Quotes</label>
-                                                        <div class="pull-right">
-                                                            <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                            <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                  </div>
+                </div>
+              </div>
             </div>
-        </>
-    )
-}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default ListInvoice
+export default ListInvoice;
