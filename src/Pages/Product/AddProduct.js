@@ -10,6 +10,7 @@ import {
   GetCategoryNameList,
 } from "../../Redux/crmSlices/productSlice/ProductSlice";
 import DragAndDrop from "../../Components/DragNDrop";
+import { GetCategoryList } from "../../Redux/crmSlices/categorySlice/CategorySlice";
 
 const AddProduct = () => {
   const {
@@ -33,8 +34,10 @@ const AddProduct = () => {
   });
 
   useEffect(() => {
-    dispatch(GetCategoryNameList());
+    dispatch(GetCategoryList());
   }, []);
+
+  
 
   const handleProductFile = (files) => {
     setProductMedia(files);
@@ -108,7 +111,7 @@ const AddProduct = () => {
                         >
                           <div className="row">
                             {/* Category */}
-                            <div className="col-lg-6">
+                            {/* <div className="col-lg-6">
                               <div className="mb-3">
                                 <label
                                   htmlFor="categoryInput"
@@ -143,7 +146,7 @@ const AddProduct = () => {
                                   </p>
                                 )}
                               </div>
-                            </div>
+                            </div> */}
 
                             {/* Unique ID */}
                             <div className="col-lg-6">

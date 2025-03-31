@@ -10,9 +10,10 @@ const initialState = {
 }
 
 export const GetCategoryList = createAsyncThunk(
-    "GetCategoryList",async (body) => { 
+    "GetCategoryList",async () => { 
         try {
-            const response = await instance.get('category/fetch-all')
+            const response = await instance.get('https://api.advanceengineerings.com/web/category/fetch-all')
+           
             return response.data
         } catch (error) {
             return error
@@ -52,7 +53,17 @@ export const updateCategory = createAsyncThunk(
     }
 )
 
-
+export const deleteCat = createAsyncThunk(
+    "deleteCat",
+    async (Id, { rejectWithValue }) => {
+      try {
+        const res = await instance.get(`https://api.advanceengineerings.com/web/category/remove-cat?cat_id=${Id}`);
+        return res; // Return the deleted user ID
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  ); 
 
 export const CategorySlice = createSlice({
     name: "CategorySlice",
@@ -67,6 +78,7 @@ export const CategorySlice = createSlice({
         });
         builder.addCase(GetCategoryList.fulfilled,(state,action) => {
             state.loading = false;
+           
             state.data = action.payload;
         });
         builder.addCase(GetCategoryList.rejected,(state,action) => {
@@ -97,6 +109,21 @@ export const CategorySlice = createSlice({
             state.response = action.payload;
         });
         builder.addCase(updateCategory.rejected,(state,action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        // Delete 
+
+        builder.addCase(deleteCat.pending,(state,action) => {
+            state.loading = true;
+            state.response = null;
+        });
+        builder.addCase(deleteCat.fulfilled,(state,action) => {
+            state.loading = false;
+            state.response = action.payload;
+        });
+        builder.addCase(deleteCat.rejected,(state,action) => {
             state.loading = false;
             state.error = action.payload;
         })
