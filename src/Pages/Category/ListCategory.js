@@ -27,9 +27,12 @@ const ListCategory = () => {
         }
     })
 
+    useEffect(()=>{
+        dispatch(GetCategoryList())
+    },[dispatch])
+console.log(data)
     // ------------------------------ FOR PAGE NUMBER UPDATE ----------------------------- START ----> 
-    const pageNumber = localStorage.getItem("category-list")  // Category Page Number
-
+    const pageNumber = localStorage.getItem("category-list") 
     useEffect(() => {
 
         if (!pageNumber) {

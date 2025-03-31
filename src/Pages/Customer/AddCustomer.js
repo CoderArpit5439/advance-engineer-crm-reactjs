@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CreateCustomer } from '../../Redux/crmSlices/customerSlice/CustomerSlice';
 
 const AddCustomer = () => {
-    const { register, handleSubmit, formState: { errors }, setValue, control, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, control, watch ,reset} = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -20,7 +20,10 @@ const AddCustomer = () => {
     })
 
     const onSubmit = (data) => {
+      console.log(data)
         dispatch(CreateCustomer(data))
+        navigate("/list-customer")
+        reset()
     }
 
     return (
@@ -237,7 +240,7 @@ const AddCustomer = () => {
                                   type="text"
                                   className="form-control"
                                   id="firstnameInput"
-                                  placeholder="Enter your firstname"
+                                  placeholder="Enter your comapny"
                                   {...register('c_company_name')} 
                                 />
                               </div>
@@ -248,7 +251,7 @@ const AddCustomer = () => {
                                 <label
                                   htmlFor="lastnameInput"
                                   className="form-label"
-                                  {...register('c_fullname')}
+                                
                                 >
                                   Full Name
                                 </label>
@@ -256,8 +259,8 @@ const AddCustomer = () => {
                                   type="text"
                                   className="form-control"
                                   id="lastnameInput"
-                                  placeholder="Enter your lastname"
-                                  
+                                  placeholder="Enter your name"
+                                  {...register('c_fullname')}
                                 />
                               </div>
                             </div>
@@ -283,7 +286,7 @@ const AddCustomer = () => {
                             <div className="col-lg-6">
                               <div className="mb-3">
                                 <label
-                                  htmlFor="emailInput"
+                                 
                                   className="form-label"
                                 >
                                   Email Address
@@ -291,7 +294,7 @@ const AddCustomer = () => {
                                 <input
                                   type="email"
                                   className="form-control"
-                                  id="emailInput"
+                                  
                                   placeholder="Enter your email"
                                   {...register('c_email')}
                                 />
@@ -366,10 +369,10 @@ const AddCustomer = () => {
                                   Password
                                 </label>
                                 <input
-                                  type="text"
+                                  type="password"
                                   className="form-control"
                                   id="websiteInput1"
-                                  placeholder="www.example.com"
+                                  placeholder="enter your password "
                                   {...register('c_password')}
                                 />
                               </div>
@@ -474,7 +477,7 @@ const AddCustomer = () => {
                                 </label>
                                 <select class="form-control" {...register('c_status')}>
                                   <option value="Active">Active</option>
-                                  <option value="Not Active">Not Active</option>
+                                  <option value="inactive">inactive</option>
                                 </select>
                               </div>
                             </div>

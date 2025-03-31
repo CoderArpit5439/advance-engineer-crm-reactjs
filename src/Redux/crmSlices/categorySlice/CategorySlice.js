@@ -10,9 +10,9 @@ const initialState = {
 }
 
 export const GetCategoryList = createAsyncThunk(
-    "GetCategoryList",async (body) => {
+    "GetCategoryList",async (body) => { 
         try {
-            const response = await instance.get(`category/fetch-category?page=${body.page}`)
+            const response = await instance.get('category/fetch-all')
             return response.data
         } catch (error) {
             return error

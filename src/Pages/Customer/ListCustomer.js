@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCustomer,
   GetCustomerList,
   updateCustomer,
 } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import Pagination from "../../Components/Pagination";
-
+import Swal from "sweetalert2";
 const ListCustomer = () => {
   const {
     register,
@@ -93,6 +94,38 @@ console.log(data)
     dispatch(updateCustomer(body));
   };
 
+  const handleDelete = (customer) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert this!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCustomer(customer.c_id)) 
+          .then(() => {
+            Swal.fire(
+              "Deleted!",
+              `${customer.c_fullname} has been deleted.`, // Corrected to use customer.c_fullname
+              "success"
+            );
+            dispatch(GetCustomerList())
+          })
+          .catch(() => {
+            Swal.fire(
+              "Error!",
+              "There was an issue deleting the customer.",
+              "error"
+            );
+          });
+          
+      }
+    });
+  };
+  
   return (
     <>
       <Header />
@@ -338,9 +371,9 @@ console.log(data)
                             <button
                               type="button"
                               className="btn btn-success add-btn"
-                              data-bs-toggle="modal"
+                          
                               id="create-btn"
-                              data-bs-target="#showModal"
+                              onClick={()=>navigate("/add-customer")}
                             >
                               <i className="ri-add-line align-bottom me-1" />{" "}
                               Add
@@ -355,9 +388,9 @@ console.log(data)
                         >
                           <thead className="table-light">
                             <tr>
-                              <th className="sort" data-sort="customer_name">
+                              {/* <th className="sort" data-sort="customer_name">
                                 Photo
-                              </th>
+                              </th> */}
                               <th className="sort" data-sort="email">
                                 Company
                               </th>
@@ -474,16 +507,16 @@ console.log(data)
                           </tbody> */}
                           {showItems}
                           <tbody className="list form-check-all">
-                                                {showItems?.length > 0 ? showItems?.map((customer, i) => {
+                                                {data?.length > 0 ? data?.map((customer, i) => {
                                                     return (
                                                         <tr>
-                                                            <td>
+                                                            {/* <td>
                                                                 {customer.c_image !== null ?
-                                                                    <img src={`http://localhost:8080/public/assets/img/uploads/customerImage/${customer.c_image}`} class="img-circle" alt="User Image" width="50" height="50" />
+                                                                    <img src={`https://api.advanceengineerings.com/${customer.c_image}`} class="img-circle" alt="User Image" width="50" height="50" />
                                                                     :
                                                                     <img src="assets/dist/img/w1.png" class="img-circle" alt="User Image" width="50" height="50" />
                                                                 }
-                                                            </td>
+                                                            </td> */}
                                                             <td>{customer.c_fullname}</td>
                                                             <td>{customer.c_company_name}</td>
                                                             <td>{customer.c_mobile}</td>
@@ -505,19 +538,18 @@ console.log(data)
                                                             <td>
                                                             <div className="d-flex gap-2">
                                         <div className="edit">
-                                          <button
+                                          {/* <button
                                             className="btn btn-sm btn-success edit-item-btn"
                                             data-bs-toggle="modal"
                                             data-bs-target="#showModal"
                                           >
                                             Edit
-                                          </button>
+                                          </button> */}
                                         </div>
                                         <div className="remove">
                                           <button
                                             className="btn btn-sm btn-danger remove-item-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteRecordModal"
+                                            onClick={()=>handleDelete(customer)}
                                           >
                                             Remove
                                           </button>

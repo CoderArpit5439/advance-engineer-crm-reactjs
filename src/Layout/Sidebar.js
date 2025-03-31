@@ -102,9 +102,8 @@ const Sidebar = () => {
                                     {/* end Dashboard Menu */}
                                     <li className="nav-item">
                                       <a
-                                        className="nav-link menu-link collapsed active"
-                                        href="#sidebarDashboards"
-                                        data-bs-toggle="collapse"
+                                        className="nav-link menu-link collapsed "
+                                    
                                         role="button"
                                         aria-expanded="true"
                                         aria-controls="sidebarDashboards"
@@ -174,7 +173,7 @@ const Sidebar = () => {
                                               onClick={() =>
                                                 navigate("/list-customer")
                                               }
-                                              className="nav-link"
+                                              className="nav-link cursor-pointer"
                                               data-key="t-chat"
                                             >
                                               List

@@ -527,7 +527,7 @@ const AddProduct = () => {
                                 >
                                   <option value=""> -- Select Status --</option>
                                   <option value="active">Active</option>
-                                  <option value="unactive">Unactive</option>
+                                  <option value="inactive">inactive</option>
                                 </select>
                                 {errors.p_status && (
                                   <p className="text-danger">

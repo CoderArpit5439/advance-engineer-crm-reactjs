@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AddLead,
-  fetchLead,
-  deleteLead,
-  updateLead,
-} from "../../Redux/crmSlices/Lead/LeadSlice";
+import { fetchLead, deleteLead, searchLead } from "../../Redux/crmSlices/Lead/LeadSlice";
 import { useNavigate } from "react-router-dom";
-
 import Swal from "sweetalert2";
 
 const LeadList = () => {
@@ -18,23 +11,42 @@ const LeadList = () => {
   const navigate = useNavigate();
 
   const [leads, setLeads] = useState([]);
-  useEffect(() => {
-    dispatch(fetchLead());
-  }, [dispatch]);
-  const { data, count, loading, response } = useSelector((state) => {
+  const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const [itemsPerPage, setItemsPerPage] = useState(10); // Items per page state
+
+  const { data, count, loading, response, status, error } = useSelector((state) => {
     return {
       data: state.rootReducer.LeadSlice?.data?.data,
       loading: state.rootReducer.LeadSlice?.loading,
       response: state.rootReducer.LeadSlice?.response,
+      count: state.rootReducer.LeadSlice?.count,
+      status: state.rootReducer.LeadSlice?.status,
+      error: state.rootReducer.LeadSlice?.error,
     };
   });
 
+  console.log("Result => " , response)
+
+  // Fetch leads whenever current page, items per page or searchQuery changes
+  useEffect(() => {
+    const offset = (currentPage - 1) * itemsPerPage; // Calculate the offset based on the current page
+
+    if (searchQuery) {
+      dispatch(searchLead({ search: searchQuery, offset, limit: itemsPerPage })); // Dispatch search action
+    } else {
+      dispatch(fetchLead({ offset, limit: itemsPerPage })); // Dispatch fetch action if no search term
+    }
+  }, [dispatch, currentPage, itemsPerPage, searchQuery]);
+
   useEffect(() => {
     if (response && response.data) {
-      setLeads(response.data);
-    }
-  }, [response]);
 
+      setLeads(response.data);  // Update leads with the API response
+    }
+  }, [response]);  // Make sure to update leads whenever the response changes
+
+  // Handle deleting a lead
   const handleDelete = (lead) => {
     Swal.fire({
       title: "Are you sure?",
@@ -46,21 +58,21 @@ const LeadList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Dispatch the delete action and handle async response
         dispatch(deleteLead(lead.l_id))
           .then(() => {
-            // If deletion is successful, fetch the updated leads list
-            dispatch(fetchLead());
-
-            // Show success message after successful deletion
+            dispatch(
+              fetchLead({
+                offset: (currentPage - 1) * itemsPerPage,
+                limit: itemsPerPage,
+              })
+            );
             Swal.fire(
               "Deleted!",
               `${lead.l_name} has been deleted.`,
               "success"
             );
           })
-          .catch((error) => {
-            // Handle any errors that occur during the deletion
+          .catch(() => {
             Swal.fire(
               "Error!",
               "There was an issue deleting the lead.",
@@ -76,6 +88,15 @@ const LeadList = () => {
       localStorage.setItem("editData", JSON.stringify(data));
       navigate("/update-lead");
     }
+  };
+
+  // Pagination logic
+  const totalPages = Math.ceil(count / itemsPerPage);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Reset to page 1 when the search query changes
   };
 
   return (
@@ -101,23 +122,24 @@ const LeadList = () => {
                           >
                             <i className="ri-add-line align-bottom me-1" /> Add
                           </button>
-                          {/* Search  */}
+                          {/* Search */}
                           <div
                             className="col-10 d-flex "
                             style={{ marginTop: "20px" }}
                           >
-                            <div class="search-box mx-2">
+                            <div className="search-box mx-2">
                               <input
                                 type="text"
-                                class="form-control w-auto"
+                                className="form-control w-auto"
                                 id="searchMemberList"
                                 placeholder="Mobile, Name"
+                                value={searchQuery}
+                                onChange={handleSearchChange}
                               />
-                              <i class="ri-search-line search-icon"></i>
+                              <i className="ri-search-line search-icon"></i>
                             </div>
-                            <div class="search-box mx-2"></div>
                           </div>
-                          {/* Search  */}
+                          {/* Search */}
                         </div>
                       </div>
 
@@ -128,100 +150,131 @@ const LeadList = () => {
                         >
                           <thead className="table-light">
                             <tr>
-                              <th className="sort" data-sort="lead_name">
-                                Lead Name
-                              </th>
-                              <th className="sort" data-sort="lead_source">
-                                Source
-                              </th>
-                              <th className="sort" data-sort="lead_mobile">
-                                Mobile
-                              </th>
-                              <th className="sort" data-sort="lead_email">
-                                Email
-                              </th>
-                              <th className="sort" data-sort="lead_address">
-                                Address
-                              </th>
-                              <th className="sort" data-sort="lead_type">
-                                Type
-                              </th>
-                              <th className="sort" data-sort="lead_join">
-                                Join
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Action
-                              </th>
+                              <th>Lead Name</th>
+                              <th>Source</th>
+                              <th>Mobile</th>
+                              <th>Email</th>
+                              <th>Address</th>
+                              <th>Type</th>
+                              <th>Join</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody className="list form-check-all">
-                            {loading ? (
-                              <tr>
-                                <td colSpan={8} className="text-center">
-                                  <span>Loading...</span>
-                                </td>
-                              </tr>
-                            ) : leads?.length > 0 ? (
-                              leads.map((lead, key) => (
-                                <tr key={key}>
-                                  <td>{lead.l_name}</td>
-                                  <td>{lead.l_source}</td>
-                                  <td>{lead.l_mobile}</td>
-                                  <td>{lead.l_email}</td>
-                                  <td>{lead.l_address}</td>
-                                  <td>{lead.l_type}</td>
-                                  <td>{lead.l_join}</td>
-                                  <td>
-                                    <div className="d-flex gap-2">
-                                      <button
-                                        type="button"
-                                        className="btn btn-sm btn-info"
-                                        onClick={() => handleEdit(lead)}
-                                      >
-                                        <i className="fa fa-pencil-o"></i>{" "}
-                                        Update
-                                      </button>
-                                      <button
-                                        type="button"
-                                        className="btn btn-sm btn-danger"
-                                        onClick={() => handleDelete(lead)}
-                                      >
-                                        <i className="fa fa-trash-o"></i> Remove
-                                      </button>
-                                    </div>
-                                  </td>
-                                </tr>
-                              ))
-                            ) : (
-                              <tr>
-                                <td colSpan={8} className="text-center">
-                                  No leads available
-                                </td>
-                              </tr>
-                            )}
-                          </tbody>
+  {loading ? (
+    <tr>
+      <td colSpan={8} className="text-center">
+        <span>Loading...</span>
+      </td>
+    </tr>
+  ) : response && response.length > 0 ? (
+    response.map((lead, key) => (
+      <tr key={key}>
+        <td>{lead.l_name}</td>
+        <td>{lead.l_source}</td>
+        <td>{lead.l_mobile}</td>
+        <td>{lead.l_email}</td>
+        <td>{lead.l_address}</td>
+        <td>{lead.l_type}</td>
+        <td>{lead.l_join}</td>
+        <td>
+          <div className="d-flex gap-2">
+            <button
+              type="button"
+              className="btn btn-sm btn-info"
+              onClick={() => handleEdit(lead)}
+            >
+              <i className="fa fa-pencil-o"></i> Update
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-danger"
+              onClick={() => handleDelete(lead)}
+            >
+              <i className="fa fa-trash-o"></i> Remove
+            </button>
+          </div>
+        </td>
+      </tr>
+    ))
+  ) : leads && leads.length > 0 ? (
+    leads.map((lead, key) => (
+      <tr key={key}>
+        <td>{lead.l_name}</td>
+        <td>{lead.l_source}</td>
+        <td>{lead.l_mobile}</td>
+        <td>{lead.l_email}</td>
+        <td>{lead.l_address}</td>
+        <td>{lead.l_type}</td>
+        <td>{lead.l_join}</td>
+        <td>
+          <div className="d-flex gap-2">
+            <button
+              type="button"
+              className="btn btn-sm btn-info"
+              onClick={() => handleEdit(lead)}
+            >
+              <i className="fa fa-pencil-o"></i> Update
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-danger"
+              onClick={() => handleDelete(lead)}
+            >
+              <i className="fa fa-trash-o"></i> Remove
+            </button>
+          </div>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan={8} className="text-center">
+        No leads available
+      </td>
+    </tr>
+  )}
+</tbody>
+
                         </table>
 
-                        {/* No Result Found Section */}
-                        {leads?.length === 0 && !loading && (
-                          <div
-                            className="noresult"
-                            style={{ display: "block" }}
-                          >
-                            <div className="text-center">
-                              <lord-icon
-                                src="https://cdn.lordicon.com/msoeawqm.json"
-                                trigger="loop"
-                                colors="primary:#121331,secondary:#08a88a"
-                                style={{ width: 75, height: 75 }}
-                              />
-                              <h5 className="mt-2">Sorry! No Leads Found</h5>
-                              <p className="text-muted mb-0">
-                                We searched for leads but didn't find any.
-                              </p>
-                            </div>
+                        {/* Pagination */}
+                        <div className="container mt-5">
+                          <div className="d-flex justify-content-end align-items-center">
+                            <nav aria-label="Page navigation">
+                              <ul className="pagination pagination-lg">
+                                <li className="page-item">
+                                  <button
+                                    className="page-link"
+                                    onClick={() => setCurrentPage(currentPage - 1)}
+                                    aria-disabled="true"
+                                    disabled={currentPage === 1}
+                                  >
+                                    <span aria-hidden="true">&laquo;</span> Previous
+                                  </button>
+                                </li>
+
+                                <li className="page-item disabled">
+                                  <span className="page-link">
+                                    Page {currentPage} of {totalPages}
+                                  </span>
+                                </li>
+
+                                <li className="page-item">
+                                  <button
+                                    className="page-link"
+                                    onClick={() => setCurrentPage(currentPage + 1)}
+                                    aria-disabled="false"
+                                    disabled={currentPage === totalPages}
+                                  >
+                                    Next <span aria-hidden="true">&raquo;</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </nav>
                           </div>
-                        )}
+                        </div>
+                        {/* Pagination */}
                       </div>
                     </div>
                   </div>
