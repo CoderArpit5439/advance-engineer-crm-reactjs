@@ -12,20 +12,34 @@ import {
 } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import Pagination from "../../Components/Pagination";
 import Swal from "sweetalert2";
+import { fetchCompany } from "../../Redux/crmSlices/companySlice/CompanySlice";
 const ListCompany = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    control,
-    watch,
-  } = useForm();
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const [showItems, setShowItems] = useState([]); //pagination and search for map function
 
+  const { data, count, loading, response, status, error } = useSelector(
+    (state) => {
+      return {
+        data: state.rootReducer.companySlice?.data?.data,
+        loading: state.rootReducer.companySlice?.loading,
+        response: state.rootReducer.companySlice?.response,
+        count: state.rootReducer.companySlice?.count,
+        status: state.rootReducer.companySlice?.status,
+        error: state.rootReducer.companySlice?.error,
+      };
+    }
+  );
+  useEffect(() => {
+    dispatch(fetchCompany());
+  }, [dispatch]);
 
-
+  const handleEdit = (data) => {
+    if (data) {
+      localStorage.setItem("editCompany", JSON.stringify(data));
+      navigate("/edit-company");
+    }
+  };
 
   return (
     <>
@@ -49,7 +63,6 @@ const ListCompany = () => {
                             <button
                               type="button"
                               className="btn btn-success add-btn"
-
                               id="create-btn"
                               onClick={() => navigate("/add-company")}
                             >
@@ -100,38 +113,63 @@ const ListCompany = () => {
                           </thead>
 
                           <tbody className="list form-check-all">
-                            <tr>
-                              <td className='text-center'>
-                                <img src="https://i0.wp.com/biosimilarsrr.com/wp-content/uploads/2018/01/Lupin-logo.jpg?ssl=1" height="50px" width="50px" alt="lopin logo" />
-                              </td>
-                              <td className='text-center'>
-                                Lopin
-                              </td>
-                              <td className='text-center'>
-                                <a href="https://www.lupin.com/" target="_blank" className="underline">www.lupin.com</a>
-                              </td>
-                              <td className='text-center'>
-                                lopin@gmail.com
-                              </td>
-                              <td className='text-center'>
-                                Mumbai
-                              </td>
-                              <td className='text-center'>
-                                9966885577
-                              </td>
-                              <td className='text-center'>
-                                08
-                              </td>
-                              <td className='text-center'>
-                                04
-                              </td>
-                              <td className='text-center'> 
-                                <button className="btn btn-warning" onClick={()=>navigate('/view-company')}>View</button>
-                                <button className="btn btn-success">Edit</button>
-                              </td>
-                            </tr>
-
-
+                            {data && data.length > 0 ? (
+                              data.map((company, index) => (
+                                <tr key={index}>
+                                  <td className="text-center">
+                                    <img
+                                      src={company.c_image}
+                                      height="50px"
+                                      width="50px"
+                                      alt={`${company.c_name} logo`}
+                                    />
+                                  </td>
+                                  <td className="text-center">
+                                    {company.c_name}
+                                  </td>
+                                  <td className="text-center">
+                                    <a
+                                      href={company.c_website}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="underline"
+                                    >
+                                      {company.c_website}
+                                    </a>
+                                  </td>
+                                  <td className="text-center">
+                                    {company.c_email ?? "N/A"}
+                                  </td>
+                                  <td className="text-center">
+                                    {company.c_head_office_address}
+                                  </td>
+                                  <td className="text-center">
+                                    {company.c_head_office_contact}
+                                  </td>
+                                  <td className="text-center">
+                                    {company.total_country_plant}
+                                  </td>
+                                  <td className="text-center">
+                                    {company.total_india_plant}
+                                  </td>
+                                  <td className="text-center">
+                                  <button
+              type="button"
+              className="btn btn-sm btn-info"
+              onClick={() => handleEdit(company)}
+            >
+              <i className="fa fa-pencil-o"></i> Update
+            </button>
+                                  </td>
+                                </tr>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan="9" className="text-center">
+                                  No companies found.
+                                </td>
+                              </tr>
+                            )}
                           </tbody>
                         </table>
                         <div className="noresult" style={{ display: "none" }}>

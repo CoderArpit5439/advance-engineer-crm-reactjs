@@ -46,6 +46,7 @@ import ViewCompany from '../Pages/Company/ViewCompany'
 import AddPlant from '../Pages/Plant/AddPlant'
 import ListPlant from '../Pages/Plant/ListPlant'
 import ViewPlant from '../Pages/Plant/ViewPlant'
+import EditCompany from '../Pages/Company/EditCompany'
 const PrivateRoute = () => {
     return (
         <>
@@ -57,7 +58,7 @@ const PrivateRoute = () => {
 
                 <Route path='/add-company' element={<AddCompany />} />
                 <Route path='/list-company' element={<ListCompany />} />
-                <Route path='/view-company' element={<ViewCompany />} />
+                <Route path='/edit-company' element={<EditCompany />} />
 
                 <Route path='/add-plant' element={<AddPlant />} />
                 <Route path='/list-plant' element={<ListPlant />} />

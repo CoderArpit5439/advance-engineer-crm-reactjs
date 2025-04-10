@@ -12,6 +12,8 @@ import InventorySlice from "./crmSlices/Inventory/InventorySlice";
 import SupportSlice from "./crmSlices/support/SupportSlice";
 import TaskSlice from "./crmSlices/task/TaskSlice";
 import  MyDashboardSlice  from "./crmSlices/Dashboard/DashboardSlice";
+import  companySlice  from "./crmSlices/companySlice/CompanySlice";
+import plantSlice from "./crmSlices/plantSlice/PlantSlice";
 
 
 
@@ -29,7 +31,9 @@ const rootReducer = combineReducers({
     InventorySlice,
     SupportSlice,
     TaskSlice,
-    MyDashboardSlice
+    MyDashboardSlice,
+    companySlice,
+    plantSlice
 })
 
 export default rootReducer; 

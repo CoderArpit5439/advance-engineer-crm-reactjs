@@ -12,17 +12,32 @@ import {
 } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import Pagination from "../../Components/Pagination";
 import Swal from "sweetalert2";
+import { fetchPlants } from "../../Redux/crmSlices/plantSlice/PlantSlice";
 const ListPlant = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    control,
-    watch,
-  } = useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showItems, setShowItems] = useState([]); //pagination and search for map function
+  const { data, count, loading, response, status, error } = useSelector(
+    (state) => {
+      return {
+        data: state.rootReducer.plantSlice?.data?.data,
+        loading: state.rootReducer.plantSlice?.loading,
+        response: state.rootReducer.plantSlice?.response,
+        count: state.rootReducer.plantSlice?.count,
+        status: state.rootReducer.plantSlice?.status,
+        error: state.rootReducer.plantSlice?.error,
+      };
+    }
+  );
+  useEffect(() => {
+    dispatch(fetchPlants());
+  }, [dispatch]);
+
+  const handleEdit = (data) => {
+    // if (data) {
+    //   localStorage.setItem("editCompany", JSON.stringify(data));
+    //   navigate("/edit-company");
+    // }
+  };
 
   return (
     <>
@@ -46,7 +61,6 @@ const ListPlant = () => {
                             <button
                               type="button"
                               className="btn btn-success add-btn"
-
                               id="create-btn"
                               onClick={() => navigate("/add-plant")}
                             >
@@ -94,38 +108,41 @@ const ListPlant = () => {
                           </thead>
 
                           <tbody className="list form-check-all">
-                            <tr>
-                              <td className='text-center'>
-                                Lopin
-                              </td>
-                              <td className='text-center'>
-                                Madhya pradesh
-                              </td>
-                              <td className='text-center'>
-                                Indore
-                              </td>
-                              <td className='text-center'>
-                                401, Near petrol pump, Tejaji nagar  
-                              </td>
-                              <td className='text-center'>
-                               4854545DFGF54GSDFG
-                              </td>
-                              <td className='text-center'>
-                              9966885577
-                              </td>
-                              <td className='text-center'>
-                                9966885577
-                              </td>
-                              <td className='text-center'>
-                              9966885577
-                              </td>
-                              <td className='text-center'> 
-                                <button className="btn btn-warning" onClick={()=>navigate('/view-plant')}>View</button>
-                                <button className="btn btn-success">Edit</button>
-                              </td>
-                            </tr>
-
-
+                            {data?.map((plant) => (
+                              <tr key={plant.id}>
+                                <td className="">
+                                  {plant.company_name}
+                                </td>
+                                <td className="">{plant.p_state}</td>
+                                <td className="">{plant.p_city}</td>
+                                <td className="">
+                                  {plant.p_area_working}
+                                </td>
+                                <td className="">
+                                  {plant.p_tax_type}
+                                </td>
+                                <td className="">
+                                  {plant.p_security_contact}
+                                </td>
+                                <td className="">
+                                  {plant.p_account_contact}
+                                </td>
+                                <td className="">
+                                  {plant.p_store_contact}
+                                </td>
+                                <td className="">
+                             
+                                  {/* <button
+                                    className="btn btn-success"
+                                    onClick={() =>
+                                      navigate(`/edit-plant/${plant.id}`)
+                                    }
+                                  >
+                                    Edit
+                                  </button> */}
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                         <div className="noresult" style={{ display: "none" }}>
