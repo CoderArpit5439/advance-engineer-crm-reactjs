@@ -53,7 +53,7 @@ const AddInventory = () => {
 
       <div className="row">
         <div className="col-xxl-12 mb-10">
-          <div className="card mt-xxl-n5">
+          <div className="card ">
             <div className="card-header">
               <ul
                 className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"

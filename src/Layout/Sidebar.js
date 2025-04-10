@@ -102,43 +102,134 @@ const Sidebar = () => {
                                     {/* end Dashboard Menu */}
                                     <li className="nav-item">
                                       <a
-                                        className="nav-link menu-link collapsed "
-                                    
+                                        className="nav-link menu-link collapsed"
+                                        href="#Company"
+                                        data-bs-toggle="collapse"
                                         role="button"
-                                        aria-expanded="true"
-                                        aria-controls="sidebarDashboards"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
                                       >
-                                        <i className="ri-user-star-line" />{" "}
-                                        <span data-key="t-dashboards">
-                                          Employe
-                                        </span>
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Company</span>
                                       </a>
                                       <div
-                                        className="collapse menu-dropdown show"
-                                        id="sidebarDashboards"
+                                        className="collapse menu-dropdown"
+                                        id="Company"
                                       >
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                            onClick={()=>navigate("/add-employee")}
-                                              className="nav-link cursor-pointer"
-                                              
+                                              onClick={() =>
+                                                navigate("/add-company")
+                                              }
+                                              className="nav-link"
+                                              role="button"
+                                              data-key="t-calender"
                                             >
-                                              Add Employe
+                                              Add
                                             </a>
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              onClick={()=>navigate("/employe-list")}
+                                              onClick={() =>
+                                                navigate("/list-company")
+                                              }
                                               className="nav-link cursor-pointer"
-                                          
+                                              data-key="t-chat"
                                             >
-                                              List Employe
+                                              List
                                             </a>
                                           </li>
                                         </ul>
                                       </div>
                                     </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        href="#plant"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
+                                      >
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Plant</span>
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="plant"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/add-plant")
+                                              }
+                                              className="nav-link"
+                                              role="button"
+                                              data-key="t-calender"
+                                            >
+                                              Add
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/list-plant")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                              data-key="t-chat"
+                                            >
+                                              List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        data-bs-toggle="collapse"
+                                           href="#employee"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
+                                      >
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Employee</span>
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="employee"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/add-employee")
+                                              }
+                                              className="nav-link"
+                                              role="button"
+                                              data-key="t-calender"
+                                            >
+                                              Add
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/list-employee")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                              data-key="t-chat"
+                                            >
+                                              List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                             
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"

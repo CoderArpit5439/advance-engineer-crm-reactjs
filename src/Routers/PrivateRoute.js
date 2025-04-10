@@ -40,6 +40,12 @@ import AddGraphics from '../Pages/Graphics/AddGraphics'
 import TestingInvoice from '../Pages/Invoice/TestingInvoice'
 import EditInvoice from '../Pages/Invoice/EditInvoice'
 import EditLead from '../Pages/Lead/EditLead'
+import ListCompany from '../Pages/Company/ListCompany'
+import AddCompany from '../Pages/Company/AddCompany'
+import ViewCompany from '../Pages/Company/ViewCompany'
+import AddPlant from '../Pages/Plant/AddPlant'
+import ListPlant from '../Pages/Plant/ListPlant'
+import ViewPlant from '../Pages/Plant/ViewPlant'
 const PrivateRoute = () => {
     return (
         <>
@@ -48,6 +54,14 @@ const PrivateRoute = () => {
 
                 <Route path='/add-customer' element={<AddCustomer />} />
                 <Route path='/list-customer' element={<ListCustomer />} />
+
+                <Route path='/add-company' element={<AddCompany />} />
+                <Route path='/list-company' element={<ListCompany />} />
+                <Route path='/view-company' element={<ViewCompany />} />
+
+                <Route path='/add-plant' element={<AddPlant />} />
+                <Route path='/list-plant' element={<ListPlant />} />
+                <Route path='/view-plant' element={<ViewPlant />} />
 
                 <Route path='/list-quotation' element={<ListQuotation />} />
                 <Route path='/create-quotation' element={<CreateQuotation />} />
