@@ -8,43 +8,45 @@ const initialState = {
   response: null,
 };
 export const addPlant = createAsyncThunk(
-    "addPlant",
-    async (body, { rejectWithValue }) => {
-      try {
-        const formData = new FormData();
-        
-        // Append all form data to the FormData object
-        formData.append("company_id", body.company);
-        formData.append("p_state", body.state);
-        formData.append("p_city", body.city);
-        formData.append("p_area_working", body.workingArea);
-        formData.append("p_tax_type", body.taxType);
-        formData.append("p_pincode", body.pinCode);
-        formData.append("p_address", body.address);
-        formData.append("p_gst", body.gst);
-        formData.append("p_security_contact", body.securityContactNumber);
-        formData.append("p_account_contact", body.accountContactNumber);
-        formData.append("p_store_contact", body.storeContactNumber);
-        formData.append("p_other_contact", body.otherContactNumber);
-        formData.append("p_security_email", body.securityEmail);
-        formData.append("p_account_email", body.accountEmail);
-        formData.append("p_store_email", body.storeEmail);
-        formData.append("p_other_email", body.otherEmail);
-        formData.append("p_international_domestic", body.p_international_domestic);
-      
-  
-        const response = await instance.post("plant/add-plant", formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response?.data || error.message);
-      }
+  "addPlant",
+  async (body, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+
+      // Append all form data to the FormData object
+      formData.append("company_id", body.company);
+      formData.append("p_state", body.state);
+      formData.append("p_city", body.city);
+      formData.append("p_area_working", body.workingArea);
+      formData.append("p_tax_type", body.taxType);
+      formData.append("p_pincode", body.pinCode);
+      formData.append("p_address", body.address);
+      formData.append("p_gst", body.gst);
+      formData.append("p_security_contact", body.securityContactNumber);
+      formData.append("p_account_contact", body.accountContactNumber);
+      formData.append("p_store_contact", body.storeContactNumber);
+      formData.append("p_other_contact", body.otherContactNumber);
+      formData.append("p_security_email", body.securityEmail);
+      formData.append("p_account_email", body.accountEmail);
+      formData.append("p_store_email", body.storeEmail);
+      formData.append("p_other_email", body.otherEmail);
+      formData.append(
+        "p_international_domestic",
+        body.p_international_domestic
+      );
+
+      const response = await instance.post("plant/add-plant", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
     }
-  );
+  }
+);
 
 export const fetchPlants = createAsyncThunk("fetchPlants", async () => {
   try {
@@ -54,42 +56,43 @@ export const fetchPlants = createAsyncThunk("fetchPlants", async () => {
     throw error;
   }
 });
-// export const updateCompany = createAsyncThunk(
-//   "company/updateCompany",
-//   async (body, { rejectWithValue }) => {
-//     try {
-//       const formData = new FormData();
-  
+export const updatePlant = createAsyncThunk(
+  "updatePlant",
+  async (body, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
 
-//       formData.append("c_id", body?.id);
-//       formData.append("c_name", body?.c_name);
-//       formData.append("c_image", body?.company_image[0]); 
-//       formData.append("c_website", body?.c_website);
-//       formData.append("c_head_office_address", body?.c_head_office_address);
-//       formData.append("c_head_office_contact", body?.c_head_office_contact);
-//       formData.append("total_country_plant", body?.total_country_plant);
-//       formData.append("total_india_plant", body?.total_india_plant);
-//       formData.append("c_type_of_manufacturing", body?.c_type_of_manufacturing);
-//       formData.append("c_bank_name", body?.c_bank_name);
-//       formData.append("c_bank_ifsc", body?.c_bank_ifsc);
-//       formData.append("c_bank_account_no", body?.c_bank_account_no);
-//       formData.append("c_bank_branch", body?.c_bank_branch);
-//       formData.append(
-//         "c_international_domestic",
-//         body.c_international_domestic
-//       );
-//       console.log(formData)
-//       const res = await instance.post("company/update-company", formData);
-//       return res.data;
-      
-//     } catch (error) {
-//       // Return the error message if something goes wrong
-//       return rejectWithValue(
-//         error.response ? error.response.data : "An unknown error occurred"
-//       );
-//     }
-//   }
-// );
+      formData.append("c_id", body?.c_id);
+      formData.append("p_id",body?.p_id)
+      formData.append("p_state", body?.p_state);
+      formData.append("p_city", body?.p_city);
+      formData.append("p_area_working", body?.p_area_working);
+      formData.append("p_tax_type", body?.p_tax_type);
+      formData.append("p_pincode", body?.p_pincode);
+      formData.append("p_address", body?.p_address);
+      formData.append("p_gst", body?.p_gst);
+      formData.append("p_security_contact", body?.p_security_contact);
+      formData.append("p_account_contact", body?.p_account_contact);
+      formData.append("p_store_contact", body?.p_store_contact);
+      formData.append("p_other_contact", body?.p_other_contact);
+      formData.append("p_security_email", body?.p_security_email);
+      formData.append("p_account_email", body.p_account_email);
+      formData.append("p_store_email", body?.p_store_email);
+      formData.append("p_other_email", body?.p_other_email);
+      formData.append(
+        "p_international_domestic",
+        body?.p_international_domestic
+      );
+
+      const res = await instance.post("plant/update-plant", formData);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unknown error occurred"
+      );
+    }
+  }
+);
 
 export const plantSlice = createSlice({
   name: "plant",
@@ -131,20 +134,20 @@ export const plantSlice = createSlice({
       state.error = action.error.message;
     });
 
-    // // Update Company
-    // builder.addCase(updateCompany.pending, (state) => {
-    //   state.loading = true;
-    //   state.response = null;
-    //   state.error = null;
-    // });
-    // builder.addCase(updateCompany.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.response = action.payload;
-    // });
-    // builder.addCase(updateCompany.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message;
-    // });
+    // Update Company
+    builder.addCase(updatePlant.pending, (state) => {
+      state.loading = true;
+      state.response = null;
+      state.error = null;
+    });
+    builder.addCase(updatePlant.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(updatePlant.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
   },
 });
 

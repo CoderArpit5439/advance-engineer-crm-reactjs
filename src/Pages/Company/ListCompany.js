@@ -91,9 +91,7 @@ const ListCompany = () => {
                               <th className="sort" data-sort="date">
                                 Web
                               </th>
-                              <th className="sort" data-sort="status">
-                                Email
-                              </th>
+                             
                               <th className="sort" data-sort="action">
                                 Head office add
                               </th>
@@ -116,7 +114,7 @@ const ListCompany = () => {
                             {data && data.length > 0 ? (
                               data.map((company, index) => (
                                 <tr key={index}>
-                                  <td className="text-center">
+                                  <td className="">
                                     <img
                                       src={company.c_image}
                                       height="50px"
@@ -124,10 +122,10 @@ const ListCompany = () => {
                                       alt={`${company.c_name} logo`}
                                     />
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                     {company.c_name}
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                     <a
                                       href={company.c_website}
                                       target="_blank"
@@ -137,22 +135,20 @@ const ListCompany = () => {
                                       {company.c_website}
                                     </a>
                                   </td>
-                                  <td className="text-center">
-                                    {company.c_email ?? "N/A"}
-                                  </td>
-                                  <td className="text-center">
+                                  
+                                  <td className="">
                                     {company.c_head_office_address}
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                     {company.c_head_office_contact}
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                     {company.total_country_plant}
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                     {company.total_india_plant}
                                   </td>
-                                  <td className="text-center">
+                                  <td className="">
                                   <button
               type="button"
               className="btn btn-sm btn-info"

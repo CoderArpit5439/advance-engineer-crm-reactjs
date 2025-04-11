@@ -20,8 +20,14 @@ export const addInquiry = createAsyncThunk(
       formData.append("inq_name", body.inq_name);
       formData.append("inq_email", body.inq_email);
       formData.append("inq_status", body.inq_status);
-    
-
+      formData.append("p_name", body.p_name);
+      formData.append("p_size", body.p_size);
+      formData.append("p_moc", body.p_moc);
+      formData.append("p_thickness", body.p_thickness);
+      formData.append("p_drg", body.p_drg);
+      formData.append("p_product", body.p_product);
+      formData.append("p_code", body.p_code);
+      formData.append("p_info", body.p_info);
       const res = await instance.post("inquiry/add-inquiry", formData);
       return res.data;
     } catch (error) {

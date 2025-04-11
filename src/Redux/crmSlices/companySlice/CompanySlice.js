@@ -56,11 +56,9 @@ export const updateCompany = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-  
-
       formData.append("c_id", body.id);
       formData.append("c_name", body.c_name);
-      formData.append("c_image", body.company_image[0]); 
+      formData.append("c_image", body.c_image[0]); 
       formData.append("c_website", body.c_website);
       formData.append("c_head_office_address", body.c_head_office_address);
       formData.append("c_head_office_contact", body.c_head_office_contact);

@@ -66,7 +66,8 @@ const EditCompany = () => {
     };
   
     dispatch(updateCompany(updatedData));
-    // navigate("/list-company");
+    localStorage.removeItem("editCompany")
+    navigate("/list-company")
   };
 
   return (

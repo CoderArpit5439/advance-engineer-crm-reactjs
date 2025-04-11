@@ -23,7 +23,7 @@ const AddInquiry = () => {
   } = useForm();
   const onSubmit = (inquiry) => {
     dispatch(addInquiry(inquiry));
-    navigate("/list-inquiry")
+    navigate("/inquiry-list")
     reset();
   };
   return (
@@ -181,6 +181,155 @@ const AddInquiry = () => {
                                 {errors.inq_status && (
                                   <p className="text-danger">
                                     {errors.inq_status.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Product Name:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_name", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_name.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Size:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_size", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_size.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  MOC:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_moc", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_moc.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Thickness:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_thickness", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_thickness.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                 DRG:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_drg", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_drg.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                 Product Code:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_code", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_code.message}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                 Information:
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Inquiry Name"
+                                  className="form-control"
+                                  {...register("p_info", {
+                                    required: "Inquiry Name is required",
+                                  })}
+                                />
+                                {errors.inq_name && (
+                                  <p className="text-danger">
+                                    {errors.p_info.message}
                                   </p>
                                 )}
                               </div>
