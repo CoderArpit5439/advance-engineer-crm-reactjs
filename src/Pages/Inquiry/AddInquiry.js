@@ -9,9 +9,20 @@ import {
   fetchInquiry,
 } from "../../Redux/crmSlices/Inquiry/InquirySlice";
 import Header from "../../Layout/Header";
+import { GetProductList } from "../../Redux/crmSlices/productSlice/ProductSlice";
 const AddInquiry = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data, count, loading, response } = useSelector((state) => {
+    return {
+      data: state.rootReducer.ProductSlice?.data?.data,
+      count: state.rootReducer.ProductSlice?.data?.count,
+      loading: state.rootReducer.ProductSlice?.loading,
+      response: state.rootReducer.ProductSlice?.response,
+    };
+  });
+
+  console.log(data)
   const {
     register,
     handleSubmit,
@@ -23,9 +34,13 @@ const AddInquiry = () => {
   } = useForm();
   const onSubmit = (inquiry) => {
     dispatch(addInquiry(inquiry));
-    navigate("/inquiry-list")
+    navigate("/inquiry-list");
     reset();
   };
+  useEffect(() => {
+    dispatch(GetProductList());
+  }, [dispatch]);
+
   return (
     <div>
       <Header />
@@ -191,17 +206,36 @@ const AddInquiry = () => {
                                 <label className="form-label">
                                   Product Name:
                                 </label>
-                                <input
-                                  type="text"
-                                  placeholder="Inquiry Name"
-                                  className="form-control"
-                                  {...register("p_name", {
-                                    required: "Inquiry Name is required",
+                                <div className="mb-3">
+                                
+                                <select
+                                  className={`form-control ${
+                                    errors.company ? "is-invalid" : ""
+                                  }`}
+                                  {...register("p_id", {
+                                    required: "Product Name is required",
                                   })}
-                                />
-                                {errors.inq_name && (
+                                >
+                                  <option value="">-- Select Product --</option>
+                                  {data?.map((product) => (
+                                    <option
+                                      key={product.p_id}
+                                      value={product.p_id}
+                                    >
+                                      {product.p_name}
+                                    </option>
+                                  ))}
+                                  {/* Add your company options here */}
+                                </select>
+                                {errors.p_id && (
+                                  <div className="invalid-feedback">
+                                    {errors.p_id.message}
+                                  </div>
+                                )}
+                              </div>
+                                {errors.p_id && (
                                   <p className="text-danger">
-                                    {errors.p_name.message}
+                                    {errors.p_id.message}
                                   </p>
                                 )}
                               </div>
@@ -209,9 +243,7 @@ const AddInquiry = () => {
 
                             <div className="col-lg-6">
                               <div className="mb-3">
-                                <label className="form-label">
-                                  Size:
-                                </label>
+                                <label className="form-label">Size:</label>
                                 <input
                                   type="text"
                                   placeholder="Inquiry Name"
@@ -230,9 +262,7 @@ const AddInquiry = () => {
 
                             <div className="col-lg-6">
                               <div className="mb-3">
-                                <label className="form-label">
-                                  MOC:
-                                </label>
+                                <label className="form-label">MOC:</label>
                                 <input
                                   type="text"
                                   placeholder="Inquiry Name"
@@ -251,9 +281,7 @@ const AddInquiry = () => {
 
                             <div className="col-lg-6">
                               <div className="mb-3">
-                                <label className="form-label">
-                                  Thickness:
-                                </label>
+                                <label className="form-label">Thickness:</label>
                                 <input
                                   type="text"
                                   placeholder="Inquiry Name"
@@ -272,9 +300,7 @@ const AddInquiry = () => {
 
                             <div className="col-lg-6">
                               <div className="mb-3">
-                                <label className="form-label">
-                                 DRG:
-                                </label>
+                                <label className="form-label">DRG:</label>
                                 <input
                                   type="text"
                                   placeholder="Inquiry Name"
@@ -291,12 +317,10 @@ const AddInquiry = () => {
                               </div>
                             </div>
 
-                            
-
                             <div className="col-lg-6">
                               <div className="mb-3">
                                 <label className="form-label">
-                                 Product Code:
+                                  Product Code:
                                 </label>
                                 <input
                                   type="text"
@@ -317,7 +341,7 @@ const AddInquiry = () => {
                             <div className="col-lg-6">
                               <div className="mb-3">
                                 <label className="form-label">
-                                 Information:
+                                  Information:
                                 </label>
                                 <input
                                   type="text"

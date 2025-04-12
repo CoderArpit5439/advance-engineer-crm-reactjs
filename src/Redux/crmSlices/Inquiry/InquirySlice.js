@@ -20,7 +20,7 @@ export const addInquiry = createAsyncThunk(
       formData.append("inq_name", body.inq_name);
       formData.append("inq_email", body.inq_email);
       formData.append("inq_status", body.inq_status);
-      formData.append("p_name", body.p_name);
+      formData.append("p_id", body.p_id);
       formData.append("p_size", body.p_size);
       formData.append("p_moc", body.p_moc);
       formData.append("p_thickness", body.p_thickness);
