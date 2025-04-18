@@ -4,12 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { logoutAuth } from '../redux/crmSlices/authSlice/AuthSlice';
 import { toast } from "react-toastify";
-// import { lunchStartNow } from '../redux/crmSlices/attendanceSlice/AttendanceSlice';
-// import CountdownTimer from '../common/CountdownTimer';
-// import fractionlogo from '../image/Asset 3.png'
-// import { GetNotificationList, ReadNotification, RemoveNotification } from '../redux/crmSlices/notificationSlice/NotificationSlice';
-// import moment from 'moment';
-
+import Cookies from 'js-cookie';
 const Header = () => {
   const [isFull, setIsFull] = useState(false);
   const navigate = useNavigate();
@@ -31,9 +26,9 @@ const Header = () => {
   useEffect(() => {
     if (data?.status) {
       toast.success(data.message);
-      navigate("/");
+   
     }
-  }, [data?.status]);
+  }, [data]);
 
   useEffect(() => {
     // dispatch(GetNotificationList())
@@ -55,8 +50,10 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    // dispatch(logoutAuth())
-    navigate("/");
+       Cookies.remove('authToken') 
+          sessionStorage.clear();
+      window.location.href=""
+    // navigate("/");
   };
 
   const changeTheme = () => {

@@ -68,7 +68,8 @@ const Inquirylist = () => {
   };
 
   const addQuotation = (data) => {
-    localStorage.setItem("productId", data.p_id);
+    console.log("=>",data.inq_id)
+    localStorage.setItem("productId", data.inq_id);
     navigate("/create-quotation");
   };
 

@@ -195,7 +195,7 @@ const Sidebar = () => {
                                         aria-expanded="false"
                                         aria-controls="sidebarApps"
                                       >
-                                        <i className="ri-apps-2-line" />{" "}
+                                        <i className="ri-apps-2-line" />
                                         <span data-key="t-apps">Employee</span>
                                       </a>
                                       <div

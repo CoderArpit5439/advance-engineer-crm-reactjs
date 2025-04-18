@@ -8,7 +8,7 @@ const initialState = {
   response: null,
   nameList: null,
   categoryList: null,
-  productList : []
+  productList :{}
 };
 
 export const GetProductList = createAsyncThunk(
@@ -28,8 +28,8 @@ export const GetSingleProduct = createAsyncThunk(
   async (body) => {
     try {
       const formData = new FormData();
-      formData.append("p_id", body.p_id);
-      const response = await instance.post("product/single-product", formData);
+      formData.append("inq_id", body?.inq_id);
+      const response = await instance.post("quotation/get-single-product", formData);
       return response.data;
     } catch (error) {
       return error;

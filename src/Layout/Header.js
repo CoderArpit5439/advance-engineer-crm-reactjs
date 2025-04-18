@@ -56,8 +56,8 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    Cookies.remove('authToken')
-  
+    
+    Cookies.remove('authToken') 
   };
 
   const changeTheme = () => {
@@ -290,6 +290,7 @@ const Header = () => {
                     <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>{" "}
                     <span className="align-middle">Profile</span>
                   </button>
+
                   {/*<Link className="dropdown-item" to="#"><i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Messages</span></Link>
                                     <Link className="dropdown-item" to="#"><i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Taskboard</span></Link>
                                     <Link className="dropdown-item" to="#"><i className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Help</span></Link>
@@ -299,10 +300,10 @@ const Header = () => {
                                     <Link className="dropdown-item" to="#"><i className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></Link> */}
                   <button
                     className="dropdown-item"
-                    onClick={() => handleLogout()}
+                   
                   >
                     <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>{" "}
-                    <span className="align-middle" data-key="t-logout">
+                    <span className="align-middle"   onClick={() => handleLogout()}>
                       Logout
                     </span>
                   </button>

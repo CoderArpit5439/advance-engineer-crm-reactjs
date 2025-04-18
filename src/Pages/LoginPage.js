@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAuth } from "../Redux/crmSlices/authSlice/AuthSlice";
+import Swal from "sweetalert2";
 // import outline from '../../image/outline.png'
 // import { AiOutlineEyeInvisible, AiFillEye } from 'react-icons/ai';
 
@@ -31,9 +32,13 @@ const LoginPage = () => {
     if (data?.status === true) {
       navigate("/dashboard");
       setIsErrorVisible(false);
-    } else {
-      setIsErrorVisible(data?.message);
-      
+    } else if(data?.status === false) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: data?.message,
+      });
+      setIsErrorVisible();
     }
   }, [data]);
 
@@ -42,7 +47,6 @@ const LoginPage = () => {
   };
 
   return (
-   
     <div>
       <div className="auth-page-wrapper pt-5">
         <div className="auth-one-bg-position auth-one-bg" id="auth-particles">
@@ -75,6 +79,30 @@ const LoginPage = () => {
                     </div>
                     <div className="p-2 mt-4">
                       <form onSubmit={handleSubmit(onSubmit)}>
+
+                      <div className="mb-3">
+                          <label htmlFor="username" className="form-label">
+                            Select Role 
+                          </label>
+                          <select
+                            type="text"
+                            className={`form-control ${
+                              errors.role && "border border-danger"
+                            }`}
+                            id="username"
+                            placeholder="your role"
+                            {...register("role", { required: true })}
+                          >
+                           
+                            <option value="0">Admin</option>
+                            <option value="1">Employe</option>
+                          </select>
+                          {errors.role && (
+                            <span className="text-danger">
+                             Select your role
+                            </span>
+                          )}
+                        </div>
                         <div className="mb-3">
                           <label htmlFor="username" className="form-label">
                             Username
@@ -131,13 +159,13 @@ const LoginPage = () => {
                             >
                               {isVisible ? (
                                 <i
-                                  class="pe-7s-more"
+                                  class="ri-eye-fill align-middle"
                                   style={{ color: "black" }}
                                   onClick={() => setIsVisible(false)}
                                 ></i>
                               ) : (
                                 <i
-                                  class="pe-7s-look"
+                                  class="ri-eye-fill align-middle"
                                   style={{ color: "black" }}
                                   onClick={() => setIsVisible(true)}
                                 ></i>

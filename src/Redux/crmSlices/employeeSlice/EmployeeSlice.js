@@ -11,10 +11,12 @@ const initialState = {
 export const AddUser = createAsyncThunk("AddUser", async (body) => {
   try {
     const formData = new FormData();
-    formData.append("emp_name", body.user_name);
-    formData.append("emp_password", body.user_pass);
-    formData.append("emp_image", body.user_image[0]);
-    formData.append("emp_role", body.user_role);
+    console.log(body)
+    formData.append("emp_name", body.data.user_name);
+    formData.append("emp_password", body.data.user_pass);
+    formData.append("emp_image", body.data.user_image[0]);
+    formData.append("emp_role", body.data.user_role);
+    formData.append("allow_page", body.allow );
     const res = await instance.post("employee/add-employe", formData);
     return res.data;
   } catch (error) {

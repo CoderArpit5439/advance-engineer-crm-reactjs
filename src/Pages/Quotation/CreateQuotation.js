@@ -9,12 +9,17 @@ import { GetCustomerList } from "../../Redux/crmSlices/customerSlice/CustomerSli
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { GetSingleProduct } from "../../Redux/crmSlices/productSlice/ProductSlice";
+import Swal from "sweetalert2";
 
 const Quotation = () => {
   const [items, setItems] = useState([]);
   const [shippingAddress, setShippingAddress] = useState("");
   const [saveProduct, setSaveProduct] = useState(false);
   const [newproduct, setNewProduct] = useState({});
+  const [customerId, setCustomerId] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [inqId,setInqID] = useState("");
+  const [qpId,setQpId] = useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -35,27 +40,36 @@ const Quotation = () => {
     }
   );
 
+ 
   useEffect(() => {
-    setValue("p_unique_id", productList?.p_unique_id);
-    setValue("p_name", productList?.p_name);
-    setValue("p_price", productList?.p_price);
-    setValue("p_material", productList?.p_material);
-    setValue("p_moc", productList?.p_moc);
-    setValue("p_dimension", productList?.p_dimension);
-    setValue("p_brand", productList?.p_brand);
-    setValue("p_color", productList?.p_color);
-    setValue("p_weight", productList?.p_weight);
-    setValue("p_manufacturer", productList?.p_manufacturer);
-    setValue("p_country", productList?.p_country);
-    setValue("p_code", productList?.p_code);
-    setValue("p_drawing_no", productList?.p_drawing_no);
-    setValue("p_finish_type", productList?.p_finish_type);
-    setValue("p_status", productList?.p_status);
-    setValue("p_description", productList?.p_description);
-  }, [productList]);
+    if (productList?.length > 0) {
+      const product = productList[0]; 
+      setInqID(product?.inq_id)
+      setQpId(product?.qp_id)
+      setValue("p_unique_id", product?.p_unique_id);
+      setValue("p_name", product?.p_name);
+      setValue("p_price", product?.p_price);
+      setValue("p_material", product?.p_material);
+      setValue("p_moc", product?.p_moc);
+      setValue("p_dimension", product?.p_dimension);
+      setValue("p_brand", product?.p_brand);
+      setValue("p_color", product?.p_color);
+      setValue("p_weight", product?.p_weight);
+      setValue("p_manufacturer", product?.p_manufacturer);
+      setValue("p_country", product?.p_country);
+      setValue("p_code", product?.p_code);
+      setValue("p_drawing_no", product?.p_drawing_no);
+      setValue("p_finish_type", product?.p_finish_type);
+      setValue("p_status", product?.p_status);
+      setValue("p_description", product?.p_description);
+    }
+  }, [productList, setValue]); 
 
-  const addProduct = (data) => {
-    setNewProduct(data);
+  const addSaveProductProduct = (data) => {
+    if (data) {
+      setNewProduct(data);
+      setSaveProduct(true);
+    }
   };
 
   useEffect(() => {
@@ -67,16 +81,17 @@ const Quotation = () => {
       (customer) => customer.c_fullname === event.target.value
     );
     if (selectedCustomer) {
+      console.log(selectedCustomer);
+      setCustomerId(selectedCustomer?.c_id);
+      setCustomerName(selectedCustomer?.c_fullname);
       setShippingAddress(selectedCustomer.c_address);
     }
   };
 
   useEffect(() => {
     const id = localStorage.getItem("productId");
-    if (id) {
-      dispatch(GetSingleProduct({ p_id: id }));
-    }
-  }, [dispatch]);
+    dispatch(GetSingleProduct({ inq_id: id }));
+  }, []);
 
   const [branding, setBranding] = useState({
     companyName: "Advance engineering",
@@ -166,15 +181,9 @@ const Quotation = () => {
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-      // Convert the PDF to a Blob
       const pdfBlob = pdf.output("blob");
-
-      // Optional: Convert the Blob to a downloadable URL for testing
       const blobURL = URL.createObjectURL(pdfBlob);
       console.log("Blob URL: ", pdfBlob);
-      // setPdfBlobState(pdfBlob);
-
       const formData = new FormData();
       formData.append("quo_name", details.name);
       formData.append("quo_date", details.date);
@@ -274,58 +283,74 @@ const Quotation = () => {
     printWindow.close();
   };
 
-  const handleSave = () => {
-    const formData = new FormData();
-    formData.append("quo_name", details.name);
-    formData.append("quo_date", details.date);
-    formData.append("quo_subject", details.subject);
-    formData.append("quo_number", details.quotationNumber);
-    formData.append("quo_description", JSON.stringify(list));
-    formData.append("quo_quantity", totalQuantity);
-    formData.append("quo_kg", totalKG);
-    formData.append("quo_discount", discountPercentage);
-    formData.append("quo_total", total);
-
-    const productData = new FormData();
-    productData.append("p_unique_id", newproduct?.p_unique_id);
-    productData.append("p_name", newproduct?.p_name);
-    productData.append("p_price", newproduct?.p_price);
-    productData.append("p_material", newproduct?.p_material);
-    productData.append("p_moc", newproduct?.p_moc);
-    productData.append("p_dimension", newproduct?.p_dimension);
-    productData.append("p_brand", newproduct?.p_brand);
-    productData.append("p_color", newproduct?.p_color);
-    productData.append("p_weight", newproduct?.p_weight);
-    productData.append("p_manufacturer", newproduct?.p_manufacturer);
-    productData.append("p_country", newproduct?.p_country);
-    productData.append("p_code", newproduct?.p_code);
-    productData.append("p_drawing_no", newproduct?.p_drawing_no);
-    productData.append("p_finish_type", newproduct?.p_finish_type);
-    productData.append("p_status", newproduct?.p_status);
-    productData.append("p_description", newproduct?.p_description);
-
-    fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-      method: "POST",
-      body: formData,
-    });
-    fetch(
-      "https://api.advanceengineerings.com/crm/quotationproduct/add-quotationproduct",
-      {
-        method: "POST",
-        body: productData,
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("PDF uploaded successfully:", data);
-        addProduct();
-        // navigate("/list-quotation");
-      })
-      .catch((error) => {
-        console.error("Error uploading PDF:", error);
-        alert("Failed to upload the quotation PDF.");
+  const handleSave = async () => {
+    if (
+      !details ||
+      !details.name ||
+      !details.date ||
+      !details.subject ||
+      !details.quotationNumber
+    ) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " Name ,Subject , Date ,Quotation Number are required!",
       });
+    } else if (!list || list.length === 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " All item detail required!",
+      });
+    } else if (!newproduct || Object.keys(newproduct).length === 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Fill all product details and tap a save button!",
+      });
+    } else if (!customerId && !customerName) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select a shipping address!",
+      });
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("quo_name", details.name);
+      formData.append("quo_date", details.date);
+      formData.append("quo_subject", details.subject);
+      formData.append("quo_number", details.quotationNumber);
+      formData.append("quo_description", JSON.stringify(list));
+      formData.append("quo_quantity", totalQuantity);
+      formData.append("quo_kg", totalKG);
+      formData.append("quo_discount", discountPercentage);
+      formData.append("quo_total", total);
+      Object.entries(newproduct).forEach(([key, value]) => {
+        formData.append(`${key}`, value || "");
+      });
+      formData.append("customerId", customerId);
+      formData.append("customerName", customerName);
+      formData.append("inq_id",inqId)
+      formData.append("qp_id",qpId)
+      const [quotationResponse, productResponse] = await Promise.all([
+        fetch(
+          "https://api.advanceengineerings.com/crm/quotation/add-quotation",
+          {
+            method: "POST",
+            body: formData,
+          }
+        ),
+      ]);
+      localStorage.removeItem("productId");
+      navigate("/list-quotation");
+    } catch (error) {
+      console.error("Error uploading data:", error);
+      alert("Failed to upload the quotation data.");
+    }
   };
+
   const [productData, setProductData] = useState({
     itemName: "",
     hsnCode: "",
@@ -516,9 +541,7 @@ const Quotation = () => {
                                       type="text"
                                       className="form-control"
                                       placeholder="Enter item"
-                                      {...register("itemName", {
-                                        required: "Item Name is required",
-                                      })}
+                                      {...register("itemName", {})}
                                     />
                                     {errors.itemName && (
                                       <p className="text-danger">
@@ -541,15 +564,8 @@ const Quotation = () => {
                                       className="form-control"
                                       id="manufacturer-brand-input"
                                       placeholder="Enter HSN Code"
-                                      {...register("hsnCode", {
-                                        required: "HSN Code is required",
-                                      })}
+                                      {...register("hsnCode", {})}
                                     />
-                                    {errors.hsnCode && (
-                                      <p className="text-danger">
-                                        {errors.hsnCode.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -569,15 +585,8 @@ const Quotation = () => {
                                       id="stocks-input"
                                       placeholder="Quantity"
                                       required
-                                      {...register("quantity", {
-                                        required: "Quantity is required",
-                                      })}
+                                      {...register("quantity", {})}
                                     />
-                                    {errors.quantity && (
-                                      <p className="text-danger">
-                                        {errors.quantity.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
 
@@ -604,16 +613,8 @@ const Quotation = () => {
                                         aria-label="Price"
                                         aria-describedby="product-price-addon"
                                         required
-                                        {...register("pricePerUnit", {
-                                          required:
-                                            "Price Per Unit is required",
-                                        })}
+                                        {...register("pricePerUnit", {})}
                                       />
-                                      {errors.pricePerUnit && (
-                                        <p className="text-danger">
-                                          {errors.pricePerUnit.message}
-                                        </p>
-                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -660,15 +661,8 @@ const Quotation = () => {
                                       id="orders-input"
                                       placeholder="Unit"
                                       required
-                                      {...register("unitType", {
-                                        required: "Unit is required",
-                                      })}
+                                      {...register("unitType", {})}
                                     />
-                                    {errors.unitType && (
-                                      <p className="text-danger">
-                                        {errors.unitType.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -767,47 +761,9 @@ const Quotation = () => {
                         <div class="tab-content">
                           <form
                             className="col-sm-12"
-                            onSubmit={handleSubmit(addProduct)}
+                            onSubmit={handleSubmit(addSaveProductProduct)}
                           >
                             <div className="row">
-                              {/* Category */}
-                              {/* <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="categoryInput"
-                                  className="form-label"
-                                >
-                                  Category
-                                </label>
-                                <select
-                                  id="categoryInput"
-                                  className="form-control"
-                                  {...register("p_category", {
-                                    required: "Category is required",
-                                  })}
-                                >
-                                  <option value="">
-                                    {" "}
-                                    -- Select Any Category --{" "}
-                                  </option>
-                                  {catList?.length > 0 &&
-                                    catList.map((cat) => (
-                                      <option
-                                        key={cat.cat_id}
-                                        value={cat.cat_id}
-                                      >
-                                        {cat.cat_name}
-                                      </option>
-                                    ))}
-                                </select>
-                                {errors.p_category && (
-                                  <p className="text-danger">
-                                    {errors.p_category.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div> */}
-
                               {/* Unique ID */}
                               <div className="col-lg-6">
                                 <div className="mb-3">
@@ -817,11 +773,13 @@ const Quotation = () => {
                                   >
                                     Unique ID
                                   </label>
+                             
                                   <input
                                     type="text"
                                     className="form-control"
                                     id="uniqueIdInput"
                                     placeholder="1001"
+                                   
                                     {...register("p_unique_id", {
                                       required: "Unique ID is required",
                                     })}
@@ -1229,7 +1187,7 @@ const Quotation = () => {
                                   marginLeft: "10px",
                                 }}
                               >
-                               {saveProduct ? "Saved" :"Save"}
+                                {saveProduct ? "Saved" : "Save"}
                               </button>
 
                               {/* File Upload */}

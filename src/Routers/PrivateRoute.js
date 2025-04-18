@@ -109,7 +109,7 @@ const PrivateRoute = () => {
                 <Route path='/graphics-list' element={<GraphicsList/>}/>
 
                 <Route path='/add-employee' element={<AddEmployee/>}/>
-                <Route path='/employe-list' element={<ListEmployee/>}/> 
+                <Route path='/list-employee' element={<ListEmployee/>}/> 
 
                 <Route path='/support-list' element={<SupportList />} />
                 <Route path='/add-support' element={<AddSupport />} />
