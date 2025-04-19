@@ -66,6 +66,13 @@ const Inquirylist = () => {
       }
     });
   };
+
+  const addQuotation = (data) => {
+    console.log("=>",data.inq_id)
+    localStorage.setItem("productId", data.inq_id);
+    navigate("/create-quotation");
+  };
+
   return (
     <div>
       <Header />
@@ -116,6 +123,27 @@ const Inquirylist = () => {
                               <th className="sort" data-sort="inq_status">
                                 Status
                               </th>
+                              <th className="sort" data-sort="inq_status">
+                                Product Name
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                Size
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                MOC
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                Thickness
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                DRG
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                Code
+                              </th>
+                              <th className="sort" data-sort="inq_status">
+                                Information
+                              </th>
                               <th className="sort" data-sort="action">
                                 Action
                               </th>
@@ -129,29 +157,24 @@ const Inquirylist = () => {
                                 </td>
                               </tr>
                             ) : inquiry?.length > 0 ? (
-                              inquiry.map((inq, key) => (
+                              inquiry?.map((inq, key) => (
                                 <tr key={key}>
-                                  <td>{inq.inq_name}</td>
-                                  <td>{inq.inq_contact}</td>
-                                  <td>{inq.inq_email}</td>
-                                  <td>{inq.inq_message}</td>
-                                  <td>
-                                    <span className="label-custom label label-default">
-                                      {inq.inq_status}
-                                    </span>
-                                  </td>
+                                  <td>{inq?.inq_name}</td>
+                                  <td>{inq?.inq_contact}</td>
+                                  <td>{inq?.inq_email}</td>
+                                  <td>{inq?.inq_message}</td>
+                                  <td> {inq?.inq_status} </td>
+                                  <td> {inq?.p_name} </td>
+                                  <td> {inq?.p_size} </td>
+                                  <td> {inq?.p_moc} </td>
+                                  <td> {inq?.p_thickness} </td>
+                                  <td> {inq?.p_drg} </td>
+
+                                  <td> {inq?.p_code} </td>
+                                  <td> {inq?.p_info} </td>
+
                                   <td>
                                     <div className="d-flex gap-2">
-                                      {/* <div className="edit">
-                                        <button
-                                          type="button"
-                                          className="btn btn-sm btn-success edit-item-btn"
-                                          data-toggle="modal"
-                                          data-target="#Inquiry1"
-                                        >
-                                          <i className="fa fa-pencil"></i>
-                                        </button>
-                                      </div> */}
                                       <div className="remove">
                                         <button
                                           type="button"
@@ -161,8 +184,18 @@ const Inquirylist = () => {
                                           Remove
                                         </button>
                                       </div>
+                                      <div className="remove">
+                                        <button
+                                          type="button"
+                                          className="btn btn-sm btn-info remove-item-btn"
+                                          onClick={() => addQuotation(inq)}
+                                        >
+                                          Quotation
+                                        </button>
+                                      </div>
                                     </div>
                                   </td>
+                                  <td></td>
                                 </tr>
                               ))
                             ) : (

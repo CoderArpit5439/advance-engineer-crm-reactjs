@@ -46,6 +46,11 @@ import ViewCompany from '../Pages/Company/ViewCompany'
 import AddPlant from '../Pages/Plant/AddPlant'
 import ListPlant from '../Pages/Plant/ListPlant'
 import ViewPlant from '../Pages/Plant/ViewPlant'
+import EditCompany from '../Pages/Company/EditCompany'
+import EditPlant from '../Pages/Plant/EditPlant'
+import AddOrder from '../Pages/Order/AddOrder'
+import AllOrders from '../Pages/Order/AllOrders'
+import EditOrder from '../Pages/Order/EditOrder'
 const PrivateRoute = () => {
     return (
         <>
@@ -57,11 +62,11 @@ const PrivateRoute = () => {
 
                 <Route path='/add-company' element={<AddCompany />} />
                 <Route path='/list-company' element={<ListCompany />} />
-                <Route path='/view-company' element={<ViewCompany />} />
+                <Route path='/edit-company' element={<EditCompany />} />
 
                 <Route path='/add-plant' element={<AddPlant />} />
                 <Route path='/list-plant' element={<ListPlant />} />
-                <Route path='/view-plant' element={<ViewPlant />} />
+                <Route path='/edit-plant' element={<EditPlant />} />
 
                 <Route path='/list-quotation' element={<ListQuotation />} />
                 <Route path='/create-quotation' element={<CreateQuotation />} />
@@ -83,6 +88,11 @@ const PrivateRoute = () => {
                 <Route path='/add-inquiry' element={<AddInquiry />} />
                 <Route path='/inquiry-list' element={<Inquirylist />} />
 
+                <Route path='/add-order' element={<AddOrder/>}/>
+                <Route path='/all-order' element={<AllOrders/>}/>
+                <Route path='/edit-order-details' element={<EditOrder/>}/>
+
+
                 <Route path='/list-order' element={<Order />} />
                 <Route path='/list-support' element={<Support />} />
                 <Route path='/list-inventory' element={<Inventory />} />
@@ -99,7 +109,7 @@ const PrivateRoute = () => {
                 <Route path='/graphics-list' element={<GraphicsList/>}/>
 
                 <Route path='/add-employee' element={<AddEmployee/>}/>
-                <Route path='/employe-list' element={<ListEmployee/>}/> 
+                <Route path='/list-employee' element={<ListEmployee/>}/> 
 
                 <Route path='/support-list' element={<SupportList />} />
                 <Route path='/add-support' element={<AddSupport />} />

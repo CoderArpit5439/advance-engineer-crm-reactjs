@@ -1,46 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteCustomer,
-  GetCustomerList,
-  updateCustomer,
-} from "../../Redux/crmSlices/customerSlice/CustomerSlice";
-import Pagination from "../../Components/Pagination";
-import Swal from "sweetalert2";
-import { fetchPlants } from "../../Redux/crmSlices/plantSlice/PlantSlice";
-const ListPlant = () => {
+import { useNavigate } from "react-router-dom";
+import { getOrder } from "../../Redux/crmSlices/orderSlice/OrderSlice";
+
+const AllOrders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data, count, loading, response, status, error } = useSelector(
-    (state) => {
-      return {
-        data: state.rootReducer.plantSlice?.data?.data,
-        loading: state.rootReducer.plantSlice?.loading,
-        response: state.rootReducer.plantSlice?.response,
-        count: state.rootReducer.plantSlice?.count,
-        status: state.rootReducer.plantSlice?.status,
-        error: state.rootReducer.plantSlice?.error,
-      };
-    }
-  );
+  const { data, count, loading, status, error } = useSelector((state) => {
+    return {
+      data: state.rootReducer.orderSlice?.data?.data,
+      loading: state.rootReducer.orderSlice?.loading,
+      count: state.rootReducer.orderSlice?.count,
+      status: state.rootReducer.orderSlice?.status,
+      error: state.rootReducer.orderSlice?.error,
+    };
+  });
+
   useEffect(() => {
-    dispatch(fetchPlants());
+    dispatch(getOrder());
   }, [dispatch]);
 
   const handleEdit = (data) => {
-    if (data) {
-      localStorage.setItem("editPlant", JSON.stringify(data));
-      navigate("/edit-plant");
-    }
+    localStorage.setItem("editOrder", JSON.stringify(data));
+    navigate("/edit-order-details");
   };
 
   return (
-    <>
+    <div>
       <Header />
       <Sidebar />
       <div className="main-content">
@@ -62,7 +51,7 @@ const ListPlant = () => {
                               type="button"
                               className="btn btn-success add-btn"
                               id="create-btn"
-                              onClick={() => navigate("/add-plant")}
+                              onClick={() => navigate("/add-order")}
                             >
                               <i className="ri-add-line align-bottom me-1" />{" "}
                               Add
@@ -78,28 +67,40 @@ const ListPlant = () => {
                           <thead className="table-light">
                             <tr>
                               <th className="sort" data-sort="email">
-                                Company Name
+                                Customer
                               </th>
                               <th className="sort" data-sort="date">
-                                State
+                                Contact
                               </th>
                               <th className="sort" data-sort="status">
-                                City
+                                Order NO
                               </th>
                               <th className="sort" data-sort="action">
-                                Address
+                                CSTR P.O
                               </th>
                               <th className="sort" data-sort="action">
-                                GST no.
+                                item
                               </th>
                               <th className="sort" data-sort="action">
-                                Security Contact
+                                Due Date
                               </th>
                               <th className="sort" data-sort="action">
-                                Account contact
+                                Quantity
                               </th>
                               <th className="sort" data-sort="action">
-                                Store contact
+                                PNDG
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Done
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Unit
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Total
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Status
                               </th>
                               <th className="sort" data-sort="action">
                                 Action
@@ -108,21 +109,25 @@ const ListPlant = () => {
                           </thead>
 
                           <tbody className="list form-check-all">
-                            {data?.map((plant) => (
-                              <tr key={plant.id}>
-                                <td className="">{plant.company_name}</td>
-                                <td className="">{plant.p_state}</td>
-                                <td className="">{plant.p_city}</td>
-                                <td className="">{plant.p_area_working}</td>
-                                <td className="">{plant.p_tax_type}</td>
-                                <td className="">{plant.p_security_contact}</td>
-                                <td className="">{plant.p_account_contact}</td>
-                                <td className="">{plant.p_store_contact}</td>
+                            {data?.map((order) => (
+                              <tr key={order.id}>
+                                <td className="">{order.or_customer}</td>
+                                <td className="">{order.or_contact}</td>
+                                <td className="">{order.or_order_no}</td>
+                                <td className="">{order.or_cstr_p_o}</td>
+                                <td className="">{order.or_item}</td>
+                                <td className="">{order.or_due_date}</td>
+                                <td className="">{order.or_qty}</td>
+                                <td className="">{order.or_pndg}</td>
+                                <td className="">{order.or_done}</td>
+                                <td className="">{order.or_unit}</td>
+                                <td className="">{order.or_total}</td>
+                                <td className="">{order.or_status}</td>
                                 <td className="">
                                   <button
                                     type="button"
                                     className="btn btn-sm btn-info"
-                                    onClick={() => handleEdit(plant)}
+                                    onClick={() => handleEdit(order)}
                                   >
                                     <i className="fa fa-pencil-o"></i> Update
                                   </button>
@@ -158,8 +163,8 @@ const ListPlant = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
-export default ListPlant;
+export default AllOrders;

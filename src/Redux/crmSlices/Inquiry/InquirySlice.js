@@ -1,4 +1,3 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../../Config/Config";
 
@@ -8,7 +7,6 @@ const initialState = {
   error: null,
   response: [],
 };
-
 
 export const addInquiry = createAsyncThunk(
   "addInquiry",
@@ -20,13 +18,37 @@ export const addInquiry = createAsyncThunk(
       formData.append("inq_name", body.inq_name);
       formData.append("inq_email", body.inq_email);
       formData.append("inq_status", body.inq_status);
-    
-
+      formData.append("p_id", body.p_id);
+      formData.append("p_size", body.p_size);
+      formData.append("p_moc", body.p_moc);
+      formData.append("p_thickness", body.p_thickness);
+      formData.append("p_drg", body.p_drg);
+      formData.append("p_product", body.p_product);
+      formData.append("p_code", body.p_code);
+      formData.append("p_info", body.p_info);
+      formData.append("p_unique_id", body?.p_unique_id);
+      formData.append("p_name", body?.p_name);
+      formData.append("p_price", body?.p_price);
+      formData.append("p_material", body?.p_material);
+      formData.append("p_moc", body?.p_moc);
+      formData.append("p_dimension", body?.p_dimension);
+      formData.append("p_brand", body?.p_brand);
+      formData.append("p_color", body?.p_color);
+      formData.append("p_weight", body?.p_weight);
+      formData.append("p_manufacturer", body?.p_manufacturer);
+      formData.append("p_country", body?.p_country);
+      formData.append("p_code", body?.p_code);
+      formData.append("p_drawing_no", body?.p_drawing_no);
+      formData.append("p_finish_type", body?.p_finish_type);
+      formData.append("p_status", body?.p_status);
+      formData.append("p_description", body?.p_description);
       const res = await instance.post("inquiry/add-inquiry", formData);
       return res.data;
     } catch (error) {
       // Handling error and rejecting with a custom message
-      return rejectWithValue(error.response ? error.response.data : "An unknown error occurred");
+      return rejectWithValue(
+        error.response ? error.response.data : "An unknown error occurred"
+      );
     }
   }
 );
@@ -49,28 +71,35 @@ export const updateLead = createAsyncThunk(
       return res.data;
     } catch (error) {
       // Handling error and rejecting with a custom message
-      return rejectWithValue(error.response ? error.response.data : "An unknown error occurred");
+      return rejectWithValue(
+        error.response ? error.response.data : "An unknown error occurred"
+      );
     }
   }
 );
 
-export const fetchInquiry = createAsyncThunk("fetchInquiry",async ()=>{
-    try {
-        const res = await instance.get("inquiry/fetch-inquiry");
-        return res.data;
-      } catch (error) {
-        throw error;
-      }
-})
+export const fetchInquiry = createAsyncThunk("fetchInquiry", async () => {
+  try {
+    const res = await instance.get("inquiry/fetch-inquiry");
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+});
 
-export const deleteInquiry = createAsyncThunk("deleteInquiry", async (inq_id, { rejectWithValue }) => {
+export const deleteInquiry = createAsyncThunk(
+  "deleteInquiry",
+  async (inq_id, { rejectWithValue }) => {
     try {
-     const res =  await instance.get(`/inquiry/remove-inquiry?inq_id=${inq_id}`);
+      const res = await instance.get(
+        `/inquiry/remove-inquiry?inq_id=${inq_id}`
+      );
       return res; // Return the deleted user ID
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  });
+  }
+);
 
 // CreateSlice for managing the lead state
 export const InquirySlice = createSlice({
@@ -93,50 +122,48 @@ export const InquirySlice = createSlice({
     });
     // Fetch Leads
     builder.addCase(fetchInquiry.pending, (state) => {
-        state.loading = true;
-        state.response = null;
-        state.error = null; // Reset the error when starting a new request
-      });
-      builder.addCase(fetchInquiry.fulfilled, (state, action) => {
-        state.loading = false;
-        state.response = action.payload;
-      });
-      builder.addCase(fetchInquiry.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || action.error.message; // Set error properly
-      });
+      state.loading = true;
+      state.response = null;
+      state.error = null; // Reset the error when starting a new request
+    });
+    builder.addCase(fetchInquiry.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(fetchInquiry.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload || action.error.message; // Set error properly
+    });
 
-      //remove Leads
-      builder.addCase(deleteInquiry.pending, (state) => {
-        state.loading = true;
-        state.response = null;
-        state.error = null; // Reset the error when starting a new request
-      });
-      builder.addCase(deleteInquiry.fulfilled, (state, action) => {
-        state.loading = false;
-        state.response = action.payload;
-      });
-      builder.addCase(deleteInquiry.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || action.error.message; // Set error properly
-      });
+    //remove Leads
+    builder.addCase(deleteInquiry.pending, (state) => {
+      state.loading = true;
+      state.response = null;
+      state.error = null; // Reset the error when starting a new request
+    });
+    builder.addCase(deleteInquiry.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(deleteInquiry.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload || action.error.message; // Set error properly
+    });
 
-      // Update Leads
-      builder.addCase(updateLead.pending, (state) => {
-        state.loading = true;
-        state.response = null;
-        state.error = null; 
-      });
-      builder.addCase(updateLead.fulfilled, (state, action) => {
-        state.loading = false;
-        state.response = action.payload;
-      });
-      builder.addCase(updateLead.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || action.error.message; 
-      });
-
-
+    // Update Leads
+    builder.addCase(updateLead.pending, (state) => {
+      state.loading = true;
+      state.response = null;
+      state.error = null;
+    });
+    builder.addCase(updateLead.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(updateLead.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload || action.error.message;
+    });
   },
 });
 

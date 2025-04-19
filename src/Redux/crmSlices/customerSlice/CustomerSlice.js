@@ -34,6 +34,20 @@ export const GetQuotationList = createAsyncThunk(
   }
 );
 
+export const GetSingleProducts = createAsyncThunk("GetSingleProduct",async(body)=>{
+  try {
+    console.log(body.qp_id)
+    const formData = new FormData();
+    formData.append("qp_id",body?.qp_id)
+    const response = await instance.post("quotation/get-single-product",formData);
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
+)
+
 export const deleteQuotation = createAsyncThunk(
   "deleteQuotation",
   async (Id, { rejectWithValue }) => {
@@ -209,6 +223,20 @@ export const CustomerSlice = createSlice({
       state.response = action.payload;
     });
     builder.addCase(deleteCustomer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload || action.error.message;
+    });
+
+    builder.addCase(GetSingleProducts.pending,(state)=>{
+      state.loading = true;
+      state.response = null;
+      state.error = null;
+    })
+    builder.addCase(GetSingleProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.response = action.payload;
+    });
+    builder.addCase(GetSingleProducts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload || action.error.message;
     });

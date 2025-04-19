@@ -8,29 +8,72 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetCustomerList } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import { GetSingleProduct } from "../../Redux/crmSlices/productSlice/ProductSlice";
+import Swal from "sweetalert2";
 
 const Quotation = () => {
   const [items, setItems] = useState([]);
   const [shippingAddress, setShippingAddress] = useState("");
+  const [saveProduct, setSaveProduct] = useState(false);
+  const [newproduct, setNewProduct] = useState({});
+  const [customerId, setCustomerId] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [inqId,setInqID] = useState("");
+  const [qpId,setQpId] = useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm();
-  const { dta, count, loading, response } = useSelector((state) => {
-    return {
-      response: state.rootReducer.CustomerSlice?.data?.data,
-      count: state.rootReducer.CustomerSlice?.data?.count,
-      loading: state.rootReducer.CustomerSlice?.loading,
-    };
-  });
+  const { data, count, loading, response, productList } = useSelector(
+    (state) => {
+      return {
+        response: state.rootReducer.CustomerSlice?.data?.data,
+        count: state.rootReducer.CustomerSlice?.data?.count,
+        loading: state.rootReducer.CustomerSlice?.loading,
+        productList: state.rootReducer.ProductSlice?.productList?.data,
+      };
+    }
+  );
+
+ 
+  useEffect(() => {
+    if (productList?.length > 0) {
+      const product = productList[0]; 
+      setInqID(product?.inq_id)
+      setQpId(product?.qp_id)
+      setValue("p_unique_id", product?.p_unique_id);
+      setValue("p_name", product?.p_name);
+      setValue("p_price", product?.p_price);
+      setValue("p_material", product?.p_material);
+      setValue("p_moc", product?.p_moc);
+      setValue("p_dimension", product?.p_dimension);
+      setValue("p_brand", product?.p_brand);
+      setValue("p_color", product?.p_color);
+      setValue("p_weight", product?.p_weight);
+      setValue("p_manufacturer", product?.p_manufacturer);
+      setValue("p_country", product?.p_country);
+      setValue("p_code", product?.p_code);
+      setValue("p_drawing_no", product?.p_drawing_no);
+      setValue("p_finish_type", product?.p_finish_type);
+      setValue("p_status", product?.p_status);
+      setValue("p_description", product?.p_description);
+    }
+  }, [productList, setValue]); 
+
+  const addSaveProductProduct = (data) => {
+    if (data) {
+      setNewProduct(data);
+      setSaveProduct(true);
+    }
+  };
 
   useEffect(() => {
-    dispatch(GetCustomerList()); // Fetch customer data when component mounts
+    dispatch(GetCustomerList());
   }, [dispatch]);
 
   const handleSelectChange = (event) => {
@@ -38,9 +81,17 @@ const Quotation = () => {
       (customer) => customer.c_fullname === event.target.value
     );
     if (selectedCustomer) {
+      console.log(selectedCustomer);
+      setCustomerId(selectedCustomer?.c_id);
+      setCustomerName(selectedCustomer?.c_fullname);
       setShippingAddress(selectedCustomer.c_address);
     }
   };
+
+  useEffect(() => {
+    const id = localStorage.getItem("productId");
+    dispatch(GetSingleProduct({ inq_id: id }));
+  }, []);
 
   const [branding, setBranding] = useState({
     companyName: "Advance engineering",
@@ -130,15 +181,9 @@ const Quotation = () => {
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-      // Convert the PDF to a Blob
       const pdfBlob = pdf.output("blob");
-
-      // Optional: Convert the Blob to a downloadable URL for testing
       const blobURL = URL.createObjectURL(pdfBlob);
       console.log("Blob URL: ", pdfBlob);
-      // setPdfBlobState(pdfBlob);
-
       const formData = new FormData();
       formData.append("quo_name", details.name);
       formData.append("quo_date", details.date);
@@ -238,31 +283,74 @@ const Quotation = () => {
     printWindow.close();
   };
 
-  const handleSave = () => {
-    const formData = new FormData();
-    formData.append("quo_name", details.name);
-    formData.append("quo_date", details.date);
-    formData.append("quo_subject", details.subject);
-    formData.append("quo_number", details.quotationNumber);
-    formData.append("quo_description", JSON.stringify(list));
-    formData.append("quo_quantity", totalQuantity);
-    formData.append("quo_kg", totalKG);
-    formData.append("quo_discount", discountPercentage);
-    formData.append("quo_total", total);
-    fetch("https://api.advanceengineerings.com/crm/quotation/add-quotation", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("PDF uploaded successfully:", data);
-        navigate("/list-quotation");
-      })
-      .catch((error) => {
-        console.error("Error uploading PDF:", error);
-        alert("Failed to upload the quotation PDF.");
+  const handleSave = async () => {
+    if (
+      !details ||
+      !details.name ||
+      !details.date ||
+      !details.subject ||
+      !details.quotationNumber
+    ) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " Name ,Subject , Date ,Quotation Number are required!",
       });
+    } else if (!list || list.length === 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " All item detail required!",
+      });
+    } else if (!newproduct || Object.keys(newproduct).length === 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Fill all product details and tap a save button!",
+      });
+    } else if (!customerId && !customerName) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select a shipping address!",
+      });
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("quo_name", details.name);
+      formData.append("quo_date", details.date);
+      formData.append("quo_subject", details.subject);
+      formData.append("quo_number", details.quotationNumber);
+      formData.append("quo_description", JSON.stringify(list));
+      formData.append("quo_quantity", totalQuantity);
+      formData.append("quo_kg", totalKG);
+      formData.append("quo_discount", discountPercentage);
+      formData.append("quo_total", total);
+      Object.entries(newproduct).forEach(([key, value]) => {
+        formData.append(`${key}`, value || "");
+      });
+      formData.append("customerId", customerId);
+      formData.append("customerName", customerName);
+      formData.append("inq_id",inqId)
+      formData.append("qp_id",qpId)
+      const [quotationResponse, productResponse] = await Promise.all([
+        fetch(
+          "https://api.advanceengineerings.com/crm/quotation/add-quotation",
+          {
+            method: "POST",
+            body: formData,
+          }
+        ),
+      ]);
+      localStorage.removeItem("productId");
+      navigate("/list-quotation");
+    } catch (error) {
+      console.error("Error uploading data:", error);
+      alert("Failed to upload the quotation data.");
+    }
   };
+
   const [productData, setProductData] = useState({
     itemName: "",
     hsnCode: "",
@@ -434,7 +522,7 @@ const Quotation = () => {
                               aria-selected="true"
                             >
                               Add
-                             </a>
+                            </a>
                           </li>
                         </ul>
                       </div>
@@ -453,9 +541,7 @@ const Quotation = () => {
                                       type="text"
                                       className="form-control"
                                       placeholder="Enter item"
-                                      {...register("itemName", {
-                                        required: "Item Name is required",
-                                      })}
+                                      {...register("itemName", {})}
                                     />
                                     {errors.itemName && (
                                       <p className="text-danger">
@@ -478,15 +564,8 @@ const Quotation = () => {
                                       className="form-control"
                                       id="manufacturer-brand-input"
                                       placeholder="Enter HSN Code"
-                                      {...register("hsnCode", {
-                                        required: "HSN Code is required",
-                                      })}
+                                      {...register("hsnCode", {})}
                                     />
-                                    {errors.hsnCode && (
-                                      <p className="text-danger">
-                                        {errors.hsnCode.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -506,15 +585,8 @@ const Quotation = () => {
                                       id="stocks-input"
                                       placeholder="Quantity"
                                       required
-                                      {...register("quantity", {
-                                        required: "Quantity is required",
-                                      })}
+                                      {...register("quantity", {})}
                                     />
-                                    {errors.quantity && (
-                                      <p className="text-danger">
-                                        {errors.quantity.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
 
@@ -541,16 +613,8 @@ const Quotation = () => {
                                         aria-label="Price"
                                         aria-describedby="product-price-addon"
                                         required
-                                        {...register("pricePerUnit", {
-                                          required:
-                                            "Price Per Unit is required",
-                                        })}
+                                        {...register("pricePerUnit", {})}
                                       />
-                                      {errors.pricePerUnit && (
-                                        <p className="text-danger">
-                                          {errors.pricePerUnit.message}
-                                        </p>
-                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -597,15 +661,8 @@ const Quotation = () => {
                                       id="orders-input"
                                       placeholder="Unit"
                                       required
-                                      {...register("unitType", {
-                                        required: "Unit is required",
-                                      })}
+                                      {...register("unitType", {})}
                                     />
-                                    {errors.unitType && (
-                                      <p className="text-danger">
-                                        {errors.unitType.message}
-                                      </p>
-                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -680,36 +737,471 @@ const Quotation = () => {
                       </div>
                     </div>
 
-                    {/* Table end */}
-                    <div className="card">
+                    {/* Add product  */}
+
+                    <div class="card">
                       <div class="card-header">
-                        <div className="d-flex justify-content-between">
-                          <h6>GST No: 1234567890</h6>
-                          <h6>MSME No: 9876543210</h6>
-                        </div>
-                        <h5
-                          class="card-title mb-0 "
-                          style={{ marginTop: "20px" }}
+                        <ul
+                          class="nav nav-tabs-custom card-header-tabs border-bottom-0"
+                          role="tablist"
                         >
-                          Terms and Conditions
-                        </h5>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="tab"
+                              role="tab"
+                              aria-selected="true"
+                            >
+                              Add Product
+                            </a>
+                          </li>
+                        </ul>
                       </div>
-                      <div class="card-body ">
-                        <div class="mb-3">
-                          <ul class="text-muted vstack gap-2">
-                            <li>This Quotation will be valid for 14 days.</li>
-                            <li>
-                              Delivery time 3 to 4 week after PO confirm
-                              receiving.
-                            </li>
-                            <li>50% payment advance.</li>
-                            <li>GST 18% Extra.</li>
-                            <li>Transportation charges Free of cost.</li>
-                            <li>Quote as per same Qty.</li>
-                          </ul>
+                      <div class="card-body">
+                        <div class="tab-content">
+                          <form
+                            className="col-sm-12"
+                            onSubmit={handleSubmit(addSaveProductProduct)}
+                          >
+                            <div className="row">
+                              {/* Unique ID */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="uniqueIdInput"
+                                    className="form-label"
+                                  >
+                                    Unique ID
+                                  </label>
+                             
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="uniqueIdInput"
+                                    placeholder="1001"
+                                   
+                                    {...register("p_unique_id", {
+                                      required: "Unique ID is required",
+                                    })}
+                                  />
+                                  {errors.p_unique_id && (
+                                    <p className="text-danger">
+                                      {errors.p_unique_id.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Name */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="nameInput"
+                                    className="form-label"
+                                  >
+                                    Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="nameInput"
+                                    placeholder="Enter Product Name"
+                                    {...register("p_name", {
+                                      required: "Name is required",
+                                    })}
+                                  />
+                                  {errors.p_name && (
+                                    <p className="text-danger">
+                                      {errors.p_name.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Price */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="priceInput"
+                                    className="form-label"
+                                  >
+                                    Price
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    id="priceInput"
+                                    placeholder="Enter Price"
+                                    {...register("p_price", {
+                                      required: "Price is required",
+                                    })}
+                                  />
+                                  {errors.p_price && (
+                                    <p className="text-danger">
+                                      {errors.p_price.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Material */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="materialInput"
+                                    className="form-label"
+                                  >
+                                    Material
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="materialInput"
+                                    placeholder="Enter Material"
+                                    {...register("p_material", {
+                                      required: "Material is required",
+                                    })}
+                                  />
+                                  {errors.p_material && (
+                                    <p className="text-danger">
+                                      {errors.p_material.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* MOC */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="mocInput"
+                                    className="form-label"
+                                  >
+                                    MOC
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="mocInput"
+                                    placeholder="Enter MOC"
+                                    {...register("p_moc", {
+                                      required: "MOC is required",
+                                    })}
+                                  />
+                                  {errors.p_moc && (
+                                    <p className="text-danger">
+                                      {errors.p_moc.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Dimension */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="dimensionInput"
+                                    className="form-label"
+                                  >
+                                    Dimension
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="dimensionInput"
+                                    placeholder="Enter Dimension"
+                                    {...register("p_dimension", {
+                                      required: "Dimension is required",
+                                    })}
+                                  />
+                                  {errors.p_dimension && (
+                                    <p className="text-danger">
+                                      {errors.p_dimension.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Brand */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="brandInput"
+                                    className="form-label"
+                                  >
+                                    Brand
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="brandInput"
+                                    placeholder="Enter Brand"
+                                    {...register("p_brand", {
+                                      required: "Brand is required",
+                                    })}
+                                  />
+                                  {errors.p_brand && (
+                                    <p className="text-danger">
+                                      {errors.p_brand.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Colour */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="colorInput"
+                                    className="form-label"
+                                  >
+                                    Colour
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="colorInput"
+                                    placeholder="Enter Colour"
+                                    {...register("p_color", {
+                                      required: "Colour is required",
+                                    })}
+                                  />
+                                  {errors.p_color && (
+                                    <p className="text-danger">
+                                      {errors.p_color.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Weight */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="weightInput"
+                                    className="form-label"
+                                  >
+                                    Weight
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    id="weightInput"
+                                    placeholder="Enter Weight"
+                                    {...register("p_weight", {
+                                      required: "Weight is required",
+                                    })}
+                                  />
+                                  {errors.p_weight && (
+                                    <p className="text-danger">
+                                      {errors.p_weight.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Manufacturer */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="manufacturerInput"
+                                    className="form-label"
+                                  >
+                                    Manufacturer
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="manufacturerInput"
+                                    placeholder="Enter Manufacturer"
+                                    {...register("p_manufacturer", {
+                                      required: "Manufacturer is required",
+                                    })}
+                                  />
+                                  {errors.p_manufacturer && (
+                                    <p className="text-danger">
+                                      {errors.p_manufacturer.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Country */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="countryInput"
+                                    className="form-label"
+                                  >
+                                    Country
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="countryInput"
+                                    placeholder="Enter Country"
+                                    {...register("p_country", {
+                                      required: "Country is required",
+                                    })}
+                                  />
+                                  {errors.p_country && (
+                                    <p className="text-danger">
+                                      {errors.p_country.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Code */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="codeInput"
+                                    className="form-label"
+                                  >
+                                    Code
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="codeInput"
+                                    placeholder="Enter Code"
+                                    {...register("p_code", {
+                                      required: "Code is required",
+                                    })}
+                                  />
+                                  {errors.p_code && (
+                                    <p className="text-danger">
+                                      {errors.p_code.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Drawing No */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="drawingNoInput"
+                                    className="form-label"
+                                  >
+                                    Drawing No
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="drawingNoInput"
+                                    placeholder="Enter Drawing No"
+                                    {...register("p_drawing_no", {
+                                      required: "Drawing No is required",
+                                    })}
+                                  />
+                                  {errors.p_drawing_no && (
+                                    <p className="text-danger">
+                                      {errors.p_drawing_no.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Finish Type */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="finishTypeInput"
+                                    className="form-label"
+                                  >
+                                    Finish Type
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="finishTypeInput"
+                                    placeholder="Enter Finish Type"
+                                    {...register("p_finish_type", {
+                                      required: "Finish Type is required",
+                                    })}
+                                  />
+                                  {errors.p_finish_type && (
+                                    <p className="text-danger">
+                                      {errors.p_finish_type.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Status */}
+                              <div className="col-lg-6">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="statusInput"
+                                    className="form-label"
+                                  >
+                                    Status
+                                  </label>
+                                  <select
+                                    id="statusInput"
+                                    className="form-control"
+                                    {...register("p_status", {
+                                      required: "Status is required",
+                                    })}
+                                  >
+                                    <option value="">
+                                      {" "}
+                                      -- Select Status --
+                                    </option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">inactive</option>
+                                  </select>
+                                  {errors.p_status && (
+                                    <p className="text-danger">
+                                      {errors.p_status.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Description */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="descriptionInput"
+                                    className="form-label"
+                                  >
+                                    Description
+                                  </label>
+                                  <textarea
+                                    className="form-control"
+                                    id="descriptionInput"
+                                    rows="3"
+                                    {...register("p_description")}
+                                  />
+                                </div>
+                              </div>
+
+                              <button
+                                className="btn btn-success "
+                                style={{
+                                  width: "80px",
+                                  justifyItems: "end",
+                                  marginLeft: "10px",
+                                }}
+                              >
+                                {saveProduct ? "Saved" : "Save"}
+                              </button>
+
+                              {/* File Upload */}
+                              {/* <div className="col-lg-12">
+                              <DragAndDrop onFilesChange={handleProductFile} />
+                            </div> */}
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
+                    {/* Add Product  */}
+
+                    {/* Table end */}
                   </div>
 
                   <div class="col-lg-4">
@@ -869,6 +1361,37 @@ const Quotation = () => {
                     </div>
 
                     {/* Bank detail */}
+
+                    {/* terms condition  */}
+                    <div className="card" style={{ marginTop: "20px" }}>
+                      <div class="card-header">
+                        <div className="d-flex justify-content-between">
+                          <h6>GST No: 1234567890</h6>
+                          <h6>MSME No: 9876543210</h6>
+                        </div>
+                        <h5
+                          class="card-title mb-0 "
+                          style={{ marginTop: "20px" }}
+                        >
+                          Terms and Conditions
+                        </h5>
+                      </div>
+                      <div class="card-body ">
+                        <div class="mb-3">
+                          <ul class="text-muted vstack gap-2">
+                            <li>This Quotation will be valid for 14 days.</li>
+                            <li>
+                              Delivery time 3 to 4 week after PO confirm
+                              receiving.
+                            </li>
+                            <li>50% payment advance.</li>
+                            <li>GST 18% Extra.</li>
+                            <li>Transportation charges Free of cost.</li>
+                            <li>Quote as per same Qty.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="col-lg-12 text-end">
@@ -908,7 +1431,11 @@ const styles = {
     marginRight: "auto",
   },
   branding: { textAlign: "left" },
-  details: { display: "flex", justifyContent: "space-between", marginBottom: "20px" },
+  details: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "20px",
+  },
   table: {
     width: "100%",
     marginBottom: "20px",
