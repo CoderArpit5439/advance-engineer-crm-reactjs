@@ -37,14 +37,7 @@ const Sidebar = () => {
         <div>
             <div className="app-menu navbar-menu " style={{ borderRight: "0px", overflowY: "auto", fontFamily: "poppins" }}>
                 <div className="navbar-brand-box ">
-                    {/* <Link className="logo logo-dark" to='/dashboard'>
-                        <span className="logo-lg">
-                            <img src={darkLogo.image} alt="" height="40" />
-                        </span>
-                        <span className="logo-sm">
-                            <img src={darkLogo.image} alt="" height="40" />
-                        </span>
-                    </Link> */}
+                    
                     <Link className="logo logo-light mt-2 " to='/dashboard'>
                         <span className="logo-lg">
                             <img className="rounded avatar-md" alt="200x200" src={darkLogo.image} />

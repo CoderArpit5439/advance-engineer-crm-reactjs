@@ -94,14 +94,23 @@ const EmployeeList = () => {
   <table className="table align-middle table-nowrap" id="dataTableExample1">
     <thead className="table-light">
       <tr>
+        <th className="sort" data-sort="emp_image">
+          Photo
+        </th>
         <th className="sort" data-sort="emp_name">
-          Name
+          First Name
+        </th>
+        <th className="sort" data-sort="emp_name">
+          Last Name
+        </th>
+        <th>
+          Designation
+        </th>
+        <th>
+          Joining Date
         </th>
         <th className="sort" data-sort="emp_role">
           Role
-        </th>
-        <th className="sort" data-sort="emp_image">
-          Photo
         </th>
         <th className="sort" data-sort="action">
           Action
@@ -112,8 +121,6 @@ const EmployeeList = () => {
       {userList && userList.length > 0 ? (
         userList.map((user) => (
           <tr key={user.id}>
-            <td>{user.emp_name}</td>
-            <td>{user.emp_role}</td>
             <td>
               <img
                 src={user.emp_image || "assets/dist/img/default-cat.png"}
@@ -122,20 +129,26 @@ const EmployeeList = () => {
                 height="50"
               />
             </td>
+            <td>{user.emp_first_name}</td>
+            <td>{user.emp_last_name}</td>
+            <td>{user.emp_designation}</td>
+            <td>{user.emp_joining_date}</td>
+            <td>{user.emp_role}</td>
+            
             <td>
               <div className="d-flex gap-2">
-                {/* <button
+                <button
                   className="btn btn-info btn-sm"
                   onClick={() => handleEdit(user)}
                 >
-                  <i className="fa fa-pencil"></i> Edit
-                </button> */}
-                <button
+                  <i className="fa fa-pencil"></i> View
+                </button>
+                {/* <button
                   className="btn btn-danger btn-sm"
                   onClick={() => handleDelete(user)}
                 >
                   <i className="fa fa-trash"></i> Delete
-                </button>
+                </button> */}
               </div>
             </td>
           </tr>

@@ -4,17 +4,19 @@ import AuthSlice from "./crmSlices/authSlice/AuthSlice";
 import ProductSlice from "./crmSlices/productSlice/ProductSlice";
 import CategorySlice from "./crmSlices/categorySlice/CategorySlice";
 import GraphicsSlice from "./crmSlices/graphicsSlice/GraphicsSlice"
-import  EmployeeSlice  from "./crmSlices/employeeSlice/EmployeeSlice";
-import  LeadSlice  from "./crmSlices/Lead/LeadSlice";
-import  ManufacturingSlice  from "./crmSlices/Manufacturing/ManufacturingSlice";
-import  InquirySlice  from "./crmSlices/Inquiry/InquirySlice";
+import EmployeeSlice  from "./crmSlices/employeeSlice/EmployeeSlice";
+import LeadSlice  from "./crmSlices/Lead/LeadSlice";
+import ManufacturingSlice  from "./crmSlices/Manufacturing/ManufacturingSlice";
+import InquirySlice  from "./crmSlices/Inquiry/InquirySlice";
 import InventorySlice from "./crmSlices/Inventory/InventorySlice";
 import SupportSlice from "./crmSlices/support/SupportSlice";
 import TaskSlice from "./crmSlices/task/TaskSlice";
-import  MyDashboardSlice  from "./crmSlices/Dashboard/DashboardSlice";
-import  companySlice  from "./crmSlices/companySlice/CompanySlice";
+import MyDashboardSlice  from "./crmSlices/Dashboard/DashboardSlice";
+import companySlice  from "./crmSlices/companySlice/CompanySlice";
 import plantSlice from "./crmSlices/plantSlice/PlantSlice";
-import  orderSlice  from "./crmSlices/orderSlice/OrderSlice";
+import orderSlice  from "./crmSlices/orderSlice/OrderSlice";
+import LoginActivitySlice  from "./crmSlices/loginActivitySlice/LoginActivitySlice";
+import UnitSlice from "./crmSlices/unit/UnitSlice";
 
 
 
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
     CategorySlice,
     GraphicsSlice,
     EmployeeSlice,
+    LoginActivitySlice,
     LeadSlice,
     ManufacturingSlice,
     InquirySlice,
@@ -35,7 +38,9 @@ const rootReducer = combineReducers({
     MyDashboardSlice,
     companySlice,
     plantSlice,
-    orderSlice
+    orderSlice,
+    UnitSlice,
+
 })
 
 export default rootReducer; 

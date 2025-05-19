@@ -13,9 +13,6 @@ const AddCompany = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
-    watch,
-    reset,
   } = useForm({
     defaultValues: {
       international: false,
@@ -28,8 +25,9 @@ const AddCompany = () => {
 
   const onSubmit = (data) => {
     if (data) {
+      console.log(data);
       dispatch(createCompany(data));
-      navigate("/list-company")
+      // navigate("/list-company")
     }
   };
 

@@ -20,6 +20,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isErrorVisible, setIsErrorVisible] = useState(false);
+  const [userLatitude, setUserLatitude] = useState('');
+  const [userLongitude, setUserLongitude] = useState('');
+  const [userAgent, setUserAgent] = useState('');
+  const [userIPAddress, setUserIPAddress] = useState('');
 
   const { loading, data } = useSelector((state) => {
     return {
@@ -42,9 +46,55 @@ const LoginPage = () => {
     }
   }, [data]);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    await getActivityData().then((gData) => {
+      console.log(gData);
+      data.activity = JSON.stringify(gData);
+    });
+
+   
+
+  console.log(data.activity);
+
     dispatch(loginAuth(data));
   };
+
+  const getActivityData = async () => {
+
+    if(window.navigator) {
+
+      var userAgent = '';
+      var lat = '';
+      var long = '';
+      await window.navigator.geolocation.getCurrentPosition((pos) => {
+
+        lat = pos.coords.latitude;
+        long = pos.coords.longitude;
+
+      });
+
+      userAgent = navigator.userAgentData.platform;
+      setUserAgent(userAgent);
+
+      var ipAdd
+
+      await fetch("https://api.ipify.org?format=json").then(res => res.json().then((data  => {
+        ipAdd = data.ip;
+      })));
+
+      return {
+        "user_agent": userAgent,
+        "user_ip_address": ipAdd,
+        "user_lat_long": lat + ',' + long
+    }
+
+    }else{
+      alert('Javascript not supported, please try into another browser');
+      return false;
+    }
+
+
+  }
 
   return (
     <div>
@@ -94,8 +144,8 @@ const LoginPage = () => {
                             {...register("role", { required: true })}
                           >
                            
-                            <option value="0">Admin</option>
-                            <option value="1">Employe</option>
+                            <option value="admin">Admin</option>
+                            <option value="employee">Employee</option>
                           </select>
                           {errors.role && (
                             <span className="text-danger">

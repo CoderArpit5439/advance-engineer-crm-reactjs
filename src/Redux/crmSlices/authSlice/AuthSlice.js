@@ -16,8 +16,11 @@ export const loginAuth = createAsyncThunk(
         const formData = new FormData();
         formData.append("username", data.username);
         formData.append("password", data.password);
+        formData.append("role", data.role);
+        formData.append("activity", data.activity);
+
         try {
-            const response = await axios.post("https://api.advanceengineerings.com/crm/auth/login", formData);
+            const response = await axios.post("http://localhost:8080/crm/auth/login", formData);
           
             if (response?.data?.token) {
                 const now = new Date();

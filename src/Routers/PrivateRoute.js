@@ -51,6 +51,10 @@ import EditPlant from '../Pages/Plant/EditPlant'
 import AddOrder from '../Pages/Order/AddOrder'
 import AllOrders from '../Pages/Order/AllOrders'
 import EditOrder from '../Pages/Order/EditOrder'
+import LoginActivityList from '../Pages/LoginActivity/LoginActivityList'
+import AddUnit from '../Pages/Unit/AddUnit'
+import ListUnit from '../Pages/Unit/ListUnit'
+import ViewCustomer from '../Pages/Customer/ViewCustomer'
 const PrivateRoute = () => {
     return (
         <>
@@ -59,14 +63,20 @@ const PrivateRoute = () => {
 
                 <Route path='/add-customer' element={<AddCustomer />} />
                 <Route path='/list-customer' element={<ListCustomer />} />
+                <Route path='/view-customer/:id' element={<ViewCustomer />} />
 
                 <Route path='/add-company' element={<AddCompany />} />
                 <Route path='/list-company' element={<ListCompany />} />
                 <Route path='/edit-company' element={<EditCompany />} />
+                <Route path='/view-company/:id' element={<ViewCompany />} />
 
                 <Route path='/add-plant' element={<AddPlant />} />
-                <Route path='/list-plant' element={<ListPlant />} />
+                {/* <Route path='/list-plant' element={<ListPlant />} /> */}
                 <Route path='/edit-plant' element={<EditPlant />} />
+                <Route path='/view-plant/:id' element={<ViewPlant />} />
+
+                <Route path='/add-unit' element={<AddUnit />} />
+                {/* <Route path='/list-unit' element={<ListUnit />} /> */}
 
                 <Route path='/list-quotation' element={<ListQuotation />} />
                 <Route path='/create-quotation' element={<CreateQuotation />} />
@@ -110,6 +120,8 @@ const PrivateRoute = () => {
 
                 <Route path='/add-employee' element={<AddEmployee/>}/>
                 <Route path='/list-employee' element={<ListEmployee/>}/> 
+
+                <Route path='/login-activity-list' element={<LoginActivityList/>}/>
 
                 <Route path='/support-list' element={<SupportList />} />
                 <Route path='/add-support' element={<AddSupport />} />

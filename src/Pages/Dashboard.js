@@ -6,6 +6,7 @@ import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GetDashboardDetails } from "../Redux/crmSlices/Dashboard/DashboardSlice";
+import { RightBar } from "../LayoutNew/Rightbar";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const Dashboard = () => {
 
   const cardList = [
     {
-      name: "Employe  ",
+      name: "Employees",
       icon: "card",
       url: "/add-employee",
     },
@@ -348,6 +349,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      <RightBar />
       <Footer />
     </div>
   );

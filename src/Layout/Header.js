@@ -116,7 +116,7 @@ const Header = () => {
                 <div className="logo logo-light">
                   <span className="logo-sm">
                     <img
-                      src="../assets/images/logo-sm.png"
+                      src="ld/assets/images/logo-sm.png"
                       alt=""
                       height="22"
                     />
@@ -131,7 +131,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                 id="topnav-hamburger-icon"
@@ -144,7 +144,7 @@ const Header = () => {
                   <span></span>
                   <span></span>
                 </span>
-              </button>
+              </button> */}
 
            
             </div>

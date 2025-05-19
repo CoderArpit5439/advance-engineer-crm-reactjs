@@ -3,6 +3,7 @@ import instance from "../../../Config/Config";
 
 const initialState = {
   data: null,
+  singleCompany: null,
   pagination: {
     currentPage: 1,
     perPage: 10,
@@ -17,6 +18,7 @@ const initialState = {
 export const createCompany = createAsyncThunk(
   "company/createCompany",
   async (body) => {
+    console.log(body);
     try {
       const formData = new FormData();
       formData.append("c_name", body.c_company_name);
@@ -36,8 +38,10 @@ export const createCompany = createAsyncThunk(
         body.p_international_domestic
       );
       const res = await instance.post("company/add-company", formData);
+      console.log(res);
       return res.data;
     } catch (error) {
+
       throw error;
     }
   }
@@ -51,6 +55,17 @@ export const fetchCompany = createAsyncThunk("fetchCompany", async () => {
     throw error;
   }
 });
+
+export const fetchSingleCompany = createAsyncThunk("fetchSingleCompany", async (id) => {
+  try {
+    const res = await instance.get(`company/get-single-company?id=${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+});
+
+
 export const updateCompany = createAsyncThunk(
   "company/updateCompany",
   async (body, { rejectWithValue }) => {
@@ -122,6 +137,21 @@ export const companySlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(fetchCompany.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+        // Get Single Company
+    builder.addCase(fetchSingleCompany.pending, (state) => {
+      state.loading = true;
+      state.response = null;
+      state.error = null;
+    });
+    builder.addCase(fetchSingleCompany.fulfilled, (state, action) => {
+      state.loading = false;
+      state.singleCompany = action.payload;
+    });
+    builder.addCase(fetchSingleCompany.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

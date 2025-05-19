@@ -112,14 +112,14 @@ const Header = () => {
                 <div className="logo logo-light">
                   <span className="logo-sm">
                     <img
-                      src="../assets/images/logo-sm.png"
-                      alt=""
+                      src="assets/images/logo-sm.png"
+                      alt="Advance Engineering"
                       height="22"
                     />
                   </span>
                   <span className="logo-lg">
                     <img
-                      src="../assets/images/logo-light.png"
+                      src="/assets/images/logo-light.png"
                       alt=""
                       height="17"
                     />
@@ -127,7 +127,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
                 id="topnav-hamburger-icon"
@@ -140,7 +140,7 @@ const Header = () => {
                   <span></span>
                   <span></span>
                 </span>
-              </button>
+              </button> */}
 
               {/* <form className="app-search d-none d-md-block">
                                 <div className="position-relative">

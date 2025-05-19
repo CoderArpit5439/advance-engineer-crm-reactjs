@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { allPermittedPages } from "../Redux/crmSlices/sidebarSlice/SidebarSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [allMenus, setAllMenus] = useState([]);
+
+  useEffect(() => {
+    // console.log(data)
+    dispatch(allPermittedPages());
+  }, [])
+
   return (
     <>
       <div>
@@ -19,10 +29,10 @@ const Sidebar = () => {
             {/* Light Logo*/}
             <a href="index.html" className="logo logo-light">
               <span className="logo-sm">
-                {/* <img src="assets/images/logo-sm.png" alt="" height={22} /> */}
+                <img src="assets/images/logo-sm.png" alt="" height={22} />
               </span>
               <span className="logo-lg">
-                {/* <img src="assets/images/logo-light.png" alt="" height={17} /> */}
+                <img src="assets/images/logo-light.png" alt="" height={17} />
               </span>
             </a>
             <button
@@ -143,7 +153,7 @@ const Sidebar = () => {
                                         </ul>
                                       </div>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
                                         href="#plant"
@@ -185,8 +195,95 @@ const Sidebar = () => {
                                           </li>
                                         </ul>
                                       </div>
-                                    </li>
+                                    </li> */}
+                                  
+                                    {/* <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        href="#Unit"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
+                                      >
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Unit</span>
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="Unit"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/add-unit")
+                                              }
+                                              className="nav-link"
+                                              role="button"
+                                              data-key="t-calender"
+                                            >
+                                              Add
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/list-unit")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                              data-key="t-chat"
+                                            >
+                                              List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li> */}
                                     <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        href="#Customer"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
+                                      >
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Customer</span>
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="Customer"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/add-customer")
+                                              }
+                                              className="nav-link"
+                                              role="button"
+                                              data-key="t-calender"
+                                            >
+                                              Add
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/list-customer")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                              data-key="t-chat"
+                                            >
+                                              List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                      <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
                                         data-bs-toggle="collapse"
@@ -229,43 +326,31 @@ const Sidebar = () => {
                                         </ul>
                                       </div>
                                     </li>
-                             
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
-                                        href="#Customer"
+                                        href="#LoginActivity"
                                         data-bs-toggle="collapse"
                                         role="button"
                                         aria-expanded="false"
                                         aria-controls="sidebarApps"
                                       >
                                         <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Customer</span>
+                                        <span data-key="t-apps">Login Activity</span>
                                       </a>
                                       <div
                                         className="collapse menu-dropdown"
-                                        id="Customer"
+                                        id="LoginActivity"
                                       >
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
                                               onClick={() =>
-                                                navigate("/add-customer")
+                                                navigate("/login-activity-list")
                                               }
                                               className="nav-link"
                                               role="button"
                                               data-key="t-calender"
-                                            >
-                                              Add
-                                            </a>
-                                          </li>
-                                          <li className="nav-item">
-                                            <a
-                                              onClick={() =>
-                                                navigate("/list-customer")
-                                              }
-                                              className="nav-link cursor-pointer"
-                                              data-key="t-chat"
                                             >
                                               List
                                             </a>
@@ -592,7 +677,7 @@ const Sidebar = () => {
                                          <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
-                                        href="#Lead"
+                                        href="#Order"
                                         data-bs-toggle="collapse"
                                         role="button"
                                         aria-expanded="false"
@@ -603,7 +688,7 @@ const Sidebar = () => {
                                       </a>
                                       <div
                                         className="collapse menu-dropdown"
-                                        id="Lead"
+                                        id="Order"
                                       >
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">

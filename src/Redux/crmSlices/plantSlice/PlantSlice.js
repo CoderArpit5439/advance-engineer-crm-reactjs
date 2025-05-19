@@ -3,6 +3,7 @@ import instance from "../../../Config/Config";
 
 const initialState = {
   data: null,
+  singlePlant: null,
   loading: false,
   error: null,
   response: null,
@@ -14,7 +15,7 @@ export const addPlant = createAsyncThunk(
       const formData = new FormData();
 
       // Append all form data to the FormData object
-      formData.append("company_id", body.company);
+      formData.append("c_id", body.c_id);
       formData.append("p_state", body.state);
       formData.append("p_city", body.city);
       formData.append("p_area_working", body.workingArea);
@@ -56,6 +57,7 @@ export const fetchPlants = createAsyncThunk("fetchPlants", async () => {
     throw error;
   }
 });
+
 export const updatePlant = createAsyncThunk(
   "updatePlant",
   async (body, { rejectWithValue }) => {
@@ -94,6 +96,15 @@ export const updatePlant = createAsyncThunk(
   }
 );
 
+export const fetchSinglePlant = createAsyncThunk("fetchSinglePlant", async (id) => {
+  try {
+    const res = await instance.get(`plant/fetch-single-plant?id=${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+});
+
 export const plantSlice = createSlice({
   name: "plant",
   initialState,
@@ -130,6 +141,19 @@ export const plantSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(fetchPlants.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(fetchSinglePlant.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(fetchSinglePlant.fulfilled, (state, action) => {
+      state.loading = false;
+      state.singlePlant = action.payload;
+    });
+    builder.addCase(fetchSinglePlant.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

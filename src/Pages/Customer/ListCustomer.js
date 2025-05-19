@@ -12,6 +12,8 @@ import {
 } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import Pagination from "../../Components/Pagination";
 import Swal from "sweetalert2";
+import { RightBar } from "../../LayoutNew/Rightbar";
+import CompanyDetails from "../../Components/DashRightBar/CompanyDetails";
 const ListCustomer = () => {
   const {
     register,
@@ -517,7 +519,9 @@ console.log(data)
                                                                     <img src="assets/dist/img/w1.png" class="img-circle" alt="User Image" width="50" height="50" />
                                                                 }
                                                             </td> */}
-                                                            <td>{customer.c_fullname}</td>
+                                                            <td >
+                                                            {customer.c_fullname}
+                                                            </td>
                                                             <td>{customer.c_company_name}</td>
                                                             <td>{customer.c_mobile}</td>
                                                             <td>{customer.c_email}</td>
@@ -636,6 +640,7 @@ console.log(data)
           </div>
         </div>
       </div>
+      
       <Footer />
     </>
   );

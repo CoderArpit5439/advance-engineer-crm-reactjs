@@ -3,6 +3,7 @@ import instance from "../../../Config/Config";
 
 const initialState = {
   data: null,
+  singleCustomer: null,
   loading: false,
   error: null,
   response: null,
@@ -21,6 +22,15 @@ export const GetCustomerList = createAsyncThunk(
     }
   }
 );
+
+export const fetchSingleCustomer = createAsyncThunk("fetchSingleCustomer", async (id) => {
+  try {
+    const res = await instance.get(`customer/fetch-single-customer?id=${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+});
 
 export const GetQuotationList = createAsyncThunk(
   "GetQuotationList",
@@ -158,6 +168,18 @@ export const CustomerSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(GetCustomerList.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(fetchSingleCustomer.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchSingleCustomer.fulfilled, (state, action) => {
+      state.loading = false;
+      state.singleCustomer = action.payload;
+    });
+    builder.addCase(fetchSingleCustomer.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

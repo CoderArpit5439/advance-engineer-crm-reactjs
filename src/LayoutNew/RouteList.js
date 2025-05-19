@@ -12,6 +12,12 @@ export const RouteList = [
         icon: "ri-team-fill",
     },
     {
+        title: "Login Activity",
+        keys: "login-activity",
+        path: "/login-activity",
+        icon: "ri-team-fill",
+    },
+    {
         title: "Department",
         keys: "department",
         path: "/department",

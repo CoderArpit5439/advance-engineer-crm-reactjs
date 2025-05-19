@@ -1,73 +1,94 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Layout/Header";
 import Footer from "../../Layout/Footer";
 import Sidebar from "../../Layout/Sidebar";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { addPlant } from "../../Redux/crmSlices/plantSlice/PlantSlice";
+import { updatePlant } from "../../Redux/crmSlices/plantSlice/PlantSlice"; // Make sure this import is correct
 import { fetchCompany } from "../../Redux/crmSlices/companySlice/CompanySlice";
 
-const AddPlant = () => {
+const EditPlant = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [currentComapnyID, setCurrentComapnyID] = useState("");
+  const [comapnyName, setComapnyName] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    control,
-    watch,
-    reset,
-  } = useForm({
-    defaultValues: {
-      company: "",
-      state: "",
-      city: "",
-      workingArea: "",
-      taxType: "",
-      pinCode: "",
-      address: "",
-      gst: "",
-      securityContactNumber: "",
-      accountContactNumber: "",
-      storeContactNumber: "",
-      otherContactNumber: "",
-      securityEmail: "",
-      accountEmail: "",
-      storeEmail: "",
-      otherEmail: "",
-      p_international_domestic: "",
-    },
-  });
+  } = useForm();
 
-  const { data, count, loading, response, status, error } = useSelector(
-    (state) => {
-      return {
-        data: state.rootReducer.companySlice?.data?.data,
-        loading: state.rootReducer.companySlice?.loading,
-        response: state.rootReducer.companySlice?.response,
-        count: state.rootReducer.companySlice?.count,
-        status: state.rootReducer.companySlice?.status,
-        error: state.rootReducer.companySlice?.error,
-      };
-    }
-  );
-
-  console.log(data, response);
-
-  const navigate = useNavigate();
-
+  // Fetch companies for dropdown
   useEffect(() => {
     dispatch(fetchCompany());
   }, [dispatch]);
 
-  const onSubmit = (data) => {
-    dispatch(addPlant(data));
-    navigate("/list-company");
+  const { loading, data: companies } = useSelector((state) => ({
+    loading: state.rootReducer.LeadSlice?.loading,
+    data: state.rootReducer.companySlice?.data?.data,
+  }));
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("editPlant");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      console.log(parsedData,currentComapnyID)
+      setCurrentComapnyID(parsedData?.c_id);
+      setComapnyName(parsedData?.company_name);
+      setValue("p_state", parsedData?.p_state);
+      setValue("p_city", parsedData?.p_city);
+      setValue("p_area_working", parsedData?.p_area_working);
+      setValue("p_tax_type", parsedData?.p_tax_type);
+      setValue("p_pincode", parsedData?.p_pincode);
+      setValue("p_address", parsedData?.p_address);
+      setValue("p_gst", parsedData?.p_gst);
+      setValue("p_security_contact", parsedData?.p_security_contact);
+      setValue("p_account_contact", parsedData?.p_account_contact);
+      setValue("p_store_contact", parsedData?.p_store_contact);
+      setValue("p_other_contact", parsedData?.p_other_contact);
+      setValue("p_security_email", parsedData?.p_security_email);
+      setValue("p_account_email", parsedData?.p_account_email);
+      setValue("p_store_email", parsedData?.p_store_email);
+      setValue("p_other_email", parsedData?.p_other_email);
+      setValue(
+        "p_international_domestic",
+        parsedData?.p_international_domestic
+      );
+    }
+  }, [setValue]);
+
+  const onSubmit = (formData) => {
+    const storedData = JSON.parse(localStorage.getItem("editPlant"));
+    const updatedData = {
+      p_id: storedData?.p_id,
+      c_id: currentComapnyID,
+      p_state: formData.p_state,
+      p_city: formData.p_city,
+      p_area_working: formData.p_area_working,
+      p_tax_type: formData.p_tax_type,
+      p_pincode: formData.p_pincode,
+      p_address: formData.p_address,
+      p_gst: formData.p_gst,
+      p_security_contact: formData.p_security_contact,
+      p_account_contact: formData.p_account_contact,
+      p_store_contact: formData.p_store_contact,
+      p_other_contact: formData.p_other_contact,
+      p_security_email: formData.p_security_email,
+      p_account_email: formData.p_account_email,
+      p_store_email: formData.p_store_email,
+      p_other_email: formData.p_other_email,
+      p_international_domestic: formData.p_international_domestic,
+    };
+    dispatch(updatePlant(updatedData));
+    localStorage.removeItem("editPlant");
+    navigate("/list-plant");
   };
 
   return (
-    <>
+    <div>
       <Header />
       <Sidebar />
       <div className="main-content">
@@ -99,7 +120,7 @@ const AddPlant = () => {
                           role="tab"
                           aria-selected="true"
                         >
-                          <i className="fas fa-home" /> Add Plant
+                          <i className="fas fa-home" /> Edit Plant
                         </a>
                       </li>
                     </ul>
@@ -122,12 +143,15 @@ const AddPlant = () => {
                                   className={`form-control ${
                                     errors.c_id ? "is-invalid" : ""
                                   }`}
-                                  {...register("c_id", {
-                                    required: "Company is required",
-                                  })}
+                                  onChange={(e) =>
+                                    setCurrentComapnyID(e.target.value)
+                                  }
+                                
                                 >
-                                  <option value="">-- Select company --</option>
-                                  {data?.map((company) => (
+                                  <option value={currentComapnyID}>
+                                    {comapnyName}
+                                  </option>
+                                  {companies?.map((company) => (
                                     <option
                                       key={company.c_id}
                                       value={company.c_id}
@@ -135,7 +159,6 @@ const AddPlant = () => {
                                       {company.c_name}
                                     </option>
                                   ))}
-                                  {/* Add your company options here */}
                                 </select>
                                 {errors.c_id && (
                                   <div className="invalid-feedback">
@@ -151,16 +174,16 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.state ? "is-invalid" : ""
+                                    errors.p_state ? "is-invalid" : ""
                                   }`}
                                   placeholder="State"
-                                  {...register("state", {
+                                  {...register("p_state", {
                                     required: "State is required",
                                   })}
                                 />
-                                {errors.state && (
+                                {errors.p_state && (
                                   <div className="invalid-feedback">
-                                    {errors.state.message}
+                                    {errors.p_state.message}
                                   </div>
                                 )}
                               </div>
@@ -172,16 +195,16 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.city ? "is-invalid" : ""
+                                    errors.p_city ? "is-invalid" : ""
                                   }`}
                                   placeholder="City"
-                                  {...register("city", {
+                                  {...register("p_city", {
                                     required: "City is required",
                                   })}
                                 />
-                                {errors.city && (
+                                {errors.p_city && (
                                   <div className="invalid-feedback">
-                                    {errors.city.message}
+                                    {errors.p_city.message}
                                   </div>
                                 )}
                               </div>
@@ -195,16 +218,16 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.workingArea ? "is-invalid" : ""
+                                    errors.p_area_working ? "is-invalid" : ""
                                   }`}
                                   placeholder="Working area"
-                                  {...register("workingArea", {
+                                  {...register("p_area_working", {
                                     required: "Working area is required",
                                   })}
                                 />
-                                {errors.workingArea && (
+                                {errors.p_area_working && (
                                   <div className="invalid-feedback">
-                                    {errors.workingArea.message}
+                                    {errors.p_area_working.message}
                                   </div>
                                 )}
                               </div>
@@ -217,9 +240,9 @@ const AddPlant = () => {
                                 </label>
                                 <select
                                   className={`form-control ${
-                                    errors.taxType ? "is-invalid" : ""
+                                    errors.p_tax_type ? "is-invalid" : ""
                                   }`}
-                                  {...register("taxType", {
+                                  {...register("p_tax_type", {
                                     required: "Tax type is required",
                                   })}
                                 >
@@ -229,9 +252,9 @@ const AddPlant = () => {
                                   <option value="GST">GST (18%)</option>
                                   <option value="SEZ">SEZ (0%)</option>
                                 </select>
-                                {errors.taxType && (
+                                {errors.p_tax_type && (
                                   <div className="invalid-feedback">
-                                    {errors.taxType.message}
+                                    {errors.p_tax_type.message}
                                   </div>
                                 )}
                               </div>
@@ -243,10 +266,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.pinCode ? "is-invalid" : ""
+                                    errors.p_pincode ? "is-invalid" : ""
                                   }`}
                                   placeholder="Pin code"
-                                  {...register("pinCode", {
+                                  {...register("p_pincode", {
                                     required: "Pin code is required",
                                     pattern: {
                                       value: /^[0-9]{6}$/,
@@ -254,9 +277,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.pinCode && (
+                                {errors.p_pincode && (
                                   <div className="invalid-feedback">
-                                    {errors.pinCode.message}
+                                    {errors.p_pincode.message}
                                   </div>
                                 )}
                               </div>
@@ -268,16 +291,16 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.address ? "is-invalid" : ""
+                                    errors.p_address ? "is-invalid" : ""
                                   }`}
                                   placeholder="Address"
-                                  {...register("address", {
+                                  {...register("p_address", {
                                     required: "Address is required",
                                   })}
                                 />
-                                {errors.address && (
+                                {errors.p_address && (
                                   <div className="invalid-feedback">
-                                    {errors.address.message}
+                                    {errors.p_address.message}
                                   </div>
                                 )}
                               </div>
@@ -289,16 +312,16 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.gst ? "is-invalid" : ""
+                                    errors.p_gst ? "is-invalid" : ""
                                   }`}
                                   placeholder="GST"
-                                  {...register("gst", {
+                                  {...register("p_gst", {
                                     required: "GST is required",
                                   })}
                                 />
-                                {errors.gst && (
+                                {errors.p_gst && (
                                   <div className="invalid-feedback">
-                                    {errors.gst.message}
+                                    {errors.p_gst.message}
                                   </div>
                                 )}
                               </div>
@@ -312,12 +335,12 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.securityContactNumber
+                                    errors.p_security_contact
                                       ? "is-invalid"
                                       : ""
                                   }`}
                                   placeholder="Security Contact Number"
-                                  {...register("securityContactNumber", {
+                                  {...register("p_security_contact", {
                                     required:
                                       "Security contact number is required",
                                     pattern: {
@@ -326,9 +349,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.securityContactNumber && (
+                                {errors.p_security_contact && (
                                   <div className="invalid-feedback">
-                                    {errors.securityContactNumber.message}
+                                    {errors.p_security_contact.message}
                                   </div>
                                 )}
                               </div>
@@ -342,12 +365,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.accountContactNumber
-                                      ? "is-invalid"
-                                      : ""
+                                    errors.p_account_contact ? "is-invalid" : ""
                                   }`}
                                   placeholder="Account Contact Number"
-                                  {...register("accountContactNumber", {
+                                  {...register("p_account_contact", {
                                     required:
                                       "Account contact number is required",
                                     pattern: {
@@ -356,9 +377,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.accountContactNumber && (
+                                {errors.p_account_contact && (
                                   <div className="invalid-feedback">
-                                    {errors.accountContactNumber.message}
+                                    {errors.p_account_contact.message}
                                   </div>
                                 )}
                               </div>
@@ -372,12 +393,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.storeContactNumber
-                                      ? "is-invalid"
-                                      : ""
+                                    errors.p_store_contact ? "is-invalid" : ""
                                   }`}
                                   placeholder="Store Contact Number"
-                                  {...register("storeContactNumber", {
+                                  {...register("p_store_contact", {
                                     required:
                                       "Store contact number is required",
                                     pattern: {
@@ -386,9 +405,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.storeContactNumber && (
+                                {errors.p_store_contact && (
                                   <div className="invalid-feedback">
-                                    {errors.storeContactNumber.message}
+                                    {errors.p_store_contact.message}
                                   </div>
                                 )}
                               </div>
@@ -402,12 +421,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.otherContactNumber
-                                      ? "is-invalid"
-                                      : ""
+                                    errors.p_other_contact ? "is-invalid" : ""
                                   }`}
                                   placeholder="Other Contact Number"
-                                  {...register("otherContactNumber", {
+                                  {...register("p_other_contact", {
                                     required:
                                       "Other contact number is required",
                                     pattern: {
@@ -416,9 +433,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.otherContactNumber && (
+                                {errors.p_other_contact && (
                                   <div className="invalid-feedback">
-                                    {errors.otherContactNumber.message}
+                                    {errors.p_other_contact.message}
                                   </div>
                                 )}
                               </div>
@@ -432,10 +449,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.securityEmail ? "is-invalid" : ""
+                                    errors.p_security_email ? "is-invalid" : ""
                                   }`}
                                   placeholder="Security Email Id"
-                                  {...register("securityEmail", {
+                                  {...register("p_security_email", {
                                     required: "Security email is required",
                                     pattern: {
                                       value:
@@ -444,9 +461,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.securityEmail && (
+                                {errors.p_security_email && (
                                   <div className="invalid-feedback">
-                                    {errors.securityEmail.message}
+                                    {errors.p_security_email.message}
                                   </div>
                                 )}
                               </div>
@@ -460,10 +477,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.accountEmail ? "is-invalid" : ""
+                                    errors.p_account_email ? "is-invalid" : ""
                                   }`}
                                   placeholder="Account Email Id"
-                                  {...register("accountEmail", {
+                                  {...register("p_account_email", {
                                     required: "Account email is required",
                                     pattern: {
                                       value:
@@ -472,9 +489,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.accountEmail && (
+                                {errors.p_account_email && (
                                   <div className="invalid-feedback">
-                                    {errors.accountEmail.message}
+                                    {errors.p_account_email.message}
                                   </div>
                                 )}
                               </div>
@@ -488,10 +505,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.storeEmail ? "is-invalid" : ""
+                                    errors.p_store_email ? "is-invalid" : ""
                                   }`}
                                   placeholder="Store Email Id"
-                                  {...register("storeEmail", {
+                                  {...register("p_store_email", {
                                     required: "Store email is required",
                                     pattern: {
                                       value:
@@ -500,9 +517,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.storeEmail && (
+                                {errors.p_store_email && (
                                   <div className="invalid-feedback">
-                                    {errors.storeEmail.message}
+                                    {errors.p_store_email.message}
                                   </div>
                                 )}
                               </div>
@@ -516,10 +533,10 @@ const AddPlant = () => {
                                 <input
                                   type="text"
                                   className={`form-control ${
-                                    errors.otherEmail ? "is-invalid" : ""
+                                    errors.p_other_email ? "is-invalid" : ""
                                   }`}
                                   placeholder="Other Email Id"
-                                  {...register("otherEmail", {
+                                  {...register("p_other_email", {
                                     required: "Other email is required",
                                     pattern: {
                                       value:
@@ -528,9 +545,9 @@ const AddPlant = () => {
                                     },
                                   })}
                                 />
-                                {errors.otherEmail && (
+                                {errors.p_other_email && (
                                   <div className="invalid-feedback">
-                                    {errors.otherEmail.message}
+                                    {errors.p_other_email.message}
                                   </div>
                                 )}
                               </div>
@@ -592,8 +609,9 @@ const AddPlant = () => {
                                 <button
                                   type="submit"
                                   className="btn btn-success"
+                                  disabled={loading}
                                 >
-                                  Submit
+                                  {loading ? "Updating..." : "Update Plant"}
                                 </button>
                               </div>
                             </div>
@@ -609,8 +627,8 @@ const AddPlant = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
-export default AddPlant;
+export default EditPlant;

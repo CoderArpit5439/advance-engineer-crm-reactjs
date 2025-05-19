@@ -2,20 +2,25 @@ import React, { useEffect, useState } from "react";
 import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteCustomer,
-  GetCustomerList,
-  updateCustomer,
-} from "../../Redux/crmSlices/customerSlice/CustomerSlice";
-import Pagination from "../../Components/Pagination";
-import Swal from "sweetalert2";
+// import {
+//   deleteCustomer,
+//   GetCustomerList,
+//   updateCustomer,
+// } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
+// import Pagination from "../../Components/Pagination";
+// import Swal from "sweetalert2";
 import { fetchPlants } from "../../Redux/crmSlices/plantSlice/PlantSlice";
+import CompanyDetails from "../../Components/DashRightBar/CompanyDetails";
+import PlantDetails from "../../Components/DashRightBar/PlantDetails";
 const ListPlant = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const [isOpen,setIsOpen] = useState(false);
+  const [companyDetails,setCompanyDetails] = useState({});
+  const [plantDetails,setPlantDetails] = useState({});
   const { data, count, loading, response, status, error } = useSelector(
     (state) => {
       return {
@@ -38,6 +43,14 @@ const ListPlant = () => {
       navigate("/edit-plant");
     }
   };
+
+  const onClickCompany = (companyInfo) => {
+    setCompanyDetails(companyInfo);
+  }
+  
+  const onClickPlant = (plantInfo) => {
+    setPlantDetails(plantInfo);
+  }
 
   return (
     <>
@@ -110,9 +123,31 @@ const ListPlant = () => {
                           <tbody className="list form-check-all">
                             {data?.map((plant) => (
                               <tr key={plant.id}>
-                                <td className="">{plant.company_name}</td>
-                                <td className="">{plant.p_state}</td>
-                                <td className="">{plant.p_city}</td>
+                                <td className="">
+                                <a 
+                                href="javascript:void(0)" 
+                                data-bs-toggle="offcanvas" 
+                                data-bs-target="#theme-settings-offcanvas-company" 
+                                aria-controls="theme-settings-offcanvas-company" 
+                                className="text-decoration-underline" 
+                                rel="noreferrer"
+                                onClick={ () => onClickCompany(plant)}
+                                >                          
+                                  {plant.company_name}
+
+                                </a>
+                               
+                                </td>
+                                <td className="" >{plant.p_state}</td>
+                                <td 
+                                onClick={ () => onClickPlant(plant)}    
+                                data-bs-toggle="offcanvas" 
+                                data-bs-target="#theme-settings-offcanvas-plant" 
+                                aria-controls="theme-settings-offcanvas-plant" 
+                                className="text-decoration-underline" 
+                                rel="noreferrer" >
+                                {plant.p_city}
+                                </td>
                                 <td className="">{plant.p_area_working}</td>
                                 <td className="">{plant.p_tax_type}</td>
                                 <td className="">{plant.p_security_contact}</td>
@@ -156,6 +191,8 @@ const ListPlant = () => {
             </div>
           </div>
         </div>
+       <CompanyDetails cData={companyDetails} />
+       <PlantDetails pData={plantDetails} />
       </div>
       <Footer />
     </>
