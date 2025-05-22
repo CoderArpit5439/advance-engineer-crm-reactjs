@@ -37,7 +37,7 @@ const AddProduct = () => {
     dispatch(GetCategoryList());
   }, []);
 
-  
+
 
   const handleProductFile = (files) => {
     setProductMedia(files);
@@ -76,42 +76,43 @@ const AddProduct = () => {
                 </div>
               </div>
             </div>
-            <div className="row">
-              {/*end col*/}
-              <div className="col-xxl-12 mb-10">
-                <div className="card ">
-                  <div className="card-header">
-                    <ul
-                      className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
-                      role="tablist"
-                    >
-                      <li className="nav-item" role="presentation">
-                        <a
-                          className="nav-link active"
-                          data-bs-toggle="tab"
-                          href="#personalDetails"
-                          role="tab"
-                          aria-selected="true"
-                        >
-                          <i className="fas fa-home" /> Add Production
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="card-body p-4">
-                    <div className="tab-content">
-                      <div
-                        className="tab-pane active"
-                        id="personalDetails"
-                        role="tabpanel"
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="col-sm-12"
+            >
+              <div className="row">
+                {/*end col*/}
+                <div className="col-xxl-8 mb-10">
+                  <div className="card ">
+                    <div className="card-header">
+                      <ul
+                        className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                        role="tablist"
                       >
-                        <form
-                          onSubmit={handleSubmit(onSubmit)}
-                          className="col-sm-12"
+                        <li className="nav-item" role="presentation">
+                          <a
+                            className="nav-link active"
+                            data-bs-toggle="tab"
+                            href="#personalDetails"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            <i className="fas fa-home" /> Product Information
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="card-body p-4">
+                      <div className="tab-content">
+                        <div
+                          className="tab-pane active"
+                          id="personalDetails"
+                          role="tabpanel"
                         >
+
                           <div className="row">
                             {/* Category */}
-                            {/* <div className="col-lg-6">
+                            <div className="col-lg-6">
                               <div className="mb-3">
                                 <label
                                   htmlFor="categoryInput"
@@ -146,7 +147,7 @@ const AddProduct = () => {
                                   </p>
                                 )}
                               </div>
-                            </div> */}
+                            </div>
 
                             {/* Unique ID */}
                             <div className="col-lg-6">
@@ -226,83 +227,57 @@ const AddProduct = () => {
                               </div>
                             </div>
 
-                            {/* Material */}
-                            <div className="col-lg-6">
+                            {/* Description */}
+                            <div className="col-lg-12">
                               <div className="mb-3">
                                 <label
-                                  htmlFor="materialInput"
+                                  htmlFor="descriptionInput"
                                   className="form-label"
                                 >
-                                  Material
+                                  Description
                                 </label>
-                                <input
-                                  type="text"
+                                <textarea
                                   className="form-control"
-                                  id="materialInput"
-                                  placeholder="Enter Material"
-                                  {...register("p_material", {
-                                    required: "Material is required",
-                                  })}
+                                  id="descriptionInput"
+                                  rows="3"
+                                  {...register("p_description")}
                                 />
-                                {errors.p_material && (
-                                  <p className="text-danger">
-                                    {errors.p_material.message}
-                                  </p>
-                                )}
                               </div>
                             </div>
 
-                            {/* MOC */}
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="mocInput"
-                                  className="form-label"
-                                >
-                                  MOC
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="mocInput"
-                                  placeholder="Enter MOC"
-                                  {...register("p_moc", {
-                                    required: "MOC is required",
-                                  })}
-                                />
-                                {errors.p_moc && (
-                                  <p className="text-danger">
-                                    {errors.p_moc.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card ">
+                    <div className="card-header">
+                      <ul
+                        className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                        role="tablist"
+                      >
+                        <li className="nav-item" role="presentation">
+                          <a
+                            className="nav-link active"
+                            data-bs-toggle="tab"
+                            href="#personalDetails"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            <i className="fas fa-home" /> About Product
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="card-body p-4">
+                      <div className="tab-content">
+                        <div
+                          className="tab-pane active"
+                          id="personalDetails"
+                          role="tabpanel"
+                        >
 
-                            {/* Dimension */}
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="dimensionInput"
-                                  className="form-label"
-                                >
-                                  Dimension
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="dimensionInput"
-                                  placeholder="Enter Dimension"
-                                  {...register("p_dimension", {
-                                    required: "Dimension is required",
-                                  })}
-                                />
-                                {errors.p_dimension && (
-                                  <p className="text-danger">
-                                    {errors.p_dimension.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
+                          <div className="row">
 
                             {/* Brand */}
                             <div className="col-lg-6">
@@ -351,32 +326,6 @@ const AddProduct = () => {
                                 {errors.p_color && (
                                   <p className="text-danger">
                                     {errors.p_color.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Weight */}
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="weightInput"
-                                  className="form-label"
-                                >
-                                  Weight
-                                </label>
-                                <input
-                                  type="number"
-                                  className="form-control"
-                                  id="weightInput"
-                                  placeholder="Enter Weight"
-                                  {...register("p_weight", {
-                                    required: "Weight is required",
-                                  })}
-                                />
-                                {errors.p_weight && (
-                                  <p className="text-danger">
-                                    {errors.p_weight.message}
                                   </p>
                                 )}
                               </div>
@@ -460,32 +409,6 @@ const AddProduct = () => {
                               </div>
                             </div>
 
-                            {/* Drawing No */}
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="drawingNoInput"
-                                  className="form-label"
-                                >
-                                  Drawing No
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="drawingNoInput"
-                                  placeholder="Enter Drawing No"
-                                  {...register("p_drawing_no", {
-                                    required: "Drawing No is required",
-                                  })}
-                                />
-                                {errors.p_drawing_no && (
-                                  <p className="text-danger">
-                                    {errors.p_drawing_no.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-
                             {/* Finish Type */}
                             <div className="col-lg-6">
                               <div className="mb-3">
@@ -512,77 +435,227 @@ const AddProduct = () => {
                               </div>
                             </div>
 
-                            {/* Status */}
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="statusInput"
-                                  className="form-label"
-                                >
-                                  Status
-                                </label>
-                                <select
-                                  id="statusInput"
-                                  className="form-control"
-                                  {...register("p_status", {
-                                    required: "Status is required",
-                                  })}
-                                >
-                                  <option value=""> -- Select Status --</option>
-                                  <option value="active">Active</option>
-                                  <option value="inactive">inactive</option>
-                                </select>
-                                {errors.p_status && (
-                                  <p className="text-danger">
-                                    {errors.p_status.message}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
 
-                            {/* Description */}
-                            <div className="col-lg-12">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="descriptionInput"
-                                  className="form-label"
-                                >
-                                  Description
-                                </label>
-                                <textarea
-                                  className="form-control"
-                                  id="descriptionInput"
-                                  rows="3"
-                                  {...register("p_description")}
-                                />
-                              </div>
-                            </div>
 
                             {/* File Upload */}
                             <div className="col-lg-12">
                               <DragAndDrop onFilesChange={handleProductFile} />
                             </div>
-
-                            {/* Submit/ */}
-                            <div className="col-lg-12 text-center">
-                              <button
-                                className="btn btn-success    mt-6  text-bold text-lg"
-                                type="submit"
-                              >
-                                Save
-                              </button>
-                            </div>
                           </div>
-                        </form>
+                        </div>
                       </div>
-                      {/*end tab-pane*/}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xxl-4 mb-10">
+                  <div className="card ">
+                    <div className="card-header">
+                      <ul
+                        className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                        role="tablist"
+                      >
+                        <li className="nav-item" role="presentation">
+                          <a
+                            className="nav-link active"
+                            data-bs-toggle="tab"
+                            href="#personalDetails"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            <i className="fas fa-home" /> Product Measurement
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="card-body p-4">
+                      <div className="tab-content">
+                        <div
+                          className="tab-pane active"
+                          id="personalDetails"
+                          role="tabpanel"
+                        >
+                          <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            className="col-sm-12"
+                          >
+                            <div className="row">
+
+                              {/* Material */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="materialInput"
+                                    className="form-label"
+                                  >
+                                    Material
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="materialInput"
+                                    placeholder="Enter Material"
+                                    {...register("p_material", {
+                                      required: "Material is required",
+                                    })}
+                                  />
+                                  {errors.p_material && (
+                                    <p className="text-danger">
+                                      {errors.p_material.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* MOC */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="mocInput"
+                                    className="form-label"
+                                  >
+                                    MOC
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="mocInput"
+                                    placeholder="Enter MOC"
+                                    {...register("p_moc", {
+                                      required: "MOC is required",
+                                    })}
+                                  />
+                                  {errors.p_moc && (
+                                    <p className="text-danger">
+                                      {errors.p_moc.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Dimension */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="dimensionInput"
+                                    className="form-label"
+                                  >
+                                    Dimension
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="dimensionInput"
+                                    placeholder="Enter Dimension"
+                                    {...register("p_dimension", {
+                                      required: "Dimension is required",
+                                    })}
+                                  />
+                                  {errors.p_dimension && (
+                                    <p className="text-danger">
+                                      {errors.p_dimension.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Weight */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="weightInput"
+                                    className="form-label"
+                                  >
+                                    Weight
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    id="weightInput"
+                                    placeholder="Enter Weight"
+                                    {...register("p_weight", {
+                                      required: "Weight is required",
+                                    })}
+                                  />
+                                  {errors.p_weight && (
+                                    <p className="text-danger">
+                                      {errors.p_weight.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Drawing No */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="drawingNoInput"
+                                    className="form-label"
+                                  >
+                                    Drawing No
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="drawingNoInput"
+                                    placeholder="Enter Drawing No"
+                                    {...register("p_drawing_no", {
+                                      required: "Drawing No is required",
+                                    })}
+                                  />
+                                  {errors.p_drawing_no && (
+                                    <p className="text-danger">
+                                      {errors.p_drawing_no.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Status */}
+                              <div className="col-lg-12">
+                                <div className="mb-3">
+                                  <label
+                                    htmlFor="statusInput"
+                                    className="form-label"
+                                  >
+                                    Status
+                                  </label>
+                                  <select
+                                    id="statusInput"
+                                    className="form-control"
+                                    {...register("p_status", {
+                                      required: "Status is required",
+                                    })}
+                                  >
+                                    <option value=""> -- Select Status --</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">inactive</option>
+                                  </select>
+                                  {errors.p_status && (
+                                    <p className="text-danger">
+                                      {errors.p_status.message}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Submit/ */}
+                              <div className="col-lg-12 text-center">
+                                <button
+                                  className="btn btn-success    mt-6  text-bold text-lg"
+                                  type="submit"
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/*end col*/}
-            </div>
-            {/*end row*/}
+            </form>
           </div>
         </div>
       </div>

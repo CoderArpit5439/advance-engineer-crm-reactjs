@@ -11,14 +11,18 @@ const ViewCompany = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { data, plantList, unitList, customerList, error } = useSelector(
+  const { data, plantList, unitList, customerList, quotationList, invoiceList,inquiryList,orderList, cards, error } = useSelector(
     (state) => {
       return {
+        cards: state.rootReducer.companySlice?.singleCompany?.cards,
         data: state.rootReducer.companySlice?.singleCompany?.data,
         plantList: state.rootReducer.companySlice?.singleCompany?.plantList,
         unitList: state.rootReducer.companySlice?.singleCompany?.unitList,
-        customerList:
-          state.rootReducer.companySlice?.singleCompany?.customerList,
+        customerList: state.rootReducer.companySlice?.singleCompany?.customerList,
+        quotationList: state.rootReducer.companySlice?.singleCompany?.quotationList,
+        invoiceList: state.rootReducer.companySlice?.singleCompany?.invoiceList,
+        orderList: state.rootReducer.companySlice?.singleCompany?.orderList,
+        inquiryList: state.rootReducer.companySlice?.singleCompany?.inquiryList,
         error: state.rootReducer.companySlice?.singleCompany?.error,
       };
     }
@@ -31,7 +35,6 @@ const ViewCompany = () => {
     }
   }, []);
 
-  console.log(741, data, plantList, unitList, customerList);
   return (
     <>
       <Header />
@@ -41,115 +44,44 @@ const ViewCompany = () => {
           <div class="container-fluid">
             <div class="row mb-4">
               <div class="col-xl-12">
-                <div class="card crm-widget">
-                  <div class="card-body p-0">
-                    <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
+                {/* <div class="card crm-widget"> */}
+                {/* <div class="card-body p-0"> */}
+                <div class="row ">
+                  {cards?.map((card, i) => {
+                    return (
                       <div class="col">
-                        <div class="py-4 px-3">
-                          <h5 class="text-muted text-uppercase fs-13">
-                            Quotations{" "}
-                            <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
-                          </h5>
-                          <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                              <i class="ri-space-ship-line display-6 text-muted cfs-22"></i>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 class="mb-0 cfs-22">
-                                <span class="counter-value" data-target="197">
-                                  197
-                                </span>
-                              </h2>
+                        <div class="card card-height-100">
+                          <div class="d-flex">
+                            <div class="flex-grow-1 p-3">
+                              <h5 class="mb-1">{card.name}</h5>
+                              <h2 class="mt-2 ff-secondary fw-semibold"><span class="counter-value" >{card.count}</span></h2>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col">
-                        <div class="mt-3 mt-md-0 py-4 px-3">
-                          <h5 class="text-muted text-uppercase fs-13">
-                            Invoices{" "}
-                            <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
-                          </h5>
-                          <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                              <i class="ri-exchange-dollar-line display-6 text-muted cfs-22"></i>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 class="mb-0 cfs-22">
-                                $
-                                <span class="counter-value" data-target="489.4">
-                                  489.4
-                                </span>
-                                k
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="mt-3 mt-md-0 py-4 px-3">
-                          <h5 class="text-muted text-uppercase fs-13">
-                            Orders{" "}
-                            <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i>
-                          </h5>
-                          <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                              <i class="ri-pulse-line display-6 text-muted cfs-22"></i>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 class="mb-0 cfs-22">
-                                <span class="counter-value" data-target="32.89">
-                                  32.89
-                                </span>
-                                %
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="mt-3 mt-lg-0 py-4 px-3">
-                          <h5 class="text-muted text-uppercase fs-13">
-                            Total sales{" "}
-                            <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i>
-                          </h5>
-                          <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                              <i class="ri-service-line display-6 text-muted cfs-22"></i>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 class="mb-0 cfs-22">
-                                <span class="counter-value" data-target="2659">
-                                  2,659
-                                </span>
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="py-4 px-3">
-                          <h5 class="text-muted text-uppercase fs-13">
-                            Inquiry's{" "}
-                            <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
-                          </h5>
-                          <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                              <i class="ri-space-ship-line display-6 text-muted cfs-22"></i>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <h2 class="mb-0 cfs-22">
-                                <span class="counter-value" data-target="197">
-                                  197
-                                </span>
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      // <div class="col">
+                      //   <div class="py-4 px-3">
+                      //     <h5 class="text-muted text-uppercase fs-13">
+                      //       {card.name}{" "}
+                      //       <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
+                      //     </h5>
+                      //     <div class="d-flex align-items-center">
+                      //       <div class="flex-grow-1 ms-3">
+                      //         <h2 class="mb-0 cfs-22">
+                      //           <span class="counter-value">
+                      //           {card.count}
+                      //           </span>
+                      //         </h2>
+                      //       </div>
+                      //     </div>
+                      //   </div>
+                      // </div>
+                    )
+                  })}
+
                 </div>
+                {/* </div> */}
+                {/* </div> */}
               </div>
             </div>
 
@@ -260,6 +192,26 @@ const ViewCompany = () => {
                           <a
                             class="nav-link fw-semibold"
                             data-bs-toggle="tab"
+                            href="#project-inquiry"
+                            role="tab"
+                          >
+                            Inquiry
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link fw-semibold"
+                            data-bs-toggle="tab"
+                            href="#project-order"
+                            role="tab"
+                          >
+                            Order
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link fw-semibold"
+                            data-bs-toggle="tab"
                             href="#project-quotations"
                             role="tab"
                           >
@@ -276,6 +228,7 @@ const ViewCompany = () => {
                             Invoices
                           </a>
                         </li>
+                        
                       </ul>
                     </div>
                   </div>
@@ -547,7 +500,7 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {plantList?.map((plant, i) => {
+                                        {plantList?.length != 0 ? plantList?.map((plant, i) => {
                                           return (
                                             <tr>
                                               <td
@@ -606,13 +559,13 @@ const ViewCompany = () => {
                                               <td>{plant.p_area_working}</td>
                                             </tr>
                                           );
-                                        })}
+                                        })
+                                          :
+                                          <tr><td colspan="4" class="text-center">No plants found</td></tr>
+                                        }
                                       </tbody>
                                     </table>
                                   </div>
-                                  {/* <div class="text-center mt-3">
-                                                        <a href="javascript:void(0);" class="text-success "><i class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load more </a>
-                                                    </div> */}
                                 </div>
                               </div>
                             </div>
@@ -643,29 +596,21 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {unitList?.map((unit, i) => {
+                                        {unitList?.length != 0 ? unitList?.map((unit, i) => {
                                           return (
                                             <tr>
                                               <td>{unit.u_name}</td>
                                               <td>{unit.plant_name}</td>
                                               <td>{unit.u_created_at}</td>
-                                              {/* <td>
-                                            <div>{unit.p_account_contact}</div>
-                                            <div>
-                                              <div>
-                                                {unit.p_account_email}
-                                              </div>
-                                            </div>
-                                          </td> */}
                                             </tr>
                                           );
-                                        })}
+                                        })
+                                        :
+                                      <tr><td colspan="4" class="text-center">No Units found</td></tr>
+                                          }
                                       </tbody>
                                     </table>
                                   </div>
-                                  {/* <div class="text-center mt-3">
-                                                        <a href="javascript:void(0);" class="text-success "><i class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load more </a>
-                                                    </div> */}
                                 </div>
                               </div>
                             </div>
@@ -698,16 +643,16 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {customerList?.map((customer, i) => {
+                                        {customerList?.length != 0 ? customerList?.map((customer, i) => {
                                           return (
                                             <tr>
                                               <td
-                                               className="text-decoration-underline"
+                                                className="text-decoration-underline"
                                                 onClick={() =>
                                                   navigate(
                                                     `/view-customer/${customer.c_id}`
                                                   )}
-                                                  >{customer.c_fullname}</td>
+                                              >{customer.c_fullname}</td>
                                               <td>{customer.c_company_name}</td>
                                               <td>
                                                 <div>{customer.c_mobile}</div>
@@ -728,13 +673,13 @@ const ViewCompany = () => {
                                           </td> */}
                                             </tr>
                                           );
-                                        })}
+                                        })
+                                        :
+                                          <tr><td colspan="10" class="text-center">No Customer found</td></tr>
+                                          }
                                       </tbody>
                                     </table>
                                   </div>
-                                  {/* <div class="text-center mt-3">
-                                                        <a href="javascript:void(0);" class="text-success "><i class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load more </a>
-                                                    </div> */}
                                 </div>
                               </div>
                             </div>
@@ -776,10 +721,9 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {/* {quotationList?.map((customer, i) => { */}
-                                          {/* return ( */}
+                                        {quotationList?.length != 0 ? quotationList?.map((quotation, i) => {
+                                          return (
                                             <tr>
-                                           
                                               <td>145824</td>
                                               <td>Lupin plant</td>
                                               <td>Lupin unit</td>
@@ -795,28 +739,27 @@ const ViewCompany = () => {
                                               <td>1300</td>
                                               <td>1.2 mm</td>
                                               <td>
-                                              <div>
-                                                <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                                <button className="btn btn-sm m-1 btn-warning">View</button>
-                                                <button className="btn btn-sm m-1 btn-info">Order</button>
-                                                <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                              </div>
-                                              <div>
-                                                <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                                <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                                <button className="btn btn-sm m-1 btn-link">Email</button>
-                                              </div>
+                                                <div>
+                                                  <button className="btn btn-sm m-1 btn-success">Follow Up</button>
+                                                  <button className="btn btn-sm m-1 btn-warning">View</button>
+                                                  <button className="btn btn-sm m-1 btn-info">Order</button>
+                                                  <button className="btn btn-sm m-1 btn-danger">Remove</button>
+                                                </div>
+                                                <div>
+                                                  <button className="btn btn-sm m-1 btn-primary">Reject</button>
+                                                  <button className="btn btn-sm m-1 btn-secondary">Print</button>
+                                                  <button className="btn btn-sm m-1 btn-link">Email</button>
+                                                </div>
                                               </td>
-                                              
+
                                             </tr>
-                                          {/* ); */}
-                                        {/* })} */}
+                                          );
+                                        })  
+                                        :
+                                         <tr><td colspan="10" class="text-center">No Quotation found</td></tr>}
                                       </tbody>
                                     </table>
                                   </div>
-                                  {/* <div class="text-center mt-3">
-                                                        <a href="javascript:void(0);" class="text-success "><i class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load more </a>
-                                                    </div> */}
                                 </div>
                               </div>
                             </div>
@@ -827,7 +770,7 @@ const ViewCompany = () => {
                           id="project-invoices"
                           role="tabpanel"
                         >
-                         <div class="card">
+                          <div class="card">
                             <div class="card-body">
                               <div class="d-flex align-items-center mb-4">
                                 <h5 class="card-title flex-grow-1">
@@ -858,47 +801,209 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {/* {quotationList?.map((customer, i) => { */}
-                                          {/* return ( */}
-                                            <tr>
-                                           
-                                              <td>145824</td>
-                                              <td>Lupin plant</td>
-                                              <td>Lupin unit</td>
-                                              <td>Rahul Sharma</td>
-                                              <td>1023</td>
-                                              <td>AEG1021</td>
-                                              <td>SS Chair</td>
-                                              <td>L 500 X W 500</td>
-                                              <td>SS 304</td>
-                                              <td>15 KG</td>
-                                              <td>1</td>
-                                              <td>1300</td>
-                                              <td>1300</td>
-                                              <td>1.2 mm</td>
-                                              <td>
-                                              <div>
-                                                <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                                <button className="btn btn-sm m-1 btn-warning">View</button>
-                                                <button className="btn btn-sm m-1 btn-info">Order</button>
-                                                <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                              </div>
-                                              <div>
-                                                <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                                <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                                <button className="btn btn-sm m-1 btn-link">Email</button>
-                                              </div>
-                                              </td>
-                                              
-                                            </tr>
-                                          {/* ); */}
-                                        {/* })} */}
+                                        {invoiceList?.length != 0 ? invoiceList?.map((Invoice, i) => {
+                                        return (
+                                        <tr>
+
+                                          <td>145824</td>
+                                          <td>Lupin plant</td>
+                                          <td>Lupin unit</td>
+                                          <td>Rahul Sharma</td>
+                                          <td>1023</td>
+                                          <td>AEG1021</td>
+                                          <td>SS Chair</td>
+                                          <td>L 500 X W 500</td>
+                                          <td>SS 304</td>
+                                          <td>15 KG</td>
+                                          <td>1</td>
+                                          <td>1300</td>
+                                          <td>1300</td>
+                                          <td>1.2 mm</td>
+                                          <td>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
+                                              <button className="btn btn-sm m-1 btn-warning">View</button>
+                                              <button className="btn btn-sm m-1 btn-info">Order</button>
+                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
+                                            </div>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
+                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
+                                              <button className="btn btn-sm m-1 btn-link">Email</button>
+                                            </div>
+                                          </td>
+
+                                        </tr>
+                                         );
+                                        })
+                                          :
+                                          <tr><td colspan="10" class="text-center">No Invoice found</td></tr>}
                                       </tbody>
                                     </table>
                                   </div>
-                                  {/* <div class="text-center mt-3">
-                                                        <a href="javascript:void(0);" class="text-success "><i class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load more </a>
-                                                    </div> */}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="tab-pane fade"
+                          id="project-inquiry"
+                          role="tabpanel"
+                        >
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="d-flex align-items-center mb-4">
+                                <h5 class="card-title flex-grow-1">
+                                  All Inquiry
+                                </h5>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <div class="table-responsive table-card">
+                                    <table class="table table-borderless align-middle mb-0 text-center">
+                                      <thead class="table-light">
+                                        <tr>
+                                          <th scope="col">Sr No.</th>
+                                          <th scope="col">Company</th>
+                                          <th scope="col">Customer</th>
+                                          <th scope="col">Quotation</th>
+                                          <th scope="col">Item code</th>
+                                          <th scope="col">DRG no.</th>
+                                          <th scope="col">Description</th>
+                                          <th scope="col">Dimension</th>
+                                          <th scope="col">Material</th>
+                                          <th scope="col">Weight</th>
+                                          <th scope="col">Qty</th>
+                                          <th scope="col">Price</th>
+                                          <th scope="col">Total amt</th>
+                                          <th scope="col">Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {inquiryList?.length != 0 ? inquiryList?.map((inquiry, i) => {
+                                        return (
+                                        <tr>
+
+                                          <td>{i+1}</td>
+                                          <td>{inquiry.company_name}</td>
+                                          <td>{inquiry.customer_name}</td>
+                                          <td>{inquiry.quotation_no}</td>
+                                          <td>{inquiry.inq_item_code}</td>
+                                          <td>{inquiry.inq_drg_no}</td>
+                                          <td>{inquiry.inq_description}</td>
+                                          <td>{inquiry.inq_dimension}</td>
+                                          <td>{inquiry.inq_material}</td>
+                                          <td>{inquiry.inq_weight}</td>
+                                          <td>{inquiry.inq_qty}</td>
+                                          <td>{inquiry.inq_price}</td>
+                                          <td>{inquiry.inq_description}</td>
+                                          <td>{inquiry.inq_status}</td>
+                                          <td>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
+                                              <button className="btn btn-sm m-1 btn-warning">View</button>
+                                              <button className="btn btn-sm m-1 btn-info">Order</button>
+                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
+                                            </div>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
+                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
+                                              <button className="btn btn-sm m-1 btn-link">Email</button>
+                                            </div>
+                                          </td>
+
+                                        </tr>
+                                         );
+                                        })
+                                          :
+                                          <tr><td colspan="10" class="text-center">No Invoice found</td></tr>}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="tab-pane fade"
+                          id="project-order"
+                          role="tabpanel"
+                        >
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="d-flex align-items-center mb-4">
+                                <h5 class="card-title flex-grow-1">
+                                  All Orders
+                                </h5>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-12">
+                                  <div class="table-responsive table-card">
+                                    <table class="table table-borderless align-middle mb-0 text-center">
+                                      <thead class="table-light">
+                                        <tr>
+                                         <th scope="col">Sr No.</th>
+                                          <th scope="col">Company</th>
+                                          <th scope="col">Customer</th>
+                                          <th scope="col">Quotation</th>
+                                          <th scope="col">PO Number</th>
+                                          <th scope="col">Item code</th>
+                                          <th scope="col">DRG no.</th>
+                                          <th scope="col">PO Description</th>
+                                          <th scope="col">Description</th>
+                                          <th scope="col">Dimension</th>
+                                          <th scope="col">Material</th>
+                                          <th scope="col">Weight</th>
+                                          <th scope="col">Qty</th>
+                                          <th scope="col">Price</th>
+                                          <th scope="col">Total amt</th>
+                                          <th scope="col">Thickness</th>
+                                          <th scope="col">Action</th>
+                                       </tr>
+                                      </thead>
+                                      <tbody>
+                                        {orderList?.length != 0 ? orderList?.map((order, i) => {
+                                        return (
+                                        <tr>
+
+                                          <td>145824</td>
+                                          <td>Lupin plant</td>
+                                          <td>Lupin unit</td>
+                                          <td>Rahul Sharma</td>
+                                          <td>1023</td>
+                                          <td>AEG1021</td>
+                                          <td>SS Chair</td>
+                                          <td>L 500 X W 500</td>
+                                          <td>SS 304</td>
+                                          <td>15 KG</td>
+                                          <td>1</td>
+                                          <td>1300</td>
+                                          <td>1300</td>
+                                          <td>1.2 mm</td>
+                                          <td>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
+                                              <button className="btn btn-sm m-1 btn-warning">View</button>
+                                              <button className="btn btn-sm m-1 btn-info">Order</button>
+                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
+                                            </div>
+                                            <div>
+                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
+                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
+                                              <button className="btn btn-sm m-1 btn-link">Email</button>
+                                            </div>
+                                          </td>
+
+                                        </tr>
+                                         );
+                                        })
+                                          :
+                                          <tr><td colspan="10" class="text-center">No Orders found</td></tr>}
+                                      </tbody>
+                                    </table>
+                                  </div>
                                 </div>
                               </div>
                             </div>

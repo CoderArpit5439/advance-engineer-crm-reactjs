@@ -56,63 +56,6 @@ const ListCompany = () => {
         <div className="page-content">
           <div className="container-fluid">
             <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          {" "}
-                          Total Sales
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          Rs.
-                          <span class="counter-value" data-target="559.25">
-                            {cards?.totalSell}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-success-subtle rounded fs-3">
-                          <i class="bx bx-dollar-circle text-success"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          Total Plants
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          <span class="counter-value" data-target="36894">
-                           {cards?.totalPlant}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-info-subtle rounded fs-3">
-                          <i class="bx bx-shopping-bag text-info"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <div class="col-xl-3 col-md-6">
                 <div class="card card-animate">
@@ -148,6 +91,34 @@ const ListCompany = () => {
                     <div class="d-flex align-items-center">
                       <div class="flex-grow-1 overflow-hidden">
                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                          Total Plants
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                      <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                          <span class="counter-value" data-target="36894">
+                            {cards?.totalPlant}
+                          </span>
+                        </h4>
+                      </div>
+                      <div class="avatar-sm flex-shrink-0">
+                        <span class="avatar-title bg-info-subtle rounded fs-3">
+                          <i class="bx bx-shopping-bag text-info"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6">
+                <div class="card card-animate">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
                           Total Units
                         </p>
                       </div>
@@ -156,7 +127,7 @@ const ListCompany = () => {
                       <div>
                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                           <span class="counter-value" data-target="165.89">
-                          {cards?.totalUnit}
+                            {cards?.totalUnit}
                           </span>
                         </h4>
                       </div>
@@ -169,199 +140,221 @@ const ListCompany = () => {
                   </div>
                 </div>
               </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card card-animate">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                          Total Customer
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                      <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                          <span class="counter-value" data-target="165.89">
+                            {cards?.totalCustomer}
+                          </span>
+                        </h4>
+                      </div>
+                      <div class="avatar-sm flex-shrink-0">
+                        <span class="avatar-title bg-primary-subtle rounded fs-3">
+                          <i class="bx bx-wallet text-primary"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
             </div>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">
                   <div className="card-header">
-                    <h4 className="card-title mb-0">Company List</h4>
-                  </div>
-                  {/* end card header */}
-                  <div className="card-body">
-                    <div className="listjs-table" id="customerList">
-                      <div className="row g-4 mb-3">
-                        <div className="col-sm-auto">
-                          <div>
-                            <button
-                              type="button"
-                              className="btn btn-success add-btn"
-                              id="create-btn"
-                              onClick={() => navigate("/add-company")}
-                            >
-                              <i className="ri-add-line align-bottom me-1" />{" "}
-                              Company
-                            </button>
-                          </div>
-                        </div>
-                        <div className="col-sm-auto">
-                          <div>
-                            <button
-                              type="button"
-                              className="btn btn-success add-btn"
-                              id="create-btn"
-                              onClick={() => navigate("/add-plant")}
-                            >
-                              <i className="ri-add-line align-bottom me-1" />{" "}
-                              Plant
-                            </button>
-                          </div>
-                        </div>
-                        <div className="col-sm-auto">
-                          <div>
-                            <button
-                              type="button"
-                              className="btn btn-success add-btn"
-                              id="create-btn"
-                              onClick={() => navigate("/add-unit")}
-                            >
-                              <i className="ri-add-line align-bottom me-1" />{" "}
-                              Unit
-                            </button>
-                          </div>
-                        </div>
+                    <div class="d-flex align-items-center">
+                      <div class="flex-grow-1">
+                        <h4 className="card-title mb-0">Company List</h4>
                       </div>
-                      <div className="table-responsive table-card mt-3 mb-1">
-                        <table
-                          className="table align-middle table-nowrap"
-                          id="customerTable"
-                        >
-                          <thead className="table-light">
-                            <tr>
-                              {/* <th className="sort" data-sort="customer_name">
-                                Photo
-                              </th> */}
-                              <th className="sort" data-sort="phone">
-                                Logo
-                              </th>
-                              <th className="sort" data-sort="email">
-                                Name
-                              </th>
-                              <th className="sort" data-sort="date">
-                                Web
-                              </th>
-
-                              <th className="sort" data-sort="action">
-                                Head office add
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Head office contact
-                              </th>
-                              <th className="sort" data-sort="action">
-                                No. Of total contries plant
-                              </th>
-                              <th className="sort" data-sort="action">
-                                No. Of total india plant
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody className="list form-check-all">
-                            {data && data.length > 0 ? (
-                              data.map((company, index) => (
-                                <tr key={index}>
-                                  <td className="">
-                                    {company.c_image ? (
-                                      <img
-                                        src={company.c_image}
-                                        height="50px"
-                                        width="50px"
-                                        alt={`${company.c_name} logo`}
-                                      />
-                                    ) : (
-                                      <span class="d-flex align-items-center">
-                                        <img
-                                          class="rounded-circle header-profile-user"
-                                          src="../assets/images/users/user-dummy-img.jpg"
-                                          alt="Header Avatar"
-                                        />
-                                      </span>
-                                    )}
-                                  </td>
-                                  <td className="">
-                                    <a
-                                      // href="javascript:void(0)"
-                                      // data-bs-toggle="offcanvas"
-                                      // data-bs-target="#theme-settings-offcanvas-company"
-                                      // aria-controls="theme-settings-offcanvas-company"
-                                      className="text-decoration-underline"
-                                      // rel="noreferrer"
-                                      // onClick={ () => onClickCompany(company)}
-                                      onClick={() =>
-                                        navigate(
-                                          `/view-company/${company.c_id}`
-                                        )
-                                      }
-                                    >
-                                      {company.c_name}
-                                    </a>
-                                  </td>
-                                  <td className="">
-                                    <a
-                                      href={company.c_website}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="underline"
-                                    >
-                                      {company.c_website}
-                                    </a>
-                                  </td>
-
-                                  <td className="">
-                                    {company.c_head_office_address}
-                                  </td>
-                                  <td className="">
-                                    {company.c_head_office_contact}
-                                  </td>
-                                  <td className="">
-                                    {company.total_country_plant}
-                                  </td>
-                                  <td className="">
-                                    {company.total_india_plant}
-                                  </td>
-                                  <td className="">
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-info"
-                                      onClick={() => handleEdit(company)}
-                                    >
-                                      <i className="fa fa-pencil-o"></i> Update
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))
-                            ) : (
-                              <tr>
-                                <td colSpan="9" className="text-center">
-                                  No companies found.
-                                </td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                        <div className="noresult" style={{ display: "none" }}>
-                          <div className="text-center">
-                            <lord-icon
-                              src="https://cdn.lordicon.com/msoeawqm.json"
-                              trigger="loop"
-                              colors="primary:#121331,secondary:#08a88a"
-                              style={{ width: 75, height: 75 }}
-                            />
-                            <h5 className="mt-2">Sorry! No Result Found</h5>
-                            <p className="text-muted mb-0">
-                              We've searched more than 150+ Orders We did not
-                              find any orders for you search.
-                            </p>
+                      <div class="flex-shrink-0">
+                        <div className="listjs-table " id="customerList">
+                          <div className="row g-4 mb-3">
+                            <div className="col-sm-auto">
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-success add-btn"
+                                  id="create-btn"
+                                  onClick={() => navigate("/add-company")}
+                                >
+                                  <i className="ri-add-line align-bottom me-1" />{" "}
+                                  Company
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-sm-auto">
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-success add-btn"
+                                  id="create-btn"
+                                  onClick={() => navigate("/add-plant")}
+                                >
+                                  <i className="ri-add-line align-bottom me-1" />{" "}
+                                  Plant
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-sm-auto">
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-success add-btn"
+                                  id="create-btn"
+                                  onClick={() => navigate("/add-unit")}
+                                >
+                                  <i className="ri-add-line align-bottom me-1" />{" "}
+                                  Unit
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-sm-auto">
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-success add-btn"
+                                  id="create-btn"
+                                  onClick={() => navigate("/add-customer")}
+                                >
+                                  <i className="ri-add-line align-bottom me-1" />{" "}
+                                  Customer
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        {/* <CompanyDetails cData={companyDetails} cId={companyDetails?.c_id}/> */}
                       </div>
                     </div>
+                    {/* 
+                     */}
                   </div>
-                  {/* end card */}
                 </div>
+                <div class="row row-cols-xxl-5 row-cols-lg-4 row-cols-1">
+                  {data && data.length > 0 ? (
+                    data.map((company, index) => (
+                      <div class="col">
+                        <div class="card card-body">
+                          <div class="d-flex mb-4 align-items-center">
+                            <div class="flex-shrink-0">
+                              {company.c_image ?
+                                <img src={company.c_image} alt={`${company.c_name} logo`} class="avatar-sm rounded-circle" />
+                                :
+                                <img src="../assets/images/users/user-dummy-img.jpg" alt={`${company.c_name} logo`} class="avatar-sm rounded-circle" />
+                              }
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                              <h5 class="card-title mb-1 underline"
+                                onClick={() =>
+                                  navigate(
+                                    `/view-company/${company.c_id}`
+                                  )
+                                }
+                              >{company.c_name}</h5>
+                              <a class="text-muted mb-0 underline" href={company.c_website} target="_blank" >{company.c_website}</a>
+                            </div>
+                          </div>
+                          <h6 class="mb-1">$15,548</h6>
+                          <p class="card-text text-muted">Expense Account</p>
+                          <a href="javascript:void(0)" class="btn btn-primary btn-sm">See Details</a>
+                        </div>
+                      </div>
+                      // <tr key={index}>
+                      //   <td className="">
+                      //     {company.c_image ? (
+                      //       <img
+                      //         src={company.c_image}
+                      //         height="50px"
+                      //         width="50px"
+                      //         alt={`${company.c_name} logo`}
+                      //       />
+                      //     ) : (
+                      //       <span class="d-flex align-items-center">
+                      //         <img
+                      //           class="rounded-circle header-profile-user"
+                      //           src="../assets/images/users/user-dummy-img.jpg"
+                      //           alt="Header Avatar"
+                      //         />
+                      //       </span>
+                      //     )}
+                      //   </td>
+                      //   <td className="">
+                      //     <a
+                      //       // href="javascript:void(0)"
+                      //       // data-bs-toggle="offcanvas"
+                      //       // data-bs-target="#theme-settings-offcanvas-company"
+                      //       // aria-controls="theme-settings-offcanvas-company"
+                      //       className="text-decoration-underline"
+                      //       // rel="noreferrer"
+                      //       // onClick={ () => onClickCompany(company)}
+                      //       onClick={() =>
+                      //         navigate(
+                      //           `/view-company/${company.c_id}`
+                      //         )
+                      //       }
+                      //     >
+                      //       {company.c_name}
+                      //     </a>
+                      //   </td>
+                      //   <td className="">
+                      //     <a
+                      //       href={company.c_website}
+                      //       target="_blank"
+                      //       rel="noreferrer"
+                      //       className="underline"
+                      //     >
+                      //       {company.c_website}
+                      //     </a>
+                      //   </td>
+
+                      //   <td className="">
+                      //     {company.c_head_office_address}
+                      //   </td>
+                      //   <td className="">
+                      //     {company.c_head_office_contact}
+                      //   </td>
+                      //   <td className="">
+                      //     {company.total_country_plant}
+                      //   </td>
+                      //   <td className="">
+                      //     {company.total_india_plant}
+                      //   </td>
+                      //   <td className="">
+                      //     <button
+                      //       type="button"
+                      //       className="btn btn-sm btn-info"
+                      //       onClick={() => handleEdit(company)}
+                      //     >
+                      //       <i className="fa fa-pencil-o"></i> Update
+                      //     </button>
+                      //   </td>
+                      // </tr>
+                    ))
+                  ) : (
+                    <div class="col">
+                      <div class="card card-body">
+                        <h6 class="mb-1">No company found</h6>
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+
+                {/* <CompanyDetails cData={companyDetails} cId={companyDetails?.c_id}/> */}
+
+
+                {/* end card */}
+
                 {/* end col */}
               </div>
             </div>

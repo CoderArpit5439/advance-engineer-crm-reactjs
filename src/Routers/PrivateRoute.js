@@ -1,144 +1,154 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Dashboard from '../Pages/Dashboard'
-import AddCustomer from '../Pages/Customer/AddCustomer'
-import ListCustomer from '../Pages/Customer/ListCustomer'
-import ListQuotation from '../Pages/Quotation/ListQuotation'
-import CreateQuotation from '../Pages/Quotation/CreateQuotation'
-import AddProduct from '../Pages/Product/AddProduct'
-import ListProduct from '../Pages/Product/ListProduct'
-import AddCategory from '../Pages/Category/AddCategory'
-import ListCategory from '../Pages/Category/ListCategory'
-import TestingQuotation from '../Pages/Quotation/TestingQuotation'
-import ListInvoice from '../Pages/Invoice/ListInvoice'
-import CreateInvoice from '../Pages/Invoice/CreateInvoice'
-import Lead from '../Pages/Lead'
-import Inquiry from '../Pages/Inquiry'
-import Order from '../Pages/Order'
-import Support from '../Pages/Support'
-import Inventory from '../Pages/Inventory'
-import Account from '../Pages/Account'
-import AddManufacturing from '../Pages/Manufacturing/AddManufacturing'
-import Task from '../Pages/Task'
-import GraphicsList from '../Pages/Graphics/GraphicsList'
-import AddEmployee from '../Pages/Employee/AddEmployee'
-import ListEmployee from '../Pages/Employee/ListEmployee'
-import Manufacturinglist from '../Pages/Manufacturing/Manufacturinglist'
-import Addaccount from '../Pages/Account/Addaccount'
-import AccountList from '../Pages/Account/AccountList'
-import AddInquiry from '../Pages/Inquiry/AddInquiry'
-import Inquirylist from '../Pages/Inquiry/Inquirylist'
-import AddTask from '../Pages/Task/AddTask'
-import TaskList from '../Pages/Task/TaskList'
-import SupportList from "../Pages/Support/SupportList"
-import AddSupport from "../Pages/Support/AddSupport"
-import AddInventory from '../Pages/Inventory/AddInventory'
-import InventoryList from '../Pages/Inventory/InventoryList'
-import AddNewLead from '../Pages/Lead/AddNewLead'
-import LeadList from '../Pages/Lead/LeadList'
-import AddGraphics from '../Pages/Graphics/AddGraphics'
-import TestingInvoice from '../Pages/Invoice/TestingInvoice'
-import EditInvoice from '../Pages/Invoice/EditInvoice'
-import EditLead from '../Pages/Lead/EditLead'
-import ListCompany from '../Pages/Company/ListCompany'
-import AddCompany from '../Pages/Company/AddCompany'
-import ViewCompany from '../Pages/Company/ViewCompany'
-import AddPlant from '../Pages/Plant/AddPlant'
-import ListPlant from '../Pages/Plant/ListPlant'
-import ViewPlant from '../Pages/Plant/ViewPlant'
-import EditCompany from '../Pages/Company/EditCompany'
-import EditPlant from '../Pages/Plant/EditPlant'
-import AddOrder from '../Pages/Order/AddOrder'
-import AllOrders from '../Pages/Order/AllOrders'
-import EditOrder from '../Pages/Order/EditOrder'
-import LoginActivityList from '../Pages/LoginActivity/LoginActivityList'
-import AddUnit from '../Pages/Unit/AddUnit'
-import ListUnit from '../Pages/Unit/ListUnit'
-import ViewCustomer from '../Pages/Customer/ViewCustomer'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "../Pages/Dashboard";
+import AddCustomer from "../Pages/Customer/AddCustomer";
+import ListCustomer from "../Pages/Customer/ListCustomer";
+import ListQuotation from "../Pages/Quotation/ListQuotation";
+import CreateQuotation from "../Pages/Quotation/CreateQuotation";
+import AddProduct from "../Pages/Product/AddProduct";
+import ListProduct from "../Pages/Product/ListProduct";
+import AddCategory from "../Pages/Category/AddCategory";
+import ListCategory from "../Pages/Category/ListCategory";
+import TestingQuotation from "../Pages/Quotation/TestingQuotation";
+import ListInvoice from "../Pages/Invoice/ListInvoice";
+import CreateInvoice from "../Pages/Invoice/CreateInvoice";
+import Lead from "../Pages/Lead";
+import Inquiry from "../Pages/Inquiry";
+import Order from "../Pages/Order";
+import Support from "../Pages/Support";
+import Inventory from "../Pages/Inventory";
+import Account from "../Pages/Account";
+import AddManufacturing from "../Pages/Manufacturing/AddManufacturing";
+import Task from "../Pages/Task";
+import GraphicsList from "../Pages/Graphics/GraphicsList";
+import AddEmployee from "../Pages/Employee/AddEmployee";
+import ListEmployee from "../Pages/Employee/ListEmployee";
+import Manufacturinglist from "../Pages/Manufacturing/Manufacturinglist";
+import Addaccount from "../Pages/Account/Addaccount";
+import AccountList from "../Pages/Account/AccountList";
+import AddInquiry from "../Pages/Inquiry/AddInquiry";
+import Inquirylist from "../Pages/Inquiry/Inquirylist";
+import AddTask from "../Pages/Task/AddTask";
+import TaskList from "../Pages/Task/TaskList";
+import SupportList from "../Pages/Support/SupportList";
+import AddSupport from "../Pages/Support/AddSupport";
+import AddInventory from "../Pages/Inventory/AddInventory";
+import InventoryList from "../Pages/Inventory/InventoryList";
+import AddNewLead from "../Pages/Lead/AddNewLead";
+import LeadList from "../Pages/Lead/LeadList";
+import AddGraphics from "../Pages/Graphics/AddGraphics";
+import TestingInvoice from "../Pages/Invoice/TestingInvoice";
+import EditInvoice from "../Pages/Invoice/EditInvoice";
+import EditLead from "../Pages/Lead/EditLead";
+import ListCompany from "../Pages/Company/ListCompany";
+import AddCompany from "../Pages/Company/AddCompany";
+import ViewCompany from "../Pages/Company/ViewCompany";
+import AddPlant from "../Pages/Plant/AddPlant";
+import ListPlant from "../Pages/Plant/ListPlant";
+import ViewPlant from "../Pages/Plant/ViewPlant";
+import EditCompany from "../Pages/Company/EditCompany";
+import EditPlant from "../Pages/Plant/EditPlant";
+import AddOrder from "../Pages/Order/AddOrder";
+import AllOrders from "../Pages/Order/AllOrders";
+import EditOrder from "../Pages/Order/EditOrder";
+import LoginActivityList from "../Pages/LoginActivity/LoginActivityList";
+import AddUnit from "../Pages/Unit/AddUnit";
+import ListUnit from "../Pages/Unit/ListUnit";
+import ViewCustomer from "../Pages/Customer/ViewCustomer";
+import CalendarEvent from "../Pages/Calender/CalendarEvent";
+import ProductDetail from "../Pages/Product/ProductDetail";
+import ViewOrder from "../Pages/Order/ViewOrder";
+import ListVendor from "../Pages/Vendor/ListVendor";
+import ViewVendor from "../Pages/Vendor/ViewVendor";
 const PrivateRoute = () => {
-    return (
-        <>
-            <Routes>
-                <Route path='/dashboard' element={<Dashboard />} />
+  return (
+    <>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/calendar" element={<CalendarEvent />} />
 
-                <Route path='/add-customer' element={<AddCustomer />} />
-                <Route path='/list-customer' element={<ListCustomer />} />
-                <Route path='/view-customer/:id' element={<ViewCustomer />} />
+        <Route path="/add-customer" element={<AddCustomer />} />
+        <Route path="/list-customer" element={<ListCustomer />} />
+        <Route path="/view-customer/:id" element={<ViewCustomer />} />
 
-                <Route path='/add-company' element={<AddCompany />} />
-                <Route path='/list-company' element={<ListCompany />} />
-                <Route path='/edit-company' element={<EditCompany />} />
-                <Route path='/view-company/:id' element={<ViewCompany />} />
+        <Route path="/add-company" element={<AddCompany />} />
+        <Route path="/list-company" element={<ListCompany />} />
+        <Route path="/edit-company" element={<EditCompany />} />
+        <Route path="/view-company/:id" element={<ViewCompany />} />
 
-                <Route path='/add-plant' element={<AddPlant />} />
-                {/* <Route path='/list-plant' element={<ListPlant />} /> */}
-                <Route path='/edit-plant' element={<EditPlant />} />
-                <Route path='/view-plant/:id' element={<ViewPlant />} />
+        <Route path="/add-plant" element={<AddPlant />} />
+        {/* <Route path='/list-plant' element={<ListPlant />} /> */}
+        <Route path="/edit-plant" element={<EditPlant />} />
+        <Route path="/view-plant/:id" element={<ViewPlant />} />
 
-                <Route path='/add-unit' element={<AddUnit />} />
-                {/* <Route path='/list-unit' element={<ListUnit />} /> */}
+        <Route path="/add-unit" element={<AddUnit />} />
+        {/* <Route path='/list-unit' element={<ListUnit />} /> */}
 
-                <Route path='/list-quotation' element={<ListQuotation />} />
-                <Route path='/create-quotation' element={<CreateQuotation />} />
-                <Route path='/testing-quotation' element={<TestingQuotation />} />
+        <Route path="/list-quotation" element={<ListQuotation />} />
+        <Route path="/create-quotation" element={<CreateQuotation />} />
+        <Route path="/testing-quotation" element={<TestingQuotation />} />
 
-                <Route path='/list-invoice' element={<ListInvoice />} />
-                <Route path='/create-invoice' element={<CreateInvoice />} />
-                <Route path='/testing-invoice' element={<TestingInvoice />} />
-                <Route path='/edit-invoice' element={<EditInvoice />} />
+        <Route path="/list-invoice" element={<ListInvoice />} />
+        <Route path="/create-invoice" element={<CreateInvoice />} />
+        <Route path="/testing-invoice" element={<TestingInvoice />} />
+        <Route path="/edit-invoice" element={<EditInvoice />} />
 
-                <Route path='/add-product' element={<AddProduct />} />
-                <Route path='/list-product' element={<ListProduct />} />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/view-product/:id" element={<ProductDetail />} />
+        <Route path="/list-product" element={<ListProduct />} />
 
-                <Route path='/add-category' element={<AddCategory />} />
-                <Route path='/list-category' element={<ListCategory />} />
-           
-                <Route path='/list-lead' element={<Lead />} />
+        <Route path="/add-category" element={<AddCategory />} />
+        <Route path="/list-category" element={<ListCategory />} />
 
-                <Route path='/add-inquiry' element={<AddInquiry />} />
-                <Route path='/inquiry-list' element={<Inquirylist />} />
+        <Route path="/list-lead" element={<Lead />} />
 
-                <Route path='/add-order' element={<AddOrder/>}/>
-                <Route path='/all-order' element={<AllOrders/>}/>
-                <Route path='/edit-order-details' element={<EditOrder/>}/>
+        <Route path="/add-inquiry" element={<AddInquiry />} />
+        <Route path="/inquiry-list" element={<Inquirylist />} />
 
+        <Route path="/add-order" element={<AddOrder />} />
+        <Route path="/all-order" element={<AllOrders />} />
+        <Route path="/view-order/:id" element={<ViewOrder />} />
+        <Route path="/edit-order-details" element={<EditOrder />} />
 
-                <Route path='/list-order' element={<Order />} />
-                <Route path='/list-support' element={<Support />} />
-                <Route path='/list-inventory' element={<Inventory />} />
-                
-                <Route path='/add-account' element={<Addaccount />} />
-                <Route path='/account-list' element={<AccountList />} />
+        <Route path="/list-vendor" element={<ListVendor />} />
+        <Route path="/view-vendor/:id" element={<ViewVendor />} />
 
-                <Route path='/add-manufacturing' element={<AddManufacturing />} />
-                <Route path='/manufacturing-list' element={<Manufacturinglist />} />
-                
-                <Route path='/add-task' element={<AddTask />} />
-                <Route path='/task-list' element={<TaskList />} />
+        {/* not used routes */}
+        <Route path="/list-order" element={<Order />} />
+        <Route path="/list-support" element={<Support />} />
+        <Route path="/list-inventory" element={<Inventory />} />
 
-                <Route path='/graphics-list' element={<GraphicsList/>}/>
+        <Route path="/add-account" element={<Addaccount />} />
+        <Route path="/account-list" element={<AccountList />} />
 
-                <Route path='/add-employee' element={<AddEmployee/>}/>
-                <Route path='/list-employee' element={<ListEmployee/>}/> 
+        <Route path="/add-manufacturing" element={<AddManufacturing />} />
+        <Route path="/manufacturing-list" element={<Manufacturinglist />} />
 
-                <Route path='/login-activity-list' element={<LoginActivityList/>}/>
+        <Route path="/add-task" element={<AddTask />} />
+        <Route path="/task-list" element={<TaskList />} />
 
-                <Route path='/support-list' element={<SupportList />} />
-                <Route path='/add-support' element={<AddSupport />} />
+        <Route path="/graphics-list" element={<GraphicsList />} />
 
-                <Route path='/inventory-list' element={<InventoryList />} />
-                <Route path='/add-inventory' element={<AddInventory />} />
+        <Route path="/add-employee" element={<AddEmployee />} />
+        <Route path="/list-employee" element={<ListEmployee />} />
 
-                <Route path='/add-lead' element={<AddNewLead />} />
-                <Route path='/lead-list' element={<LeadList />} />
-                <Route path='/update-lead' element={<EditLead />} />
+        <Route path="/login-activity-list" element={<LoginActivityList />} />
 
-                <Route path='/add-graphics' element={<AddGraphics />} />
-                <Route path='/Graphic-list' element={<GraphicsList />} />
+        <Route path="/support-list" element={<SupportList />} />
+        <Route path="/add-support" element={<AddSupport />} />
 
-            </Routes>
-        </>
-    )
-}
+        <Route path="/inventory-list" element={<InventoryList />} />
+        <Route path="/add-inventory" element={<AddInventory />} />
 
-export default PrivateRoute
+        <Route path="/add-lead" element={<AddNewLead />} />
+        <Route path="/lead-list" element={<LeadList />} />
+        <Route path="/update-lead" element={<EditLead />} />
+
+        <Route path="/add-graphics" element={<AddGraphics />} />
+        <Route path="/Graphic-list" element={<GraphicsList />} />
+      </Routes>
+    </>
+  );
+};
+
+export default PrivateRoute;

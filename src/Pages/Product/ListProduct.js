@@ -108,11 +108,449 @@ const ListProduct = () => {
     setProductDetail(data);
   };
 
+  const menuItems = [
+    "Dashboard",
+  ];
+
   return (
     <>
       <Header />
       <Sidebar />
-      <div className="main-content">
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                  <h4 class="mb-sm-0">Products</h4>
+
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Ecommerce</a>
+                      </li>
+                      <li class="breadcrumb-item active">Products</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div className="chat-wrapper col-md-12 col-lg-2 d-lg-flex">
+                <div
+                  className="chat-leftsidebar-modify"
+                  style={{ height: "auto" }}
+                >
+                  <div className="px-4 pt-4 mb-3">
+                    <div className="text-center">
+                      <div>
+                        <img
+                          className="mb-4"
+                          src="/assets/images/logo-light.png"
+                          height="45"
+                          width="auto"
+                          alt="remark logo"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="tab-content text-muted">
+                    <div className="tab-pane active" style={{ height: "auto" }}>
+                      <ul className="list-unstyled mobile-responsive">
+                        {menuItems.map((item, index) => (
+                          <li
+                            key={index}
+                            className={`px-4 rounded-pill menu-option ${
+                              item === "Consultancy"
+                                ? "bg-primary bg-gradient"
+                                : "null"
+                            }`}
+                          >
+                            <div className="d-flex align-items-center">
+                              <div className="flex-grow-1">
+                                <h4
+                                  className={`mb-0 fs-13 ${
+                                    item === "Consultancy"
+                                      ? "text-light"
+                                      : "text-muted"
+                                  }`}
+                                >
+                                  {item}
+                                </h4>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-10">
+                <div>
+                  <div class="card">
+                    <div class="card-header border-0">
+                      <div class="row g-4">
+                        <div class="col-sm-auto">
+                          <div>
+                            <a
+                              href="apps-ecommerce-add-product.html"
+                              class="btn btn-success"
+                              id="addproduct-btn"
+                            >
+                              <i class="ri-add-line align-bottom me-1"></i> Add
+                              Product
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-sm">
+                          <div class="d-flex justify-content-sm-end">
+                            <div class="search-box ms-2">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="searchProductList"
+                                placeholder="Search Products..."
+                              />
+                              <i class="ri-search-line search-icon"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-header">
+                      <div class="row align-items-center">
+                        <div class="col-auto">
+                          <div id="selection-element">
+                            <div class="my-n1 d-flex align-items-center text-muted">
+                              Select{" "}
+                              <div
+                                id="select-content"
+                                class="text-body fw-semibold px-1"
+                              ></div>{" "}
+                              Result{" "}
+                              <button
+                                type="button"
+                                class="btn btn-link link-danger p-0 ms-3 material-shadow-none"
+                                data-bs-toggle="modal"
+                                data-bs-target="#removeItemModal"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="tab-content text-muted">
+                        <div
+                          class="tab-pane active"
+                          id="productnav-all"
+                          role="tabpanel"
+                        >
+                          <div
+                            id="table-product-list-all"
+                            class="table-card gridjs-border-none"
+                          >
+                            <div
+                              role="complementary"
+                              class="gridjs gridjs-container"
+                              style={{ width: "100%" }}
+                            >
+                              <div
+                                class="gridjs-wrapper"
+                                style={{ height: "auto" }}
+                              >
+                                <table
+                                  role="grid"
+                                  class="gridjs-table"
+                                  style={{ height: "auto" }}
+                                >
+                                  <thead class="gridjs-thead">
+                                    <tr class="gridjs-tr">
+                                      <th
+                                        data-column-id="#"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "40px" }}
+                                      >
+                                        <div class="gridjs-th-content">#</div>
+                                      </th>
+                                      <th
+                                        data-column-id="product"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "360px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Product
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="stock"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "94px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Stock
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="price"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "101px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Price
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="orders"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "84px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Orders
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="orders"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "84px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Rating
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="orders"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "84px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Published
+                                        </div>
+                                      </th>
+                                      <th
+                                        data-column-id="orders"
+                                        class="gridjs-th gridjs-th-sort text-muted"
+                                        tabindex="0"
+                                        style={{ width: "84px" }}
+                                      >
+                                        <div class="gridjs-th-content">
+                                          Action
+                                        </div>
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {showItems?.length > 0 ? (
+                                      showItems?.map((product, i) => {
+                                        return (
+                                          <tr class="gridjs-tr">
+                                            <td
+                                              data-column-id="#"
+                                              class="gridjs-td"
+                                            >
+                                              <span>
+                                                <div class="form-check checkbox-product-list">
+                                                  <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    value="1"
+                                                    id="checkbox-1"
+                                                  />
+                                                  <label
+                                                    class="form-check-label"
+                                                    for="checkbox-1"
+                                                  ></label>
+                                                </div>
+                                              </span>
+                                            </td>
+
+                                            <td
+                                              data-column-id="product"
+                                              class="gridjs-td"
+                                            >
+                                              <span>
+                                                <div class="d-flex align-items-center">
+                                                  <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar-sm bg-light rounded p-1">
+                                                      {product.p_image !==
+                                                      null ? (
+                                                        <img
+                                                          src={product.p_image}
+                                                          className="img-fluid d-block"
+                                                          alt="Product Image"
+                                                        />
+                                                      ) : (
+                                                        <img
+                                                          src="assets/dist/img/default-product.png"
+                                                          className="img-fluid d-block"
+                                                          alt="Default Image"
+                                                        />
+                                                      )}
+                                                    </div>
+                                                  </div>
+                                                  <div class="flex-grow-1">    
+                                                    <h5 class="fs-14 mb-1">
+                                                      <a
+                                                      onClick={() => navigate(`/view-product/${product.p_id}`)}
+                                                        class="text-body"
+                                                        >
+                                                        {product.p_name}
+                                                      </a>
+                                                    </h5>
+                                                    <p class="text-muted mb-0">
+                                                      Category :{" "}
+                                                      <span class="fw-medium">
+                                                        Fashion
+                                                      </span>
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </span>
+                                            </td>
+
+                                            <td
+                                              data-column-id="stock"
+                                              class="gridjs-td"
+                                            >
+                                              12
+                                            </td>
+                                            <td
+                                              data-column-id="price"
+                                              class="gridjs-td"
+                                            >
+                                              <span>$215.00</span>
+                                            </td>
+                                            <td
+                                              data-column-id="orders"
+                                              class="gridjs-td"
+                                            >
+                                              48
+                                            </td>
+
+                                            <td
+                                              data-column-id="rating"
+                                              class="gridjs-td"
+                                            >
+                                              <span>
+                                                <span class="badge bg-light text-body fs-12 fw-medium">
+                                                  <i class="mdi mdi-star text-warning me-1"></i>
+                                                  4.2
+                                                </span>
+                                              </span>
+                                            </td>
+
+                                            <td
+                                              data-column-id="published"
+                                              class="gridjs-td"
+                                            >
+                                              <span>
+                                                12 Oct, 2021
+                                                <small class="text-muted ms-1">
+                                                  10:05 AM
+                                                </small>
+                                              </span>
+                                            </td>
+
+                                            <td
+                                              data-column-id="action"
+                                              class="gridjs-td"
+                                            >
+                                              <span>
+                                                <div class="dropdown">
+                                                  <button
+                                                    class="btn btn-soft-secondary btn-sm dropdown"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false"
+                                                  >
+                                                    <i class="ri-more-fill"></i>
+                                                  </button>
+                                                  <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li>
+                                                      <a
+                                                        class="dropdown-item"
+                                                        href="apps-ecommerce-product-details.html"
+                                                      >
+                                                        <i class="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
+                                                        View
+                                                      </a>
+                                                    </li>
+                                                    <li>
+                                                      <a
+                                                        class="dropdown-item edit-list"
+                                                        data-edit-id="1"
+                                                        href="apps-ecommerce-add-product.html"
+                                                      >
+                                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
+                                                        Edit
+                                                      </a>
+                                                    </li>
+                                                    <li class="dropdown-divider"></li>
+                                                    <li>
+                                                      <a
+                                                        class="dropdown-item remove-list"
+                                                        href="#"
+                                                        data-id="1"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#removeItemModal"
+                                                      >
+                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
+                                                        Delete
+                                                      </a>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </span>
+                                            </td>
+                                          </tr>
+                                        );
+                                      })
+                                    ) : (
+                                      <div></div>
+                                    )}
+                                    {/* Pagination Row */}
+                                    <tr>
+                                      <td colSpan={7}>
+                                        <Pagination
+                                          data={fetchProductList}
+                                          setShowItems={setShowItems}
+                                          itemPerPage={20}
+                                          showItems={showItems}
+                                          setCurrentPage={setCurrentPageNo}
+                                          currentPage={currentPageNo}
+                                          totalRow={totalRow}
+                                        />
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
             <div className="row" style={{ fontFamily: "poppins" }}>
@@ -148,9 +586,9 @@ const ListProduct = () => {
         <th>Price</th>
         <th>Material</th>
         <th>Brand</th>
-        <th>Status</th>
-        {/* <th>Action</th> */}
-      </tr>
+        <th>Status</th> */}
+      {/* <th>Action</th> */}
+      {/* </tr>
     </thead>
     <tbody>
       {showItems?.length > 0 ? (
@@ -189,11 +627,11 @@ const ListProduct = () => {
                   {product.p_status}
                 </span>
               )}
-            </td>
-            {/* <td> */}
-              {/* <div className="d-flex gap-2"> */}
-                {/* Edit Button with modal trigger */}
-                    {/* <button
+            </td> */}
+      {/* <td> */}
+      {/* <div className="d-flex gap-2"> */}
+      {/* Edit Button with modal trigger */}
+      {/* <button
                     type="button"
                     className="btn btn-info btn-sm "
                     data-bs-toggle="modal"
@@ -203,8 +641,8 @@ const ListProduct = () => {
                     <i className="fa fa-eye"></i>View
                     </button> */}
 
-                {/* Edit Button with modal trigger */}
-                {/* <button
+      {/* Edit Button with modal trigger */}
+      {/* <button
                   type="button"
                   className="btn btn-add btn-sm bg-teal-800"
                   data-bs-toggle="modal"
@@ -214,8 +652,8 @@ const ListProduct = () => {
                   Edit
                 </button> */}
 
-                {/* Delete Button */}
-                {/* <button
+      {/* Delete Button */}
+      {/* <button
                   type="button"
                   className="btn btn-danger btn-sm"
                   data-bs-toggle="modal"
@@ -224,9 +662,9 @@ const ListProduct = () => {
                 >
                   <i className="fa fa-trash-o"></i>
                 </button> */}
-              {/* </div> */}
-            {/* </td> */}
-          </tr>
+      {/* </div> */}
+      {/* </td> */}
+      {/* </tr>
         ))
       ) : (
         <tr>
@@ -234,9 +672,9 @@ const ListProduct = () => {
             No records found
           </td>
         </tr>
-      )}
+      )} */}
       {/* Pagination Row */}
-      <tr>
+      {/* <tr>
         <td colSpan={7}>
           <Pagination
             data={fetchProductList}
@@ -250,10 +688,10 @@ const ListProduct = () => {
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> */}
 
-  {/* "No Result" Animation */}
-  <div className="noresult" style={{ display: "none" }}>
+      {/* "No Result" Animation */}
+      {/* <div className="noresult" style={{ display: "none" }}>
     <div className="text-center">
       <lord-icon
         src="https://cdn.lordicon.com/msoeawqm.json"
@@ -268,9 +706,9 @@ const ListProduct = () => {
       </p>
     </div>
   </div>
-</div>
+</div> */}
 
-<div className="modal fade" id="productEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+      {/* <div className="modal fade" id="productEditModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header modal-header-primary">
@@ -279,10 +717,10 @@ const ListProduct = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="modal-body">
-          <div className='row'>
-            {/* Your input fields for editing product */}
-            {/* Add your form fields here, similar to the original modal code */}
-          </div>
+          <div className='row'> */}
+      {/* Your input fields for editing product */}
+      {/* Add your form fields here, similar to the original modal code */}
+      {/* </div>
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-danger pull-left" data-bs-dismiss="modal">Close</button>
@@ -291,9 +729,9 @@ const ListProduct = () => {
       </form>
     </div>
   </div>
-</div>
+</div> */}
 
-<div className="modal fade" id="productViewModal" tabindex="-1" role="dialog" aria-hidden="true">
+      {/* <div className="modal fade" id="productViewModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div className="modal-dialog" style={{ width: "900px" }}>
     <div className="modal-content">
       <div className="modal-header modal-header-primary">
@@ -301,35 +739,34 @@ const ListProduct = () => {
         <h3><i className="fa fa-user m-r-5"></i> Product</h3>
       </div>
       <div className="modal-body">
-        <div className='row'>
-          {/* Your form fields for viewing product */}
-          <div className="form-group col-sm-4">
+        <div className='row'> */}
+      {/* Your form fields for viewing product */}
+      {/* <div className="form-group col-sm-4">
             <h6>Name</h6>
             <p>{productDetail?.p_name}</p>
           </div>
           <div className="form-group col-sm-4">
             <h6>Price</h6>
             <p>{productDetail?.p_price}</p>
-          </div>
-          {/* Add the rest of the fields here */}
-        </div>
+          </div> */}
+      {/* Add the rest of the fields here */}
+      {/* </div>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-danger pull-left" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
-
-                    </div>
+      {/* </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -11,7 +11,7 @@ const Sidebar = () => {
   useEffect(() => {
     // console.log(data)
     dispatch(allPermittedPages());
-  }, [])
+  }, []);
 
   return (
     <>
@@ -196,7 +196,7 @@ const Sidebar = () => {
                                         </ul>
                                       </div>
                                     </li> */}
-                                  
+
                                     {/* <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
@@ -283,11 +283,11 @@ const Sidebar = () => {
                                         </ul>
                                       </div>
                                     </li>
-                                      <li className="nav-item">
+                                    <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
                                         data-bs-toggle="collapse"
-                                           href="#employee"
+                                        href="#employee"
                                         role="button"
                                         aria-expanded="false"
                                         aria-controls="sidebarApps"
@@ -329,6 +329,37 @@ const Sidebar = () => {
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
+                                        data-bs-toggle="collapse"
+                                        href="#calendar"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarApps"
+                                      >
+                                        <i className="ri-apps-2-line" />
+                                        <span data-key="t-apps">Calendar</span>
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="calendar"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/calendar")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                              data-key="t-chat"
+                                            >
+                                              List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
                                         href="#LoginActivity"
                                         data-bs-toggle="collapse"
                                         role="button"
@@ -336,7 +367,9 @@ const Sidebar = () => {
                                         aria-controls="sidebarApps"
                                       >
                                         <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Login Activity</span>
+                                        <span data-key="t-apps">
+                                          Login Activity
+                                        </span>
                                       </a>
                                       <div
                                         className="collapse menu-dropdown"
@@ -379,18 +412,20 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                             onClick={()=>navigate("/add-category")}
+                                              onClick={() =>
+                                                navigate("/add-category")
+                                              }
                                               className="nav-link cursor-pointer"
-                                          
                                             >
                                               Add Category
                                             </a>
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                             onClick={()=>navigate("/list-category")}
+                                              onClick={() =>
+                                                navigate("/list-category")
+                                              }
                                               className="nav-link cursor-pointer"
-                                              
                                             >
                                               Category List
                                             </a>
@@ -418,10 +453,10 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                             
                                               className="nav-link collapsed cursor-pointer"
-                                              onClick={()=>navigate("/add-product")}
-                                              
+                                              onClick={() =>
+                                                navigate("/add-product")
+                                              }
                                             >
                                               Add Product
                                             </a>
@@ -432,9 +467,10 @@ const Sidebar = () => {
                                               <ul className="nav nav-sm flex-column">
                                                 <li className="nav-item">
                                                   <a
-                                                    onClick={()=>navigate("/list-product")}
+                                                    onClick={() =>
+                                                      navigate("/list-product")
+                                                    }
                                                     className="nav-link cursor-pointer"
-                                                    
                                                   >
                                                     List Products
                                                   </a>
@@ -444,11 +480,82 @@ const Sidebar = () => {
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                              onClick={()=>navigate("/list-product")}
+                                              onClick={() =>
+                                                navigate("/list-product")
+                                              }
                                               className="nav-link cursor-pointer"
-                                              
                                             >
                                               Product List
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        href="#Order"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarLayouts"
+                                      >
+                                        <i className="ri-layout-3-line" />{" "}
+                                        <span data-key="t-layouts">Orders</span>{" "}
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="Order"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/add-order")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                            >
+                                              Add Order
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/all-order")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                            >
+                                              All Orders
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link collapsed"
+                                        href="#Vendor"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="false"
+                                        aria-controls="sidebarLayouts"
+                                      >
+                                        <i className="ri-layout-3-line" />{" "}
+                                        <span data-key="t-layouts">Vendor</span>{" "}
+                                      </a>
+                                      <div
+                                        className="collapse menu-dropdown"
+                                        id="Vendor"
+                                      >
+                                        <ul className="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              onClick={() =>
+                                                navigate("/list-vendor")
+                                              }
+                                              className="nav-link cursor-pointer"
+                                            >
+                                            List
                                             </a>
                                           </li>
                                         </ul>
@@ -486,9 +593,9 @@ const Sidebar = () => {
                                           </li>
                                           <li className="nav-item">
                                             <a
-                                            onClick={() =>
-                                              navigate("/list-quotation")
-                                            }
+                                              onClick={() =>
+                                                navigate("/list-quotation")
+                                              }
                                               className="nav-link"
                                               data-key="t-detached"
                                             >
@@ -518,9 +625,9 @@ const Sidebar = () => {
                                         <ul className="nav nav-sm flex-column">
                                           <li className="nav-item">
                                             <a
-                                            onClick={() =>
-                                              navigate("/create-invoice")
-                                            }
+                                              onClick={() =>
+                                                navigate("/create-invoice")
+                                              }
                                               className="nav-link"
                                               role="button"
                                               data-key="t-calender"
@@ -674,47 +781,6 @@ const Sidebar = () => {
                                         </ul>
                                       </div>
                                     </li> */}
-                                         <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link collapsed"
-                                        href="#Order"
-                                        data-bs-toggle="collapse"
-                                        role="button"
-                                        aria-expanded="false"
-                                        aria-controls="sidebarLayouts"
-                                      >
-                                        <i className="ri-layout-3-line" />{" "}
-                                        <span data-key="t-layouts">Orders</span>{" "}
-                                      </a>
-                                      <div
-                                        className="collapse menu-dropdown"
-                                        id="Order"
-                                      >
-                                        <ul className="nav nav-sm flex-column">
-                                          <li className="nav-item">
-                                            <a
-                                              onClick={() =>
-                                                navigate("/add-order")
-                                              }
-                                              className="nav-link cursor-pointer"
-                                            >
-                                              Add Order
-                                            </a>
-                                          </li>
-                                          <li className="nav-item">
-                                            <a
-                                              onClick={() =>
-                                                navigate("/all-order")
-                                              }
-                                              className="nav-link cursor-pointer"
-                                            >
-                                              All Orders
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </li>
-
 
                                     <li className="nav-item">
                                       <a
@@ -1074,14 +1140,12 @@ const Sidebar = () => {
                                         id="Graphics"
                                       >
                                         <ul className="nav nav-sm flex-column">
-                                         
                                           <li className="nav-item">
                                             <a
                                               onClick={() =>
                                                 navigate("/add-graphics")
                                               }
                                               className="nav-link cursor-pointer"
-                                           
                                             >
                                               Add Graphics
                                             </a>
@@ -1092,9 +1156,8 @@ const Sidebar = () => {
                                                 navigate("/Graphic-list")
                                               }
                                               className="nav-link cursor-pointer"
-                                           
                                             >
-                                               Graphics List
+                                              Graphics List
                                             </a>
                                           </li>
                                         </ul>
