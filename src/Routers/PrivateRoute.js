@@ -10,7 +10,8 @@ import ListProduct from "../Pages/Product/ListProduct";
 import AddCategory from "../Pages/Category/AddCategory";
 import ListCategory from "../Pages/Category/ListCategory";
 import TestingQuotation from "../Pages/Quotation/TestingQuotation";
-import ListInvoice from "../Pages/Invoice/ListInvoice";
+import ListsInvoice from "../Pages/Invoice/ListsInvoice";
+
 import CreateInvoice from "../Pages/Invoice/CreateInvoice";
 import Lead from "../Pages/Lead";
 import Inquiry from "../Pages/Inquiry";
@@ -60,6 +61,9 @@ import ProductDetail from "../Pages/Product/ProductDetail";
 import ViewOrder from "../Pages/Order/ViewOrder";
 import ListVendor from "../Pages/Vendor/ListVendor";
 import ViewVendor from "../Pages/Vendor/ViewVendor";
+import Contacts from "../Pages/Contacts/Contacts";
+import NewInvoice from "../Pages/Invoice/NewInvoice";
+import Chat from "../Pages/Chat/Chat";
 const PrivateRoute = () => {
   return (
     <>
@@ -81,6 +85,8 @@ const PrivateRoute = () => {
         <Route path="/edit-plant" element={<EditPlant />} />
         <Route path="/view-plant/:id" element={<ViewPlant />} />
 
+         <Route path="/chat-list" element={<Chat />} />
+
         <Route path="/add-unit" element={<AddUnit />} />
         {/* <Route path='/list-unit' element={<ListUnit />} /> */}
 
@@ -88,10 +94,13 @@ const PrivateRoute = () => {
         <Route path="/create-quotation" element={<CreateQuotation />} />
         <Route path="/testing-quotation" element={<TestingQuotation />} />
 
-        <Route path="/list-invoice" element={<ListInvoice />} />
-        <Route path="/create-invoice" element={<CreateInvoice />} />
+        <Route path="/list-invoice" element={<ListsInvoice />} />
+        <Route path="/create-invoice" element={<NewInvoice />} />
         <Route path="/testing-invoice" element={<TestingInvoice />} />
         <Route path="/edit-invoice" element={<EditInvoice />} />
+
+         <Route path="/contact-list" element={<Contacts />} />
+          <Route path="/accounts-details" element={<AccountList />} />
 
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/view-product/:id" element={<ProductDetail />} />

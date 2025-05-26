@@ -34,6 +34,12 @@ const CreateInvoice = () => {
     };
   });
 
+  useEffect(()=>{
+    createImageBitmap.href.local = "machine not working "
+    const data = [{"name":"product1 " ,"name1":"get prodcu"}]
+    Object.keys("name =>","get data ")
+  })
+
   useEffect(() => {
     dispatch(GetCustomerList()); // Fetch customer data when component mounts
   }, [dispatch]);
