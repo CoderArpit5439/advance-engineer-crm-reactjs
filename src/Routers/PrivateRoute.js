@@ -64,6 +64,7 @@ import ViewVendor from "../Pages/Vendor/ViewVendor";
 import Contacts from "../Pages/Contacts/Contacts";
 import NewInvoice from "../Pages/Invoice/NewInvoice";
 import Chat from "../Pages/Chat/Chat";
+import Gallery from "../Pages/Gallery/Gallery";
 const PrivateRoute = () => {
   return (
     <>
@@ -79,6 +80,7 @@ const PrivateRoute = () => {
         <Route path="/list-company" element={<ListCompany />} />
         <Route path="/edit-company" element={<EditCompany />} />
         <Route path="/view-company/:id" element={<ViewCompany />} />
+        <Route path='/gallery' element={<Gallery/>} />
 
         <Route path="/add-plant" element={<AddPlant />} />
         {/* <Route path='/list-plant' element={<ListPlant />} /> */}
