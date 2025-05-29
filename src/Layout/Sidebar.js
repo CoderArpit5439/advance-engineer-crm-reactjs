@@ -319,10 +319,7 @@ const Sidebar = () => {
                                       </div>
                                     </li> */}
 
-                                    {/* Chat */}
-                                       {/* Chat */}
-
-                                      <li className="nav-item">
+                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"
                                         href="#chat"
@@ -342,23 +339,20 @@ const Sidebar = () => {
                                           <li className="nav-item">
                                             <a
                                               onClick={() =>
-                                                navigate("/chat-list")
+                                                navigate("/chat")
                                               }
                                               className="nav-link"
                                               role="button"
                                               data-key="t-calender"
                                             >
-                                             Chat List
+                                              Chat Now
                                             </a>
                                           </li>
-                                        
+                                       
                                         </ul>
                                       </div>
                                     </li>
 
-                                    {/* Chat  */}
-
-                                    {/* Chat */}
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link collapsed"

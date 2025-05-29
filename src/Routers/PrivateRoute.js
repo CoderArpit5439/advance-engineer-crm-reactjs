@@ -157,6 +157,8 @@ const PrivateRoute = () => {
 
         <Route path="/add-graphics" element={<AddGraphics />} />
         <Route path="/Graphic-list" element={<GraphicsList />} />
+        <Route path="/chat" element={<Chat />} />
+      
       </Routes>
     </>
   );

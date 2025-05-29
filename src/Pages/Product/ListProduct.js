@@ -14,6 +14,7 @@ import {
   GetProductList,
   updateProduct,
 } from "../../Redux/crmSlices/productSlice/ProductSlice";
+import ProductSidebar from "../../Components/ProductSidebar";
 
 const ListProduct = () => {
   const {
@@ -108,9 +109,7 @@ const ListProduct = () => {
     setProductDetail(data);
   };
 
-  const menuItems = [
-    "Dashboard",
-  ];
+  const menuItems = ["Dashboard"];
 
   return (
     <>
@@ -142,7 +141,7 @@ const ListProduct = () => {
                   className="chat-leftsidebar-modify"
                   style={{ height: "auto" }}
                 >
-                  <div className="px-4 pt-4 mb-3">
+                  {/* <div className="px-4 pt-4 mb-3">
                     <div className="text-center">
                       <div>
                         <img
@@ -184,6 +183,113 @@ const ListProduct = () => {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  </div> */}
+                  {/* Side bar  */}
+                  <div
+                    className="sidebar bg-white"
+                    style={{
+                      width: "280px",
+                      height: "100vh",
+                      borderRight: "1px solid #eee",
+                    }}
+                  >
+                    <div
+                      className="sidebar-content"
+                      style={{
+                        padding: "16px 0",
+                        height: "100%",
+                        overflowY: "auto",
+                      }}
+                    >
+                      {/* Logo / Brand */}
+                      <div className="px-4 py-3 mb-2">
+                        <h4 className="mb-0 fw-bold">Dashboard</h4>
+                      </div>
+
+                      {/* Main Navigation */}
+                      <ul className="list-unstyled mb-0">
+                        {/* Dashboard */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-dashboard-line me-3"></i>
+                            <span>Dashboard</span>
+                          </a>
+                        </li>
+
+                        {/* Leads */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-contacts-line me-3"></i>
+                            <span>Leads</span>
+                            <span className="badge bg-primary ms-auto">12</span>
+                          </a>
+                        </li>
+
+                        {/* Employees */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-team-line me-3"></i>
+                            <span>Employees</span>
+                          </a>
+                        </li>
+
+                        {/* Employers */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-building-line me-3"></i>
+                            <span>Employers</span>
+                          </a>
+                        </li>
+
+                        {/* Projects */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-task-line me-3"></i>
+                            <span>Projects</span>
+                          </a>
+                        </li>
+
+                        {/* Reports */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-bar-chart-line me-3"></i>
+                            <span>Reports</span>
+                          </a>
+                        </li>
+
+                        {/* Settings */}
+                        <li className="px-3 mb-1">
+                          <a
+                            href="#"
+                            className="d-flex align-items-center px-3 py-2 rounded text-decoration-none"
+                          >
+                            <i className="ri-settings-3-line me-3"></i>
+                            <span>Settings</span>
+                          </a>
+                        </li>
+                      </ul>
+
+                      {/* Divider */}
+                      <hr className="my-3 mx-4" />
                     </div>
                   </div>
                 </div>
@@ -401,12 +507,16 @@ const ListProduct = () => {
                                                       )}
                                                     </div>
                                                   </div>
-                                                  <div class="flex-grow-1">    
+                                                  <div class="flex-grow-1">
                                                     <h5 class="fs-14 mb-1">
                                                       <a
-                                                      onClick={() => navigate(`/view-product/${product.p_id}`)}
+                                                        onClick={() =>
+                                                          navigate(
+                                                            `/view-product/${product.p_id}`
+                                                          )
+                                                        }
                                                         class="text-body"
-                                                        >
+                                                      >
                                                         {product.p_name}
                                                       </a>
                                                     </h5>

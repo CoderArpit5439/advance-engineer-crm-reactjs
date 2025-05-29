@@ -5,64 +5,73 @@ import Footer from "../../Layout/Footer";
 import ReactApexChart from "react-apexcharts";
 
 const ViewVendor = () => {
-
   // --------------------- BASIC COLOUM CHART -------------- START ---------->
- const optionsColoum = {
+  const optionsColoum = {
     chart: {
-      type: 'bar',
-      height: 350
+      type: "bar",
+      height: 350,
     },
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '55%',
+        columnWidth: "55%",
         borderRadius: 5,
-        borderRadiusApplication: 'end'
-      }
+        borderRadiusApplication: "end",
+      },
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent']
+      colors: ["transparent"],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+      categories: [
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+      ],
     },
     yaxis: {
       title: {
-        text: '$ (thousands)'
-      }
+        text: "$ (thousands)",
+      },
     },
     fill: {
-      opacity: 1
+      opacity: 1,
     },
     tooltip: {
       y: {
         formatter: function (val) {
           return "$ " + val + " thousands";
-        }
-      }
-    }
+        },
+      },
+    },
   };
 
   const seriesColoum = [
     {
-      name: 'Net Profit',
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+      name: "Net Profit",
+      data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
     },
     {
-      name: 'Revenue',
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+      name: "Revenue",
+      data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
     },
     {
-      name: 'Free Cash Flow',
-      data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-    }
+      name: "Free Cash Flow",
+      data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+    },
   ];
-// --------------------- BASIC COLOUM CHART -------------- END ---------->
+  // --------------------- BASIC COLOUM CHART -------------- END ---------->
   return (
     <div>
       <Header />
@@ -427,7 +436,12 @@ const ViewVendor = () => {
                           <p class="text-muted mb-0">Conversation Ratio</p>
                         </div>
                       </div>
-                        <ReactApexChart options={optionsColoum} series={seriesColoum} type="bar" height={350} />
+                      <ReactApexChart
+                        options={optionsColoum}
+                        series={seriesColoum}
+                        type="bar"
+                        height={350}
+                      />
                     </div>
                   </div>
 
@@ -435,7 +449,7 @@ const ViewVendor = () => {
                     <div></div>
                   </div>
                 </div>
-
+                  <h4 className="mb-3 mt-2"> Order List</h4>
                 <div class="row g-4 mb-3">
                   <div class="col-sm-auto">
                     <div>
@@ -463,82 +477,174 @@ const ViewVendor = () => {
                 <div class="card">
                   <div class="card-body">
                     <table className="table table-nowrap mb-0">
-                    <thead class="table-light">
-                      <tr >
-                        <th
-                          data-column-id="#"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "40px"}}
-                        >
-                          <div class="gridjs-th-content">#</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="product"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "360px"}}
-                        >
-                          <div class="gridjs-th-content">Product</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="stock"
-                          scope="col"
-                          tabindex="0"
-                          style={{width:"94px"}}
-                        >
-                          <div class="gridjs-th-content">Stock</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="price"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "101px"}}
-                        >
-                          <div class="gridjs-th-content">Price</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="orders"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "84px"}}
-                        >
-                          <div class="gridjs-th-content">Orders</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="rating"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "105px"}}
-                        >
-                          <div class="gridjs-th-content">Rating</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="published"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "220px"}}
-                        >
-                          <div class="gridjs-th-content">Published</div>
-                        
-                        </th>
-                        <th
-                          data-column-id="action"
-                          scope="col"
-                          tabindex="0"
-                          style={{width: "80px"}}
-                        >
-                          <div class="gridjs-th-content">Action</div>
-                        
-                        </th>
-                      </tr>
-                    </thead>
+                      <thead class="table-light">
+                        <tr>
+                          <th
+                            data-column-id="#"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "40px" }}
+                          >
+                            <div class="gridjs-th-content">#</div>
+                          </th>
+                          <th
+                            data-column-id="product"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "360px" }}
+                          >
+                            <div class="gridjs-th-content">Product</div>
+                          </th>
+                          <th
+                            data-column-id="stock"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "94px" }}
+                          >
+                            <div class="gridjs-th-content">Stock</div>
+                          </th>
+                          <th
+                            data-column-id="price"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "101px" }}
+                          >
+                            <div class="gridjs-th-content">Price</div>
+                          </th>
+                          <th
+                            data-column-id="orders"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "84px" }}
+                          >
+                            <div class="gridjs-th-content">Orders</div>
+                          </th>
+                          <th
+                            data-column-id="rating"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "105px" }}
+                          >
+                            <div class="gridjs-th-content">Rating</div>
+                          </th>
+                          <th
+                            data-column-id=""
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "220px" }}
+                          >
+                            <div class="gridjs-th-content"></div>
+                          </th>
+                          <th
+                            data-column-id="action"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "80px" }}
+                          >
+                            <div class="gridjs-th-content">Action</div>
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+                {/* purchase product  */}
+                <h4 className="mb-3 mt-2">Purchase Order List</h4>
+                <div class="row g-4 mb-3">
+                  <div class="col-sm-auto">
+                    <div>
+                      <a
+                        href="apps-ecommerce-add-product.html"
+                        class="btn btn-success"
+                      >
+                        <i class="ri-add-line align-bottom me-1"></i> Add New
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="d-flex justify-content-sm-end">
+                      <div class="search-box ms-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Search Products..."
+                        />
+                        <i class="ri-search-line search-icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <table className="table table-nowrap mb-0">
+                      <thead class="table-light">
+                        <tr>
+                          <th
+                            data-column-id="#"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "40px" }}
+                          >
+                            <div class="gridjs-th-content">#</div>
+                          </th>
+                          <th
+                            data-column-id="product"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "360px" }}
+                          >
+                            <div class="gridjs-th-content">Product</div>
+                          </th>
+                          <th
+                            data-column-id="stock"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "94px" }}
+                          >
+                            <div class="gridjs-th-content">Stock</div>
+                          </th>
+                          <th
+                            data-column-id="price"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "101px" }}
+                          >
+                            <div class="gridjs-th-content">Price</div>
+                          </th>
+                          <th
+                            data-column-id="orders"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "84px" }}
+                          >
+                            <div class="gridjs-th-content">Orders</div>
+                          </th>
+                          <th
+                            data-column-id="rating"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "105px" }}
+                          >
+                            <div class="gridjs-th-content">Rating</div>
+                          </th>
+                          <th
+                            data-column-id=""
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "220px" }}
+                          >
+                            <div class="gridjs-th-content"></div>
+                          </th>
+                          <th
+                            data-column-id="action"
+                            scope="col"
+                            tabindex="0"
+                            style={{ width: "80px" }}
+                          >
+                            <div class="gridjs-th-content">Action</div>
+                          </th>
+                        </tr>
+                      </thead>
                     </table>
                   </div>
                 </div>
