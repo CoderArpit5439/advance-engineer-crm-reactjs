@@ -9,6 +9,7 @@ import {
   deleteSupport,
   fetchSupport,
 } from "../../Redux/crmSlices/support/SupportSlice";
+import TopCards from "../../Components/TopCards";
 const SupportList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ const SupportList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+            <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

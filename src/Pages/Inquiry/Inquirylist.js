@@ -11,6 +11,7 @@ import {
   fetchInquiry,
 } from "../../Redux/crmSlices/Inquiry/InquirySlice";
 import { Navigate } from "react-router-dom";
+import TopCards from "../../Components/TopCards";
 
 const Inquirylist = () => {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ const Inquirylist = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+               <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

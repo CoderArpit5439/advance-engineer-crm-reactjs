@@ -9,6 +9,7 @@ import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
 import { useNavigate } from "react-router-dom";
+import TopCards from "../../Components/TopCards";
 
 const GraphicsList = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const GraphicsList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+            <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLead, deleteLead, searchLead } from "../../Redux/crmSlices/Lead/LeadSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import TopCards from "../../Components/TopCards";
 
 const LeadList = () => {
   const dispatch = useDispatch();
@@ -106,6 +107,7 @@ const LeadList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+               <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

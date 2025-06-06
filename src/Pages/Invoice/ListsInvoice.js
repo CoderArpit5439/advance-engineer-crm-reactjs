@@ -2,7 +2,9 @@ import React from "react";
 import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
+import { useNavigate } from "react-router-dom";
 const ListsInvoice = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -270,7 +272,7 @@ const ListsInvoice = () => {
                             <i className="ri-delete-bin-2-line" />
                           </button>
                           <a
-                            href="apps-invoices-create.html"
+                          onClick={() => navigate('/create-invoice')}
                             className="btn btn-danger"
                           >
                             <i className="ri-add-line align-bottom me-1" />{" "}

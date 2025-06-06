@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../Components/Pagination";
 import Swal from "sweetalert2";
 import {
-    deleteCat,
+  deleteCat,
   GetCategoryList,
   updateCategory,
 } from "../../Redux/crmSlices/categorySlice/CategorySlice";
@@ -101,9 +101,7 @@ const ListCategory = () => {
       if (result.isConfirmed) {
         dispatch(deleteCat(cat?.cat_id))
           .then(() => {
-            dispatch(
-             GetCategoryList()
-            );
+            dispatch(GetCategoryList());
             Swal.fire(
               "Deleted!",
               `${cat.cat_name} has been deleted.`,
@@ -140,7 +138,7 @@ const ListCategory = () => {
                             type="submit"
                             className="btn btn-success add-btn"
                             id="create-btn"
-                            onClick={() => navigate("/add-employee")} // Redirect to "Add Lead" page
+                            onClick={() => navigate("/add-category")} // Redirect to "Add Lead" page
                           >
                             <i className="ri-add-line align-bottom me-1" /> Add
                           </button>
@@ -154,13 +152,13 @@ const ListCategory = () => {
                           <thead className="table-light">
                             <tr>
                               <th className="sort" data-sort="emp_name">
-                             Category Code
+                                Category Code
                               </th>
                               <th className="sort" data-sort="emp_role">
                                 Category Name
                               </th>
                               <th className="sort" data-sort="emp_image">
-                             Category Image 
+                                Category Image
                               </th>
                               <th className="sort" data-sort="action">
                                 Action

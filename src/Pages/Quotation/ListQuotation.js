@@ -17,6 +17,7 @@ import {
   deleteQuotation,
 } from "../../Redux/crmSlices/customerSlice/CustomerSlice";
 import Swal from "sweetalert2";
+import TopCards from "../../Components/TopCards";
 const ListQuotation = () => {
   const {
     register,
@@ -121,6 +122,8 @@ const ListQuotation = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+
+               <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

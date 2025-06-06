@@ -8,6 +8,7 @@ import {
   deleteInventory,
   fetchInventory,
 } from "../../Redux/crmSlices/Inventory/InventorySlice";
+import TopCards from "../../Components/TopCards";
 const InventoryList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ const InventoryList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+               <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

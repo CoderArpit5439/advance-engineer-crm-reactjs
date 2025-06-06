@@ -11,22 +11,32 @@ const ViewCompany = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { data, plantList, unitList, customerList, quotationList, invoiceList,inquiryList,orderList, cards, error } = useSelector(
-    (state) => {
-      return {
-        cards: state.rootReducer.companySlice?.singleCompany?.cards,
-        data: state.rootReducer.companySlice?.singleCompany?.data,
-        plantList: state.rootReducer.companySlice?.singleCompany?.plantList,
-        unitList: state.rootReducer.companySlice?.singleCompany?.unitList,
-        customerList: state.rootReducer.companySlice?.singleCompany?.customerList,
-        quotationList: state.rootReducer.companySlice?.singleCompany?.quotationList,
-        invoiceList: state.rootReducer.companySlice?.singleCompany?.invoiceList,
-        orderList: state.rootReducer.companySlice?.singleCompany?.orderList,
-        inquiryList: state.rootReducer.companySlice?.singleCompany?.inquiryList,
-        error: state.rootReducer.companySlice?.singleCompany?.error,
-      };
-    }
-  );
+  const {
+    data,
+    plantList,
+    unitList,
+    customerList,
+    quotationList,
+    invoiceList,
+    inquiryList,
+    orderList,
+    cards,
+    error,
+  } = useSelector((state) => {
+    return {
+      cards: state.rootReducer.companySlice?.singleCompany?.cards,
+      data: state.rootReducer.companySlice?.singleCompany?.data,
+      plantList: state.rootReducer.companySlice?.singleCompany?.plantList,
+      unitList: state.rootReducer.companySlice?.singleCompany?.unitList,
+      customerList: state.rootReducer.companySlice?.singleCompany?.customerList,
+      quotationList:
+        state.rootReducer.companySlice?.singleCompany?.quotationList,
+      invoiceList: state.rootReducer.companySlice?.singleCompany?.invoiceList,
+      orderList: state.rootReducer.companySlice?.singleCompany?.orderList,
+      inquiryList: state.rootReducer.companySlice?.singleCompany?.inquiryList,
+      error: state.rootReducer.companySlice?.singleCompany?.error,
+    };
+  });
 
   useEffect(() => {
     if (id) {
@@ -54,7 +64,9 @@ const ViewCompany = () => {
                           <div class="d-flex">
                             <div class="flex-grow-1 p-3">
                               <h5 class="mb-1">{card.name}</h5>
-                              <h2 class="mt-2 ff-secondary fw-semibold"><span class="counter-value" >{card.count}</span></h2>
+                              <h2 class="mt-2 ff-secondary fw-semibold">
+                                <span class="counter-value">{card.count}</span>
+                              </h2>
                             </div>
                           </div>
                         </div>
@@ -76,9 +88,8 @@ const ViewCompany = () => {
                       //     </div>
                       //   </div>
                       // </div>
-                    )
+                    );
                   })}
-
                 </div>
                 {/* </div> */}
                 {/* </div> */}
@@ -228,7 +239,6 @@ const ViewCompany = () => {
                             Invoices
                           </a>
                         </li>
-                        
                       </ul>
                     </div>
                   </div>
@@ -482,11 +492,13 @@ const ViewCompany = () => {
                                   All Plants
                                 </h5>
                               </div>
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="table-responsive table-card">
-                                    <table class="table table-borderless align-middle mb-0">
-                                      <thead class="table-light">
+                            </div>
+                          </div>
+                          <div class="row">
+                            {/* <div class="col-lg-12"> */}
+                            {/* <div class="table-responsive table-card"> */}
+                            {/* <table class="table table-borderless align-middle mb-0"> */}
+                            {/* <thead class="table-light">
                                         <tr>
                                           <th scope="col">City</th>
                                           <th scope="col">Accountant</th>
@@ -498,12 +510,14 @@ const ViewCompany = () => {
                                           <th scope="col">Pin Code</th>
                                           <th scope="col">Area Working</th>
                                         </tr>
-                                      </thead>
-                                      <tbody>
-                                        {plantList?.length != 0 ? plantList?.map((plant, i) => {
-                                          return (
-                                            <tr>
-                                              <td
+                                      </thead> */}
+                            {/* <tbody> */}
+                            {plantList?.length != 0 ? (
+                              plantList?.map((plant, i) => {
+                                return (
+                                  <div class="col-xxl-3 col-md-6">
+                                    {/* // <tr>
+                                               <td
                                                 className="text-decoration-underline"
                                                 onClick={() =>
                                                   navigate(
@@ -512,63 +526,130 @@ const ViewCompany = () => {
                                                 }
                                               >
                                                 {plant.p_city}
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {plant.p_account_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {plant.p_account_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {plant.p_security_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {plant.p_security_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {plant.p_store_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {plant.p_store_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {plant.p_other_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {plant.p_other_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>{plant.p_gst}</td>
-                                              <td>{plant.p_state}</td>
-                                              <td>{plant.p_pincode}</td>
-                                              <td>{plant.p_area_working}</td>
-                                            </tr>
-                                          );
-                                        })
-                                          :
-                                          <tr><td colspan="4" class="text-center">No plants found</td></tr>
-                                        }
-                                      </tbody>
-                                    </table>
+                                              </td> 
+                                            //   <td>
+                                            //     <div>
+                                            //       {plant.p_account_contact}
+                                            //     </div>
+                                            //     <div>
+                                            //       <div>
+                                            //         {plant.p_account_email}
+                                            //       </div>
+                                            //     </div>
+                                            //   </td>
+                                            //   <td>
+                                            //     <div>
+                                            //       {plant.p_security_contact}
+                                            //     </div>
+                                            //     <div>
+                                            //       <div>
+                                            //         {plant.p_security_email}
+                                            //       </div>
+                                            //     </div>
+                                            //   </td>
+                                            //   <td>
+                                            //     <div>
+                                            //       {plant.p_store_contact}
+                                            //     </div>
+                                            //     <div>
+                                            //       <div>
+                                            //         {plant.p_store_email}
+                                            //       </div>
+                                            //     </div>
+                                            //   </td>
+                                            //   <td>
+                                            //     <div>
+                                            //       {plant.p_other_contact}
+                                            //     </div>
+                                            //     <div>
+                                            //       <div>
+                                            //         {plant.p_other_email}
+                                            //       </div>
+                                            //     </div>
+                                            //   </td>
+                                            //   <td>{plant.p_gst}</td>
+                                            //   <td>{plant.p_state}</td>
+                                            //   <td>{plant.p_pincode}</td>
+                                            //   <td>{plant.p_area_working}</td>
+                                            // </tr> */}
+                                    <div class="card companiesList-card">
+                                      <div class="card-body">
+                                        <div class="avatar-sm mx-auto">
+                                          <div class="avatar-title bg-light rounded">
+                                            <img
+                                              src="assets/images/companies/img-3.png"
+                                              alt=""
+                                              class="avatar-xxs companyLogo-img"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="text-center">
+                                          <a href="#!">
+                                            <h5
+                                              className="text-decoration-underline mt-3 company-name"
+                                              onClick={() =>
+                                                navigate(
+                                                  `/view-plant/${plant.p_id}`
+                                                )
+                                              }
+                                            >
+                                              {plant.p_city}
+                                            </h5>
+                                          </a>
+                                          <div class="d-none company-desc">
+                                            The IT department of a company
+                                            ensures that the network of
+                                            computers within the organisation
+                                            are well-connected and functioning
+                                            properly. All the other departments
+                                            within the company rely on them to
+                                            ensure that their respective
+                                            functions can go on seamlessly.
+                                          </div>
+                                          <p class="text-muted industry-type">
+                                            IT Department
+                                          </p>
+                                          <div class="d-none">
+                                            <span class="employee">
+                                              250-300
+                                            </span>
+                                            <span class="location">
+                                              Cullera, Spain
+                                            </span>
+                                            <span class="rating">4.8</span>
+                                            <span class="website">
+                                              www.martinsolution.com
+                                            </span>
+                                            <span class="email">
+                                              info@martinsolution.com
+                                            </span>
+                                            <span class="since">1995</span>
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <button
+                                            type="button"
+                                            class="btn btn-soft-primary w-100 viewcompany-list"
+                                          >
+                                            View More
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
+                                );
+                              })
+                            ) : (
+                              <tr>
+                                <td colspan="4" class="text-center">
+                                  No plants found
+                                </td>
+                              </tr>
+                            )}
+                            {/* </tbody>
+                                    </table> */}
+                            {/* </div> */}
+                            {/* </div> */}
                           </div>
                         </div>
                         <div
@@ -576,7 +657,7 @@ const ViewCompany = () => {
                           id="project-units"
                           role="tabpanel"
                         >
-                          <div class="card">
+                          {/* <div class="card">
                             <div class="card-body">
                               <div class="d-flex align-items-center mb-4">
                                 <h5 class="card-title flex-grow-1">
@@ -590,30 +671,121 @@ const ViewCompany = () => {
                                       <thead class="table-light">
                                         <tr>
                                           <th scope="col">Name</th>
-                                          {/* <th scope="col">Contact</th> */}
+                                          {/* <th scope="col">Contact</th>
                                           <th scope="col">Plant</th>
                                           <th scope="col">Create at</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {unitList?.length != 0 ? unitList?.map((unit, i) => {
-                                          return (
-                                            <tr>
-                                              <td>{unit.u_name}</td>
-                                              <td>{unit.plant_name}</td>
-                                              <td>{unit.u_created_at}</td>
-                                            </tr>
-                                          );
-                                        })
-                                        :
-                                      <tr><td colspan="4" class="text-center">No Units found</td></tr>
-                                          }
+                                        {unitList?.length != 0 ? (
+                                          unitList?.map((unit, i) => {
+                                            return (
+                                              <tr>
+                                                <td>{unit.u_name}</td>
+                                                <td>{unit.plant_name}</td>
+                                                <td>{unit.u_created_at}</td>
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td colspan="4" class="text-center">
+                                              No Units found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>
                                 </div>
                               </div>
                             </div>
+                          </div> */}
+                           <div class="card">
+                            <div class="card-body">
+                              <div class="d-flex align-items-center mb-4">
+                                <h5 class="card-title flex-grow-1">
+                                  All Units
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            
+                             {unitList?.length != 0 ? (
+                                          unitList?.map((unit, i) => {
+                                return (
+                                  <div class="col-xxl-3 col-md-6">
+                                    <div class="card companiesList-card">
+                                      <div class="card-body">
+                                        <div class="avatar-sm mx-auto">
+                                          <div class="avatar-title bg-light rounded">
+                                            <img
+                                              src="assets/images/companies/img-3.png"
+                                              alt=""
+                                              class="avatar-xxs companyLogo-img"
+                                            />
+                                          </div>
+                                        </div>
+                                        <div class="text-center">
+                                          <a href="#!">
+                                            <h5
+                                              className="text-decoration-underline mt-3 company-name"
+                                              
+                                            >
+                                             {unit.u_name}
+                                            </h5>
+                                          </a>
+                                          <div class="d-none company-desc">
+                                            The IT department of a company
+                                            ensures that the network of
+                                            computers within the organisation
+                                            are well-connected and functioning
+                                            properly. All the other departments
+                                            within the company rely on them to
+                                            ensure that their respective
+                                            functions can go on seamlessly.
+                                          </div>
+                                          <p class="text-muted industry-type">
+                                            IT Department
+                                          </p>
+                                          <div class="d-none">
+                                            <span class="employee">
+                                              250-300
+                                            </span>
+                                            <span class="location">
+                                              Cullera, Spain
+                                            </span>
+                                            <span class="rating">4.8</span>
+                                            <span class="website">
+                                              www.martinsolution.com
+                                            </span>
+                                            <span class="email">
+                                              info@martinsolution.com
+                                            </span>
+                                            <span class="since">1995</span>
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <button
+                                            type="button"
+                                            class="btn btn-soft-primary w-100 viewcompany-list"
+                                          >
+                                            View More
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              })
+                            ) : (
+                              <tr>
+                                <td colspan="4" class="text-center">
+                                  No plants found
+                                </td>
+                              </tr>
+                            )}
                           </div>
                         </div>
                         <div
@@ -643,27 +815,35 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {customerList?.length != 0 ? customerList?.map((customer, i) => {
-                                          return (
-                                            <tr>
-                                              <td
-                                                className="text-decoration-underline"
-                                                onClick={() =>
-                                                  navigate(
-                                                    `/view-customer/${customer.c_id}`
-                                                  )}
-                                              >{customer.c_fullname}</td>
-                                              <td>{customer.c_company_name}</td>
-                                              <td>
-                                                <div>{customer.c_mobile}</div>
-                                                <div>
-                                                  <div>{customer.c_email}</div>
-                                                </div>
-                                              </td>
-                                              <td>{customer.c_department}</td>
-                                              <td>{customer.c_address}</td>
-                                              <td>{customer.c_created_at}</td>
-                                              {/* <td>
+                                        {customerList?.length != 0 ? (
+                                          customerList?.map((customer, i) => {
+                                            return (
+                                              <tr>
+                                                <td
+                                                  className="text-decoration-underline"
+                                                  onClick={() =>
+                                                    navigate(
+                                                      `/view-customer/${customer.c_id}`
+                                                    )
+                                                  }
+                                                >
+                                                  {customer.c_fullname}
+                                                </td>
+                                                <td>
+                                                  {customer.c_company_name}
+                                                </td>
+                                                <td>
+                                                  <div>{customer.c_mobile}</div>
+                                                  <div>
+                                                    <div>
+                                                      {customer.c_email}
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                                <td>{customer.c_department}</td>
+                                                <td>{customer.c_address}</td>
+                                                <td>{customer.c_created_at}</td>
+                                                {/* <td>
                                             <div>{unit.p_account_contact}</div>
                                             <div>
                                               <div>
@@ -671,12 +851,19 @@ const ViewCompany = () => {
                                               </div>
                                             </div>
                                           </td> */}
-                                            </tr>
-                                          );
-                                        })
-                                        :
-                                          <tr><td colspan="10" class="text-center">No Customer found</td></tr>
-                                          }
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td
+                                              colspan="10"
+                                              class="text-center"
+                                            >
+                                              No Customer found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>
@@ -721,42 +908,64 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {quotationList?.length != 0 ? quotationList?.map((quotation, i) => {
-                                          return (
-                                            <tr>
-                                              <td>145824</td>
-                                              <td>Lupin plant</td>
-                                              <td>Lupin unit</td>
-                                              <td>Rahul Sharma</td>
-                                              <td>1023</td>
-                                              <td>AEG1021</td>
-                                              <td>SS Chair</td>
-                                              <td>L 500 X W 500</td>
-                                              <td>SS 304</td>
-                                              <td>15 KG</td>
-                                              <td>1</td>
-                                              <td>1300</td>
-                                              <td>1300</td>
-                                              <td>1.2 mm</td>
-                                              <td>
-                                                <div>
-                                                  <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                                  <button className="btn btn-sm m-1 btn-warning">View</button>
-                                                  <button className="btn btn-sm m-1 btn-info">Order</button>
-                                                  <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                                </div>
-                                                <div>
-                                                  <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                                  <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                                  <button className="btn btn-sm m-1 btn-link">Email</button>
-                                                </div>
-                                              </td>
-
-                                            </tr>
-                                          );
-                                        })  
-                                        :
-                                         <tr><td colspan="10" class="text-center">No Quotation found</td></tr>}
+                                        {quotationList?.length != 0 ? (
+                                          quotationList?.map((quotation, i) => {
+                                            return (
+                                              <tr>
+                                                <td>145824</td>
+                                                <td>Lupin plant</td>
+                                                <td>Lupin unit</td>
+                                                <td>Rahul Sharma</td>
+                                                <td>1023</td>
+                                                <td>AEG1021</td>
+                                                <td>SS Chair</td>
+                                                <td>L 500 X W 500</td>
+                                                <td>SS 304</td>
+                                                <td>15 KG</td>
+                                                <td>1</td>
+                                                <td>1300</td>
+                                                <td>1300</td>
+                                                <td>1.2 mm</td>
+                                                <td>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-success">
+                                                      Follow Up
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-warning">
+                                                      View
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-info">
+                                                      Order
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-danger">
+                                                      Remove
+                                                    </button>
+                                                  </div>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-primary">
+                                                      Reject
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-secondary">
+                                                      Print
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-link">
+                                                      Email
+                                                    </button>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td
+                                              colspan="10"
+                                              class="text-center"
+                                            >
+                                              No Quotation found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>
@@ -801,43 +1010,64 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {invoiceList?.length != 0 ? invoiceList?.map((Invoice, i) => {
-                                        return (
-                                        <tr>
-
-                                          <td>145824</td>
-                                          <td>Lupin plant</td>
-                                          <td>Lupin unit</td>
-                                          <td>Rahul Sharma</td>
-                                          <td>1023</td>
-                                          <td>AEG1021</td>
-                                          <td>SS Chair</td>
-                                          <td>L 500 X W 500</td>
-                                          <td>SS 304</td>
-                                          <td>15 KG</td>
-                                          <td>1</td>
-                                          <td>1300</td>
-                                          <td>1300</td>
-                                          <td>1.2 mm</td>
-                                          <td>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                              <button className="btn btn-sm m-1 btn-warning">View</button>
-                                              <button className="btn btn-sm m-1 btn-info">Order</button>
-                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                            </div>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                              <button className="btn btn-sm m-1 btn-link">Email</button>
-                                            </div>
-                                          </td>
-
-                                        </tr>
-                                         );
-                                        })
-                                          :
-                                          <tr><td colspan="10" class="text-center">No Invoice found</td></tr>}
+                                        {invoiceList?.length != 0 ? (
+                                          invoiceList?.map((Invoice, i) => {
+                                            return (
+                                              <tr>
+                                                <td>145824</td>
+                                                <td>Lupin plant</td>
+                                                <td>Lupin unit</td>
+                                                <td>Rahul Sharma</td>
+                                                <td>1023</td>
+                                                <td>AEG1021</td>
+                                                <td>SS Chair</td>
+                                                <td>L 500 X W 500</td>
+                                                <td>SS 304</td>
+                                                <td>15 KG</td>
+                                                <td>1</td>
+                                                <td>1300</td>
+                                                <td>1300</td>
+                                                <td>1.2 mm</td>
+                                                <td>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-success">
+                                                      Follow Up
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-warning">
+                                                      View
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-info">
+                                                      Order
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-danger">
+                                                      Remove
+                                                    </button>
+                                                  </div>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-primary">
+                                                      Reject
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-secondary">
+                                                      Print
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-link">
+                                                      Email
+                                                    </button>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td
+                                              colspan="10"
+                                              class="text-center"
+                                            >
+                                              No Invoice found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>
@@ -881,43 +1111,68 @@ const ViewCompany = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {inquiryList?.length != 0 ? inquiryList?.map((inquiry, i) => {
-                                        return (
-                                        <tr>
-
-                                          <td>{i+1}</td>
-                                          <td>{inquiry.company_name}</td>
-                                          <td>{inquiry.customer_name}</td>
-                                          <td>{inquiry.quotation_no}</td>
-                                          <td>{inquiry.inq_item_code}</td>
-                                          <td>{inquiry.inq_drg_no}</td>
-                                          <td>{inquiry.inq_description}</td>
-                                          <td>{inquiry.inq_dimension}</td>
-                                          <td>{inquiry.inq_material}</td>
-                                          <td>{inquiry.inq_weight}</td>
-                                          <td>{inquiry.inq_qty}</td>
-                                          <td>{inquiry.inq_price}</td>
-                                          <td>{inquiry.inq_description}</td>
-                                          <td>{inquiry.inq_status}</td>
-                                          <td>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                              <button className="btn btn-sm m-1 btn-warning">View</button>
-                                              <button className="btn btn-sm m-1 btn-info">Order</button>
-                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                            </div>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                              <button className="btn btn-sm m-1 btn-link">Email</button>
-                                            </div>
-                                          </td>
-
-                                        </tr>
-                                         );
-                                        })
-                                          :
-                                          <tr><td colspan="10" class="text-center">No Invoice found</td></tr>}
+                                        {inquiryList?.length != 0 ? (
+                                          inquiryList?.map((inquiry, i) => {
+                                            return (
+                                              <tr>
+                                                <td>{i + 1}</td>
+                                                <td>{inquiry.company_name}</td>
+                                                <td>{inquiry.customer_name}</td>
+                                                <td>{inquiry.quotation_no}</td>
+                                                <td>{inquiry.inq_item_code}</td>
+                                                <td>{inquiry.inq_drg_no}</td>
+                                                <td>
+                                                  {inquiry.inq_description}
+                                                </td>
+                                                <td>{inquiry.inq_dimension}</td>
+                                                <td>{inquiry.inq_material}</td>
+                                                <td>{inquiry.inq_weight}</td>
+                                                <td>{inquiry.inq_qty}</td>
+                                                <td>{inquiry.inq_price}</td>
+                                                <td>
+                                                  {inquiry.inq_description}
+                                                </td>
+                                                <td>{inquiry.inq_status}</td>
+                                                <td>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-success">
+                                                      Follow Up
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-warning">
+                                                      View
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-info">
+                                                      Order
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-danger">
+                                                      Remove
+                                                    </button>
+                                                  </div>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-primary">
+                                                      Reject
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-secondary">
+                                                      Print
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-link">
+                                                      Email
+                                                    </button>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td
+                                              colspan="10"
+                                              class="text-center"
+                                            >
+                                              No Invoice found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>
@@ -944,7 +1199,7 @@ const ViewCompany = () => {
                                     <table class="table table-borderless align-middle mb-0 text-center">
                                       <thead class="table-light">
                                         <tr>
-                                         <th scope="col">Sr No.</th>
+                                          <th scope="col">Sr No.</th>
                                           <th scope="col">Company</th>
                                           <th scope="col">Customer</th>
                                           <th scope="col">Quotation</th>
@@ -961,46 +1216,67 @@ const ViewCompany = () => {
                                           <th scope="col">Total amt</th>
                                           <th scope="col">Thickness</th>
                                           <th scope="col">Action</th>
-                                       </tr>
+                                        </tr>
                                       </thead>
                                       <tbody>
-                                        {orderList?.length != 0 ? orderList?.map((order, i) => {
-                                        return (
-                                        <tr>
-
-                                          <td>145824</td>
-                                          <td>Lupin plant</td>
-                                          <td>Lupin unit</td>
-                                          <td>Rahul Sharma</td>
-                                          <td>1023</td>
-                                          <td>AEG1021</td>
-                                          <td>SS Chair</td>
-                                          <td>L 500 X W 500</td>
-                                          <td>SS 304</td>
-                                          <td>15 KG</td>
-                                          <td>1</td>
-                                          <td>1300</td>
-                                          <td>1300</td>
-                                          <td>1.2 mm</td>
-                                          <td>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-success">Follow Up</button>
-                                              <button className="btn btn-sm m-1 btn-warning">View</button>
-                                              <button className="btn btn-sm m-1 btn-info">Order</button>
-                                              <button className="btn btn-sm m-1 btn-danger">Remove</button>
-                                            </div>
-                                            <div>
-                                              <button className="btn btn-sm m-1 btn-primary">Reject</button>
-                                              <button className="btn btn-sm m-1 btn-secondary">Print</button>
-                                              <button className="btn btn-sm m-1 btn-link">Email</button>
-                                            </div>
-                                          </td>
-
-                                        </tr>
-                                         );
-                                        })
-                                          :
-                                          <tr><td colspan="10" class="text-center">No Orders found</td></tr>}
+                                        {orderList?.length != 0 ? (
+                                          orderList?.map((order, i) => {
+                                            return (
+                                              <tr>
+                                                <td>145824</td>
+                                                <td>Lupin plant</td>
+                                                <td>Lupin unit</td>
+                                                <td>Rahul Sharma</td>
+                                                <td>1023</td>
+                                                <td>AEG1021</td>
+                                                <td>SS Chair</td>
+                                                <td>L 500 X W 500</td>
+                                                <td>SS 304</td>
+                                                <td>15 KG</td>
+                                                <td>1</td>
+                                                <td>1300</td>
+                                                <td>1300</td>
+                                                <td>1.2 mm</td>
+                                                <td>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-success">
+                                                      Follow Up
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-warning">
+                                                      View
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-info">
+                                                      Order
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-danger">
+                                                      Remove
+                                                    </button>
+                                                  </div>
+                                                  <div>
+                                                    <button className="btn btn-sm m-1 btn-primary">
+                                                      Reject
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-secondary">
+                                                      Print
+                                                    </button>
+                                                    <button className="btn btn-sm m-1 btn-link">
+                                                      Email
+                                                    </button>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            );
+                                          })
+                                        ) : (
+                                          <tr>
+                                            <td
+                                              colspan="10"
+                                              class="text-center"
+                                            >
+                                              No Orders found
+                                            </td>
+                                          </tr>
+                                        )}
                                       </tbody>
                                     </table>
                                   </div>

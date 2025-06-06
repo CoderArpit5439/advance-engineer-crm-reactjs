@@ -5,6 +5,7 @@ import Footer from "../../Layout/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getOrder } from "../../Redux/crmSlices/orderSlice/OrderSlice";
+import TopCards from "../../Components/TopCards";
 
 const AllOrders = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const AllOrders = () => {
                 </div>
               </div>
             </div>
+               <TopCards/>
             <div class="row">
               <div class="col-lg-12">
                 <div class="card" id="orderList">
@@ -64,9 +66,7 @@ const AllOrders = () => {
                           <button
                             type="button"
                             class="btn btn-success add-btn"
-                            data-bs-toggle="modal"
-                            id="create-btn"
-                            data-bs-target="#showModal"
+                            onClick={() => navigate("/add-order")}
                           >
                             <i class="ri-add-line align-bottom me-1"></i> Create
                             Order
@@ -157,26 +157,26 @@ const AllOrders = () => {
                               aria-haspopup="true"
                               aria-expanded="false"
                             >
-                                <select
-                                  class="form-control choices__input"
-                                  data-choices=""
-                                  data-choices-search-false=""
-                                  name="choices-single-default"
-                                  id="idPayment"
-                                  hidden=""
-                                  tabindex="-1"
-                                  data-choice="active"
-                                >
-                                  <option value="">Select Payment</option>
-                                  <option value="all" selected="">
-                                    All
-                                  </option>
-                                  <option value="Mastercard">Mastercard</option>
-                                  <option value="Paypal">Paypal</option>
-                                  <option value="Visa">Visa</option>
-                                  <option value="COD">COD</option>
-                                </select>
-                             
+                              <select
+                                class="form-control choices__input"
+                                data-choices=""
+                                data-choices-search-false=""
+                                name="choices-single-default"
+                                id="idPayment"
+                                hidden=""
+                                tabindex="-1"
+                                data-choice="active"
+                              >
+                                <option value="">Select Payment</option>
+                                <option value="all" selected="">
+                                  All
+                                </option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Visa">Visa</option>
+                                <option value="COD">COD</option>
+                              </select>
+
                               <div
                                 class="choices__list choices__list--dropdown"
                                 aria-expanded="false"
@@ -413,7 +413,7 @@ const AllOrders = () => {
                               </th>
                               <td class="id">
                                 <a
-                                onClick={() => navigate(`/view-order/${1}`)}
+                                  onClick={() => navigate(`/view-order/${1}`)}
                                   class="fw-medium link-primary"
                                 >
                                   #VZ12
@@ -443,10 +443,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -495,12 +492,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ11
-                                </a>
+                                <a class="fw-medium link-primary">#VZ11</a>
                               </td>
                               <td class="customer_name">Diana Kohler</td>
                               <td class="product_name">
@@ -526,10 +518,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -578,12 +567,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ10
-                                </a>
+                                <a class="fw-medium link-primary">#VZ10</a>
                               </td>
                               <td class="customer_name">Henry Baird</td>
                               <td class="product_name">
@@ -609,10 +593,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -661,12 +642,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ9
-                                </a>
+                                <a class="fw-medium link-primary">#VZ9</a>
                               </td>
                               <td class="customer_name">Donald Palmer</td>
                               <td class="product_name">
@@ -692,10 +668,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -744,12 +717,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ8
-                                </a>
+                                <a class="fw-medium link-primary">#VZ8</a>
                               </td>
                               <td class="customer_name">Alexis Clarke</td>
                               <td class="product_name">
@@ -775,10 +743,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -827,12 +792,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ7
-                                </a>
+                                <a class="fw-medium link-primary">#VZ7</a>
                               </td>
                               <td class="customer_name">Nancy Martino</td>
                               <td class="product_name">Funky Prints T-shirt</td>
@@ -856,10 +816,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -908,12 +865,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ6
-                                </a>
+                                <a class="fw-medium link-primary">#VZ6</a>
                               </td>
                               <td class="customer_name">James Price</td>
                               <td class="product_name">Apple iPhone 12</td>
@@ -937,10 +889,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -989,12 +938,7 @@ const AllOrders = () => {
                                 </div>
                               </th>
                               <td class="id">
-                                <a
-                                
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ5
-                                </a>
+                                <a class="fw-medium link-primary">#VZ5</a>
                               </td>
                               <td class="customer_name">Thomas Taylor</td>
                               <td class="product_name">Galaxy Watch4</td>
@@ -1018,10 +962,7 @@ const AllOrders = () => {
                                     data-bs-placement="top"
                                     title="View"
                                   >
-                                    <a
-                                    
-                                      class="text-primary d-inline-block"
-                                    >
+                                    <a class="text-primary d-inline-block">
                                       <i class="ri-eye-fill fs-16"></i>
                                     </a>
                                   </li>
@@ -1240,7 +1181,7 @@ const AllOrders = () => {
                                       required=""
                                     />
                                   </div>
-                                </div>               
+                                </div>
                               </div>
                               <div>
                                 <label

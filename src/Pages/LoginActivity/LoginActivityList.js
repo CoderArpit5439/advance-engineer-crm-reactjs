@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { individualLoginActivity } from "../../Redux/crmSlices/loginActivitySlice/LoginActivitySlice";
+import TopCards from "../../Components/TopCards";
 
 const LoginActivityList = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const LoginActivityList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+            <TopCards/>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

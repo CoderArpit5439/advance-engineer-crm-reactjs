@@ -65,6 +65,16 @@ import Contacts from "../Pages/Contacts/Contacts";
 import NewInvoice from "../Pages/Invoice/NewInvoice";
 import Chat from "../Pages/Chat/Chat";
 import Gallery from "../Pages/Gallery/Gallery";
+import FileManager from "../Pages/FileManager/FileManager";
+import DashboardEmployee from "../Pages/Employee/DashboardEmployee";
+import ListMachine from "../Pages/Machine/ListMachine";
+import ViewMachine from "../Pages/Machine/ViewMachine";
+import AddProject from "../Pages/Project/AddProject";
+import AllProjects from "../Pages/Project/AllProjects";
+import OverviewProject from "../Pages/Project/OverviewProject";
+import NewCompanyList from "../Pages/Company/NewCompanyList";
+import MoreDetails from "../Pages/Company/MoreDetails";
+import Transportation from "../Pages/Transport/Transportation";
 const PrivateRoute = () => {
   return (
     <>
@@ -78,6 +88,7 @@ const PrivateRoute = () => {
 
         <Route path="/add-company" element={<AddCompany />} />
         <Route path="/list-company" element={<ListCompany />} />
+         <Route path="/more-details" element={<MoreDetails />} />
         <Route path="/edit-company" element={<EditCompany />} />
         <Route path="/view-company/:id" element={<ViewCompany />} />
         <Route path='/gallery' element={<Gallery/>} />
@@ -90,6 +101,7 @@ const PrivateRoute = () => {
          <Route path="/chat-list" element={<Chat />} />
 
         <Route path="/add-unit" element={<AddUnit />} />
+        <Route path="/transportation" element={<Transportation />} />
         {/* <Route path='/list-unit' element={<ListUnit />} /> */}
 
         <Route path="/list-quotation" element={<ListQuotation />} />
@@ -140,8 +152,12 @@ const PrivateRoute = () => {
 
         <Route path="/graphics-list" element={<GraphicsList />} />
 
+        <Route path="/list-machine" element={<ListMachine />} />
+        <Route path="/view-machine/:id" element={<ViewMachine />} />
+
         <Route path="/add-employee" element={<AddEmployee />} />
         <Route path="/list-employee" element={<ListEmployee />} />
+        <Route path="/dashboard-employee" element={<DashboardEmployee />} />
 
         <Route path="/login-activity-list" element={<LoginActivityList />} />
 
@@ -154,10 +170,16 @@ const PrivateRoute = () => {
         <Route path="/add-lead" element={<AddNewLead />} />
         <Route path="/lead-list" element={<LeadList />} />
         <Route path="/update-lead" element={<EditLead />} />
+        
+        <Route path="/file-manager" element={<FileManager />} />
 
         <Route path="/add-graphics" element={<AddGraphics />} />
         <Route path="/Graphic-list" element={<GraphicsList />} />
         <Route path="/chat" element={<Chat />} />
+
+        <Route path="/add-project" element={<AddProject/>}/>
+        <Route path="/project-list" element={<AllProjects/>}/>
+        <Route path="/overview-project" element={<OverviewProject/>}/>
       
       </Routes>
     </>

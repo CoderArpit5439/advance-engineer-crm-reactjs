@@ -55,6 +55,7 @@ const ListCompany = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+         
             <div class="row">
 
               <div class="col-xl-3 col-md-6">

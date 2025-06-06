@@ -10,6 +10,7 @@ import {
   fetchTask,
   // UpdateTask,
 } from "../../Redux/crmSlices/task/TaskSlice";
+import TopCards from "../../Components/TopCards";
 const TaskList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,6 +70,8 @@ const TaskList = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
+               <TopCards/>
+
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
                 <div className="card">

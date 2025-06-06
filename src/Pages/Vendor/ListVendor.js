@@ -4,6 +4,7 @@ import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
 import { useNavigate } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
+import TopCards from "../../Components/TopCards";
 
 const ListVendor = () => {
     const navigate = useNavigate();
@@ -78,6 +79,7 @@ const ListVendor = () => {
                 </div>
               </div>
             </div>
+               <TopCards/>
             <div class="card">
               <div class="card-header border-0 rounded">
                 <div class="row g-2">
