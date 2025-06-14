@@ -1,598 +1,1342 @@
-import React from 'react'
-import Header from '../../Layout/Header';
-import Sidebar from '../../Layout/Sidebar';
-import Footer from '../../Layout/Footer';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Header from "../../Layout/Header";
+import Sidebar from "../../Layout/Sidebar";
+import Footer from "../../Layout/Footer";
+import { useNavigate } from "react-router-dom";
 
 const ViewMachine = () => {
-    const cards = [
-        {name:"Total spares part",count:10},
-        {name:"Total Operator",count:5},
-        {name:"Next Maintenance",count:"20/05/2025"},
-        {name:"Last Maintenance",count:"08/01/2025"},
-    ];
-    const data = [];
-    const machineList = [];
-    const navigate = useNavigate();
-    const operatorList = [];
-    const maintenanceList = [];
+  const cards = [
+    { name: "Total spares part", count: 10 },
+    { name: "Total Operator", count: 5 },
+    { name: "Next Maintenance", count: "20/05/2025" },
+    { name: "Last Maintenance", count: "08/01/2025" },
+  ];
+  const data = [];
+  const machineList = [];
+  const navigate = useNavigate();
+  const operatorList = [];
+  const maintenanceList = [];
 
   return (
     <div>
-            <>
-      <Header />
-      <Sidebar />
-      <div class="main-content">
-        <div class="page-content">
-          <div class="container-fluid">
-            <div class="row mb-4">
-              <div class="col-xl-12">
-                <div class="row ">
-                  {cards?.map((card, i) => {
-                    return (
-                      <div class="col">
-                        <div class="card card-height-100">
-                          <div class="d-flex">
-                            <div class="flex-grow-1 p-3">
-                              <h5 class="mb-1">{card.name}</h5>
-                              <h2 class="mt-2 ff-secondary fw-semibold"><span class="counter-value" >{card.count}</span></h2>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
+      <>
+        <Header />
+        <Sidebar />
+        <div class="main-content">
+          <div class="page-content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
+                    <h4 class="mb-sm-0">Seller Details</h4>
 
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card mt-n4 mx-n4">
-                  <div class="bg-warning-subtle">
-                    <div class="card-body pb-0 px-4">
-                      <div class="row mb-3">
-                        <div class="col-md">
-                          <div class="row align-items-center g-3">                             
-                            <div class="col-md">
-                              <div>
-                                <h4 class="fw-bold">Machine L1</h4>
-                                <div class="hstack gap-3 flex-wrap">
-                                  
-                                  <div class="vr"></div>
-                                  <div>
-                                    Add on :{" "}
-                                    <span class="fw-medium">
-                                     29/05/2025
-                                    </span>
-                                  </div>
-                                  <div class="vr"></div>
-                                  <div class="badge rounded-pill bg-info fs-12">
-                                    New
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-auto"></div>
-                      </div>
-                      <ul
-                        class="nav nav-tabs-custom border-bottom-0"
-                        role="tablist"
-                      >
-                        <li class="nav-item">
-                          <a
-                            class="nav-link active fw-semibold"
-                            data-bs-toggle="tab"
-                            href="#about-machine"
-                            role="tab"
-                          >
-                            About
-                          </a>
+                    <div class="page-title-right">
+                      <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                          <a href="javascript: void(0);">Ecommerce</a>
                         </li>
-                        <li class="nav-item">
-                          <a
-                            class="nav-link fw-semibold"
-                            data-bs-toggle="tab"
-                            href="#machine-spare"
-                            role="tab"
-                          >
-                           Spare parts
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            class="nav-link fw-semibold"
-                            data-bs-toggle="tab"
-                            href="#machine-operator"
-                            role="tab"
-                          >
-                           Operator
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            class="nav-link fw-semibold"
-                            data-bs-toggle="tab"
-                            href="#machine-maintenance"
-                            role="tab"
-                          >
-                            Maintenance
-                          </a>
-                        </li>
-                      </ul>
+                        <li class="breadcrumb-item active">Seller Details</li>
+                      </ol>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="offcanvas-body p-0">
-              {data ? (
-                <div class="container-fluid pt-3">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="tab-content text-muted">
-                        <div
-                          class="tab-pane fade show active"
-                          id="about-machine"
-                          role="tabpanel"
-                        >
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="tab-content text-muted">
-                                <div
-                                  class="tab-pane fade show active"
-                                  id="about-machine"
-                                  role="tabpanel"
+
+              <div class="row">
+                <div class="col-xxl-3">
+                  <div class="card">
+                    <div class="card-body p-4">
+                      <div>
+                        <div class="flex-shrink-0 avatar-md mx-auto">
+                          <div class="avatar-title bg-light rounded">
+                            <img
+                              src="assets/images/companies/img-2.png"
+                              alt=""
+                              height="50"
+                            />
+                          </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                          <h5 class="mb-1">Force Medicines</h5>
+                          <p class="text-muted">Since 1987</p>
+                        </div>
+                        <div class="table-responsive">
+                          <table class="table mb-0 table-borderless">
+                            <tbody>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Owner Name</span>
+                                </th>
+                                <td>David Marshall</td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Company Type</span>
+                                </th>
+                                <td>Partnership</td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Email</span>
+                                </th>
+                                <td>forcemedicines@gamil.com</td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Website</span>
+                                </th>
+                                <td>
+                                  <a
+                                    href="javascript:void(0);"
+                                    class="link-primary"
+                                  >
+                                    www.forcemedicines.com
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Contact No.</span>
+                                </th>
+                                <td>+(123) 9876 654 321</td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Fax</span>
+                                </th>
+                                <td>+1 999 876 5432</td>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <span class="fw-medium">Location</span>
+                                </th>
+                                <td>United Kingdom</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-9">
+                  <div class="card" id="orderList">
+                    <div class="card-header border-0">
+                      <div class="row align-items-center gy-3">
+                        <div class="col-sm">
+                          <h5 class="card-title mb-0">Order History</h5>
+                        </div>
+                        <div class="col-sm-auto">
+                          <div class="d-flex gap-1 flex-wrap">
+                            <button
+                              type="button"
+                              class="btn btn-success add-btn"
+                              onClick={() => navigate("/add-order")}
+                            >
+                              <i class="ri-add-line align-bottom me-1"></i>{" "}
+                              Create Order
+                            </button>
+                            <button type="button" class="btn btn-info">
+                              <i class="ri-file-download-line align-bottom me-1"></i>{" "}
+                              Import
+                            </button>
+                            <button
+                              class="btn btn-soft-danger"
+                              id="remove-actions"
+                              onclick="deleteMultiple()"
+                            >
+                              <i class="ri-delete-bin-2-line"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body border border-dashed border-end-0 border-start-0">
+                      <form>
+                        <div class="row g-3">
+                          <div class="col-xxl-5 col-sm-6">
+                            <div class="search-box">
+                              <input
+                                type="text"
+                                class="form-control search"
+                                placeholder="Search for order ID, customer, order status or something..."
+                              />
+                              <i class="ri-search-line search-icon"></i>
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-6">
+                            <div>
+                              <input
+                                type="text"
+                                class="form-control flatpickr-input"
+                                data-provider="flatpickr"
+                                data-date-format="d M, Y"
+                                data-range-date="true"
+                                id="demo-datepicker"
+                                placeholder="Select date"
+                                readonly="readonly"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-4">
+                            <div>
+                              <div
+                                class="choices"
+                                data-type="select-one"
+                                tabindex="0"
+                                role="listbox"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <select
+                                  class="form-control choices__input"
+                                  data-choices=""
+                                  data-choices-search-false=""
+                                  name="choices-single-default"
+                                  id="idStatus"
+                                  hidden=""
+                                  tabindex="-1"
+                                  data-choice="active"
                                 >
-                                  <div class="row">
-                                    <div class="col-xl-12">
-                                      <div class="card">
-                                        <div className="card-header">
-                                          {data?.c_description}
-                                        </div>
-                                        <div class="card-body">
-                                          <div class="text-muted">
-                                            <div class="">
-                                              <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Head Office Address :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {
-                                                        data?.c_head_office_address
-                                                      }
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Head Office Contact No. :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {
-                                                        data?.c_head_office_contact
-                                                      }
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      No. of total countries
-                                                      machine :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {
-                                                        data?.total_country_machine
-                                                      }
-                                                    </h5>
-                                                    {/* <div class="badge bg-danger fs-12">High</div> */}
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      No. of total india machine :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {data?.total_india_machine}
-                                                    </h5>
-                                                    {/* <div class="badge bg-warning fs-12">Inprogress</div> */}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="pt-3 border-top border-top-dashed mt-4">
-                                              <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Type of manufacturing :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {
-                                                        data?.c_type_of_manufacturing
-                                                      }
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Internation Domestic &
-                                                      Both :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {
-                                                        data?.c_international_domestic
-                                                      }
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total no. of quotation :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      10
-                                                    </h5>
-                                                    {/* <div class="badge bg-danger fs-12">High</div> */}
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total no of order :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      12
-                                                    </h5>
-                                                    {/* <div class="badge bg-warning fs-12">Inprogress</div> */}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="pt-3 border-top border-top-dashed mt-4">
-                                              <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Bank Branch :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {data?.c_bank_branch}
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Bank IFSC code :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {data?.c_bank_ifsc}
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Bank Name :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {data?.c_bank_name}
-                                                    </h5>
-                                                    {/* <div class="badge bg-danger fs-12"></div> */}
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Bank Account :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      {data?.c_bank_account_no}
-                                                    </h5>
-                                                    {/* <div class="badge bg-warning fs-12">Inprogress</div> */}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="pt-3 border-top border-top-dashed mt-4">
-                                              <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total amount of this year
-                                                      :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      12000
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total pending amount :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      2000
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total no. of Staff :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      20
-                                                    </h5>
-                                                    {/* <div class="badge bg-danger fs-12">High</div> */}
-                                                  </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                  <div>
-                                                    <p class="mb-2 text-uppercase fw-medium">
-                                                      Total receive amount :
-                                                    </p>
-                                                    <h5 class="fs-15 mb-0">
-                                                      10000
-                                                    </h5>
-                                                    {/* <div class="badge bg-warning fs-12">Inprogress</div> */}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                                  <option value="">Status</option>
+                                  <option value="all" selected="">
+                                    All
+                                  </option>
+                                  <option value="Pending">Pending</option>
+                                  <option value="Inprogress">Inprogress</option>
+                                  <option value="Cancelled">Cancelled</option>
+                                  <option value="Pickups">Pickups</option>
+                                  <option value="Returns">Returns</option>
+                                  <option value="Delivered">Delivered</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-4">
+                            <div>
+                              <div
+                                class="choices"
+                                data-type="select-one"
+                                tabindex="0"
+                                role="listbox"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <select
+                                  class="form-control choices__input"
+                                  data-choices=""
+                                  data-choices-search-false=""
+                                  name="choices-single-default"
+                                  id="idPayment"
+                                  hidden=""
+                                  tabindex="-1"
+                                  data-choice="active"
+                                >
+                                  <option value="">Select Payment</option>
+                                  <option value="all" selected="">
+                                    All
+                                  </option>
+                                  <option value="Mastercard">Mastercard</option>
+                                  <option value="Paypal">Paypal</option>
+                                  <option value="Visa">Visa</option>
+                                  <option value="COD">COD</option>
+                                </select>
+
+                                <div
+                                  class="choices__list choices__list--dropdown"
+                                  aria-expanded="false"
+                                >
+                                  <div class="choices__list" role="listbox">
+                                    <div
+                                      id="choices--idPayment-item-choice-1"
+                                      class="choices__item choices__item--choice choices__placeholder choices__item--selectable is-highlighted"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="1"
+                                      data-value=""
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                      aria-selected="true"
+                                    >
+                                      Select Payment
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-2"
+                                      class="choices__item choices__item--choice is-selected choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="2"
+                                      data-value="all"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      All
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-6"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="6"
+                                      data-value="COD"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      COD
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-3"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="3"
+                                      data-value="Mastercard"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Mastercard
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-4"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="4"
+                                      data-value="Paypal"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Paypal
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-5"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="5"
+                                      data-value="Visa"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Visa
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          <div class="col-xxl-1 col-sm-4">
+                            <div>
+                              <button
+                                type="button"
+                                class="btn btn-primary w-100"
+                                onclick="SearchData();"
+                              >
+                                {" "}
+                                <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                                Filters
+                              </button>
+                            </div>
+                          </div>
                         </div>
+                      </form>
+                    </div>
+                    <div class="card-body pt-0">
+                      <div>
+                        <ul
+                          class="nav nav-tabs nav-tabs-custom nav-success mb-3"
+                          role="tablist"
+                        >
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link active All py-3"
+                              data-bs-toggle="tab"
+                              id="All"
+                              href="#home1"
+                              role="tab"
+                              aria-selected="true"
+                            >
+                              <i class="ri-store-2-fill me-1 align-bottom"></i>{" "}
+                              All Orders
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Delivered"
+                              data-bs-toggle="tab"
+                              id="Delivered"
+                              href="#delivered"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-checkbox-circle-line me-1 align-bottom"></i>{" "}
+                              Delivered
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Pickups"
+                              data-bs-toggle="tab"
+                              id="Pickups"
+                              href="#pickups"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-truck-line me-1 align-bottom"></i>{" "}
+                              Pickups{" "}
+                              <span class="badge bg-danger align-middle ms-1">
+                                2
+                              </span>
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Returns"
+                              data-bs-toggle="tab"
+                              id="Returns"
+                              href="#returns"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-arrow-left-right-fill me-1 align-bottom"></i>{" "}
+                              Returns
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Cancelled"
+                              data-bs-toggle="tab"
+                              id="Cancelled"
+                              href="#cancelled"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-close-circle-line me-1 align-bottom"></i>{" "}
+                              Cancelled
+                            </a>
+                          </li>
+                        </ul>
 
-                        <div
-                          class="tab-pane fade"
-                          id="machine-spare"
-                          role="tabpanel"
-                        >
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">
-                                  All Machines
-                                </h5>
-                              </div>
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="table-responsive table-card">
-                                    <table class="table table-borderless align-middle mb-0">
-                                      <thead class="table-light">
-                                        <tr>
-                                          <th scope="col">City</th>
-                                          <th scope="col">Accountant</th>
-                                          <th scope="col">Security</th>
-                                          <th scope="col">Store</th>
-                                          <th scope="col">Other</th>
-                                          <th scope="col">GST</th>
-                                          <th scope="col">State</th>
-                                          <th scope="col">Pin Code</th>
-                                          <th scope="col">Area Working</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {machineList?.length != 0 ? machineList?.map((machine, i) => {
-                                          return (
-                                            <tr>
-                                              <td
-                                                className="text-decoration-underline"
-                                                onClick={() =>
-                                                  navigate(
-                                                    `/view-machine/${machine.p_id}`
-                                                  )
-                                                }
-                                              >
-                                                {machine.p_city}
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {machine.p_account_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {machine.p_account_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {machine.p_security_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {machine.p_security_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {machine.p_store_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {machine.p_store_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>
-                                                <div>
-                                                  {machine.p_other_contact}
-                                                </div>
-                                                <div>
-                                                  <div>
-                                                    {machine.p_other_email}
-                                                  </div>
-                                                </div>
-                                              </td>
-                                              <td>{machine.p_gst}</td>
-                                              <td>{machine.p_state}</td>
-                                              <td>{machine.p_pincode}</td>
-                                              <td>{machine.p_area_working}</td>
-                                            </tr>
-                                          );
-                                        })
-                                          :
-                                          <tr><td colspan="4" class="text-center">No machines found</td></tr>
-                                        }
-                                      </tbody>
-                                    </table>
+                        <div class="table-responsive table-card mb-1">
+                          <table
+                            class="table table-nowrap align-middle"
+                            id="orderTable"
+                          >
+                            <thead class="text-muted table-light">
+                              <tr class="text-uppercase">
+                                <th scope="col" style={{ width: "25px" }}>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      id="checkAll"
+                                      value="option"
+                                    />
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="tab-pane fade"
-                          id="machine-operator"
-                          role="tabpanel"
-                        >
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">
-                                  All Operators
-                                </h5>
-                              </div>
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="table-responsive table-card">
-                                    <table class="table table-borderless align-middle mb-0">
-                                      <thead class="table-light">
-                                        <tr>
-                                          <th scope="col">Name</th>
-                                          {/* <th scope="col">Contact</th> */}
-                                          <th scope="col">Machine</th>
-                                          <th scope="col">Create at</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {operatorList?.length != 0 ? operatorList?.map((operator, i) => {
-                                          return (
-                                            <tr>
-                                              <td>{operator.u_name}</td>
-                                              <td>{operator.machine_name}</td>
-                                              <td>{operator.u_created_at}</td>
-                                            </tr>
-                                          );
-                                        })
-                                        :
-                                      <tr><td colspan="4" class="text-center">No Operators found</td></tr>
-                                          }
-                                      </tbody>
-                                    </table>
+                                </th>
+                                <th class="sort desc" data-sort="id">
+                                  Order ID
+                                </th>
+                                <th class="sort" data-sort="customer_name">
+                                  Customer
+                                </th>
+                                <th class="sort" data-sort="product_name">
+                                  Product
+                                </th>
+                                <th class="sort" data-sort="date">
+                                  Order Date
+                                </th>
+                                <th class="sort" data-sort="amount">
+                                  Amount
+                                </th>
+                                <th class="sort" data-sort="payment">
+                                  Payment Method
+                                </th>
+                                <th class="sort" data-sort="status">
+                                  Delivery Status
+                                </th>
+                                <th class="sort" data-sort="city">
+                                  Action
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="tab-pane fade"
-                          id="machine-maintenance"
-                          role="tabpanel"
-                        >
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">
-                                  All Maintenance
-                                </h5>
-                              </div>
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="table-responsive table-card">
-                                    <table class="table table-borderless align-middle mb-0">
-                                      <thead class="table-light">
-                                        <tr>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Company</th>
-                                          <th scope="col">Contact</th>
-                                          <th scope="col">Department</th>
-                                          <th scope="col">Address</th>
-                                          <th scope="col">Created at</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {maintenanceList?.length != 0 ? maintenanceList?.map((maintenance, i) => {
-                                          return (
-                                            <tr>
-                                              <td
-                                                className="text-decoration-underline"
-                                                onClick={() =>
-                                                  navigate(
-                                                    `/view-maintenance/${maintenance.c_id}`
-                                                  )}
-                                              >{maintenance.c_fullname}</td>
-                                              <td>{maintenance.c_company_name}</td>
-                                              <td>
-                                                <div>{maintenance.c_mobile}</div>
-                                                <div>
-                                                  <div>{maintenance.c_email}</div>
+                                </th>
+                                <td class="id">
+                                  <a
+                                    onClick={() => navigate(`/view-order/${1}`)}
+                                    class="fw-medium link-primary"
+                                  >
+                                    #VZ12
+                                  </a>
+                                </td>
+                                <td class="customer_name">Alexis Clarke</td>
+                                <td class="product_name">
+                                  Noise Evolve Smartwatch
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$1021</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-danger-subtle text-danger text-uppercase">
+                                    Cancelled
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ11</a>
+                                </td>
+                                <td class="customer_name">Diana Kohler</td>
+                                <td class="product_name">
+                                  Half Sleeve T-Shirts (Blue)
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$874</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-success-subtle text-success text-uppercase">
+                                    Delivered
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ10</a>
+                                </td>
+                                <td class="customer_name">Henry Baird</td>
+                                <td class="product_name">
+                                  Classic Short Sleeve Shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$342</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-secondary-subtle text-secondary text-uppercase">
+                                    Inprogress
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ9</a>
+                                </td>
+                                <td class="customer_name">Donald Palmer</td>
+                                <td class="product_name">
+                                  Oxford Button-Down Shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$373</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-info-subtle text-info text-uppercase">
+                                    Pickups
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ8</a>
+                                </td>
+                                <td class="customer_name">Alexis Clarke</td>
+                                <td class="product_name">
+                                  USB Flash Drive Personalized wi
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$247</td>
+                                <td class="payment">Paypal</td>
+                                <td class="status">
+                                  <span class="badge bg-success-subtle text-success text-uppercase">
+                                    Delivered
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ7</a>
+                                </td>
+                                <td class="customer_name">Nancy Martino</td>
+                                <td class="product_name">
+                                  Funky Prints T-shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$180</td>
+                                <td class="payment">COD</td>
+                                <td class="status">
+                                  <span class="badge bg-primary-subtle text-primary text-uppercase">
+                                    Returns
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ6</a>
+                                </td>
+                                <td class="customer_name">James Price</td>
+                                <td class="product_name">Apple iPhone 12</td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$1240</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-secondary-subtle text-secondary text-uppercase">
+                                    Inprogress
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ5</a>
+                                </td>
+                                <td class="customer_name">Thomas Taylor</td>
+                                <td class="product_name">Galaxy Watch4</td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$408</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-info-subtle text-info text-uppercase">
+                                    Pickups
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* <div class="noresult" style={{display: "none"}}>
+                                                <div class="text-center">
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
+                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                    <p class="text-muted">We've searched more than 150+ Orders We did not find any orders for you search.</p>
                                                 </div>
-                                              </td>
-                                              <td>{maintenance.c_department}</td>
-                                              <td>{maintenance.c_address}</td>
-                                              <td>{maintenance.c_created_at}</td>
-                                              {/* <td>
-                                            <div>{operator.p_account_contact}</div>
-                                            <div>
-                                              <div>
-                                                {operator.p_account_email}
-                                              </div>
+                                            </div> */}
+                        </div>
+                        {/* <div class="d-flex justify-content-end">
+                                            <div class="pagination-wrap hstack gap-2" style="display: flex;">
+                                                <a class="page-item pagination-prev disabled" href="#">
+                                                    Previous
+                                                </a>
+                                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li><li><a class="page" href="#" data-i="2" data-page="8">2</a></li></ul>
+                                                <a class="page-item pagination-next" href="#">
+                                                    Next
+                                                </a>
                                             </div>
-                                          </td> */}
-                                            </tr>
-                                          );
-                                        })
-                                        :
-                                          <tr><td colspan="10" class="text-center">No Maintenance found</td></tr>
-                                          }
-                                      </tbody>
-                                    </table>
+                                        </div> */}
+                      </div>
+                      <div
+                        class="modal fade"
+                        id="showModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header bg-light p-3">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                &nbsp;
+                              </h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                id="close-modal"
+                              ></button>
+                            </div>
+                            <form class="tablelist-form" autocomplete="off">
+                              <div class="modal-body">
+                                <input type="hidden" id="id-field" />
+
+                                <div class="mb-3" id="modal-id">
+                                  <label for="orderId" class="form-label">
+                                    ID
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="orderId"
+                                    class="form-control"
+                                    placeholder="ID"
+                                    readonly=""
+                                  />
+                                </div>
+
+                                <div class="mb-3">
+                                  <label
+                                    for="customername-field"
+                                    class="form-label"
+                                  >
+                                    Customer Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="customername-field"
+                                    class="form-control"
+                                    placeholder="Enter name"
+                                    required=""
+                                  />
+                                </div>
+
+                                <div class="mb-3">
+                                  <label
+                                    for="productname-field"
+                                    class="form-label"
+                                  >
+                                    Product
+                                  </label>
+                                  <div
+                                    class="choices"
+                                    data-type="select-one"
+                                    tabindex="0"
+                                    role="combobox"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                  >
+                                    <div class="choices__inner">
+                                      <select
+                                        class="form-control choices__input"
+                                        data-trigger=""
+                                        name="productname-field"
+                                        id="productname-field"
+                                        required=""
+                                        hidden=""
+                                        tabindex="-1"
+                                        data-choice="active"
+                                      >
+                                        <option value="" selected="">
+                                          Product
+                                        </option>
+                                        <option value="Puma Tshirt">
+                                          Puma Tshirt
+                                        </option>
+                                        <option value="Adidas Sneakers">
+                                          Adidas Sneakers
+                                        </option>
+                                        <option value="350 ml Glass Grocery Container">
+                                          350 ml Glass Grocery Container
+                                        </option>
+                                        <option value="American egale outfitters Shirt">
+                                          American egale outfitters Shirt
+                                        </option>
+                                        <option value="Galaxy Watch4">
+                                          Galaxy Watch4
+                                        </option>
+                                        <option value="Apple iPhone 12">
+                                          Apple iPhone 12
+                                        </option>
+                                        <option value="Funky Prints T-shirt">
+                                          Funky Prints T-shirt
+                                        </option>
+                                        <option value="USB Flash Drive Personalized with 3D Print">
+                                          USB Flash Drive Personalized with 3D
+                                          Print
+                                        </option>
+                                        <option value="Oxford Button-Down Shirt">
+                                          Oxford Button-Down Shirt
+                                        </option>
+                                        <option value="Classic Short Sleeve Shirt">
+                                          Classic Short Sleeve Shirt
+                                        </option>
+                                        <option value="Half Sleeve T-Shirts (Blue)">
+                                          Half Sleeve T-Shirts (Blue)
+                                        </option>
+                                        <option value="Noise Evolve Smartwatch">
+                                          Noise Evolve Smartwatch
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="mb-3">
+                                  <label for="date-field" class="form-label">
+                                    Order Date
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="date-field"
+                                    class="form-control flatpickr-input"
+                                    data-provider="flatpickr"
+                                    required=""
+                                    data-date-format="d M, Y"
+                                    data-enable-time=""
+                                    placeholder="Select date"
+                                    readonly="readonly"
+                                  />
+                                </div>
+
+                                <div class="row gy-4 mb-3">
+                                  <div class="col-md-6">
+                                    <div>
+                                      <label
+                                        for="amount-field"
+                                        class="form-label"
+                                      >
+                                        Amount
+                                      </label>
+                                      <input
+                                        type="text"
+                                        id="amount-field"
+                                        class="form-control"
+                                        placeholder="Total amount"
+                                        required=""
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    for="delivered-status"
+                                    class="form-label"
+                                  >
+                                    Delivery Status
+                                  </label>
+                                  <div
+                                    class="choices"
+                                    data-type="select-one"
+                                    tabindex="0"
+                                    role="combobox"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                  >
+                                    <div class="choices__inner">
+                                      <select
+                                        class="form-control choices__input"
+                                        data-trigger=""
+                                        name="delivered-status"
+                                        required=""
+                                        id="delivered-status"
+                                        hidden=""
+                                        tabindex="-1"
+                                        data-choice="active"
+                                      >
+                                        <option value="" selected="">
+                                          Delivery Status
+                                        </option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Inprogress">
+                                          Inprogress
+                                        </option>
+                                        <option value="Cancelled">
+                                          Cancelled
+                                        </option>
+                                        <option value="Pickups">Pickups</option>
+                                        <option value="Delivered">
+                                          Delivered
+                                        </option>
+                                        <option value="Returns">Returns</option>
+                                      </select>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                              <div class="modal-footer">
+                                <div class="hstack gap-2 justify-content-end">
+                                  <button
+                                    type="button"
+                                    class="btn btn-light"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                    id="add-btn"
+                                  >
+                                    Add Order
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    id="edit-btn"
+                                  >
+                                    Update
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ) : (
-                <div className="container-fluid pt-3">Loading...</div>
-              )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
+        <Footer />
+      </>
     </div>
-  )
-}
+  );
+};
 
-export default ViewMachine
+export default ViewMachine;

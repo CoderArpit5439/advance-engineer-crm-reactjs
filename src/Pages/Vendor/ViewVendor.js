@@ -3,75 +3,10 @@ import Header from "../../Layout/Header";
 import Sidebar from "../../Layout/Sidebar";
 import Footer from "../../Layout/Footer";
 import ReactApexChart from "react-apexcharts";
+import { useNavigate } from "react-router-dom";
 
 const ViewVendor = () => {
-  // --------------------- BASIC COLOUM CHART -------------- START ---------->
-  const optionsColoum = {
-    chart: {
-      type: "bar",
-      height: 350,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-        borderRadius: 5,
-        borderRadiusApplication: "end",
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
-    xaxis: {
-      categories: [
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-      ],
-    },
-    yaxis: {
-      title: {
-        text: "$ (thousands)",
-      },
-    },
-    fill: {
-      opacity: 1,
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "$ " + val + " thousands";
-        },
-      },
-    },
-  };
-
-  const seriesColoum = [
-    {
-      name: "Net Profit",
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-    },
-    {
-      name: "Revenue",
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-    },
-    {
-      name: "Free Cash Flow",
-      data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-    },
-  ];
-  // --------------------- BASIC COLOUM CHART -------------- END ---------->
+  const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -155,499 +90,1218 @@ const ViewVendor = () => {
                     </div>
                   </div>
 
-                  <div class="card-body p-4 border-top border-top-dashed">
-                    <h6 class="text-muted text-uppercase fw-semibold mb-4">
-                      Products Reviews
-                    </h6>
-                    <div
-                      class="swiper vertical-swiper swiper-initialized swiper-vertical swiper-backface-hidden"
-                      style={{ height: "242px" }}
-                    >
-                      <div
-                        class="swiper-wrapper"
-                        id="swiper-wrapper-2eb819aad97213a3"
-                        aria-live="off"
-                        style={{
-                          transitionDuration: "0ms",
-                          transform: "translate3d(0px, -252px, 0px)",
-                          transitionDelay: "0ms",
-                        }}
-                      >
-                        <div
-                          class="swiper-slide"
-                          role="group"
-                          aria-label="2 / 4"
-                          data-swiper-slide-index="1"
-                          style={{ height: "116px", marginBottom: "10px" }}
-                        >
-                          <div class="card border border-dashed shadow-none">
-                            <div class="card-body">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                  <img
-                                    src="assets/images/users/avatar-3.jpg"
-                                    alt=""
-                                    class="avatar-sm rounded"
-                                  />
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                  <div>
-                                    <p class="text-muted mb-1 fst-italic">
-                                      " Amazing template, very easy to
-                                      understand and manipulate. "
-                                    </p>
-                                    <div class="fs-11 align-middle text-warning">
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-half-fill"></i>
-                                    </div>
-                                  </div>
-                                  <div class="text-end mb-0 text-muted">
-                                    - by{" "}
-                                    <cite title="Source Title">
-                                      Henry Baird
-                                    </cite>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="swiper-slide swiper-slide-prev"
-                          role="group"
-                          aria-label="3 / 4"
-                          data-swiper-slide-index="2"
-                          style={{ height: "116px", marginBottom: "10px" }}
-                        >
-                          <div class="card border border-dashed shadow-none">
-                            <div class="card-body">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm">
-                                  <div class="avatar-title bg-light rounded">
-                                    <img
-                                      src="assets/images/companies/img-8.png"
-                                      alt=""
-                                      height="30"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                  <div>
-                                    <p class="text-muted mb-1 fst-italic">
-                                      "Very beautiful product and Very helpful
-                                      customer service."
-                                    </p>
-                                    <div class="fs-11 align-middle text-warning">
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-line"></i>
-                                      <i class="ri-star-line"></i>
-                                    </div>
-                                  </div>
-                                  <div class="text-end mb-0 text-muted">
-                                    - by{" "}
-                                    <cite title="Source Title">
-                                      Zoetic Fashion
-                                    </cite>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="swiper-slide swiper-slide-active"
-                          role="group"
-                          aria-label="4 / 4"
-                          data-swiper-slide-index="3"
-                          style={{ height: "116px", marginBottom: "10px" }}
-                        >
-                          <div class="card border border-dashed shadow-none">
-                            <div class="card-body">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                  <img
-                                    src="assets/images/users/avatar-2.jpg"
-                                    alt=""
-                                    class="avatar-sm rounded"
-                                  />
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                  <div>
-                                    <p class="text-muted mb-1 fst-italic">
-                                      " The product is very beautiful. I like
-                                      it. "
-                                    </p>
-                                    <div class="fs-11 align-middle text-warning">
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-half-fill"></i>
-                                      <i class="ri-star-line"></i>
-                                    </div>
-                                  </div>
-                                  <div class="text-end mb-0 text-muted">
-                                    - by{" "}
-                                    <cite title="Source Title">
-                                      Nancy Martino
-                                    </cite>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="swiper-slide swiper-slide-next"
-                          role="group"
-                          aria-label="1 / 4"
-                          data-swiper-slide-index="0"
-                          style={{ height: "116px", marginBottom: "10px" }}
-                        >
-                          <div class="card border border-dashed shadow-none">
-                            <div class="card-body">
-                              <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm">
-                                  <div class="avatar-title bg-light rounded">
-                                    <img
-                                      src="assets/images/companies/img-1.png"
-                                      alt=""
-                                      height="30"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                  <div>
-                                    <p class="text-muted mb-1 fst-italic">
-                                      " Great product and looks great, lots of
-                                      features. "
-                                    </p>
-                                    <div class="fs-11 align-middle text-warning">
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                      <i class="ri-star-fill"></i>
-                                    </div>
-                                  </div>
-                                  <div class="text-end mb-0 text-muted">
-                                    - by{" "}
-                                    <cite title="Source Title">
-                                      Force Medicines
-                                    </cite>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <span
-                        class="swiper-notification"
-                        aria-live="assertive"
-                        aria-atomic="true"
-                      ></span>
-                    </div>
-                    <div class="text-center mt-3">
-                      <a href="javascript:void(0)" class="link-primary">
-                        View All Reviews{" "}
-                        <i class="ri-arrow-right-line align-bottom ms-1"></i>
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
 
               <div class="col-xxl-9">
-                <div class="card">
-                  <div class="card-header border-0 align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Revenue</h4>
-                    <div>
-                      <button
-                        type="button"
-                        class="btn btn-soft-secondary btn-sm"
-                      >
-                        ALL
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-soft-secondary btn-sm"
-                      >
-                        1M
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-soft-secondary btn-sm"
-                      >
-                        6M
-                      </button>
-                      <button type="button" class="btn btn-soft-primary btn-sm">
-                        1Y
-                      </button>
+                <div class="card" id="orderList">
+                    <div class="card-header border-0">
+                      <div class="row align-items-center gy-3">
+                        <div class="col-sm">
+                          <h5 class="card-title mb-0">Order History</h5>
+                        </div>
+                        <div class="col-sm-auto">
+                          <div class="d-flex gap-1 flex-wrap">
+                            <button
+                              type="button"
+                              class="btn btn-success add-btn"
+                              onClick={() => navigate("/add-order")}
+                            >
+                              <i class="ri-add-line align-bottom me-1"></i>{" "}
+                              Create Order
+                            </button>
+                            <button type="button" class="btn btn-info">
+                              <i class="ri-file-download-line align-bottom me-1"></i>{" "}
+                              Import
+                            </button>
+                            <button
+                              class="btn btn-soft-danger"
+                              id="remove-actions"
+                              onclick="deleteMultiple()"
+                            >
+                              <i class="ri-delete-bin-2-line"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <div class="card-body border border-dashed border-end-0 border-start-0">
+                      <form>
+                        <div class="row g-3">
+                          <div class="col-xxl-5 col-sm-6">
+                            <div class="search-box">
+                              <input
+                                type="text"
+                                class="form-control search"
+                                placeholder="Search for order ID, customer, order status or something..."
+                              />
+                              <i class="ri-search-line search-icon"></i>
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-6">
+                            <div>
+                              <input
+                                type="text"
+                                class="form-control flatpickr-input"
+                                data-provider="flatpickr"
+                                data-date-format="d M, Y"
+                                data-range-date="true"
+                                id="demo-datepicker"
+                                placeholder="Select date"
+                                readonly="readonly"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-4">
+                            <div>
+                              <div
+                                class="choices"
+                                data-type="select-one"
+                                tabindex="0"
+                                role="listbox"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <select
+                                  class="form-control choices__input"
+                                  data-choices=""
+                                  data-choices-search-false=""
+                                  name="choices-single-default"
+                                  id="idStatus"
+                                  hidden=""
+                                  tabindex="-1"
+                                  data-choice="active"
+                                >
+                                  <option value="">Status</option>
+                                  <option value="all" selected="">
+                                    All
+                                  </option>
+                                  <option value="Pending">Pending</option>
+                                  <option value="Inprogress">Inprogress</option>
+                                  <option value="Cancelled">Cancelled</option>
+                                  <option value="Pickups">Pickups</option>
+                                  <option value="Returns">Returns</option>
+                                  <option value="Delivered">Delivered</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xxl-2 col-sm-4">
+                            <div>
+                              <div
+                                class="choices"
+                                data-type="select-one"
+                                tabindex="0"
+                                role="listbox"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <select
+                                  class="form-control choices__input"
+                                  data-choices=""
+                                  data-choices-search-false=""
+                                  name="choices-single-default"
+                                  id="idPayment"
+                                  hidden=""
+                                  tabindex="-1"
+                                  data-choice="active"
+                                >
+                                  <option value="">Select Payment</option>
+                                  <option value="all" selected="">
+                                    All
+                                  </option>
+                                  <option value="Mastercard">Mastercard</option>
+                                  <option value="Paypal">Paypal</option>
+                                  <option value="Visa">Visa</option>
+                                  <option value="COD">COD</option>
+                                </select>
 
-                  <div class="card-header p-0 border-0 bg-light-subtle">
-                    <div class="row g-0 text-center">
-                      <div class="col-6 col-sm-3">
-                        <div class="p-3 border border-dashed border-start-0">
-                          <h5 class="mb-1">
-                            <span class="counter-value" data-target="7585">
-                              7585
-                            </span>
-                          </h5>
-                          <p class="text-muted mb-0">Orders</p>
+                                <div
+                                  class="choices__list choices__list--dropdown"
+                                  aria-expanded="false"
+                                >
+                                  <div class="choices__list" role="listbox">
+                                    <div
+                                      id="choices--idPayment-item-choice-1"
+                                      class="choices__item choices__item--choice choices__placeholder choices__item--selectable is-highlighted"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="1"
+                                      data-value=""
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                      aria-selected="true"
+                                    >
+                                      Select Payment
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-2"
+                                      class="choices__item choices__item--choice is-selected choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="2"
+                                      data-value="all"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      All
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-6"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="6"
+                                      data-value="COD"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      COD
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-3"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="3"
+                                      data-value="Mastercard"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Mastercard
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-4"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="4"
+                                      data-value="Paypal"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Paypal
+                                    </div>
+                                    <div
+                                      id="choices--idPayment-item-choice-5"
+                                      class="choices__item choices__item--choice choices__item--selectable"
+                                      role="option"
+                                      data-choice=""
+                                      data-id="5"
+                                      data-value="Visa"
+                                      data-select-text="Press to select"
+                                      data-choice-selectable=""
+                                    >
+                                      Visa
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xxl-1 col-sm-4">
+                            <div>
+                              <button
+                                type="button"
+                                class="btn btn-primary w-100"
+                                onclick="SearchData();"
+                              >
+                                {" "}
+                                <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                                Filters
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <div class="p-3 border border-dashed border-start-0">
-                          <h5 class="mb-1">
-                            $
-                            <span class="counter-value" data-target="22.89">
-                              22.89
-                            </span>
-                            k
-                          </h5>
-                          <p class="text-muted mb-0">Earnings</p>
-                        </div>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <div class="p-3 border border-dashed border-start-0">
-                          <h5 class="mb-1">
-                            <span class="counter-value" data-target="367">
-                              367
-                            </span>
-                          </h5>
-                          <p class="text-muted mb-0">Refunds</p>
-                        </div>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <div class="p-3 border border-dashed border-start-0 border-end-0">
-                          <h5 class="mb-1 text-success">
-                            <span class="counter-value" data-target="18.92">
-                              18.92
-                            </span>
-                            %
-                          </h5>
-                          <p class="text-muted mb-0">Conversation Ratio</p>
-                        </div>
-                      </div>
-                      <ReactApexChart
-                        options={optionsColoum}
-                        series={seriesColoum}
-                        type="bar"
-                        height={350}
-                      />
+                      </form>
                     </div>
-                  </div>
+                    <div class="card-body pt-0">
+                      <div>
+                        <ul
+                          class="nav nav-tabs nav-tabs-custom nav-success mb-3"
+                          role="tablist"
+                        >
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link active All py-3"
+                              data-bs-toggle="tab"
+                              id="All"
+                              href="#home1"
+                              role="tab"
+                              aria-selected="true"
+                            >
+                              <i class="ri-store-2-fill me-1 align-bottom"></i>{" "}
+                              All Orders
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Delivered"
+                              data-bs-toggle="tab"
+                              id="Delivered"
+                              href="#delivered"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-checkbox-circle-line me-1 align-bottom"></i>{" "}
+                              Delivered
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Pickups"
+                              data-bs-toggle="tab"
+                              id="Pickups"
+                              href="#pickups"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-truck-line me-1 align-bottom"></i>{" "}
+                              Pickups{" "}
+                              <span class="badge bg-danger align-middle ms-1">
+                                2
+                              </span>
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Returns"
+                              data-bs-toggle="tab"
+                              id="Returns"
+                              href="#returns"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-arrow-left-right-fill me-1 align-bottom"></i>{" "}
+                              Returns
+                            </a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a
+                              class="nav-link py-3 Cancelled"
+                              data-bs-toggle="tab"
+                              id="Cancelled"
+                              href="#cancelled"
+                              role="tab"
+                              aria-selected="false"
+                              tabindex="-1"
+                            >
+                              <i class="ri-close-circle-line me-1 align-bottom"></i>{" "}
+                              Cancelled
+                            </a>
+                          </li>
+                        </ul>
 
-                  <div class="card-body p-0 pb-2">
-                    <div></div>
-                  </div>
-                </div>
-                  <h4 className="mb-3 mt-2"> Order List</h4>
-                <div class="row g-4 mb-3">
-                  <div class="col-sm-auto">
-                    <div>
-                      <a
-                        href="apps-ecommerce-add-product.html"
-                        class="btn btn-success"
+                        <div class="table-responsive table-card mb-1">
+                          <table
+                            class="table table-nowrap align-middle"
+                            id="orderTable"
+                          >
+                            <thead class="text-muted table-light">
+                              <tr class="text-uppercase">
+                                <th scope="col" style={{ width: "25px" }}>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      id="checkAll"
+                                      value="option"
+                                    />
+                                  </div>
+                                </th>
+                                <th class="sort desc" data-sort="id">
+                                  Order ID
+                                </th>
+                                <th class="sort" data-sort="customer_name">
+                                  Customer
+                                </th>
+                                <th class="sort" data-sort="product_name">
+                                  Product
+                                </th>
+                                <th class="sort" data-sort="date">
+                                  Order Date
+                                </th>
+                                <th class="sort" data-sort="amount">
+                                  Amount
+                                </th>
+                                <th class="sort" data-sort="payment">
+                                  Payment Method
+                                </th>
+                                <th class="sort" data-sort="status">
+                                  Delivery Status
+                                </th>
+                                <th class="sort" data-sort="city">
+                                  Action
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a
+                                    onClick={() => navigate(`/view-order/${1}`)}
+                                    class="fw-medium link-primary"
+                                  >
+                                    #VZ12
+                                  </a>
+                                </td>
+                                <td class="customer_name">Alexis Clarke</td>
+                                <td class="product_name">
+                                  Noise Evolve Smartwatch
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$1021</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-danger-subtle text-danger text-uppercase">
+                                    Cancelled
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ11</a>
+                                </td>
+                                <td class="customer_name">Diana Kohler</td>
+                                <td class="product_name">
+                                  Half Sleeve T-Shirts (Blue)
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$874</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-success-subtle text-success text-uppercase">
+                                    Delivered
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ10</a>
+                                </td>
+                                <td class="customer_name">Henry Baird</td>
+                                <td class="product_name">
+                                  Classic Short Sleeve Shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$342</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-secondary-subtle text-secondary text-uppercase">
+                                    Inprogress
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ9</a>
+                                </td>
+                                <td class="customer_name">Donald Palmer</td>
+                                <td class="product_name">
+                                  Oxford Button-Down Shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$373</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-info-subtle text-info text-uppercase">
+                                    Pickups
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ8</a>
+                                </td>
+                                <td class="customer_name">Alexis Clarke</td>
+                                <td class="product_name">
+                                  USB Flash Drive Personalized wi
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$247</td>
+                                <td class="payment">Paypal</td>
+                                <td class="status">
+                                  <span class="badge bg-success-subtle text-success text-uppercase">
+                                    Delivered
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ7</a>
+                                </td>
+                                <td class="customer_name">Nancy Martino</td>
+                                <td class="product_name">
+                                  Funky Prints T-shirt
+                                </td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$180</td>
+                                <td class="payment">COD</td>
+                                <td class="status">
+                                  <span class="badge bg-primary-subtle text-primary text-uppercase">
+                                    Returns
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ6</a>
+                                </td>
+                                <td class="customer_name">James Price</td>
+                                <td class="product_name">Apple iPhone 12</td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$1240</td>
+                                <td class="payment">Visa</td>
+                                <td class="status">
+                                  <span class="badge bg-secondary-subtle text-secondary text-uppercase">
+                                    Inprogress
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      name="checkAll"
+                                      value="option1"
+                                    />
+                                  </div>
+                                </th>
+                                <td class="id">
+                                  <a class="fw-medium link-primary">#VZ5</a>
+                                </td>
+                                <td class="customer_name">Thomas Taylor</td>
+                                <td class="product_name">Galaxy Watch4</td>
+                                <td class="date">
+                                  20 Apr,2022{" "}
+                                  <small class="text-muted">4:05 PM</small>
+                                </td>
+                                <td class="amount">$408</td>
+                                <td class="payment">Mastercard</td>
+                                <td class="status">
+                                  <span class="badge bg-info-subtle text-info text-uppercase">
+                                    Pickups
+                                  </span>
+                                </td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="View"
+                                    >
+                                      <a class="text-primary d-inline-block">
+                                        <i class="ri-eye-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item edit"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Edit"
+                                    >
+                                      <a
+                                        href="#showModal"
+                                        data-bs-toggle="modal"
+                                        class="text-primary d-inline-block edit-item-btn"
+                                      >
+                                        <i class="ri-pencil-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                    <li
+                                      class="list-inline-item"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-trigger="hover"
+                                      data-bs-placement="top"
+                                      title="Remove"
+                                    >
+                                      <a
+                                        class="text-danger d-inline-block remove-item-btn"
+                                        data-bs-toggle="modal"
+                                        href="#deleteOrder"
+                                      >
+                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* <div class="noresult" style={{display: "none"}}>
+                                                <div class="text-center">
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
+                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                    <p class="text-muted">We've searched more than 150+ Orders We did not find any orders for you search.</p>
+                                                </div>
+                                            </div> */}
+                        </div>
+                        {/* <div class="d-flex justify-content-end">
+                                            <div class="pagination-wrap hstack gap-2" style="display: flex;">
+                                                <a class="page-item pagination-prev disabled" href="#">
+                                                    Previous
+                                                </a>
+                                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li><li><a class="page" href="#" data-i="2" data-page="8">2</a></li></ul>
+                                                <a class="page-item pagination-next" href="#">
+                                                    Next
+                                                </a>
+                                            </div>
+                                        </div> */}
+                      </div>
+                      <div
+                        class="modal fade"
+                        id="showModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
                       >
-                        <i class="ri-add-line align-bottom me-1"></i> Add New
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-sm">
-                    <div class="d-flex justify-content-sm-end">
-                      <div class="search-box ms-2">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Products..."
-                        />
-                        <i class="ri-search-line search-icon"></i>
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header bg-light p-3">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                &nbsp;
+                              </h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                id="close-modal"
+                              ></button>
+                            </div>
+                            <form class="tablelist-form" autocomplete="off">
+                              <div class="modal-body">
+                                <input type="hidden" id="id-field" />
+
+                                <div class="mb-3" id="modal-id">
+                                  <label for="orderId" class="form-label">
+                                    ID
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="orderId"
+                                    class="form-control"
+                                    placeholder="ID"
+                                    readonly=""
+                                  />
+                                </div>
+
+                                <div class="mb-3">
+                                  <label
+                                    for="customername-field"
+                                    class="form-label"
+                                  >
+                                    Customer Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="customername-field"
+                                    class="form-control"
+                                    placeholder="Enter name"
+                                    required=""
+                                  />
+                                </div>
+
+                                <div class="mb-3">
+                                  <label
+                                    for="productname-field"
+                                    class="form-label"
+                                  >
+                                    Product
+                                  </label>
+                                  <div
+                                    class="choices"
+                                    data-type="select-one"
+                                    tabindex="0"
+                                    role="combobox"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                  >
+                                    <div class="choices__inner">
+                                      <select
+                                        class="form-control choices__input"
+                                        data-trigger=""
+                                        name="productname-field"
+                                        id="productname-field"
+                                        required=""
+                                        hidden=""
+                                        tabindex="-1"
+                                        data-choice="active"
+                                      >
+                                        <option value="" selected="">
+                                          Product
+                                        </option>
+                                        <option value="Puma Tshirt">
+                                          Puma Tshirt
+                                        </option>
+                                        <option value="Adidas Sneakers">
+                                          Adidas Sneakers
+                                        </option>
+                                        <option value="350 ml Glass Grocery Container">
+                                          350 ml Glass Grocery Container
+                                        </option>
+                                        <option value="American egale outfitters Shirt">
+                                          American egale outfitters Shirt
+                                        </option>
+                                        <option value="Galaxy Watch4">
+                                          Galaxy Watch4
+                                        </option>
+                                        <option value="Apple iPhone 12">
+                                          Apple iPhone 12
+                                        </option>
+                                        <option value="Funky Prints T-shirt">
+                                          Funky Prints T-shirt
+                                        </option>
+                                        <option value="USB Flash Drive Personalized with 3D Print">
+                                          USB Flash Drive Personalized with 3D
+                                          Print
+                                        </option>
+                                        <option value="Oxford Button-Down Shirt">
+                                          Oxford Button-Down Shirt
+                                        </option>
+                                        <option value="Classic Short Sleeve Shirt">
+                                          Classic Short Sleeve Shirt
+                                        </option>
+                                        <option value="Half Sleeve T-Shirts (Blue)">
+                                          Half Sleeve T-Shirts (Blue)
+                                        </option>
+                                        <option value="Noise Evolve Smartwatch">
+                                          Noise Evolve Smartwatch
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="mb-3">
+                                  <label for="date-field" class="form-label">
+                                    Order Date
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="date-field"
+                                    class="form-control flatpickr-input"
+                                    data-provider="flatpickr"
+                                    required=""
+                                    data-date-format="d M, Y"
+                                    data-enable-time=""
+                                    placeholder="Select date"
+                                    readonly="readonly"
+                                  />
+                                </div>
+
+                                <div class="row gy-4 mb-3">
+                                  <div class="col-md-6">
+                                    <div>
+                                      <label
+                                        for="amount-field"
+                                        class="form-label"
+                                      >
+                                        Amount
+                                      </label>
+                                      <input
+                                        type="text"
+                                        id="amount-field"
+                                        class="form-control"
+                                        placeholder="Total amount"
+                                        required=""
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    for="delivered-status"
+                                    class="form-label"
+                                  >
+                                    Delivery Status
+                                  </label>
+                                  <div
+                                    class="choices"
+                                    data-type="select-one"
+                                    tabindex="0"
+                                    role="combobox"
+                                    aria-autocomplete="list"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                  >
+                                    <div class="choices__inner">
+                                      <select
+                                        class="form-control choices__input"
+                                        data-trigger=""
+                                        name="delivered-status"
+                                        required=""
+                                        id="delivered-status"
+                                        hidden=""
+                                        tabindex="-1"
+                                        data-choice="active"
+                                      >
+                                        <option value="" selected="">
+                                          Delivery Status
+                                        </option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Inprogress">
+                                          Inprogress
+                                        </option>
+                                        <option value="Cancelled">
+                                          Cancelled
+                                        </option>
+                                        <option value="Pickups">Pickups</option>
+                                        <option value="Delivered">
+                                          Delivered
+                                        </option>
+                                        <option value="Returns">Returns</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <div class="hstack gap-2 justify-content-end">
+                                  <button
+                                    type="button"
+                                    class="btn btn-light"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-success"
+                                    id="add-btn"
+                                  >
+                                    Add Order
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    id="edit-btn"
+                                  >
+                                    Update
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card">
-                  <div class="card-body">
-                    <table className="table table-nowrap mb-0">
-                      <thead class="table-light">
-                        <tr>
-                          <th
-                            data-column-id="#"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "40px" }}
-                          >
-                            <div class="gridjs-th-content">#</div>
-                          </th>
-                          <th
-                            data-column-id="product"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "360px" }}
-                          >
-                            <div class="gridjs-th-content">Product</div>
-                          </th>
-                          <th
-                            data-column-id="stock"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "94px" }}
-                          >
-                            <div class="gridjs-th-content">Stock</div>
-                          </th>
-                          <th
-                            data-column-id="price"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "101px" }}
-                          >
-                            <div class="gridjs-th-content">Price</div>
-                          </th>
-                          <th
-                            data-column-id="orders"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "84px" }}
-                          >
-                            <div class="gridjs-th-content">Orders</div>
-                          </th>
-                          <th
-                            data-column-id="rating"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "105px" }}
-                          >
-                            <div class="gridjs-th-content">Rating</div>
-                          </th>
-                          <th
-                            data-column-id=""
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "220px" }}
-                          >
-                            <div class="gridjs-th-content"></div>
-                          </th>
-                          <th
-                            data-column-id="action"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "80px" }}
-                          >
-                            <div class="gridjs-th-content">Action</div>
-                          </th>
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </div>
-                {/* purchase product  */}
-                <h4 className="mb-3 mt-2">Purchase Order List</h4>
-                <div class="row g-4 mb-3">
-                  <div class="col-sm-auto">
-                    <div>
-                      <a
-                        href="apps-ecommerce-add-product.html"
-                        class="btn btn-success"
-                      >
-                        <i class="ri-add-line align-bottom me-1"></i> Add New
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-sm">
-                    <div class="d-flex justify-content-sm-end">
-                      <div class="search-box ms-2">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Search Products..."
-                        />
-                        <i class="ri-search-line search-icon"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-body">
-                    <table className="table table-nowrap mb-0">
-                      <thead class="table-light">
-                        <tr>
-                          <th
-                            data-column-id="#"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "40px" }}
-                          >
-                            <div class="gridjs-th-content">#</div>
-                          </th>
-                          <th
-                            data-column-id="product"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "360px" }}
-                          >
-                            <div class="gridjs-th-content">Product</div>
-                          </th>
-                          <th
-                            data-column-id="stock"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "94px" }}
-                          >
-                            <div class="gridjs-th-content">Stock</div>
-                          </th>
-                          <th
-                            data-column-id="price"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "101px" }}
-                          >
-                            <div class="gridjs-th-content">Price</div>
-                          </th>
-                          <th
-                            data-column-id="orders"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "84px" }}
-                          >
-                            <div class="gridjs-th-content">Orders</div>
-                          </th>
-                          <th
-                            data-column-id="rating"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "105px" }}
-                          >
-                            <div class="gridjs-th-content">Rating</div>
-                          </th>
-                          <th
-                            data-column-id=""
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "220px" }}
-                          >
-                            <div class="gridjs-th-content"></div>
-                          </th>
-                          <th
-                            data-column-id="action"
-                            scope="col"
-                            tabindex="0"
-                            style={{ width: "80px" }}
-                          >
-                            <div class="gridjs-th-content">Action</div>
-                          </th>
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
