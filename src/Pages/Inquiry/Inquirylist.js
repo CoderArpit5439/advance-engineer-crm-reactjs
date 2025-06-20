@@ -110,48 +110,110 @@ const Inquirylist = () => {
                         >
                           <thead className="table-light">
                             <tr>
-                              <th className="sort" data-sort="inq_name">
-                                Inquiry Name
+                              <th class1Name="sort" data-sort="inq_name">
+                               SR NO
+                              </th>
+                              <th class1Name="sort" data-sort="inq_name">
+                                INQUIRY NO
                               </th>
                               <th className="sort" data-sort="inq_contact">
-                                Mobile No.
+                                COMPANY
                               </th>
                               <th className="sort" data-sort="inq_email">
-                                Email
-                              </th>
-                              <th className="sort" data-sort="inq_message">
-                                Message
+                                	CUSTOMER NAME
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Status
+                                DRG NO
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Product Name
+                                PRODUCT NAME
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Size
+                                QTY
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                MOC
+                                AMOUNT
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Thickness
+                                TOTAL AMOUNT
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                DRG
+                                GST / SEZ
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Code
+                                Create Date
                               </th>
                               <th className="sort" data-sort="inq_status">
-                                Information
+                                TOTAL AMOUNT
                               </th>
                               <th className="sort" data-sort="action">
                                 Action
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="list form-check-all">
+                          <tbody>
+                           <td>1</td>
+                            <td>252220	</td>
+                            <td>LUPIN LTD 	</td>
+                            <td>RAHUL SHARMA 		</td>
+                            <td>AEG422	</td>
+                            <td>AEG2232	</td>
+                            <td>SS CHAIR</td>
+                            <td>5</td>
+                            <td>10000</td>
+                            <td>5000</td>
+                            <td>GST</td>
+                            <td>5900</td>
+                                     <td>
+                                <ul className="list-inline hstack gap-2 mb-0">
+                                  <li className="list-inline-item">
+                                    <div className="dropdown">
+                                      <button
+                                        className="btn btn-soft-secondary btn-sm dropdown"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i className="ri-more-fill align-middle" />
+                                      </button>
+                                      <ul className="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                          <a
+                                            className="dropdown-item view-item-btn"
+                                            href="javascript:void(0);"
+                                          >
+                                            <i className="ri-eye-fill align-bottom me-2 text-muted" />
+                                            View
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item edit-item-btn"
+                                            href="#showModal"
+                                            data-bs-toggle="modal"
+                                          >
+                                            <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
+                                            Edit
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item remove-item-btn"
+                                            data-bs-toggle="modal"
+                                            href="#deleteRecordModal"
+                                          >
+                                            <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                            Delete
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </td>
+                          </tbody>
+
+                          {/* <tbody className="list form-check-all">
                             {loading ? (
                               <tr>
                                 <td colSpan={6} className="text-center">
@@ -207,7 +269,7 @@ const Inquirylist = () => {
                                 </td>
                               </tr>
                             )}
-                          </tbody>
+                          </tbody> */}
                         </table>
 
                         <div className="noresult" style={{ display: "none" }}>

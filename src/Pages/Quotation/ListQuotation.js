@@ -161,22 +161,37 @@ const ListQuotation = () => {
                           <thead className="table-light">
                             <tr>
                               <th className="sort" data-sort="quo_name">
-                                Name
+                                SR.no
                               </th>
                               <th className="sort" data-sort="quo_number">
-                                Number
+                                QUOT NO
                               </th>
                               <th className="sort" data-sort="quo_date">
-                                Date
+                                COMPANY
                               </th>
                               <th className="sort" data-sort="quo_subject">
-                                Subject
+                                CUSTOMER NAME
                               </th>
                               <th className="sort" data-sort="quo_total">
-                                Total
+                                PRODUCT NAME
                               </th>
                               <th className="sort" data-sort="quo_created_at">
-                                Created at
+                                DRG NO
+                              </th>
+                              <th className="sort" data-sort="quo_created_at">
+                                ITEM CODE
+                              </th>
+                              <th className="sort" data-sort="quo_created_at">
+                                QTY
+                              </th>
+                              <th className="sort" data-sort="quo_created_at">
+                                AMOUNT
+                              </th>
+                              <th className="sort" data-sort="quo_created_at">
+                               TOTAL AMOUNT
+                              </th>
+                              <th className="sort" data-sort="quo_created_at">
+                               Create Date
                               </th>
                               <th className="sort" data-sort="action">
                                 Action
@@ -184,6 +199,69 @@ const ListQuotation = () => {
                             </tr>
                           </thead>
                           <tbody className="list form-check-all">
+                                <tr >
+                                  <td>1</td>
+                                  <td>AEG-9875</td>
+                                  <td>LUPIN LTD</td>
+                                  <td>RAHUL SHARMA</td>
+                                  <td>SS CHAIR</td>
+                                  <td>AEG-9875</td>
+                                  <td>2025</td>
+                                  <td>5</td>
+                                  <td>1000</td>
+                                  <td>5000</td>
+                                  <td>18/05/2025</td>
+                                        <td>
+                                <ul className="list-inline hstack gap-2 mb-0">
+                                  <li className="list-inline-item">
+                                    <div className="dropdown">
+                                      <button
+                                        className="btn btn-soft-secondary btn-sm dropdown"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i className="ri-more-fill align-middle" />
+                                      </button>
+                                      <ul className="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                          <a
+                                            className="dropdown-item view-item-btn"
+                                            href="javascript:void(0);"
+                                          >
+                                            <i className="ri-eye-fill align-bottom me-2 text-muted" />
+                                            View
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item edit-item-btn"
+                                            href="#showModal"
+                                            data-bs-toggle="modal"
+                                          >
+                                            <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
+                                            Edit
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item remove-item-btn"
+                                            data-bs-toggle="modal"
+                                            href="#deleteRecordModal"
+                                          >
+                                            <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                            Delete
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </td>
+                                </tr>
+                           
+                          </tbody>
+                          {/* <tbody className="list form-check-all">
                             {showItems?.length > 0 ? (
                               showItems?.map((quote, i) => (
                                 <tr key={i}>
@@ -226,7 +304,7 @@ const ListQuotation = () => {
                                 </td>
                               </tr>
                             )}
-                          </tbody>
+                          </tbody> */}
                         </table>
 
                         {/* Pagination */}

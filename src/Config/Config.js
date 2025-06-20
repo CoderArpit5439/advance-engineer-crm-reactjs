@@ -3,11 +3,12 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
 const instance = axios.create({
-  // baseURL: process.env.REACT_APP_API_KEY,
-  baseURL: "http://localhost:8080/crm/",
+  baseURL: process.env.REACT_APP_API_KEY,
+  // baseURL: "http://localhost:8080/crm/",
   
 });
-// instance.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("authToken")}`
+instance.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("authToken")}`;
+
 instance.interceptors.request.use(
   (config) => {
     let authToken;

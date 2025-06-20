@@ -52,7 +52,7 @@ const AllOrders = () => {
                 </div>
               </div>
             </div>
-               <TopCards/>
+            <TopCards />
             <div class="row">
               <div class="col-lg-12">
                 <div class="card" id="orderList">
@@ -72,7 +72,7 @@ const AllOrders = () => {
                             Order
                           </button>
                           <button type="button" class="btn btn-info">
-                            <i class="ri-file-download-line align-bottom me-1"></i>{" "}
+                            <i class="ri-file-download-line align-bottom me-1"></i>
                             Import
                           </button>
                           <button
@@ -267,7 +267,6 @@ const AllOrders = () => {
                               class="btn btn-primary w-100"
                               onclick="SearchData();"
                             >
-                              {" "}
                               <i class="ri-equalizer-fill me-1 align-bottom"></i>
                               Filters
                             </button>
@@ -284,14 +283,14 @@ const AllOrders = () => {
                       >
                         <li class="nav-item" role="presentation">
                           <a
-                            class="nav-link active All py-3"
+                            class="nav-link  All py-3"
                             data-bs-toggle="tab"
                             id="All"
-                            href="#home1"
+                            href="#orderTable"
                             role="tab"
-                            aria-selected="true"
+                            aria-selected="false"
                           >
-                            <i class="ri-store-2-fill me-1 align-bottom"></i>{" "}
+                            <i class="ri-store-2-fill me-1 align-bottom"></i>
                             All Orders
                           </a>
                         </li>
@@ -305,7 +304,7 @@ const AllOrders = () => {
                             aria-selected="false"
                             tabindex="-1"
                           >
-                            <i class="ri-checkbox-circle-line me-1 align-bottom"></i>{" "}
+                            <i class="ri-checkbox-circle-line me-1 align-bottom"></i>
                             Delivered
                           </a>
                         </li>
@@ -319,8 +318,8 @@ const AllOrders = () => {
                             aria-selected="false"
                             tabindex="-1"
                           >
-                            <i class="ri-truck-line me-1 align-bottom"></i>{" "}
-                            Pickups{" "}
+                            <i class="ri-truck-line me-1 align-bottom"></i>
+                            Pickups
                             <span class="badge bg-danger align-middle ms-1">
                               2
                             </span>
@@ -336,7 +335,7 @@ const AllOrders = () => {
                             aria-selected="false"
                             tabindex="-1"
                           >
-                            <i class="ri-arrow-left-right-fill me-1 align-bottom"></i>{" "}
+                            <i class="ri-arrow-left-right-fill me-1 align-bottom"></i>
                             Returns
                           </a>
                         </li>
@@ -350,676 +349,583 @@ const AllOrders = () => {
                             aria-selected="false"
                             tabindex="-1"
                           >
-                            <i class="ri-close-circle-line me-1 align-bottom"></i>{" "}
+                            <i class="ri-close-circle-line me-1 align-bottom"></i>
                             Cancelled
+                          </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a
+                            class="nav-link py-3 FOC"
+                            data-bs-toggle="tab"
+                            id="FOC"
+                            href="#freeofcost"
+                            role="tab"
+                            aria-selected="false"
+                            tabindex="-1"
+                          >
+                            <i class="ri-close-circle-line me-1 align-bottom"></i>
+                            FOC
+                          </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a
+                            class="nav-link py-3 RGP"
+                            data-bs-toggle="tab"
+                            id="RGP"
+                            href="#gatepass"
+                            role="tab"
+                            aria-selected="false"
+                            tabindex="-1"
+                          >
+                            <i class="ri-close-circle-line me-1 align-bottom"></i>
+                            RGP
                           </a>
                         </li>
                       </ul>
 
                       <div class="table-responsive table-card mb-1">
-                        <table
-                          class="table table-nowrap align-middle"
-                          id="orderTable"
-                        >
-                          <thead class="text-muted table-light">
-                            <tr class="text-uppercase">
-                              <th scope="col" style={{ width: "25px" }}>
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    id="checkAll"
-                                    value="option"
-                                  />
-                                </div>
-                              </th>
-                              <th class="sort desc" data-sort="id">
-                                Order ID
-                              </th>
-                              <th class="sort" data-sort="customer_name">
-                                Customer
-                              </th>
-                              <th class="sort" data-sort="product_name">
-                                Product
-                              </th>
-                              <th class="sort" data-sort="date">
-                                Order Date
-                              </th>
-                              <th class="sort" data-sort="amount">
-                                Amount
-                              </th>
-                              <th class="sort" data-sort="payment">
-                                Payment Method
-                              </th>
-                              <th class="sort" data-sort="status">
-                                Delivery Status
-                              </th>
-                              <th class="sort" data-sort="city">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody class="list form-check-all">
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a
-                                  onClick={() => navigate(`/view-order/${1}`)}
-                                  class="fw-medium link-primary"
-                                >
-                                  #VZ12
-                                </a>
-                              </td>
-                              <td class="customer_name">Alexis Clarke</td>
-                              <td class="product_name">
-                                Noise Evolve Smartwatch
-                              </td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$1021</td>
-                              <td class="payment">Mastercard</td>
-                              <td class="status">
-                                <span class="badge bg-danger-subtle text-danger text-uppercase">
-                                  Cancelled
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ11</a>
-                              </td>
-                              <td class="customer_name">Diana Kohler</td>
-                              <td class="product_name">
-                                Half Sleeve T-Shirts (Blue)
-                              </td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$874</td>
-                              <td class="payment">Visa</td>
-                              <td class="status">
-                                <span class="badge bg-success-subtle text-success text-uppercase">
-                                  Delivered
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ10</a>
-                              </td>
-                              <td class="customer_name">Henry Baird</td>
-                              <td class="product_name">
-                                Classic Short Sleeve Shirt
-                              </td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$342</td>
-                              <td class="payment">Mastercard</td>
-                              <td class="status">
-                                <span class="badge bg-secondary-subtle text-secondary text-uppercase">
-                                  Inprogress
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ9</a>
-                              </td>
-                              <td class="customer_name">Donald Palmer</td>
-                              <td class="product_name">
-                                Oxford Button-Down Shirt
-                              </td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$373</td>
-                              <td class="payment">Visa</td>
-                              <td class="status">
-                                <span class="badge bg-info-subtle text-info text-uppercase">
-                                  Pickups
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ8</a>
-                              </td>
-                              <td class="customer_name">Alexis Clarke</td>
-                              <td class="product_name">
-                                USB Flash Drive Personalized wi
-                              </td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$247</td>
-                              <td class="payment">Paypal</td>
-                              <td class="status">
-                                <span class="badge bg-success-subtle text-success text-uppercase">
-                                  Delivered
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ7</a>
-                              </td>
-                              <td class="customer_name">Nancy Martino</td>
-                              <td class="product_name">Funky Prints T-shirt</td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$180</td>
-                              <td class="payment">COD</td>
-                              <td class="status">
-                                <span class="badge bg-primary-subtle text-primary text-uppercase">
-                                  Returns
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ6</a>
-                              </td>
-                              <td class="customer_name">James Price</td>
-                              <td class="product_name">Apple iPhone 12</td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$1240</td>
-                              <td class="payment">Visa</td>
-                              <td class="status">
-                                <span class="badge bg-secondary-subtle text-secondary text-uppercase">
-                                  Inprogress
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">
-                                <div class="form-check">
-                                  <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="checkAll"
-                                    value="option1"
-                                  />
-                                </div>
-                              </th>
-                              <td class="id">
-                                <a class="fw-medium link-primary">#VZ5</a>
-                              </td>
-                              <td class="customer_name">Thomas Taylor</td>
-                              <td class="product_name">Galaxy Watch4</td>
-                              <td class="date">
-                                20 Apr,2022{" "}
-                                <small class="text-muted">4:05 PM</small>
-                              </td>
-                              <td class="amount">$408</td>
-                              <td class="payment">Mastercard</td>
-                              <td class="status">
-                                <span class="badge bg-info-subtle text-info text-uppercase">
-                                  Pickups
-                                </span>
-                              </td>
-                              <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="View"
-                                  >
-                                    <a class="text-primary d-inline-block">
-                                      <i class="ri-eye-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item edit"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Edit"
-                                  >
-                                    <a
-                                      href="#showModal"
-                                      data-bs-toggle="modal"
-                                      class="text-primary d-inline-block edit-item-btn"
-                                    >
-                                      <i class="ri-pencil-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                  <li
-                                    class="list-inline-item"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-trigger="hover"
-                                    data-bs-placement="top"
-                                    title="Remove"
-                                  >
-                                    <a
-                                      class="text-danger d-inline-block remove-item-btn"
-                                      data-bs-toggle="modal"
-                                      href="#deleteOrder"
-                                    >
-                                      <i class="ri-delete-bin-5-fill fs-16"></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        {/* <div class="noresult" style={{display: "none"}}>
-                                                <div class="text-center">
-                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px"></lord-icon>
-                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                    <p class="text-muted">We've searched more than 150+ Orders We did not find any orders for you search.</p>
-                                                </div>
-                                            </div> */}
+                        <div className="tab-content text-muted">
+                          {/* All order table */}
+                          <table
+                            class="table table-nowrap tab-pane align-middle"
+                            id="orderTable"
+                          >
+                            <thead class="table-light text-uppercase">
+                              <tr>
+                                <th>SR NO</th>
+                                <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>ORDER NUMBER</th>
+                                <th>ITEM CODE</th>
+                                <th>DRG NUMBER</th>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                                <th>UNIT</th>
+                                <th>PRICE</th>
+                                <th>GST / SEZ</th>
+                                <th>TOTAL PRICE</th>
+                                <th>CREATE DATE & TIME</th>
+                                <th>DELIVERY DATE</th>
+                                <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td>
+                                <td>215425</td>
+                                <td>2025</td>
+                                <td>AEGD-1236</td>
+                                <td>SS CHAIR</td>
+                                <td>5</td>
+                                <td>1000</td>
+                                <td>900</td>
+                                <td>GST</td>
+                                <td>5900</td>
+                                <td>19-06-2025 12:44 AM</td>
+                                <td>26-06-2025</td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-info"
+                                        href="#"
+                                      >
+                                        <i class="ri-eye-fill align-middle me-1"></i>
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-warning"
+                                        href="#editModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-pencil-fill align-middle me-1"></i>
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-success"
+                                        href="#"
+                                      >
+                                        <i class="ri-download-2-fill align-middle me-1"></i>
+                                        Download
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-primary"
+                                        href="#"
+                                      >
+                                        <i class="ri-printer-fill align-middle me-1"></i>
+                                        Print
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-danger"
+                                        href="#deleteModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-delete-bin-fill align-middle me-1"></i>
+                                        Delete
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* Delivery */}
+                          <table
+                            class="table table-nowrap tab-pane align-middle"
+                            id="delivered"
+                          >
+                            <thead class="table-light">
+                              <tr class="text-uppercase">
+                                <th>SR NO</th> <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th> <th>CITY</th>
+                                <th>ITEM CODE</th> <th>STATE</th>
+                                <th>PRODUCT NAME</th> <th>QTY</th>
+                                <th>AMOUNT</th> <th>DELIVERY DATE TIME</th>
+                                <th>TRANSPORT VEHICLE NO</th>
+                                <th>DRIVER NAME</th> <th>DRIVER NUMBER</th>
+                                <th>DELIVERY STATUS</th> <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td> <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td> <td>PITHAMPUR</td>
+                                <td>2025</td> <td>MP</td> <td>SS CHAIR</td>
+                                <td>5</td> <td>5900</td>
+                                <td>19-06-2025 12:44 AM</td> <td>MP09AS2452</td>
+                                <td>JITU</td> <td>82259424242</td>
+                                <td>DELIVERED</td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        href="javascript:void(0);"
+                                        class="btn btn-sm btn-soft-primary"
+                                      >
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        href="#editModal"
+                                        class="btn btn-sm btn-soft-warning"
+                                        data-bs-toggle="modal"
+                                      >
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        href="mailto:?subject=Delivery%20Inquiry"
+                                        class="btn btn-sm btn-soft-success"
+                                      >
+                                        Mail Inq
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* Pick up */}
+                          <table
+                            class="table table-nowrap tab-pane align-middle"
+                            id="pickups"
+                          >
+                            <thead class="text-muted table-light">
+                              <tr class="text-uppercase">
+                                <th>SR NO</th> <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th> <th>CITY</th>
+                                <th>ITEM CODE</th> <th>STATE</th>
+                                <th>TOTAL AMOUNT</th> <th>DELIVERY STATUS</th>
+                                <th>TRASPORT VEHICLE NO</th>
+                                <th>DRIVER NAME</th> <th>DRIVER NUMBER</th>
+                                <th>PAYMENT</th> <th>PAYMENT STATUS</th>
+                               
+                              </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                              <tr>
+                                <td>1</td> <td class="company">LUPIN LTD</td>
+                                <td class="customer_name">RAHUL SHARMA</td>
+                                <td class="city">PITHAMPUR</td>
+                                <td class="item_code">2025</td>
+                                <td class="state">MP</td>
+                                <td class="total_amount">5900</td>
+                                <td class="delivery_status">PICKUP</td>
+                                <td class="vehicle_no">MP09AS2452</td>
+                                <td class="driver_name">JITU</td>
+                                <td class="driver_number">82259424242</td>
+                                <td class="payment">2000</td>
+                                <td class="payment_status">DONE</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* Return */}
+                          <table
+                            class="table table-nowrap tab-pane align-middle"
+                            id="returns"
+                          >
+                            <thead className="text-muted table-light">
+                              <tr className="text-uppercase">
+                                <th>SR NO</th>
+                                <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>RETURN</th>
+                                <th>ITEM CODE</th>
+                                <th>DRG NUMBER</th>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                                <th>UNIT</th>
+                                <th>PRICE</th>
+                                <th>GST / SEZ</th>
+                                <th>TOTAL PRICE</th>
+                                <th>CREATE DATE & TIME</th>
+                                <th>DELIVERY DATE</th>
+                                <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody className="list form-check-all">
+                              <tr>
+                                <td>1</td>
+                                <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td>
+                                <td>AEGI-9875</td>
+                                <td>2025</td>
+                                <td>AEGD-1236</td>
+                                <td>SS CHAIR</td>
+                                <td>5</td>
+                                <td>1000</td>
+                                <td>900</td>
+                                <td>GST</td>
+                                <td>5900</td>
+                                <td>19-06-2025 12:44 AM</td>
+                                <td>26-06-2025</td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-info"
+                                        href="#"
+                                      >
+                                        <i class="ri-eye-fill align-middle me-1"></i>
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-warning"
+                                        href="#editModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-pencil-fill align-middle me-1"></i>
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-success"
+                                        href="#"
+                                      >
+                                        <i class="ri-download-2-fill align-middle me-1"></i>
+                                        Download
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-primary"
+                                        href="#"
+                                      >
+                                        <i class="ri-printer-fill align-middle me-1"></i>
+                                        Print
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-danger"
+                                        href="#deleteModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-delete-bin-fill align-middle me-1"></i>
+                                        Delete
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* Cancelled */}
+                          <table
+                            className="table table-nowrap tab-pane align-middle"
+                            id="cancelled"
+                          >
+                            <thead className="text-muted table-light">
+                              <tr className="text-uppercase">
+                                <th>SR NO</th>
+                                <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>ORDER CANCEL</th>
+                                <th>ITEM CODE</th>
+                                <th>DRG NUMBER</th>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                                <th>UNIT</th>
+                                <th>PRICE</th>
+                                <th>GST / SEZ</th>
+                                <th>TOTAL PRICE</th>
+                                <th>CREATE DATE & TIME</th>
+                                <th>DELIVERY DATE</th>
+                                <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody className="list form-check-all">
+                              <tr>
+                                <td>1</td>
+                                <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td>
+                                <td>215425</td>
+                                <td>2025</td>
+                                <td>AEGD-1236</td>
+                                <td>SS CHAIR</td>
+                                <td>5</td>
+                                <td>1000</td>
+                                <td>900</td>
+                                <td>GST</td>
+                                <td>5900</td>
+                                <td>19-06-2025 12:44 AM</td>
+                                <td>26-06-2025</td>
+                                <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-info"
+                                        href="#"
+                                      >
+                                        <i class="ri-eye-fill align-middle me-1"></i>
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-warning"
+                                        href="#editModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-pencil-fill align-middle me-1"></i>
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-success"
+                                        href="#"
+                                      >
+                                        <i class="ri-download-2-fill align-middle me-1"></i>
+                                        Download
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-primary"
+                                        href="#"
+                                      >
+                                        <i class="ri-printer-fill align-middle me-1"></i>
+                                        Print
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-danger"
+                                        href="#deleteModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-delete-bin-fill align-middle me-1"></i>
+                                        Delete
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* Free of cost */}
+                          <table
+                            className="table table-nowrap tab-pane align-middle"
+                            id="freeofcost"
+                          >
+                            <thead className="text-muted table-light">
+                              <tr className="text-uppercase">
+                                <th>SR NO</th>
+                                <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>FREE AND COST</th>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                                <th>CREATE DATE & TIME</th>
+                                <th>DELIVERY DATE</th>
+                                <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody className="list form-check-all">
+                              <tr>
+                                <td>1</td>
+                                <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td>
+                                <td>AEGFNC-522</td>
+                                <td>SS CHAIR</td>
+                                <td>5</td>
+                                <td>19-06-2025 12:44 AM</td>
+                                <td>26-06-2025</td>
+                                 <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-info"
+                                        href="#"
+                                      >
+                                        <i class="ri-eye-fill align-middle me-1"></i>
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-warning"
+                                        href="#editModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-pencil-fill align-middle me-1"></i>
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-success"
+                                        href="#"
+                                      >
+                                        <i class="ri-download-2-fill align-middle me-1"></i>
+                                        Download
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-primary"
+                                        href="#"
+                                      >
+                                        <i class="ri-printer-fill align-middle me-1"></i>
+                                        Print
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-danger"
+                                        href="#deleteModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-delete-bin-fill align-middle me-1"></i>
+                                        Delete
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          {/* RGP */}
+                          <table
+                            class="table table-nowrap tab-pane align-middle"
+                            id="gatepass"
+                          >
+                            <thead className="text-muted table-light">
+                              <tr className="text-uppercase">
+                                <th>SR NO</th>
+                                <th>COMPANY</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>RGP NO</th>
+                                <th>PRODUCT NAME</th>
+                                <th>QTY</th>
+                                <th>CREATE DATE & TIME</th>
+                                <th>DELIVERY DATE</th>
+                                <th>ACTION</th>
+                              </tr>
+                            </thead>
+                            <tbody className="list form-check-all">
+                              <tr>
+                                <td>1</td>
+                                <td>LUPIN LTD</td>
+                                <td>RAHUL SHARMA</td>
+                                <td>AEGRGP548</td>
+                                <td>SS CHAIR</td>
+                                <td>5</td>
+                                <td>19-06-2025 12:44 AM</td>
+                                <td>26-06-2025</td>
+                                  <td>
+                                  <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-info"
+                                        href="#"
+                                      >
+                                        <i class="ri-eye-fill align-middle me-1"></i>
+                                        View
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-warning"
+                                        href="#editModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-pencil-fill align-middle me-1"></i>
+                                        Edit
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-success"
+                                        href="#"
+                                      >
+                                        <i class="ri-download-2-fill align-middle me-1"></i>
+                                        Download
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-primary"
+                                        href="#"
+                                      >
+                                        <i class="ri-printer-fill align-middle me-1"></i>
+                                        Print
+                                      </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <a
+                                        class="btn btn-sm btn-soft-danger"
+                                        href="#deleteModal"
+                                        data-bs-toggle="modal"
+                                      >
+                                        <i class="ri-delete-bin-fill align-middle me-1"></i>
+                                        Delete
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                      {/* <div class="d-flex justify-content-end">
-                                            <div class="pagination-wrap hstack gap-2" style="display: flex;">
-                                                <a class="page-item pagination-prev disabled" href="#">
-                                                    Previous
-                                                </a>
-                                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li><li><a class="page" href="#" data-i="2" data-page="8">2</a></li></ul>
-                                                <a class="page-item pagination-next" href="#">
-                                                    Next
-                                                </a>
-                                            </div>
-                                        </div> */}
                     </div>
                     <div
                       class="modal fade"
@@ -1100,7 +1006,7 @@ const AllOrders = () => {
                                       required=""
                                       hidden=""
                                       tabindex="-1"
-                                      data-choice="active"
+                                      data-choice=""
                                     >
                                       <option value="" selected="">
                                         Product
@@ -1259,24 +1165,6 @@ const AllOrders = () => {
                         </div>
                       </div>
                     </div>
-                    {/* 
-                                    <div class="modal fade flip" id="deleteOrder" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body p-5 text-center">
-                                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
-                                                    <div class="mt-4 text-center">
-                                                        <h4>You are about to delete a order ?</h4>
-                                                        <p class="text-muted fs-15 mb-4">Deleting your order will remove all of your information from our database.</p>
-                                                        <div class="hstack gap-2 justify-content-center remove">
-                                                            <button class="btn btn-link link-success fw-medium text-decoration-none" id="deleteRecord-close" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</button>
-                                                            <button class="btn btn-danger" id="delete-record">Yes, Delete It</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
                   </div>
                 </div>
               </div>
@@ -1284,132 +1172,6 @@ const AllOrders = () => {
           </div>
         </div>
       </div>
-      {/* <div className="main-content">
-        <div className="page-content">
-          <div className="container-fluid">
-            <div className="row" style={{ fontFamily: "poppins" }}>
-              <div className="col-lg-12">
-                <div className="card">
-                  <div className="card-header">
-                  </div>
-                  <div className="card-body">
-                    <div className="listjs-table" id="customerList">
-                      <div className="row g-4 mb-3">
-                        <div className="col-sm-auto">
-                          <div>
-                            <button
-                              type="button"
-                              className="btn btn-success add-btn"
-                              id="create-btn"
-                              onClick={() => navigate("/add-order")}
-                            >
-                              <i className="ri-add-line align-bottom me-1" />{" "}
-                              Add
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="table-responsive table-card mt-3 mb-1">
-                        <table
-                          className="table align-middle table-nowrap"
-                          id="customerTable"
-                        >
-                          <thead className="table-light">
-                            <tr>
-                              <th className="sort" data-sort="email">
-                                Customer
-                              </th>
-                              <th className="sort" data-sort="date">
-                                Contact
-                              </th>
-                              <th className="sort" data-sort="status">
-                                Order NO
-                              </th>
-                              <th className="sort" data-sort="action">
-                                CSTR P.O
-                              </th>
-                              <th className="sort" data-sort="action">
-                                item
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Due Date
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Quantity
-                              </th>
-                              <th className="sort" data-sort="action">
-                                PNDG
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Done
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Unit
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Total
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Status
-                              </th>
-                              <th className="sort" data-sort="action">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody className="list form-check-all">
-                            {data?.map((order) => (
-                              <tr key={order.id}>
-                                <td className="">{order.or_customer}</td>
-                                <td className="">{order.or_contact}</td>
-                                <td className="">{order.or_order_no}</td>
-                                <td className="">{order.or_cstr_p_o}</td>
-                                <td className="">{order.or_item}</td>
-                                <td className="">{order.or_due_date}</td>
-                                <td className="">{order.or_qty}</td>
-                                <td className="">{order.or_pndg}</td>
-                                <td className="">{order.or_done}</td>
-                                <td className="">{order.or_unit}</td>
-                                <td className="">{order.or_total}</td>
-                                <td className="">{order.or_status}</td>
-                                <td className="">
-                                  <button
-                                    type="button"
-                                    className="btn btn-sm btn-info"
-                                    onClick={() => handleEdit(order)}
-                                  >
-                                    <i className="fa fa-pencil-o"></i> Update
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <div className="noresult" style={{ display: "none" }}>
-                          <div className="text-center">
-                            <lord-icon
-                              src="https://cdn.lordicon.com/msoeawqm.json"
-                              trigger="loop"
-                              colors="primary:#121331,secondary:#08a88a"
-                              style={{ width: 75, height: 75 }}
-                            />
-                            <h5 className="mt-2">Sorry! No Result Found</h5>
-                            <p className="text-muted mb-0">
-                              We've searched more than 150+ Orders We did not
-                              find any orders for you search.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <Footer />
     </div>
   );

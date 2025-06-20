@@ -701,7 +701,7 @@ const ViewCompany = () => {
                               </div>
                             </div>
                           </div> */}
-                           <div class="card">
+                          <div class="card">
                             <div class="card-body">
                               <div class="d-flex align-items-center mb-4">
                                 <h5 class="card-title flex-grow-1">
@@ -711,9 +711,8 @@ const ViewCompany = () => {
                             </div>
                           </div>
                           <div class="row">
-                            
-                             {unitList?.length != 0 ? (
-                                          unitList?.map((unit, i) => {
+                            {unitList?.length != 0 ? (
+                              unitList?.map((unit, i) => {
                                 return (
                                   <div class="col-xxl-3 col-md-6">
                                     <div class="card companiesList-card">
@@ -729,11 +728,8 @@ const ViewCompany = () => {
                                         </div>
                                         <div class="text-center">
                                           <a href="#!">
-                                            <h5
-                                              className="text-decoration-underline mt-3 company-name"
-                                              
-                                            >
-                                             {unit.u_name}
+                                            <h5 className="text-decoration-underline mt-3 company-name">
+                                              {unit.u_name}
                                             </h5>
                                           </a>
                                           <div class="d-none company-desc">
@@ -806,12 +802,16 @@ const ViewCompany = () => {
                                     <table class="table table-borderless align-middle mb-0">
                                       <thead class="table-light">
                                         <tr>
-                                          <th scope="col">Name</th>
                                           <th scope="col">Company</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col">Email ID</th>
                                           <th scope="col">Contact</th>
-                                          <th scope="col">Department</th>
-                                          <th scope="col">Address</th>
-                                          <th scope="col">Created at</th>
+                                          <th scope="col">Post</th>
+                                          <th scope="col">Last Contact</th>
+                                          <th scope="col">Block / Unblock</th>
+                                          <th scope="col">Next Visit</th>
+                                          <th scope="col">Discuss</th>
+                                          <th scope="col">Action</th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -819,6 +819,9 @@ const ViewCompany = () => {
                                           customerList?.map((customer, i) => {
                                             return (
                                               <tr>
+                                                <td>
+                                                  {customer.c_company_name}
+                                                </td>
                                                 <td
                                                   className="text-decoration-underline"
                                                   onClick={() =>
@@ -829,20 +832,78 @@ const ViewCompany = () => {
                                                 >
                                                   {customer.c_fullname}
                                                 </td>
-                                                <td>
-                                                  {customer.c_company_name}
-                                                </td>
+                                                <td>{customer.c_email}</td>
                                                 <td>
                                                   <div>{customer.c_mobile}</div>
+                                                </td>
+                                                <td>
+                                                  <div>Post</div>
+                                                </td>
+                                                <td>
+                                                  <div>25-06-2025</div>
+                                                </td>
+                                                <td>
+                                                  <div>Block</div>
+                                                </td>
+                                                <td>
+                                                  <div>30-06-2025</div>
+                                                </td>
+                                                <td>
                                                   <div>
-                                                    <div>
-                                                      {customer.c_email}
-                                                    </div>
+                                                    Intrested but not buy
+                                                    machine
                                                   </div>
                                                 </td>
-                                                <td>{customer.c_department}</td>
+                                                <td>
+                                                  <ul className="list-inline hstack gap-2 mb-0">
+                                                    <li className="list-inline-item">
+                                                      <div className="dropdown">
+                                                        <button
+                                                          className="btn btn-soft-secondary btn-sm dropdown"
+                                                          type="button"
+                                                          data-bs-toggle="dropdown"
+                                                          aria-expanded="false"
+                                                        >
+                                                          <i className="ri-more-fill align-middle" />
+                                                        </button>
+                                                        <ul className="dropdown-menu dropdown-menu-end">
+                                                          <li>
+                                                            <a
+                                                              className="dropdown-item view-item-btn"
+                                                              href="javascript:void(0);"
+                                                            >
+                                                              <i className="ri-eye-fill align-bottom me-2 text-muted" />
+                                                              View
+                                                            </a>
+                                                          </li>
+                                                          <li>
+                                                            <a
+                                                              className="dropdown-item edit-item-btn"
+                                                              href="#showModal"
+                                                              data-bs-toggle="modal"
+                                                            >
+                                                              <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
+                                                              Edit
+                                                            </a>
+                                                          </li>
+                                                          <li>
+                                                            <a
+                                                              className="dropdown-item remove-item-btn"
+                                                              data-bs-toggle="modal"
+                                                              href="#deleteRecordModal"
+                                                            >
+                                                              <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                                              Delete
+                                                            </a>
+                                                          </li>
+                                                        </ul>
+                                                      </div>
+                                                    </li>
+                                                  </ul>
+                                                </td>
+                                                {/* <td>{customer.c_department}</td>
                                                 <td>{customer.c_address}</td>
-                                                <td>{customer.c_created_at}</td>
+                                                <td>{customer.c_created_at}</td> */}
                                                 {/* <td>
                                             <div>{unit.p_account_contact}</div>
                                             <div>

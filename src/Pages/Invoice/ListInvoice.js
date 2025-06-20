@@ -98,29 +98,47 @@ const ListInvoice = () => {
                           <thead className="table-light">
                             <tr>
                               <th className="sort" data-sort="emp_name">
-                                SNO
+                                SR NO
                               </th>
                               <th className="sort" data-sort="emp_name">
-                                Invoice Name
+                              INVOICE NO
                               </th>
                               <th className="sort" data-sort="emp_role">
-                                Invoice Number
+                                COMPANY NAME
+                              </th>
+                              <th className="sort" data-sort="emp_role">
+                                CUSTOMER NAME
+                              </th>
+                              <th className="sort" data-sort="emp_role">
+                                PO NUMBER	
                               </th>
 
                               <th className="sort" data-sort="action">
-                                Transport
+                                DRG NO
                               </th>
                               <th className="sort" data-sort="action">
-                                GST
+                                ITEM CODE
                               </th>
                               <th className="sort" data-sort="action">
-                                Discount
+                                PRODUCT NAME
                               </th>
                               <th className="sort" data-sort="action">
-                                Invoice Date
+                                QTY
                               </th>
                               <th className="sort" data-sort="action">
-                                Total
+                                PRICE
+                              </th>
+                              <th className="sort" data-sort="action">
+                                TOTAL AMOUNT 
+                              </th>
+                              <th className="sort" data-sort="action">
+                                GST / SEZ 
+                              </th>
+                              <th className="sort" data-sort="action">
+                                Create Date
+                              </th>
+                              <th className="sort" data-sort="action">
+                                	TOTAL AMONT
                               </th>
                               <th className="sort" data-sort="action">
                                 Action
@@ -128,6 +146,70 @@ const ListInvoice = () => {
                             </tr>
                           </thead>
                           <tbody className="list form-check-all">
+                             <tr >
+                                  <td>1</td>
+                                  <td>AEG-9875</td>
+                                  <td>LUPIN LTD</td>
+                                  <td>RAHUL SHARMA</td>
+                                  <td>74584</td>
+                                  <td>SS CHAIR</td>
+                                  <td>AEG-9875</td>
+                                  <td>2025</td>
+                                  <td>5</td>
+                                  <td>1000</td>
+                                  <td>5000</td>
+                                  <td>18/05/2025</td>
+                                        <td>
+                                <ul className="list-inline hstack gap-2 mb-0">
+                                  <li className="list-inline-item">
+                                    <div className="dropdown">
+                                      <button
+                                        className="btn btn-soft-secondary btn-sm dropdown"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i className="ri-more-fill align-middle" />
+                                      </button>
+                                      <ul className="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                          <a
+                                            className="dropdown-item view-item-btn"
+                                            href="javascript:void(0);"
+                                          >
+                                            <i className="ri-eye-fill align-bottom me-2 text-muted" />
+                                            View
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item edit-item-btn"
+                                            href="#showModal"
+                                            data-bs-toggle="modal"
+                                          >
+                                            <i className="ri-pencil-fill align-bottom me-2 text-muted" />{" "}
+                                            Edit
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a
+                                            className="dropdown-item remove-item-btn"
+                                            data-bs-toggle="modal"
+                                            href="#deleteRecordModal"
+                                          >
+                                            <i className="ri-delete-bin-fill align-bottom me-2 text-muted" />{" "}
+                                            Delete
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </td>
+                                </tr>
+                          </tbody>
+                          </table>
+                          {/* <tbody className="list form-check-all">
                             {invoices && invoices.length > 0 ? (
                               invoices.map((inv, i) => (
                                 <tr key={inv.inv_id}>
@@ -143,12 +225,7 @@ const ListInvoice = () => {
 
                                   <td>
                                     <div className="d-flex gap-2">
-                                      {/* <button
-                  className="btn btn-info btn-sm"
-                  onClick={() => handleEdit(user)}
-                >
-                  <i className="fa fa-pencil"></i> Edit
-                </button> */}
+                                  
                                       <button
                                         className="btn btn-danger btn-sm"
                                         onClick={() =>
@@ -168,11 +245,11 @@ const ListInvoice = () => {
                                 </td>
                               </tr>
                             )}
-                          </tbody>
-                        </table>
+                          </tbody> */}
+                        {/* </table> */}
 
                         {/* No Result Found Section */}
-                        {invoices?.length === 0 && !loading && (
+                        {/* {invoices?.length === 0 && !loading && (
                           <div
                             className="noresult"
                             style={{ display: "block" }}
@@ -192,7 +269,7 @@ const ListInvoice = () => {
                               </p>
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>

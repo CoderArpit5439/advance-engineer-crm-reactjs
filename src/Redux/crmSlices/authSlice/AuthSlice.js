@@ -20,12 +20,12 @@ export const loginAuth = createAsyncThunk(
         formData.append("activity", data.activity);
 
         try {
-            const response = await axios.post("http://localhost:8080/crm/auth/login", formData);
+            const response = await instance.post("/auth/login", formData);
           
             if (response?.data?.token) {
                 const now = new Date();
                 const midnight = new Date(now.getFullYear(), now.getMonth(), (now.getDate() + 1));
-                Cookies.set('authToken', response.data.token, { expires: midnight }); 
+                Cookies.set('authToken', response.data?.token, { expires: midnight }); 
             }
             return response?.data;
 

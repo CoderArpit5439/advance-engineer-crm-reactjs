@@ -110,6 +110,149 @@ const Sidebar = () => {
                                     </li>
                                     {/* end Dashboard Menu */}
 
+                                    <li class="nav-item">
+                                      <a
+                                        class="nav-link menu-link collapsed active"
+                                        href="#sidebarEcommerce"
+                                        data-bs-toggle="collapse"
+                                        role="button"
+                                        aria-expanded="true"
+                                        aria-controls="sidebarEcommerce"
+                                      >
+                                        <i class="ri-dashboard-2-line"></i>{" "}
+                                        <span data-key="t-dashboards">
+                                          Ecommerce
+                                        </span>
+                                      </a>
+                                      <div
+                                        class="collapse menu-dropdown show"
+                                        id="sidebarEcommerce"
+                                      >
+                                        <ul class="nav nav-sm flex-column">
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/list-customer")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Customer
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link"
+                                              onClick={() =>
+                                                navigate("/list-category")
+                                              }
+                                            >
+                                              <span data-key="t-layouts">
+                                                Category
+                                              </span>{" "}
+                                            </a>
+                                          </li>
+
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/list-product")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Products
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/list-quotation")
+                                              }
+                                            >
+                                              <span data-key="t-layouts">
+                                                Quotation
+                                              </span>{" "}
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link"
+                                              onClick={() =>
+                                                navigate("/inventory-list")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Inventory
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/list-invoice")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Invoice
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link"
+                                              onClick={() =>
+                                                navigate("/lead-list")
+                                              }
+                                            >
+                                              <span data-key="t-layouts">
+                                                Lead
+                                              </span>{" "}
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link collapsed"
+                                              onClick={() =>
+                                                navigate("/inquiry-list")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Inquiry
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/transportation")
+                                              }
+                                            >
+                                              <span data-key="t-apps">
+                                                Transportation
+                                              </span>
+                                            </a>
+                                          </li>
+                                          <li className="nav-item">
+                                            <a
+                                              className="nav-link menu-link "
+                                              onClick={() =>
+                                                navigate("/all-order")
+                                              }
+                                            >
+                                              <span data-key="t-layouts">
+                                                Orders
+                                              </span>{" "}
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
@@ -120,7 +263,6 @@ const Sidebar = () => {
                                         <i className="ri-apps-2-line" />{" "}
                                         <span data-key="t-apps">Company</span>
                                       </a>
-                                     
                                     </li>
 
                                     {/* Contact */}
@@ -128,7 +270,6 @@ const Sidebar = () => {
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
-                                     
                                         onClick={() =>
                                           navigate("/contact-list")
                                         }
@@ -136,7 +277,6 @@ const Sidebar = () => {
                                         <i className="ri-apps-2-line" />
                                         <span data-key="t-apps">Contacts</span>
                                       </a>
-                                    
                                     </li>
                                     {/* Contact */}
 
@@ -151,37 +291,21 @@ const Sidebar = () => {
                                         <i className="ri-apps-2-line" />{" "}
                                         <span data-key="t-apps">Account</span>
                                       </a>
-                                    
                                     </li>
 
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
-                                       
                                         onClick={() => navigate("/chat")}
                                       >
                                         <i className="ri-apps-2-line" />{" "}
                                         <span data-key="t-apps">Chat</span>
                                       </a>
-                                     
                                     </li>
 
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
-                                        onClick={() =>
-                                          navigate("/list-customer")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Customer</span>
-                                      </a>
-                                     
-                                    </li>
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                      
                                         onClick={() =>
                                           navigate("/dashboard-employee")
                                         }
@@ -189,12 +313,10 @@ const Sidebar = () => {
                                         <i className="ri-apps-2-line" />
                                         <span data-key="t-apps">Employee</span>
                                       </a>
-                                   
                                     </li>
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
-                                    
                                         onClick={() =>
                                           navigate("/list-machine")
                                         }
@@ -202,37 +324,21 @@ const Sidebar = () => {
                                         <i className="ri-apps-2-line" />
                                         <span data-key="t-apps">Machine</span>
                                       </a>
-                                      
                                     </li>
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                    
-                                        onClick={() =>
-                                          navigate("/transportation")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />
-                                        <span data-key="t-apps">Transportation</span>
-                                      </a>
-                                      
-                                    </li>
+
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link"
-                                      
                                         onClick={() => navigate("/calendar")}
                                       >
                                         <i className="ri-apps-2-line" />
                                         <span data-key="t-apps">Calendar</span>
                                       </a>
-                                     
                                     </li>
-                                   
+
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link"
-                                     
                                         onClick={() =>
                                           navigate("/login-activity-list")
                                         }
@@ -241,64 +347,6 @@ const Sidebar = () => {
                                         <span data-key="t-apps">
                                           Login Activity
                                         </span>
-                                      </a>
-                                    
-                                    </li>
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link"
-                                        // href="#Category"
-                                        // data-bs-toggle="collapse"
-                                        // role="button"
-                                        // aria-expanded="false"
-                                        // aria-controls="sidebarLayouts"
-                                        onClick={() =>
-                                          navigate("/list-category")
-                                        }
-                                      >
-                                        <i className="ri-layout-3-line" />{" "}
-                                        <span data-key="t-layouts">
-                                          Category
-                                        </span>{" "}
-                                      </a>
-                                      {/* <div
-                                        className="collapse menu-dropdown"
-                                        id="Category"
-                                      >
-                                        <ul className="nav nav-sm flex-column">
-                                          <li className="nav-item">
-                                            <a
-                                              onClick={() =>
-                                                navigate("/add-category")
-                                              }
-                                              className="nav-link cursor-pointer"
-                                            >
-                                              Add Category
-                                            </a>
-                                          </li>
-                                          <li className="nav-item">
-                                            <a
-                                              onClick={() =>
-                                                navigate("/list-category")
-                                              }
-                                              className="nav-link cursor-pointer"
-                                            >
-                                              Category List
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div> */}
-                                    </li>
-
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                        onClick={() =>
-                                          navigate("/list-product")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Products</span>
                                       </a>
                                     </li>
 
@@ -314,15 +362,7 @@ const Sidebar = () => {
                                       </a>
                                     </li>
 
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                        onClick={() => navigate("/all-order")}
-                                      >
-                                        <i className="ri-layout-3-line" />{" "}
-                                        <span data-key="t-layouts">Orders</span>{" "}
-                                      </a>
-                                    </li>
+                                  
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link "
@@ -330,52 +370,6 @@ const Sidebar = () => {
                                       >
                                         <i className="ri-layout-3-line" />{" "}
                                         <span data-key="t-layouts">Vendor</span>{" "}
-                                      </a>
-                                    </li>
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                        onClick={() =>
-                                          navigate("/list-quotation")
-                                        }
-                                      >
-                                        <i className="ri-layout-3-line" />{" "}
-                                        <span data-key="t-layouts">
-                                          Quotation
-                                        </span>{" "}
-                                      </a>
-                                    </li>
-
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link "
-                                        onClick={() =>
-                                          navigate("/list-invoice")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Invoice</span>
-                                      </a>
-                                    </li>
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link"
-                                        onClick={() => navigate("/lead-list")}
-                                      >
-                                        <i className="ri-layout-3-line" />{" "}
-                                        <span data-key="t-layouts">Lead</span>{" "}
-                                      </a>
-                                    </li>
-
-                                    <li className="nav-item">
-                                      <a
-                                        className="nav-link menu-link"
-                                        onClick={() =>
-                                          navigate("/inventory-list")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Inventory</span>
                                       </a>
                                     </li>
 
@@ -405,21 +399,10 @@ const Sidebar = () => {
 
                                     <li className="nav-item">
                                       <a
-                                        className="nav-link menu-link collapsed"
-                                        onClick={() =>
-                                          navigate("/inquiry-list")
-                                        }
-                                      >
-                                        <i className="ri-apps-2-line" />{" "}
-                                        <span data-key="t-apps">Inquiry</span>
-                                      </a>
-                                    </li>
-                                    <li className="nav-item">
-                                      <a
                                         className="nav-link menu-link "
                                         onClick={() =>
-                                                navigate("/support-list")
-                                              }
+                                          navigate("/support-list")
+                                        }
                                       >
                                         <i className="ri-layout-3-line" />{" "}
                                         <span data-key="t-layouts">
@@ -431,9 +414,9 @@ const Sidebar = () => {
                                     <li className="nav-item">
                                       <a
                                         className="nav-link menu-link"
-                                           onClick={() =>
-                                                navigate("/Graphic-list")
-                                              }
+                                        onClick={() =>
+                                          navigate("/Graphic-list")
+                                        }
                                       >
                                         <i className="ri-layout-3-line" />{" "}
                                         <span data-key="t-layouts">

@@ -48,6 +48,57 @@ const ListCompany = () => {
     setCompanyDetails(companyInfo);
   };
 
+  const topCards = [
+    {
+      title: "Total company",
+      count: 5,
+    },
+    {
+      title: "Total Customer",
+      count: 5,
+    },
+    {
+      title: "Total Quotation ",
+      count: 5,
+    },
+    {
+      title: "Total Inquiry",
+      count: 5,
+    },
+    {
+      title: "Total Invoice ",
+      count: 5,
+    },
+    {
+      title: "Total Order",
+      count: 5,
+    },
+    {
+      title: "Total Trasport ",
+      count: 5,
+    },
+    {
+      title: "Total Payment ",
+      count: 5,
+    },
+    {
+      title: "Total Compliance ",
+      count: 5,
+    },
+    {
+      title: "Total Reject Job ",
+      count: 5,
+    },
+    {
+      title: "Total Projects ",
+      count: 5,
+    },
+    {
+      title: "Total Compliance ",
+      count: 5,
+    },
+  ];
+
   return (
     <>
       <Header />
@@ -55,120 +106,34 @@ const ListCompany = () => {
       <div className="main-content">
         <div className="page-content">
           <div className="container-fluid">
-         
             <div class="row">
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          Total company
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          <span class="counter-value" data-target="183.35">
-                            {cards?.totalCompany}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-warning-subtle rounded fs-3">
-                          <i class="bx bx-user-circle text-warning"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          Total Plants
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          <span class="counter-value" data-target="36894">
-                            {cards?.totalPlant}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-info-subtle rounded fs-3">
-                          <i class="bx bx-shopping-bag text-info"></i>
-                        </span>
+              {topCards?.map((card, i) => {
+                return (
+                  <div class="col-xl-2 col-sm-6">
+                    <div class="card card-animate">
+                      <div class="card-body">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                              {card.title}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-between mt-4">
+                          <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                              <span class="counter-value" data-target="183.35">
+                                {/* {cards?.totalCompany} */}
+                                {card?.count}
+                              </span>
+                            </h4>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          Total Units
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          <span class="counter-value" data-target="165.89">
-                            {cards?.totalUnit}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-primary-subtle rounded fs-3">
-                          <i class="bx bx-wallet text-primary"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card card-animate">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-grow-1 overflow-hidden">
-                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                          Total Customer
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                      <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                          <span class="counter-value" data-target="165.89">
-                            {cards?.totalCustomer}
-                          </span>
-                        </h4>
-                      </div>
-                      <div class="avatar-sm flex-shrink-0">
-                        <span class="avatar-title bg-primary-subtle rounded fs-3">
-                          <i class="bx bx-wallet text-primary"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+                );
+              })}
             </div>
             <div className="row" style={{ fontFamily: "poppins" }}>
               <div className="col-lg-12">
@@ -237,7 +202,7 @@ const ListCompany = () => {
                         </div>
                       </div>
                     </div>
-                    {/* 
+                    {/*
                      */}
                   </div>
                 </div>
@@ -248,26 +213,48 @@ const ListCompany = () => {
                         <div class="card card-body">
                           <div class="d-flex mb-4 align-items-center">
                             <div class="flex-shrink-0">
-                              {company.c_image ?
-                                <img src={company.c_image} alt={`${company.c_name} logo`} class="avatar-sm rounded-circle" />
-                                :
-                                <img src="../assets/images/users/user-dummy-img.jpg" alt={`${company.c_name} logo`} class="avatar-sm rounded-circle" />
-                              }
+                              {company.c_image ? (
+                                <img
+                                  src={company.c_image}
+                                  alt="logo"
+                                  class="avatar-sm rounded-circle"
+                                />
+                              ) : (
+                                <img
+                                  src="../assets/images/users/user-dummy-img.jpg"
+                                  alt="logo"
+                                  class="avatar-sm rounded-circle"
+                                />
+                              )}
                             </div>
                             <div class="flex-grow-1 ms-2">
-                              <h5 class="card-title mb-1 underline"
+                              <h5
+                                class="card-title mb-1 underline"
                                 onClick={() =>
-                                  navigate(
-                                    `/view-company/${company.c_id}`
-                                  )
+                                  navigate(`/view-company/${company.c_id}`)
                                 }
-                              >{company.c_name}</h5>
-                              <a class="text-muted mb-0 underline" href={company.c_website} target="_blank" >{company.c_website}</a>
+                              >
+                                {company.c_name}
+                              </h5>
+                              <a
+                                class="text-muted mb-0 underline"
+                                href={company.c_website}
+                                target="_blank"
+                              >
+                                {company.c_website}
+                              </a>
                             </div>
                           </div>
                           <h6 class="mb-1">$15,548</h6>
                           <p class="card-text text-muted">Expense Account</p>
-                          <a href="javascript:void(0)" class="btn btn-primary btn-sm">See Details</a>
+                          <a
+                            onClick={() =>
+                              navigate(`/view-company/${company.c_id}`)
+                            }
+                            class="btn btn-primary btn-sm"
+                          >
+                            See Details
+                          </a>
                         </div>
                       </div>
                       // <tr key={index}>
@@ -348,11 +335,9 @@ const ListCompany = () => {
                       </div>
                     </div>
                   )}
-
                 </div>
 
                 {/* <CompanyDetails cData={companyDetails} cId={companyDetails?.c_id}/> */}
-
 
                 {/* end card */}
 
