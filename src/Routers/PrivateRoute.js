@@ -75,6 +75,8 @@ import OverviewProject from "../Pages/Project/OverviewProject";
 import NewCompanyList from "../Pages/Company/NewCompanyList";
 import MoreDetails from "../Pages/Company/MoreDetails";
 import Transportation from "../Pages/Transport/Transportation";
+import ListDrawing from "../Pages/Drawing/ListDrawing";
+import ViewDrawing from "../Pages/Drawing/ViewDrawing";
 const PrivateRoute = () => {
   return (
     <>
@@ -180,6 +182,11 @@ const PrivateRoute = () => {
         <Route path="/add-project" element={<AddProject/>}/>
         <Route path="/project-list" element={<AllProjects/>}/>
         <Route path="/overview-project" element={<OverviewProject/>}/>
+        
+        <Route path="/list-drawing" element={<ListDrawing />}/>
+        <Route path="/view-drawing" element={<ViewDrawing />}/>
+
+
       
       </Routes>
     </>

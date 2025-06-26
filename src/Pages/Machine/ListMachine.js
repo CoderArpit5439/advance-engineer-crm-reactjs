@@ -91,51 +91,56 @@ const ListMachine = () => {
               </div>
             </div>
             <div className="row mt-4">
-              <div class="col-xl-3 col-lg-6">
-                <div class="card ribbon-box right overflow-hidden">
-                  <div class="card-body text-center p-4">
-                    <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-                      <i class="ri-flashlight-fill text-white align-bottom"></i>
-                      <span class="trending-ribbon-text">Trending</span>
-                    </div>
-                    <img
-                      src="assets/images/companies/img-1.png"
-                      alt="img-1.png"
-                      height="45"
-                    />
-                    <h5 class="mb-1 mt-4">
-                      <a
-                        href="apps-ecommerce-Machine-details.html"
-                        class="link-primary"
-                      >
-                        Force Medicines
-                      </a>
-                    </h5>
-                    <p class="text-muted mb-4">David Marshall</p>
-                    <div class="row mt-4">
-                      {" "}
-                      <div class="col-lg-6 border-end-dashed border-end">
-                        {" "}
-                        <h5>452</h5> <span class="text-muted">Item Stock</span>{" "}
-                      </div>{" "}
-                      <div class="col-lg-6">
-                        {" "}
-                        <h5>$45,415</h5>{" "}
-                        <span class="text-muted">Wallet Balance</span>{" "}
-                      </div>{" "}
-                    </div>
-                    <div class="mt-4">
-                      {" "}
-                      <a
-                        onClick={() => navigate(`/view-machine/${1}`)}
-                        class="btn btn-light w-100"
-                      >
-                        View Details
-                      </a>{" "}
+              {[1, 2, 3, 4, 5, 6].map(() => {
+                return (
+                  <div class="col-xl-3 col-lg-6">
+                    <div class="card ribbon-box right overflow-hidden">
+                      <div class="card-body text-center p-4">
+                        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+                          <i class="ri-flashlight-fill text-white align-bottom"></i>
+                          <span class="trending-ribbon-text">Trending</span>
+                        </div>
+                        <img
+                          src="assets/images/companies/img-1.png"
+                          alt="img-1.png"
+                          height="45"
+                        />
+                        <h5 class="mb-1 mt-4">
+                          <a
+                            href="apps-ecommerce-Machine-details.html"
+                            class="link-primary"
+                          >
+                            Force Medicines
+                          </a>
+                        </h5>
+                        <p class="text-muted mb-4">David Marshall</p>
+                        <div class="row mt-4">
+                          {" "}
+                          <div class="col-lg-6 border-end-dashed border-end">
+                            {" "}
+                            <h5>452</h5>{" "}
+                            <span class="text-muted">Item Stock</span>{" "}
+                          </div>{" "}
+                          <div class="col-lg-6">
+                            {" "}
+                            <h5>$45,415</h5>{" "}
+                            <span class="text-muted">Wallet Balance</span>{" "}
+                          </div>{" "}
+                        </div>
+                        <div class="mt-4">
+                          {" "}
+                          <a
+                            onClick={() => navigate(`/view-machine/${1}`)}
+                            class="btn btn-light w-100"
+                          >
+                            View Details
+                          </a>{" "}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
             <div
               class="row align-items-center mb-4 text-center text-sm-start"
@@ -177,6 +182,76 @@ const ListMachine = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* add new tables  */}
+            <div className="row">
+              {[1, 2, 3, 4, 5, 6].map(() => {
+                return (
+                  <div className="col-xl-6 ">
+                    <div className="card">
+                      <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Table Name</h4>
+                      </div>
+                      <div className="card-body">
+
+                      <table class="table table-nowrap">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Invoice</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">
+                              <a href="#" class="fw-semibold">
+                                #VZ2110
+                              </a>
+                            </th>
+                            <td>Bobby Davis</td>
+                            <td>October 15, 2021</td>
+                            <td>$2,300</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <a href="#" class="fw-semibold">
+                                #VZ2109
+                              </a>
+                            </th>
+                            <td>Christopher Neal</td>
+                            <td>October 7, 2021</td>
+                            <td>$5,500</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <a href="#" class="fw-semibold">
+                                #VZ2108
+                              </a>
+                            </th>
+                            <td>Monkey Karry</td>
+                            <td>October 5, 2021</td>
+                            <td>$2,420</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                              <a href="#" class="fw-semibold">
+                                #VZ2107
+                              </a>
+                            </th>
+                            <td>James White</td>
+                            <td>October 2, 2021</td>
+                            <td>$7,452</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             {/* ADD VENDOR MODEL start */}
             <div

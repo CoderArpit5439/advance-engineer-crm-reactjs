@@ -257,6 +257,17 @@ const Sidebar = () => {
                                       <a
                                         className="nav-link menu-link "
                                         onClick={() =>
+                                          navigate("/list-drawing")
+                                        }
+                                      >
+                                        <i className="ri-apps-2-line" />{" "}
+                                        <span data-key="t-apps">Drawing</span>
+                                      </a>
+                                    </li>
+                                    <li className="nav-item">
+                                      <a
+                                        className="nav-link menu-link "
+                                        onClick={() =>
                                           navigate("/list-company")
                                         }
                                       >
